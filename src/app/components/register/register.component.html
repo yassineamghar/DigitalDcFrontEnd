@@ -1,40 +1,43 @@
 <div class="auth-main">
-    <div class="auth-wrapper v3">
-      <div class="auth-form">
-        <div class="card mt-5">
-          <div class="card-body">
-            <a href="javascript:" class="d-flex justify-content-center mt-3">
-              <img src="assets/images/logo-dark.svg" />
-            </a>
-            <div class="row">
-              <div class="d-flex justify-content-center">
-                <div class="auth-header">
-                  <h2 class="text-secondary mt-5"><b>Sign up</b></h2>
-                  <p class="fs-4 mt-2">Enter your credentials to continue</p>
-                </div>
+  <div class="auth-wrapper v3">
+    <div class="auth-form">
+      <div class="card mt-5">
+        <div class="card-body">
+          <a href="javascript:" class="d-flex justify-content-center mt-3">
+            <img src="assets/images/logo4.png" />
+          </a>
+          <div class="row">
+            <div class="d-flex justify-content-center">
+              <div class="auth-header">
+                <h2 class="text-secondary mt-5"><b>Sign up</b></h2>
+                <p class="fs-4 mt-2">wi</p>
               </div>
             </div>
+          </div>
+          <h5 class="my-4 d-flex justify-content-center"> Sign in with Email address </h5>
+          <!-- Angular registration form -->
+          <form (ngSubmit)="register()">
             <div class="row">
               <div class="col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
-                  <label for="floatingInput">Full Name</label>
+                  <input type="text" [(ngModel)]="registerData.Fullname" class="form-control" id="fullName" placeholder="Full Name" />
+                  <label for="fullName">Full Name</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
-                  <label for="floatingInput">User Name</label>
+                  <input type="text" [(ngModel)]="registerData.Username" class="form-control" id="userName" placeholder="Username" />
+                  <label for="userName">User Name</label>
                 </div>
               </div>
             </div>
             <div class="form-floating mb-3">
-              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
-              <label for="floatingInput">Email Address</label>
+              <input type="email" [(ngModel)]="registerData.Email" class="form-control" id="email" placeholder="name@example.com" />
+              <label for="email">Email Address</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
-              <label for="floatingInput">Password</label>
+              <input type="password" [(ngModel)]="registerData.Password" class="form-control" id="password" placeholder="Password" />
+              <label for="password">Password</label>
             </div>
             <div class="form-check mt-3s">
               <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
@@ -43,15 +46,16 @@
               </label>
             </div>
             <div class="d-grid mt-4">
-              <button type="button" class="btn btn-secondary p-2">Sign Up</button>
+              <button type="submit" class="btn btn-secondary p-2">Sign Up</button>
             </div>
-            <hr />
-            <h5 class="d-flex justify-content-center">
-              <a [routerLink]="['/login']"> Already have an account? </a>
-            </h5>
-          </div>
+          </form>
+          <!-- End of Angular registration form -->
+          <hr />
+          <h5 class="d-flex justify-content-center">
+            <a [routerLink]="['/login']"> Already have an account? </a>
+          </h5>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

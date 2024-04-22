@@ -1,23 +1,4 @@
-.auth-main .auth-wrapper.v3 .auth-form {
-    min-height: 100vh;
-    padding: 24px;
-}
-.auth-main .auth-wrapper .auth-form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1;
-}
-[part=preset-1] .auth-form {
-    background: #eef2f6;
-}
-*, *:before, *:after {
-    box-sizing: border-box;
-}
-user agent stylesheet
-div {
-    display: block;
-}
+/* Réglages globaux */
 body {
     margin: 0;
     font-family: var(--bs-body-font-family);
@@ -31,10 +12,39 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-*, *:before, *:after {
-    box-sizing: border-box;
-}
+/* Boîtes */
 *, *:before, *:after {
     box-sizing: border-box;
 }
 
+/* Authentification */
+.auth-main .auth-wrapper.v3 .auth-form {
+    min-height: 100vh;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    background-image: url('src/assets/images/imageserver.jpeg'); /* Remplacez le chemin par l'emplacement de votre image */
+    background-size: cover; /* Ajuste la taille de l'image pour couvrir l'élément */
+    background-position: center; /* Centre l'image horizontalement et verticalement */
+}
+
+
+/* Styles spécifiques au formulaire d'authentification */
+.auth-main .auth-wrapper .auth-form .card {
+    margin-top: 5rem; /* Remplacez cela par votre propre style de marge */
+}
+
+.auth-main .auth-wrapper .auth-form .auth-header {
+    text-align: center;
+    margin-top: 5rem; /* Remplacez cela par votre propre style de marge */
+}
+
+.auth-main .auth-wrapper .auth-form .form-check {
+    margin-top: 3rem; /* Remplacez cela par votre propre style de marge */
+}
+
+.auth-main .auth-wrapper .auth-form .d-grid {
+    margin-top: 4rem; /* Remplacez cela par votre propre style de marge */
+}

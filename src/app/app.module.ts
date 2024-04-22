@@ -4,9 +4,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
-// import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+// import { NgAngularPopupModule } from 'ng-angular-popup';
+
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
@@ -18,7 +19,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-import { OktaAuth } from '@okta/okta-auth-js'
+// import { OktaAuth } from '@okta/okta-auth-js';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -30,9 +33,8 @@ import { OktaAuth } from '@okta/okta-auth-js'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    // BrowserAnimationsModule,
-    // FlexLayoutModule,
     FormsModule,
+    // import('ng-angular-popup').then(module => module.NgAngularPopupModule)    FormsModule,
     MatToolbarModule,
     MatInputModule,
     MatCardModule,
@@ -45,13 +47,14 @@ import { OktaAuth } from '@okta/okta-auth-js'
     MatOptionModule,
   ],
   providers: [
-    {
-      provide: OktaAuth,
-      useValue: new OktaAuth({
-        issuer: 'http://localhost:5227',
-        clientId: 'http://localhost:4200',
-      })
-    }
+    // {
+    //   provide: OktaAuth,
+    //   useValue: new OktaAuth({
+    //     issuer: 'http://localhost:5227',
+    //     clientId: 'http://localhost:4200',
+    //   })
+    // },
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
