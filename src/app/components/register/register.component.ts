@@ -1,30 +1,48 @@
-import { Component } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from './../../services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Router } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
-  registerData = {
-    Fullname: '',
-    Email: '',
-    Username: '',
-    Password: ''
-  };
+export class RegisterComponent implements OnInit {
 
-  constructor(private authService: AuthService) {}
+  registerForm: FormGroup = new FormGroup({}); 
+  constructor(
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) { }
 
-  register(): void {
-    this.authService.register(this.registerData).subscribe(
-      response => {
-        console.log(response); // Handle success response
-      },
-      error => {
-        console.error(error); // Handle error response
-      }
-    );
+  ngOnInit(): void {
+    this.registerForm = this.formBuilder.group({
+      Fullname: [null, [Validators.required]],
+      Username: [null, [Validators.required]],
+      Email: [null, [
+        Validators.required,
+        Validators.email,
+        Validators.minLength(6)
+      ]],
+      Password: [null, [
+        Validators.required,
+        Validators.minLength(3)
+      ]],
+      
+    });
+  }
+
+  onSubmit(){
+    if(this.registerForm.invalid) {
+      return;
+    }
+    console.log(this.registerForm.value);
+    this.authService.register(this.registerForm.value).pipe(
+      map(user => this.router.navigate(['/login']))
+    ).subscribe()
   }
 
 }

@@ -16,39 +16,40 @@
           </div>
           <h5 class="my-4 d-flex justify-content-center"> Sign in with Email address </h5>
           <!-- Angular registration form -->
-          <form (ngSubmit)="register()">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <div class="row">
               <div class="col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="text" [(ngModel)]="registerData.Fullname" class="form-control" id="fullName" placeholder="Full Name" />
-                  <label for="fullName">Full Name</label>
+                  <input type="text" class="form-control" id="Fullname" formControlName="Fullname" placeholder="Full Name" />
+                  <label for="Fullname">Full Name</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="text" [(ngModel)]="registerData.Username" class="form-control" id="userName" placeholder="Username" />
-                  <label for="userName">User Name</label>
+                  <input type="text" class="form-control" id="Username" formControlName="Username" placeholder="Username" />
+                  <label for="Username">User Name</label>
                 </div>
               </div>
             </div>
             <div class="form-floating mb-3">
-              <input type="email" [(ngModel)]="registerData.Email" class="form-control" id="email" placeholder="name@example.com" />
-              <label for="email">Email Address</label>
+              <input type="email" class="form-control" id="Email" formControlName="Email" placeholder="name@example.com" />
+              <label for="Email">Email Address</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="password" [(ngModel)]="registerData.Password" class="form-control" id="password" placeholder="Password" />
-              <label for="password">Password</label>
+              <input type="Password" class="form-control" id="Password" formControlName="Password" placeholder="Password" />
+              <label for="Password">Password</label>
             </div>
-            <div class="form-check mt-3s">
-              <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
+            <div class="form-check mt-3">
+              <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" />
               <label class="form-check-label" for="customCheckc1">
                 <h5>Agree with <span>Terms & Condition.</span></h5>
               </label>
             </div>
             <div class="d-grid mt-4">
-              <button type="submit" class="btn btn-secondary p-2">Sign Up</button>
+              <button type="submit" class="btn btn-secondary p-2" (click)="onSubmit()">Sign Up</button>
             </div>
           </form>
+          <!-- <div class="error-message">{{ error }}</div> -->
           <!-- End of Angular registration form -->
           <hr />
           <h5 class="d-flex justify-content-center">

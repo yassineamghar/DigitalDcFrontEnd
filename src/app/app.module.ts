@@ -4,11 +4,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
-// import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-// import { NgAngularPopupModule } from 'ng-angular-popup';
-
-
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -19,9 +15,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-// import { OktaAuth } from '@okta/okta-auth-js';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
+import { HttpClientModule } from '@angular/common/http'; 
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,7 +31,7 @@ import { AuthService } from './services/auth.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    // import('ng-angular-popup').then(module => module.NgAngularPopupModule)    FormsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatInputModule,
     MatCardModule,
@@ -45,17 +42,9 @@ import { AuthService } from './services/auth.service';
     MatSlideToggleModule,
     MatSelectModule,
     MatOptionModule,
+    ReactiveFormsModule,
   ],
-  providers: [
-    // {
-    //   provide: OktaAuth,
-    //   useValue: new OktaAuth({
-    //     issuer: 'http://localhost:5227',
-    //     clientId: 'http://localhost:4200',
-    //   })
-    // },
-    AuthService
-  ],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
