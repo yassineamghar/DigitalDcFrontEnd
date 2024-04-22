@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,12 +7,17 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  public users: User[] = [];
+  registerData = {
+    Fullname: '',
+    Email: '',
+    Username: '',
+    Password: ''
+  };
 
   constructor(private authService: AuthService) {}
 
   register(): void {
-    this.authService.register(this.users).subscribe(
+    this.authService.register(this.registerData).subscribe(
       response => {
         console.log(response); // Handle success response
       },
