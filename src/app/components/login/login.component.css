@@ -12,6 +12,18 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
+.error-message {
+    color: #ff0000; /* Red text color */
+    text-align: center; /* Center the error message */
+    margin-top: 20px; /* Add space above the error message */
+  }
+  
+  .hr-style {
+    border-top: 1px solid #cccccc; /* Gray border */
+    margin-top: 30px; 
+    margin-bottom: 30px; /* Add space below the hr */
+  }
+
 /* Boîtes */
 *, *:before, *:after {
     box-sizing: border-box;
@@ -32,8 +44,11 @@ body {
 
 
 /* Styles spécifiques au formulaire d'authentification */
-.auth-main .auth-wrapper .auth-form .card {
-    margin-top: 5rem; /* Remplacez cela par votre propre style de marge */
+.auth-main .auth-wrapper.v3 .auth-form .card {
+    margin-top: 5rem;
+    max-width: 600px; /* Définir une largeur maximale pour le formulaire */
+    width: 200%; /* Assure que le formulaire occupe 100% de la largeur maximale */
+    margin: 0 auto; /* Centrer le formulaire horizontalement */
 }
 
 .auth-main .auth-wrapper .auth-form .auth-header {

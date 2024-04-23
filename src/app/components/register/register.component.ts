@@ -12,6 +12,8 @@ import { map } from 'rxjs';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup = new FormGroup({}); 
+  error: string | null=null;
+
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
@@ -30,7 +32,7 @@ export class RegisterComponent implements OnInit {
       Password: [null, [
         Validators.required,
         Validators.minLength(3)
-      ]],
+      ]]
       
     });
   }
@@ -40,9 +42,17 @@ export class RegisterComponent implements OnInit {
       return;
     }
     console.log(this.registerForm.value);
-    this.authService.register(this.registerForm.value).pipe(
-      map(user => this.router.navigate(['/login']))
-    ).subscribe()
+    this.authService.register(this.registerForm.value).subscribe(
+      (response) => {
+        console.log(response);
+        alert(response.message);
+        this.router.navigate(['login']);
+      },
+      (error) => {
+        console.log(error);
+        this.error = error.error; 
+      }
+    );
   }
 
 }

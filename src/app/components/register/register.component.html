@@ -3,7 +3,7 @@
     <div class="auth-form">
       <div class="card mt-5">
         <div class="card-body">
-          <a href="javascript:" class="d-flex justify-content-center mt-3">
+          <a [routerLink]="['/']" class="d-flex justify-content-center mt-3">
             <img src="assets/images/logo4.png" />
           </a>
           <div class="row">
@@ -15,7 +15,6 @@
             </div>
           </div>
           <h5 class="my-4 d-flex justify-content-center"> Sign in with Email address </h5>
-          <!-- Angular registration form -->
           <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <div class="row">
               <div class="col-md-6">
@@ -49,12 +48,11 @@
               <button type="submit" class="btn btn-secondary p-2" (click)="onSubmit()">Sign Up</button>
             </div>
           </form>
-          <!-- <div class="error-message">{{ error }}</div> -->
-          <!-- End of Angular registration form -->
+          <div *ngIf="error" class="error-message">{{ error }}</div>          
           <hr />
           <h5 class="d-flex justify-content-center">
             <a [routerLink]="['/login']"> Already have an account? </a>
-          </h5>
+          </h5> 
         </div>
       </div>
     </div>

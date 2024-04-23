@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup = new FormGroup({});
+  error: string | null=null;
   
   constructor(
     private authService: AuthService,
@@ -21,8 +22,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      Username: new FormControl(null, [Validators.required]),
-      Password: new FormControl(null, [Validators.required, Validators.minLength(3)])
+      Username: [null, [Validators.required]],
+      Password: [null, [
+        Validators.required, 
+        Validators.minLength(3)
+      ]]
     })
   }
   
@@ -32,9 +36,17 @@ export class LoginComponent implements OnInit {
       return;
     }
     console.log(this.loginForm.value);
-    this.authService.login(this.loginForm.value).pipe(
-      map(user => this.router.navigate(['/home']))
-    ).subscribe();
+    this.authService.login(this.loginForm.value).subscribe(
+      (response) => {
+        console.log(response);
+        alert("Login successful!");
+        this.router.navigate(['home']);
+      },
+      (error) => {
+        console.log(error);
+        this.error = error.error; 
+      }
+    );
   }
   
 
