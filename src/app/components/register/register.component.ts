@@ -53,6 +53,7 @@ export class RegisterComponent implements OnInit {
         this.error = error.error; 
       }
     );
+    
   }
 
 }

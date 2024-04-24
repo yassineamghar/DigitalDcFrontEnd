@@ -54,7 +54,7 @@ body {
 
 .auth-main .auth-wrapper .auth-form .auth-header {
     text-align: center;
-    margin-top: 5rem; /* Remplacez cela par votre propre style de marge */
+    margin-top: 1rem; /* Remplacez cela par votre propre style de marge */
 }
 
 .auth-main .auth-wrapper .auth-form .form-check {
