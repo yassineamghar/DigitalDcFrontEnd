@@ -1,1 +1,8 @@
-<router-outlet></router-outlet>
+<!-- Partie d'authentification -->
+<div *ngIf="isAuthenticationRoute()">
+    <router-outlet></router-outlet>
+</div>
+
+<div *ngIf="!isAuthenticationRoute()">
+    <router-outlet></router-outlet>
+</div>

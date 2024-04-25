@@ -20,9 +20,6 @@ export class AuthGuard  {
   constructor(private http: HttpClient) {}
 
   isLoggedIn(): boolean {
-    // Logic to check if the user is authenticated
-    // For example, you might check if there is a token stored in localStorage or if the user object exists in memory
-    // Return true if authenticated, false otherwise
-    return !!localStorage.getItem('token'); // Example: Check if a token exists in localStorage
+    return !!localStorage.getItem('token');
   }
 }

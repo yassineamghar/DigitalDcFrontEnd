@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  forgotpassform: FormGroup = new FormGroup({});
+  forgotpassform: FormGroup | any;
   error: string | null = null;
 
   constructor(
@@ -21,11 +21,8 @@ export class ForgotPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.forgotpassform = this.formBuilder.group({
-      Username: [null, [Validators.required]],
-      NewPassword: [null, [
-        Validators.required,
-        Validators.minLength(3)
-      ]],
+      Username: [null, Validators.required],
+      NewPassword: [null, [Validators.required, Validators.minLength(3)]],
       ConfirmPassword: [null, Validators.required]
     }, { validators: this.passwordMatchValidator });
   }
@@ -34,12 +31,10 @@ export class ForgotPasswordComponent implements OnInit {
     const passwordControl = formGroup.get('NewPassword');
     const confirmPasswordControl = formGroup.get('ConfirmPassword');
 
-    if (passwordControl && confirmPasswordControl) {
-      if (passwordControl.value !== confirmPasswordControl.value) {
-        confirmPasswordControl.setErrors({ passwordMismatch: true });
-      } else {
-        confirmPasswordControl.setErrors(null);
-      }
+    if (passwordControl && confirmPasswordControl && passwordControl.value !== confirmPasswordControl.value) {
+      confirmPasswordControl.setErrors({ passwordMismatch: true });
+    } else {
+      confirmPasswordControl?.setErrors(null);
     }
   }
 
@@ -47,26 +42,14 @@ export class ForgotPasswordComponent implements OnInit {
     if (this.forgotpassform.invalid) {
       return;
     }
-  
-    const newPassword = this.forgotpassform.value.NewPassword;
-    const confirmPassword = this.forgotpassform.value.ConfirmPassword;
-  
-    if (newPassword !== confirmPassword) {
-      const confirmPasswordControl = this.forgotpassform.get('ConfirmPassword');
-      if (confirmPasswordControl) {
-        confirmPasswordControl.setErrors({ passwordMismatch: true });
-      }
-      return;
-    }
-  
-    this.authService.forgotPassword({
-      Username: this.forgotpassform.value.Username,
-      Email: this.forgotpassform.value.Email,
-      NewPassword: newPassword
-    }).subscribe(
+
+    const { Username, NewPassword } = this.forgotpassform.value;
+
+    this.authService.forgotPassword({ Username, NewPassword }).subscribe(
       (response) => {
         console.log(response);
-        alert("Password changed succefully successful!");
+        alert("Password changed successfully!");
+        this.router.navigate(['/login']);
       },
       (error) => {
         console.log(error);
@@ -74,6 +57,4 @@ export class ForgotPasswordComponent implements OnInit {
       }
     );
   }
-  
-  
 }
