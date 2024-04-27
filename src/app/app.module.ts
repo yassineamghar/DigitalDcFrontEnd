@@ -20,6 +20,8 @@ import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NgbModule, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     MatSelectModule,
     MatOptionModule,
     ReactiveFormsModule,
+    NgbModule,
+    NgbCarouselModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

@@ -11,6 +11,11 @@ body {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
 }
+
+.img-brand{
+    width: 300px;
+}
+
 .error-message {
     color: #ff0000; /* Red text color */
     text-align: center; /* Center the error message */
