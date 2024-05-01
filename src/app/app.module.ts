@@ -22,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgbModule, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { NgbModule, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
     RegisterComponent,
     HomeComponent,
     ForgotPasswordComponent,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

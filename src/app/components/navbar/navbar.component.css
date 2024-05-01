@@ -4,9 +4,10 @@
     transition: background-color 0.2s ease;
 }
 .py-3 {
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
+    padding-top: 0rem !important; /* Ajustez cette valeur selon vos besoins */
+    padding-bottom: 0rem !important; /* Ajustez cette valeur selon vos besoins */
 }
+
 .fixed-top {
     position: fixed;
     top: 0;
