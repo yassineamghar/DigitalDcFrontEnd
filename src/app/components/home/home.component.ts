@@ -8,9 +8,9 @@ import { Component } from '@angular/core';
 export class HomeComponent {
   images=[
     {name: '1.avif', caption:""},
-    {name: '2.jpeg', caption:""},
+    {name: '2.avif', caption:""},
+    
+
   ];
-  // videos=[
-  //   {name: '1.mp4', caption:""},
-  // ]
+ 
 }

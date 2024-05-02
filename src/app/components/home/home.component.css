@@ -1,37 +1,13 @@
-/* header.masthead {
+header.masthead {
   padding-top: 3rem;
-  padding-bottom: 3rem;
-  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%);
+  padding-bottom:3rem;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%);
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
-} */
-
-header.masthead {
-  padding: 0;
-  position: relative;
 }
 
-header.masthead ngb-carousel {
-  width: 100%;
-  height: 100vh; /* Ajustez selon vos besoins */
-}
-
-
-header.masthead img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-header.masthead .caption {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  font-size: 24px;
-  color: white;
-}
 
 header.masthead h1, header.masthead .h1 {
   font-size: 2.25rem;
@@ -50,12 +26,6 @@ hr.divider-light {
 }
 
 @media (min-width: 992px) {
-  /* header.masthead { 
-    height: 50vh;
-    min-height: 25rem;
-    padding-top: 4.5rem;
-    padding-bottom: 0;
-  } */
 
   header.masthead p {
     font-size: 1.15rem;
@@ -88,6 +58,16 @@ hr.divider-light {
   margin-left: auto;
 }
 
+
+p {
+  font-size: 14px;
+  line-height: 160%;
+  margin: 0 0 20px 0;
+  text-align: justify;
+  text-align: center;
+  font-style: bold;
+  color:black;
+}
 .page-section {
   padding: 3rem 0;
 }
@@ -117,15 +97,81 @@ hr.divider-light {
   bottom: 50px;
   font-size: 40px;
   font-weight: bold;
-  color: white; /* Added text color */
+  color: white;
 }
 
 .carousel-indicators li {
   background-color: black;
 }
 
-
-
 h2{
+  color: #2E4957;;
+}
+
+h3{
   color: #E28909;
+  font-size: 30px;
+  font-weight: bold;
+
+}
+
+#portfolio {
+  padding: 60px 0;
+}
+
+.row.g-0 .col-lg-4 {
+  padding: 15px; /* Add space between boxes */
+}
+
+.portfolio-box {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  max-width: 400px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.portfolio-box:hover {
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio-box img {
+  width: 100%;
+  height: auto;
+  transition: all 0.3s ease-in-out;
+}
+
+.portfolio-box:hover img {
+  transform: scale(1.05);
+}
+
+.portfolio-box-caption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.7);
+  transition: all 0.3s ease-in-out;
+}
+
+.portfolio-box-caption .project-category,
+.portfolio-box-caption .project-name {
+  font-size: 16px;
+  color: #fff;
+  margin: 0;
+}
+
+.portfolio-box-caption .project-name {
+  font-weight: bold;
+}
+
+.portfolio-box:hover .portfolio-box-caption {
+  transform: translateY(-100%);
+}
+.img-fluid {
+  max-width: 100%;
+  height: auto;
 }
