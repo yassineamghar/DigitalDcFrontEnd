@@ -44,7 +44,18 @@ export class LoginComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-        this.error = error.error; 
+        if (error.error && error.error.errors) {
+          const errorMessages: string[] = [];
+          for (const key in error.error.errors) {
+            if (error.error.errors.hasOwnProperty(key)) {
+              const messages = error.error.errors[key];
+              errorMessages.push(...messages);
+            }
+          }
+            this.error = errorMessages.join(' and ');
+        } else {
+          this.error = "Other error occurred.";
+        }
       }
     );
   }

@@ -23,6 +23,9 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgbModule, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './components/footer/footer.component';
+import { SlidesComponent } from './components/slides/slides.component';
+import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
+import { BoardFSComponent } from './components/board-fs/board-fs.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,8 @@ import { FooterComponent } from './components/footer/footer.component';
     ForgotPasswordComponent,
     NavbarComponent,
     FooterComponent,
+    SlidesComponent,
+    BoardFSComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,9 +56,10 @@ import { FooterComponent } from './components/footer/footer.component';
     MatOptionModule,
     ReactiveFormsModule,
     NgbModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    MdbCarouselModule
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

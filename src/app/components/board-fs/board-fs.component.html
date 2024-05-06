@@ -1,0 +1,55 @@
+<!-- <button type="button" (click)="fullscreen()" style="margin-right: 10px"></button>
+<mdb-carousel [controls]="true">
+  <mdb-carousel-item [interval]="3000" *ngFor="let image of images">
+    <img src="assets/images/carousal-img/{{ image.name }}" class="d-block w-100 img-fluid" />
+  </mdb-carousel-item>
+</mdb-carousel> -->
+
+<!-- <div class="footer-navigation">
+    <button type="button" class="sub-slide-number" *ngFor="let subSlide of mainSlide.subSlides; let i = index" 
+            [class.active]="i + subSlidesOffset(mainIndex) === activeSubSlide[mainIndex]" 
+            (click)="goToSubSlide(mainIndex, i)">
+      {{ i + 1 }}
+    </button>
+  </div>   -->
+<app-navbar></app-navbar>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Carrousel -->
+       <!-- board-news-carousel.component.html -->
+
+<!-- board-news-carousel.component.html -->
+
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item" *ngFor="let newsItem of images; let i = index" [ngClass]="{'active': i === 0}">
+        <div class="carousel-content">
+          <div class="image-side">
+            <img src="assets/images/carousal-img/{{newsItem.name}}" style="border-radius: 10px;" class="d-block w-100" alt="...">
+          </div>
+          <div class="text-side">
+            <div class="text-content">
+              <h2>{{ newsItem.caption }}</h2>
+              <p>{{ newsItem.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">Footer</span>
+    </div>
+</footer>

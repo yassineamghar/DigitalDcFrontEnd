@@ -1,0 +1,83 @@
+.img-fluid{
+    width: 100%;
+    /* height: 100vh; */
+    object-fit: cover;
+}
+
+/* Styles pour la première colonne (carrousel) */
+.col-lg-6:first-child {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+/* Styles pour la deuxième colonne (titre avec description) */
+.col-lg-6:last-child {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.title-description {
+    padding: 20px;
+    background-color: #f8f9fa; /* Couleur de fond pour la section titre avec description */
+}
+
+.title-description h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.title-description p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+.container-fluid {
+    height: calc(100% - 56px - 56px); /* Hauteur de la navbar + hauteur du footer */
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+}
+/* board-news-carousel.component.css */
+
+.carousel-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .image-side {
+    flex: 1;
+    border-radius: 10px;
+  }
+  
+  .text-side {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .text-content {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .text-content h2 {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .text-content p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .carousel-item {
+    min-height: 300px; /* Adjust as needed */
+  }
+  

@@ -1,0 +1,17 @@
+<button type="button" (click)="fullscreen()" style="margin-right: 10px"></button>
+<mdb-carousel [controls]="false">
+  <mdb-carousel-item [interval]="3000" *ngFor="let mainSlide of mainSlides; let mainIndex = index">
+    <!-- Nested Carousel for Sub-slides -->
+    <mdb-carousel [controls]="true">
+      <mdb-carousel-item *ngFor="let subSlide of mainSlide.subSlides; let subIndex = index">
+        <img src="assets/images/carousal-img/{{ subSlide.image }}" class="d-block w-100 img-fluid" />
+      </mdb-carousel-item>
+      <!-- Navigation Controls for Sub-slides -->
+      <div class="carousel-navigation">
+        <button type="button" class="prev-slide" (click)="prevSubSlide(mainIndex)">Previous</button>
+        <button type="button" class="next-slide" (click)="nextSubSlide(mainIndex)">Next</button>
+      </div>
+    </mdb-carousel>      
+  </mdb-carousel-item>
+</mdb-carousel>
+
