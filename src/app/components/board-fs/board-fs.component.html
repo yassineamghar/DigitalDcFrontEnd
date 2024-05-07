@@ -14,9 +14,9 @@
   </div>   -->
   <app-navbar></app-navbar>
   <div class="container-fluid full-height">
-    <div class="row full-height">
-      <!-- Left section for images -->
-      <div class="col-lg-6 p-0 d-flex align-items-center">
+    <div class="row align-items-center full-height" >
+      <div class="col-lg-6 p-0">
+        <!-- Left section for images -->
         <div id="carouselExampleControls" class="carousel slide w-100" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item" *ngFor="let newsItem of images; let i = index" [ngClass]="{'active': i === currentIndex}">
@@ -31,19 +31,18 @@
           </a>
         </div>
       </div>
-      <div class="col-lg-6 p-5 d-flex align-items-center" style="background: linear-gradient(to right, #fc5185, #6e45e2);">
+      <div class="col-lg-6 p-5 d-flex align-items-center">
+        <!-- Right section for title and description -->
         <div class="text-white">
-          <h2>{{ images[currentIndex].caption }}</h2>
-          <p>{{ images[currentIndex].description }}</p>
+          <div class="content-container">
+            <h2>{{ images[currentIndex].caption }}</h2>
+            <p>{{ images[currentIndex].description }}</p>
+          </div>
         </div>
-        <!-- Add the next control here -->
       </div>
     </div>
   </div>
   <!-- Footer -->
-  <footer class="footer">
-      <div class="container">
-          <span class="text-muted">Footer</span>
-      </div>
-  </footer>
+  <app-footercarousel></app-footercarousel>
+  
   

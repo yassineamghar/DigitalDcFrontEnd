@@ -26,6 +26,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SlidesComponent } from './components/slides/slides.component';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 import { BoardFSComponent } from './components/board-fs/board-fs.component';
+import { FootercarouselComponent } from './components/footercarousel/footercarousel.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { BoardFSComponent } from './components/board-fs/board-fs.component';
     FooterComponent,
     SlidesComponent,
     BoardFSComponent,
+    FootercarouselComponent,
   ],
   imports: [
     BrowserModule,

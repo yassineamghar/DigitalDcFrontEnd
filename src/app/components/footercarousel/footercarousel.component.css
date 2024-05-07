@@ -1,0 +1,48 @@
+.footer {
+    background-color: transparent;
+    /* background-image: linear-gradient(to right, #fc5185, #6e45e2); */
+    color: white;
+    padding: 30px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .footer .container {
+    text-align: center;
+  }
+  
+  .footer .text-muted {
+    font-size: 1rem;
+  }
+
+  .pagination .page-item {
+    display: inline-block;
+  }
+  
+  .pagination .page-link {
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    padding: 0;
+    margin: 0 5px;
+  }
+  
+  .pagination .page-link.active-dot {
+    background-color: #c0360c; /* Change to the desired color */
+    color: #ea0909; /* Change to the desired color */
+  }
+  
+  .pagination .page-item.disabled .page-link {
+    background-color: transparent;
+    color: #ccc;
+    border-color: #ccc;
+  }
+  
+  .pagination .page-item.disabled .page-link:hover {
+    cursor: not-allowed;
+  }
+  

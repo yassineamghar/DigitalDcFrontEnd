@@ -1,18 +1,26 @@
-.img-fluid{
-    width: auto;
-    height: 100vh;
-    object-fit: cover;
-}
-
-/* CSS */
 :host {
   display: block;
-  height: 100vh; /* Make the component take up the full height of the viewport */
+  height: 100vh;
 }
 
-.full-height {
-  height: 100%;
+@media (min-width: 992px) {
+  .full-height {
+    height: calc(100% - 57.6px);
+  }
+  .col-lg-6{
+    display: block;
+  }
 }
+.container-fluid.full-height {
+  background-image: url('src/assets/images/carousal-img/background2.webp');
+  background-size: cover;
+  background-position: center;
+  opacity: 1;
+  }
+  /* .full-height {
+    height: calc(100% - 57.6px);
+  } */
+
 
 .carousel-control-prev,
 .carousel-control-next {
@@ -42,50 +50,83 @@
 }
 
 .carousel-control-next {
-  right: 0 ;
+  right: 0;
 }
 
+img{
+  border-radius: 10px;
+}
 .carousel-item img {
-  height: 300px; /* Adjust the height as needed */
+  height: 400px;
   width: 100%;
   object-fit: cover;
 }
 
-/* Style for text content */
-/* CSS */
-.col-lg-6.d-flex.align-items-center {
-  height: 100%; /* Ajustez la hauteur de la colonne à la hauteur de la fenêtre */
-  overflow: hidden; /* Empêcher le défilement vertical */
+.col-lg-6 {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
+.col-lg-6:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: linear-gradient(135deg, #f6d365, #fda085); */
+  border-radius: 20px;
+  z-index: -1;
+}
+
+.col-lg-6.d-flex.align-items-center {
+  height: 100%;
+  overflow: hidden;
+}
+
+.col-lg-6.p-5 {
+  position: relative;
+}
+
+.col-lg-6.p-5::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+}
+
+/* .col-lg-6.p-5 {
+  background: linear-gradient(135deg, #3c51d9, #f66e26); 
+} */
 .text-white {
-  padding-right: 50px; /* Ajuster l'espacement */
-  height: 80%; /* Définir une hauteur de 80% de la hauteur de la colonne */
-  overflow: auto; /* Activer le défilement si le contenu dépasse la hauteur */
+  /* padding-right: 50px;
+  height: 80%;
+  overflow: auto; */
+  z-index: 1;
+  position: relative;
+  padding: 20px;
 }
 
 .text-white h2 {
-  font-size: 2rem; /* Réduire la taille de la police */
-  margin-bottom: 10px; /* Réduire la marge inférieure */
+  /* font-size: 2rem;
+  margin-bottom: 10px; */
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .text-white p {
-  font-size: 1rem; /* Réduire la taille de la police */
-  line-height: 1.25; /* Réduire la hauteur de ligne */
+  /* font-size: 1rem;
+  line-height: 1.25; */
+  font-size: 16px;
+  line-height: 1.5;
 }
 
-/*footer style */
-.footer {
-  background-color: #fc5185;
-  background-image: linear-gradient(to right, #fc5185, #6e45e2);
-  color: white;
-  padding: 20px 0;
-}
 
-.footer .container {
-  text-align: center;
-}
 
-.footer .text-muted {
-  font-size: 1rem;
-}
+
+
