@@ -1,83 +1,91 @@
 .img-fluid{
-    width: 100%;
-    /* height: 100vh; */
+    width: auto;
+    height: 100vh;
     object-fit: cover;
 }
 
-/* Styles pour la première colonne (carrousel) */
-.col-lg-6:first-child {
-    padding-right: 15px;
-    padding-left: 15px;
+/* CSS */
+:host {
+  display: block;
+  height: 100vh; /* Make the component take up the full height of the viewport */
 }
 
-/* Styles pour la deuxième colonne (titre avec description) */
-.col-lg-6:last-child {
-    padding-right: 15px;
-    padding-left: 15px;
+.full-height {
+  height: 100%;
 }
 
-.title-description {
-    padding: 20px;
-    background-color: #f8f9fa; /* Couleur de fond pour la section titre avec description */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.title-description h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
 }
 
-.title-description p {
-    font-size: 16px;
-    line-height: 1.6;
-}
-.container-fluid {
-    height: calc(100% - 56px - 56px); /* Hauteur de la navbar + hauteur du footer */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  font-size: 30px;
+  color: #333;
+  line-height: 50px;
 }
 
+.carousel-control-prev {
+  left: 0;
+}
+
+.carousel-control-next {
+  right: 0 ;
+}
+
+.carousel-item img {
+  height: 300px; /* Adjust the height as needed */
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Style for text content */
+/* CSS */
+.col-lg-6.d-flex.align-items-center {
+  height: 100%; /* Ajustez la hauteur de la colonne à la hauteur de la fenêtre */
+  overflow: hidden; /* Empêcher le défilement vertical */
+}
+
+.text-white {
+  padding-right: 50px; /* Ajuster l'espacement */
+  height: 80%; /* Définir une hauteur de 80% de la hauteur de la colonne */
+  overflow: auto; /* Activer le défilement si le contenu dépasse la hauteur */
+}
+
+.text-white h2 {
+  font-size: 2rem; /* Réduire la taille de la police */
+  margin-bottom: 10px; /* Réduire la marge inférieure */
+}
+
+.text-white p {
+  font-size: 1rem; /* Réduire la taille de la police */
+  line-height: 1.25; /* Réduire la hauteur de ligne */
+}
+
+/*footer style */
 .footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #f8f9fa;
-    padding: 20px 0;
-    text-align: center;
+  background-color: #fc5185;
+  background-image: linear-gradient(to right, #fc5185, #6e45e2);
+  color: white;
+  padding: 20px 0;
 }
-/* board-news-carousel.component.css */
 
-.carousel-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .image-side {
-    flex: 1;
-    border-radius: 10px;
-  }
-  
-  .text-side {
-    flex: 1;
-    padding: 20px;
-  }
-  
-  .text-content {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .text-content h2 {
-    font-size: 24px;
-    color: #333;
-  }
-  
-  .text-content p {
-    font-size: 16px;
-    color: #666;
-  }
-  
-  .carousel-item {
-    min-height: 300px; /* Adjust as needed */
-  }
-  
+.footer .container {
+  text-align: center;
+}
+
+.footer .text-muted {
+  font-size: 1rem;
+}

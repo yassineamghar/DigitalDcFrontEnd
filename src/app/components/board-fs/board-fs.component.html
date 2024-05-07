@@ -12,44 +12,38 @@
       {{ i + 1 }}
     </button>
   </div>   -->
-<app-navbar></app-navbar>
-<div class="container-fluid">
-    <div class="row">
-        <!-- Carrousel -->
-       <!-- board-news-carousel.component.html -->
-
-<!-- board-news-carousel.component.html -->
-
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item" *ngFor="let newsItem of images; let i = index" [ngClass]="{'active': i === 0}">
-        <div class="carousel-content">
-          <div class="image-side">
-            <img src="assets/images/carousal-img/{{newsItem.name}}" style="border-radius: 10px;" class="d-block w-100" alt="...">
-          </div>
-          <div class="text-side">
-            <div class="text-content">
-              <h2>{{ newsItem.caption }}</h2>
-              <p>{{ newsItem.description }}</p>
+  <app-navbar></app-navbar>
+  <div class="container-fluid full-height">
+    <div class="row full-height">
+      <!-- Left section for images -->
+      <div class="col-lg-6 p-0 d-flex align-items-center">
+        <div id="carouselExampleControls" class="carousel slide w-100" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item" *ngFor="let newsItem of images; let i = index" [ngClass]="{'active': i === currentIndex}">
+              <img src="assets/images/carousal-img/{{newsItem.name}}" class="d-block w-100" alt="...">
             </div>
           </div>
+          <a class="carousel-control-prev" (click)="prevSlide()" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </a>
+          <a class="carousel-control-next" (click)="nextSlide()" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </a>
         </div>
       </div>
+      <div class="col-lg-6 p-5 d-flex align-items-center" style="background: linear-gradient(to right, #fc5185, #6e45e2);">
+        <div class="text-white">
+          <h2>{{ images[currentIndex].caption }}</h2>
+          <p>{{ images[currentIndex].description }}</p>
+        </div>
+        <!-- Add the next control here -->
+      </div>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
   </div>
+  <!-- Footer -->
+  <footer class="footer">
+      <div class="container">
+          <span class="text-muted">Footer</span>
+      </div>
+  </footer>
   
-
-<!-- Footer -->
-<footer class="footer">
-    <div class="container">
-        <span class="text-muted">Footer</span>
-    </div>
-</footer>
