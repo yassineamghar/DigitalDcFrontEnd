@@ -1,0 +1,31 @@
+<div class="container-fluid full-height">
+    <div class="row align-items-center justify-content-center full-height">
+        <div class="col-lg-6 p-3">
+            <!-- Left section for images -->
+            <div id="carouselExampleControls" class="carousel slide w-100" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item" *ngFor="let newsItem of images; let i = index"
+                        [ngClass]="{'active': i === currentIndex}">
+                        <img src="assets/images/carousal-img/{{newsItem.name}}" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" (click)="prevSlide()" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next" (click)="nextSlide()" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6 p-3 d-flex align-items-center">
+            <!-- Right section for title and description -->
+            <div class="text-white custom-content">
+                <div class="content-container">
+                    <h2>{{ images[currentIndex].caption }}</h2>
+                    <p>{{ images[currentIndex].description }}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

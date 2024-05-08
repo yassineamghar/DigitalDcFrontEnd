@@ -27,6 +27,8 @@ import { SlidesComponent } from './components/slides/slides.component';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 import { BoardFSComponent } from './components/board-fs/board-fs.component';
 import { FootercarouselComponent } from './components/footercarousel/footercarousel.component';
+import { BoardNewsComponent } from './components/board-news/board-news.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { FootercarouselComponent } from './components/footercarousel/footercarou
     SlidesComponent,
     BoardFSComponent,
     FootercarouselComponent,
+    BoardNewsComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

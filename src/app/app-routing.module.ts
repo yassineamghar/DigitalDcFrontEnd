@@ -6,6 +6,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { SlidesComponent } from './components/slides/slides.component';
 import { BoardFSComponent } from './components/board-fs/board-fs.component';
+import { BoardNewsComponent } from './components/board-news/board-news.component';
+import { AboutComponent } from './components/about/about.component';
 
 const routes: Routes = [
   {
@@ -31,6 +33,14 @@ const routes: Routes = [
   {
     path: 'boardfs',
     component: BoardFSComponent
+  },
+  {
+    path: 'boardnews',
+    component: BoardNewsComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
   },
   {
     path: '', redirectTo: '/boardfs', pathMatch: 'full'

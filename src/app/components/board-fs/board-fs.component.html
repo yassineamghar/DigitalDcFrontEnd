@@ -1,48 +1,8 @@
-<!-- <button type="button" (click)="fullscreen()" style="margin-right: 10px"></button>
-<mdb-carousel [controls]="true">
-  <mdb-carousel-item [interval]="3000" *ngFor="let image of images">
-    <img src="assets/images/carousal-img/{{ image.name }}" class="d-block w-100 img-fluid" />
-  </mdb-carousel-item>
-</mdb-carousel> -->
-
-<!-- <div class="footer-navigation">
-    <button type="button" class="sub-slide-number" *ngFor="let subSlide of mainSlide.subSlides; let i = index" 
-            [class.active]="i + subSlidesOffset(mainIndex) === activeSubSlide[mainIndex]" 
-            (click)="goToSubSlide(mainIndex, i)">
-      {{ i + 1 }}
-    </button>
-  </div>   -->
-  <app-navbar></app-navbar>
-  <div class="container-fluid full-height">
-    <div class="row align-items-center full-height" >
-      <div class="col-lg-6 p-0">
-        <!-- Left section for images -->
-        <div id="carouselExampleControls" class="carousel slide w-100" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item" *ngFor="let newsItem of images; let i = index" [ngClass]="{'active': i === currentIndex}">
-              <img src="assets/images/carousal-img/{{newsItem.name}}" class="d-block w-100" alt="...">
-            </div>
-          </div>
-          <a class="carousel-control-prev" (click)="prevSlide()" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          </a>
-          <a class="carousel-control-next" (click)="nextSlide()" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          </a>
-        </div>
-      </div>
-      <div class="col-lg-6 p-5 d-flex align-items-center">
-        <!-- Right section for title and description -->
-        <div class="text-white">
-          <div class="content-container">
-            <h2>{{ images[currentIndex].caption }}</h2>
-            <p>{{ images[currentIndex].description }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Footer -->
-  <app-footercarousel></app-footercarousel>
+<!--navbar -->
+<app-navbar></app-navbar>
+<!-- Fullscreen -->
+<app-board-news></app-board-news>
+<!-- Footer -->
+<app-footercarousel></app-footercarousel>
   
   
