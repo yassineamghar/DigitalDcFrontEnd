@@ -2,7 +2,7 @@
     background-color: transparent;
     /* background-image: linear-gradient(to right, #fc5185, #6e45e2); */
     color: white;
-    padding: 30px 0;
+    padding: 5px 0;
     position: fixed; /* Change from absolute to fixed */
     bottom: 0;
     width: 100%;
@@ -22,7 +22,7 @@
 
 .pagination .page-link {
     border-radius: 50%;
-    border: 1px solid #ccc;
+    border: 1px solid #cccccc;
     width: 20px;
     height: 20px;
     line-height: 20px;

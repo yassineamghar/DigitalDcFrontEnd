@@ -2,9 +2,12 @@
 
 <div class="container-fluid slide">
     <div class="partie1">
-        <div class="container px-4 px-lg-5">
+        <div class="container px-4 px-lg-4 ">
             <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-lg-8 text-center">
+                <div class="col-lg-3 text-center d-flex align-items-center">
+                    <img src="assets/images/TE_Connectivity_logo.svg" alt="TE Connectivity" class="img-fluid">
+                </div>
+                <div class="col-lg-9 text-center">
                     <hr class="divider">
                     <h2>About TE Connectivity</h2>
                     <h4 class="mt-0">Creating a Safer, Sustainable, Productive, and Connected Future</h4>
@@ -13,25 +16,47 @@
                         connectivity and sensor solutions.</p>
                     <hr class="divider">
                 </div>
+
             </div>
         </div>
     </div>
+
+    <div class=" full-height partie3">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-6 p-3">
+                <!-- Left section for images -->
+                <div id="carouselExampleControls" class="carousel slide w-100" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item relative mx-auto" *ngFor="let newsItem of images_equ; let i = index"
+                            [ngClass]="{'active': i === currentIndex}">
+                            <img src="assets/images/equipement/{{newsItem.name}}" class="w-full border-round" alt="...">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" (click)="prevSlide()" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </a>
+                    <a class="carousel-control-next" (click)="nextSlide()" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 p-3 d-flex align-items-center">
+                <!-- Right section for title and description -->
+                <div class="text-white custom-content">
+                    <div class="content-container">
+                        <h2>{{ images_equ[currentIndex].title }}</h2>
+                        <p>{{ images_equ[currentIndex].description }}</p>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+
     <div class="partie2">
         <div class="logos" #logosContainer>
             <div class="logos-slide" *ngFor="let newsItem of duplicatedImages; let i = index">
                 <img src="assets/images/{{newsItem.name}}">
-            </div>
-        </div>
-    </div>
-    <div class="partie3">
-        <div id="carousel2" class="carousel slide" data-ride="carousel" data-interval="3000">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <h3>Slide 1 du Carousel 2</h3>
-                </div>
-                <div class="carousel-item">
-                    <h3>Slide 2 du Carousel 2</h3>
-                </div>
             </div>
         </div>
     </div>

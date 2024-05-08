@@ -29,6 +29,9 @@ import { BoardFSComponent } from './components/board-fs/board-fs.component';
 import { FootercarouselComponent } from './components/footercarousel/footercarousel.component';
 import { BoardNewsComponent } from './components/board-news/board-news.component';
 import { AboutComponent } from './components/about/about.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CarouselModule } from 'primeng/carousel';
+
 
 @NgModule({
   declarations: [
@@ -47,6 +50,7 @@ import { AboutComponent } from './components/about/about.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -63,7 +67,8 @@ import { AboutComponent } from './components/about/about.component';
     ReactiveFormsModule,
     NgbModule,
     NgbCarouselModule,
-    MdbCarouselModule
+    MdbCarouselModule,
+    CarouselModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
