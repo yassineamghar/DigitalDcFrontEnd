@@ -1,7 +1,4 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { CarouselModule } from 'primeng/carousel';
-
 
 @Component({
   selector: 'app-about',
@@ -10,36 +7,30 @@ import { CarouselModule } from 'primeng/carousel';
 })
 export class AboutComponent implements OnInit, AfterViewInit {
 
-  images_logos = [
-    { name: 'DCimageTest.png' },
-    { name: 'logo.png' },
-    { name: 'logoDClarge.png' },
-    { name: 'iconDC.png' },
-    { name: 'logoDCtest.png' },
-    { name: 'logolarge.png' },
+  images_customers:any[] = [
+    { name: 'Aptiv_logo.png' },
+    { name: 'Fujikura logo.png' },
+    { name: 'Lear_Corporation_logo.png' },
+    { name: 'leoni-ag-logo.png' },
   ];
 
-  images_equ=[
-    { name: '1.jpeg', title: 'Equipo 1', description: 'Descripcion del equipo 1' },
-    { name: '2.jpeg', title: 'Equipo 1', description: 'Descripcion del equipo 1' },
-    { name: '3.jpeg', title: 'Equipo 1', description: 'Descripcion del equipo 1' },
-    { name: '4.jpeg', title: 'Equipo 1', description: 'Descripcion del equipo 1' },
-    { name: '5.jpeg', title: 'Equipo 1', description: 'Descripcion del equipo 1' },
-    { name: '6.jpeg', title: 'Equipo 1', description: 'Descripcion del equipo 1' },
-
+  images_partners:any[] = [
+    { name: 'barsan_Logo_2021.png' },
+    { name: 'Dachser_Logo_2021.png' },
+    { name: 'logo sjl.png' },
   ];
 
 
 
-  duplicatedImages: any[] = [];
 
   @ViewChild('logosContainer', { static: true }) logosContainer!: ElementRef;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.duplicatedImages = this.images_logos.concat(this.images_logos);
-    this.startInterval();
+    this.images_customers = this.images_customers.concat(this.images_customers);
+    this.images_partners = this.images_partners.concat(this.images_partners);
+
   }
 
   ngAfterViewInit(): void {
@@ -50,30 +41,9 @@ export class AboutComponent implements OnInit, AfterViewInit {
       console.error("One of the elements was not found.");
     }
   }
-  currentIndex: number = 0;
-  intervalId: any;
 
-  
-  prevSlide() {
-    this.currentIndex = (this.currentIndex === 0) ? (this.images_equ.length - 1) : (this.currentIndex - 1);
-    this.resetInterval();
-  }
 
-  nextSlide() {
-    this.currentIndex = (this.currentIndex === this.images_equ.length - 1) ? 0 : (this.currentIndex + 1);
-    this.resetInterval();
-  }
 
-  startInterval() {
-    this.intervalId = setInterval(() => {
-      this.nextSlide();
-    }, 3000);
-  }
-
-  resetInterval() {
-    clearInterval(this.intervalId);
-    this.startInterval();
-  }
 
 
 

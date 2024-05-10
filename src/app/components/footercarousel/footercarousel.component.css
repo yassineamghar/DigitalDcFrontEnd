@@ -1,9 +1,8 @@
 .footer {
     background-color: transparent;
-    /* background-image: linear-gradient(to right, #fc5185, #6e45e2); */
     color: white;
     padding: 5px 0;
-    position: fixed; /* Change from absolute to fixed */
+    position: fixed;
     bottom: 0;
     width: 100%;
 }

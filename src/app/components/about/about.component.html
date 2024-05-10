@@ -1,62 +1,49 @@
 <app-navbar></app-navbar>
 
-<div class="container-fluid slide">
+<div class="container-fluid slide full-height">
     <div class="partie1">
         <div class="container px-4 px-lg-4 ">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-lg-3 text-center d-flex align-items-center">
-                    <img src="assets/images/TE_Connectivity_logo.svg" alt="TE Connectivity" class="img-fluid">
+                    <img src="assets/images/TE_Connectivity_logo.svg" alt="TE Connectivity" class="img-fluid" />
                 </div>
                 <div class="col-lg-9 text-center">
-                    <hr class="divider">
+                    <hr class="divider" />
                     <h2>About TE Connectivity</h2>
-                    <h4 class="mt-0">Creating a Safer, Sustainable, Productive, and Connected Future</h4>
-                    <p class="text-white-75 mb-4">As the go-to engineering partner for today's innovation leaders and
-                        technology entrepreneurs, we are helping solve tomorrow's toughest challenges with advanced
-                        connectivity and sensor solutions.</p>
-                    <hr class="divider">
+                    <h4 class="mt-0">
+                        Creating a Safer, Sustainable, Productive, and Connected Future
+                    </h4>
+                    <p class="text-white-75 mb-4">
+                        As the go-to engineering partner for today's innovation leaders and
+                        technology entrepreneurs, we are helping solve tomorrow's toughest
+                        challenges with advanced connectivity and sensor solutions.
+                    </p>
+                    <hr class="divider" />
                 </div>
-
             </div>
         </div>
     </div>
-
-    <div class=" full-height partie3">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-lg-6 p-3">
-                <!-- Left section for images -->
-                <div id="carouselExampleControls" class="carousel slide w-100" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item relative mx-auto" *ngFor="let newsItem of images_equ; let i = index"
-                            [ngClass]="{'active': i === currentIndex}">
-                            <img src="assets/images/equipement/{{newsItem.name}}" class="w-full border-round" alt="...">
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" (click)="prevSlide()" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" (click)="nextSlide()" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-6 p-3 d-flex align-items-center">
-                <!-- Right section for title and description -->
-                <div class="text-white custom-content">
-                    <div class="content-container">
-                        <h2>{{ images_equ[currentIndex].title }}</h2>
-                        <p>{{ images_equ[currentIndex].description }}</p>
-                    </div>
-                </div>
-            </div>
-    
-        </div>
-    </div>
-
     <div class="partie2">
         <div class="logos" #logosContainer>
-            <div class="logos-slide" *ngFor="let newsItem of duplicatedImages; let i = index">
-                <img src="assets/images/{{newsItem.name}}">
+            <hr class="divider m-2" />
+            <div class="d-flex justify-content-center">
+                <h2>No clients</h2>
+            </div>
+            <hr class="divider m-2" />
+            <div class="logos-slide" *ngFor="let newsItem of images_customers; let i = index">
+                <img src="assets/images/Customers/{{ newsItem.name }}" />
+            </div>
+        </div>
+    </div>
+    <div class="partie2">
+        <div class="logos" #logosContainer>
+            <hr class="divider m-2" />
+            <div class="d-flex justify-content-center">
+                <h2>No partners</h2>
+            </div>
+            <hr class="divider m-2" />
+            <div class="logos-slide" *ngFor="let newsItem of images_partners; let i = index">
+                <img src="assets/images/partners/{{ newsItem.name }}" />
             </div>
         </div>
     </div>

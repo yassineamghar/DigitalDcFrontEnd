@@ -31,6 +31,9 @@ import { BoardNewsComponent } from './components/board-news/board-news.component
 import { AboutComponent } from './components/about/about.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselModule } from 'primeng/carousel';
+import { EquipementComponent } from './components/equipement/equipement.component';
+import { VideotestComponent } from './components/videotest/videotest.component';
+import { ShowmoreComponent } from './components/showmore/showmore.component';
 
 
 @NgModule({
@@ -47,6 +50,9 @@ import { CarouselModule } from 'primeng/carousel';
     FootercarouselComponent,
     BoardNewsComponent,
     AboutComponent,
+    EquipementComponent,
+    VideotestComponent,
+    ShowmoreComponent,
   ],
   imports: [
     BrowserModule,

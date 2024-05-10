@@ -8,6 +8,9 @@ import { SlidesComponent } from './components/slides/slides.component';
 import { BoardFSComponent } from './components/board-fs/board-fs.component';
 import { BoardNewsComponent } from './components/board-news/board-news.component';
 import { AboutComponent } from './components/about/about.component';
+import { EquipementComponent } from './components/equipement/equipement.component';
+import { ShowmoreComponent } from './components/showmore/showmore.component';
+import { VideotestComponent } from './components/videotest/videotest.component';
 
 const routes: Routes = [
   {
@@ -41,6 +44,18 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent
+  },
+  {
+    path: 'equipement',
+    component: EquipementComponent
+  },
+  {
+    path: 'showmore',
+    component: ShowmoreComponent
+  },
+  {
+    path: 'videotest',
+    component: VideotestComponent
   },
   {
     path: '', redirectTo: '/boardfs', pathMatch: 'full'
