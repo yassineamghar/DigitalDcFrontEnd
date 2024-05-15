@@ -34,6 +34,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { EquipementComponent } from './components/equipement/equipement.component';
 import { VideotestComponent } from './components/videotest/videotest.component';
 import { ShowmoreComponent } from './components/showmore/showmore.component';
+import { CardComponent } from './components/card/card.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { ShowmoreComponent } from './components/showmore/showmore.component';
     EquipementComponent,
     VideotestComponent,
     ShowmoreComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,

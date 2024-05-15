@@ -18,6 +18,9 @@ export class AboutComponent implements OnInit, AfterViewInit {
     { name: 'barsan_Logo_2021.png' },
     { name: 'Dachser_Logo_2021.png' },
     { name: 'logo sjl.png' },
+    // { name: 'barsan_Logo_2021.png' },
+    // { name: 'Dachser_Logo_2021.png' },
+    // { name: 'logo sjl.png' },
   ];
 
 
@@ -34,14 +37,27 @@ export class AboutComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const copy = this.logosContainer.nativeElement.querySelector('.logos-slide');
-    if (copy && this.logosContainer.nativeElement) {
-      this.logosContainer.nativeElement.appendChild(copy);
+    const customerSlides = this.logosContainer.nativeElement.querySelectorAll('.logos-slide');
+    if (customerSlides.length > 0 && this.logosContainer.nativeElement) {
+      customerSlides.forEach((slide: HTMLElement) => {
+        const copy = slide.cloneNode(true);
+        this.logosContainer.nativeElement.appendChild(copy);
+      });
     } else {
-      console.error("One of the elements was not found.");
+      console.error("No customer slides found.");
+    }
+  
+    const partnerSlides = this.logosContainer.nativeElement.querySelectorAll('.logos-slide');
+    if (partnerSlides.length > 0 && this.logosContainer.nativeElement) {
+      partnerSlides.forEach((slide: HTMLElement) => {
+        const copy = slide.cloneNode(true);
+        this.logosContainer.nativeElement.appendChild(copy);
+      });
+    } else {
+      console.error("No partner slides found.");
     }
   }
-
+  
 
 
 

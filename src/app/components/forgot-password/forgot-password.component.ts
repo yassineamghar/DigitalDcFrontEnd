@@ -1,3 +1,5 @@
+import { Token } from '@angular/compiler';
+import { User } from './../../models/ForgotPassword';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -22,6 +24,8 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnInit(): void {
     this.forgotpassform = this.formBuilder.group({
       Username: [null, Validators.required],
+      Email: [null, [Validators.required, Validators.email]],
+      
       NewPassword: [null, [Validators.required, Validators.minLength(3)]],
       ConfirmPassword: [null, Validators.required]
     }, { validators: this.passwordMatchValidator });
@@ -42,18 +46,17 @@ export class ForgotPasswordComponent implements OnInit {
     if (this.forgotpassform.invalid) {
       return;
     }
-
-    const { Username, NewPassword } = this.forgotpassform.value;
-
-    this.authService.forgotPassword({ Username, NewPassword }).subscribe(
-      (response) => {
-        console.log(response);
-        alert("Password changed successfully!");
-        this.router.navigate(['/login']);
+    this.authService.resetPassword(this.forgotpassform).subscribe(
+      response => {
+        if (response.status === 'Success') {
+          this.router.navigate(['/forgotpassword']);
+        } else {
+          this.error = response.message;
+        }
       },
-      (error) => {
-        console.log(error);
-        this.error = error.message;
+      error => {
+        console.error('Error:', error);
+        this.error = 'An error occurred while processing your request.';
       }
     );
   }

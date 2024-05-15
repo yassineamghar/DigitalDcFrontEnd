@@ -1,0 +1,35 @@
+#productCarousel {
+    background-color: #007bff;
+}
+
+.carousel-item {
+    min-height: 400px; /* Adjust based on your content */
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    max-width: 300px;
+    margin: auto;
+}
+
+.card-img-top {
+    height: 200px; /* Adjust as needed */
+    object-fit: cover;
+}
+
+.price {
+    display: flex;
+    align-items: baseline;
+}
+
+.new-price {
+    color: #007bff;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #6c757d;
+}

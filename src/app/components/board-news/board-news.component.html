@@ -1,5 +1,8 @@
-<div class="container-fluid full-height ">
-    <div class="row align-items-center justify-content-center full-height">
+<div class="container-fluid full-height">
+    <div class=" row title align-items-center" style="height: calc(20%);">
+        <h1>Board News !</h1>
+    </div>
+    <div class="row align-items-center" style="height: calc(75%);">
         <div class="col-lg-6 p-3">
             <!-- Left section for images -->
             <div id="carouselExampleControls" class="carousel slide w-100" data-ride="carousel">
@@ -17,15 +20,18 @@
                 </a>
             </div>
         </div>
-        <div class="col-lg-6 p-3 d-flex align-items-center">
+        <div class="col-lg-6 p-3">
             <!-- Right section for title and description -->
             <div class="text-white custom-content">
-                <div class="content-container">
+                <div class="title-container">
                     <h2>{{ images[currentIndex].caption }}</h2>
+                </div>
+                <div class="separator"></div> <!-- Separator line -->
+                <div class="content-container" style="height: 240px;">
                     <p>{{ images[currentIndex].description }}</p>
                 </div>
             </div>
         </div>
-
+        
     </div>
 </div>

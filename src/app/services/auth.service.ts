@@ -20,8 +20,12 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, loginForm);
   }
 
-  forgotPassword(forgotpassform: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/forgot-password`, forgotpassform);
+  resetPassword(data:any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reset-password'`,data);
+  }
+
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/forgot-password?Email=${email}`, {  });
   }
 
 

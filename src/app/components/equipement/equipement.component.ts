@@ -9,11 +9,11 @@ export class EquipementComponent implements OnInit{
   
   images_equ=[
     { name: '1.jpeg', title: 'Equipo 1', description: 'Descripcion del equipo 1' },
-    { name: '2.jpeg', title: 'Equipo 1', description: 'Descripcion del equipo 1' },
-    { name: '3.jpeg', title: 'Equipo 1', description: 'Descripcion del equipo 1' },
-    { name: '4.jpeg', title: 'Equipo 1', description: 'Descripcion del equipo 1' },
-    { name: '5.jpeg', title: 'Equipo 1', description: 'Descripcion del equipo 1' },
-    { name: '6.jpeg', title: 'Equipo 1', description: 'Descripcion del equipo 1' },
+    { name: '2.jpeg', title: 'Equipo 2', description: 'Descripcion del equipo 1' },
+    { name: '3.jpeg', title: 'Equipo 3', description: 'Descripcion del equipo 1' },
+    { name: '4.jpeg', title: 'Equipo 4', description: 'Descripcion del equipo 1' },
+    { name: '5.jpeg', title: 'Equipo 5', description: 'Descripcion del equipo 1' },
+    { name: '6.jpeg', title: 'Equipo 6', description: 'Descripcion del equipo 1' },
 
   ];
 

@@ -11,7 +11,6 @@
   }
 }
 .container-fluid.slide{
-    background-image: url('src/assets/images/carousal-img/background.jpeg'); 
     background-size: cover;
     background-position: center;
     display: flex;
@@ -22,7 +21,7 @@
 .partie1 {
     margin: 20px 0;
     color: azure;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.307);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
@@ -37,7 +36,7 @@
  h2 {
     font-size: 28px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     color: #fff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -47,25 +46,6 @@
     line-height: 1.6;
     color: #eee;
 }
-
-.partie2 {
-    margin: 20px 0;
-    color: azure;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    width: 100%;
-    padding: 10px 0;
-    border: 1px solid #0c0b0b;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.partie2:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-
 @keyframes slide {
     from {
         transform: translateX(0);
@@ -87,10 +67,21 @@
 .logos {
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     white-space: nowrap;
     position: relative;
+    margin: 20px 0;
+    color: azure;
+    background-color: rgba(0, 0, 0, 0.307);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    width: 100%;
+    padding: 0 0 10px 0;
 }
+
+.logos:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+} 
 
 .logos:before,
 .logos:after {

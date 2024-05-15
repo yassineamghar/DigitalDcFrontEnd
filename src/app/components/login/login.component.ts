@@ -11,6 +11,10 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+
+  forgotEmail: string = '';
+
+
   loginForm: FormGroup = new FormGroup({});
   error: string | null=null;
   
@@ -59,8 +63,20 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-  goToForgotPasswordPage() {
-    this.router.navigate(['/forgot-password']);
+
+  ForgotPasswordSubmit() {
+    this.authService.resetPassword(this.forgotEmail).subscribe(
+      response => {
+        if (response.status === 'Success') {
+          this.router.navigate(['/forgotpassword']);
+        } else {
+          console.error('Error:', response.message);
+        }
+      },
+      error => {
+        console.error('Error:', error);
+      }
+    );
   }
   
 

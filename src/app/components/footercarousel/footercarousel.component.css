@@ -31,14 +31,15 @@
 }
 
 .pagination .page-link.active-dot {
-    background-color: #c0360c; /* Change to the desired color */
-    color: #ea0909; /* Change to the desired color */
+    background-color: #000000; /* Fond noir */
+    color: #ffffff; /* Texte blanc (ou toute autre couleur désirée pour le texte) */
 }
+
 
 .pagination .page-item.disabled .page-link {
     background-color: transparent;
-    color: #ccc;
-    border-color: #ccc;
+    color: #0000000b;
+    border-color: #070707;
 }
 
 .pagination .page-item.disabled .page-link:hover {

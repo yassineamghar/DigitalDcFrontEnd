@@ -11,6 +11,7 @@ import { AboutComponent } from './components/about/about.component';
 import { EquipementComponent } from './components/equipement/equipement.component';
 import { ShowmoreComponent } from './components/showmore/showmore.component';
 import { VideotestComponent } from './components/videotest/videotest.component';
+import { CardComponent } from './components/card/card.component';
 
 const routes: Routes = [
   {
@@ -38,8 +39,31 @@ const routes: Routes = [
     component: BoardFSComponent
   },
   {
-    path: 'boardnews',
-    component: BoardNewsComponent
+    path: 'boardfs',
+    component: BoardFSComponent,
+    children: [
+      {
+        path: 'about',
+        component: AboutComponent
+      },
+      {
+        path: 'equipement',
+        component: EquipementComponent
+      },
+      {
+        path: 'showmore',
+        component: ShowmoreComponent
+      },
+      {
+        path: 'videotest',
+        component: VideotestComponent
+      },
+      {
+        path: 'boardnews',
+        component: BoardNewsComponent,
+      }
+
+    ]
   },
   {
     path: 'about',
@@ -58,7 +82,11 @@ const routes: Routes = [
     component: VideotestComponent
   },
   {
-    path: '', redirectTo: '/boardfs', pathMatch: 'full'
+    path: 'card',
+    component: CardComponent
+  },
+  {
+    path: '', redirectTo: '/card', pathMatch: 'full'
   }
 ];
 

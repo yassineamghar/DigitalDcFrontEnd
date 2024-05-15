@@ -1,31 +1,35 @@
-/* :hover{
-    height: 100vh;
-    display: block;
-} */
 @media (min-width: 992px) {
-    .full-height {
+    #portfolio {
       height: calc(100vh - 57.6px);
     }
-    .col-lg-4{
-      display: block;
-    }
-  }
-  /* .container.full-height {
-    background-image: url('src/assets/images/carousal-img/background.jpeg');
-    background-size: cover;
-    background-position: center;
-    opacity: 1;
-    } */
+}
+
 #portfolio {
-    padding: 60px 0;
-    background-image: url('src/assets/images/carousal-img/background.jpeg');
+    padding: 20px 0;
     background-size: cover;
     background-position: center;
     opacity: 1;
-  }
+    align-items: center;
+}
+
+.title h1 {
+  font-size: 3.5rem;
+  align-items: center;
+  padding: 40px 0;
+  color: rgb(18, 25, 38);
+  font-weight: 700;
+  line-height: 1.167;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.title h1:hover {
+  color: rgb(255, 69, 0); /* Change color on hover */
+  transform: scale(1.05); /* Slightly scale up on hover */
+}
+
   
   .row.g-0 .col-lg-4 {
-    padding: 15px; /* Add space between boxes */
+    padding: 20px; 
   }
   
 .portfolio-box {
