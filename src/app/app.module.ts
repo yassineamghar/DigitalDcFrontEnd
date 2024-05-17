@@ -35,6 +35,7 @@ import { EquipementComponent } from './components/equipement/equipement.componen
 import { VideotestComponent } from './components/videotest/videotest.component';
 import { ShowmoreComponent } from './components/showmore/showmore.component';
 import { CardComponent } from './components/card/card.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { CardComponent } from './components/card/card.component';
     VideotestComponent,
     ShowmoreComponent,
     CardComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -77,6 +79,8 @@ import { CardComponent } from './components/card/card.component';
     NgbCarouselModule,
     MdbCarouselModule,
     CarouselModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

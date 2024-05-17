@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { map } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -10,30 +12,30 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-
   forgotEmail: string = '';
-
-
   loginForm: FormGroup = new FormGroup({});
-  error: string | null=null;
+  error: string | null = null;
+  showPassword: boolean = false;
+  eyeIcon = faEye;
+  eyeSlashIcon = faEyeSlash;
   
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private router: Router
-    ) { }
+    private router: Router,
+    private http: HttpClient // Inject HttpClient
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       Username: [null, [Validators.required]],
       Password: [null, [
-        Validators.required, 
+        Validators.required,
         Validators.minLength(3)
       ]]
-    })
+    });
   }
-  
+
   onSubmit() {
     console.log(this.loginForm);
     if (this.loginForm.invalid) {
@@ -56,7 +58,7 @@ export class LoginComponent implements OnInit {
               errorMessages.push(...messages);
             }
           }
-            this.error = errorMessages.join(' and ');
+          this.error = errorMessages.join(' and ');
         } else {
           this.error = "Other error occurred.";
         }
@@ -65,20 +67,23 @@ export class LoginComponent implements OnInit {
   }
 
   ForgotPasswordSubmit() {
-    this.authService.resetPassword(this.forgotEmail).subscribe(
-      response => {
-        if (response.status === 'Success') {
-          this.router.navigate(['/forgotpassword']);
-        } else {
-          console.error('Error:', response.message);
-        }
+    if (!this.forgotEmail) {
+      alert('Please enter your email address.');
+      return;
+    }
+    this.authService.forgotPassword(this.forgotEmail).subscribe(
+      (response) => {
+        console.log(response);
+        alert('Password reset link sent to your email.');
       },
-      error => {
-        console.error('Error:', error);
+      (error) => {
+        console.error(error);
+        alert('Error sending password reset email.');
       }
     );
   }
-  
 
-
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 }

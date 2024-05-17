@@ -1,4 +1,5 @@
-export class User {
+
+export class ForgotPassword {
     constructor(
       public Username: string,
       public Email: string,
