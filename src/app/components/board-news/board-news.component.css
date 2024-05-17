@@ -7,6 +7,10 @@
   }
 }
 
+.container-fluid{
+  /* background-image: url('src/assets/images/carousal-img/background2.webp'); */
+  background-size: cover;
+}
 .col-lg-6 {
   position: relative;
   overflow: hidden;
@@ -45,13 +49,15 @@
 
 .custom-content {
   background-color: rgba(0, 0, 0, 0.7);
+  /* background-image: url('src/assets/images/carousal-img/background2.webp'); */
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  height: 400px;
   width: 100%;
+  object-fit: cover;
   font-family: 'Roboto', sans-serif;
-  height: 300px;
 
 }
 
