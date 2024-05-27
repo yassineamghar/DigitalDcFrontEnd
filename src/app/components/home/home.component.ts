@@ -9,8 +9,6 @@ export class HomeComponent {
   images=[
     {name: '1.avif', caption:""},
     {name: '2.avif', caption:""},
-    
-
   ];
  
 }

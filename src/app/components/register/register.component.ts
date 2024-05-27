@@ -27,7 +27,6 @@ export class RegisterComponent implements OnInit {
       Email: [null, [
         Validators.required,
         Validators.email,
-        Validators.minLength(6)
       ]],
       Password: [null, [
         Validators.required,
@@ -41,8 +40,9 @@ export class RegisterComponent implements OnInit {
     if(this.registerForm.invalid) {
       return;
     }
+    const role = 'user';
     console.log(this.registerForm.value);
-    this.authService.register(this.registerForm.value).subscribe(
+    this.authService.register(this.registerForm.value, role).subscribe(
       (response) => {
         console.log(response);
         alert(response.message);

@@ -1,3 +1,7 @@
+:host {
+  display: block;
+  height: 100vh;
+}
 @media (min-width: 992px) {
   .full-height {
     height: calc(100% - 57.6px);
@@ -116,6 +120,7 @@
   -webkit-text-stroke: 1px #E98300;
   background: url(src/assets/images/back.png);
   -webkit-background-clip: text;
+  background-clip: text;
   background-position: 0 0;
   animation: back 20s linear infinite;
   display: inline-block;

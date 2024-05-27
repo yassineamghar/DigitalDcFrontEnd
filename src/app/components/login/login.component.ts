@@ -37,19 +37,21 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.loginForm);
+    // console.log(this.loginForm);
     if (this.loginForm.invalid) {
       return;
     }
-    console.log(this.loginForm.value);
+    // console.log(this.loginForm.value);
     this.authService.login(this.loginForm.value).subscribe(
       (response) => {
-        console.log(response);
+        // console.log(response);
         alert("Login successful!");
+        //store the token in local storage
+        localStorage.setItem('token', response.token);
         this.router.navigate(['home']);
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
         if (error.error && error.error.errors) {
           const errorMessages: string[] = [];
           for (const key in error.error.errors) {
@@ -73,11 +75,11 @@ export class LoginComponent implements OnInit {
     }
     this.authService.forgotPassword(this.forgotEmail).subscribe(
       (response) => {
-        console.log(response);
+        // console.log(response);
         alert('Password reset link sent to your email.');
       },
       (error) => {
-        console.error(error);
+        // console.error(error);
         alert('Error sending password reset email.');
       }
     );

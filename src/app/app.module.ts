@@ -34,8 +34,8 @@ import { CarouselModule } from 'primeng/carousel';
 import { EquipementComponent } from './components/equipement/equipement.component';
 import { VideotestComponent } from './components/videotest/videotest.component';
 import { ShowmoreComponent } from './components/showmore/showmore.component';
-import { CardComponent } from './components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TestComponent } from './components/test/test.component';
 
 
 @NgModule({
@@ -55,7 +55,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     EquipementComponent,
     VideotestComponent,
     ShowmoreComponent,
-    CardComponent,
+    TestComponent,
     
   ],
   imports: [

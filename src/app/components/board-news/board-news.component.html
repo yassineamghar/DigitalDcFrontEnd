@@ -1,16 +1,16 @@
 <div class="container-fluid full-height">
     <div class=" row title align-items-center" style="height: calc(20%);">
-        <h1>Board News !</h1>
+        <h1 class="m-0">Board News!</h1>
     </div>
-    <div class="row align-items-center" style="height: calc(75%);">
+    <div class="row align-items-center" style="height: calc(70%);">
         <div class="col-lg-6 p-3">
-            <!-- Left section for images -->
             <div id="carouselExampleControls" class="carousel slide w-100" data-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item" *ngFor="let newsItem of images; let i = index"
-                        [ngClass]="{'active': i === currentIndex}">
-                        <img src="assets/images/carousal-img/{{newsItem.name}}" class="d-block w-100" alt="...">
-                    </div>
+                    <div class="carousel-item" *ngFor="let newsItem of images; let i = index" [ngClass]="{'active': i === currentIndex}">
+                        <a href="assets/images/carousal-img/{{newsItem.name}}" data-lightbox="image-gallery">
+                            <img src="assets/images/carousal-img/{{newsItem.name}}" class="d-block w-100">
+                        </a>
+                    </div>                    
                 </div>
                 <a class="carousel-control-prev" (click)="prevSlide()" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -21,12 +21,11 @@
             </div>
         </div>
         <div class="col-lg-6 p-3">
-            <!-- Right section for title and description -->
             <div class="text-white custom-content">
                 <div class="title-container">
                     <h2>{{ images[currentIndex].caption }}</h2>
                 </div>
-                <div class="separator"></div> <!-- Separator line -->
+                <div class="separator"></div> 
                 <div class="content-container" style="height: 240px;">
                     <p>{{ images[currentIndex].description }}</p>
                 </div>
