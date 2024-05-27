@@ -1,87 +1,104 @@
 /* :host {
     display: block;
     height: 100vh;
-  } */
-  
-/* styles.css */
+} */
 
 @media (min-width: 992px) {
-  .full-height {
-    height: calc(100vh - 57.6px);
+    .full-height {
+      height: calc(100vh - 57.6px);
+    }
   }
-}
-.container-fluid.slide{
-    background-size: cover;
-    background-position: center;
+
+.container-fluid {
     display: flex;
     flex-direction: column;
+    background-size: cover;
+    background-position: center;
     opacity: 1;
 }
 
 .partie1 {
-    margin: 20px 0;
+    flex: 1;
+    margin: 10px 0;
     color: azure;
-    background-color: rgba(0, 0, 0, 0.307);
+    background-color: rgba(234, 212, 184, 0.121);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     width: 100%;
 }
 
-.partie1:hover {
+.partie1:hover, .partie2:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
- h2 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 0px;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+.divider {
+    width: 100%;
+    height: 0.2vw;
+    background-color: orange;
+    margin-bottom: 1%;
 }
 
-.partie1 p {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #eee;
+.title-container {
+    background-color: rgba(234, 212, 184, 0.466);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
+.title-container h2 {
+    font-size: 36px;
+    color: #35313171;
+    margin-bottom: 10px;
+}
+
+.img-fluid {
+    height: auto;
+    max-width: 100%;
+}
+.custom-content p {
+    font-size: 20px;
+    line-height: 1.4;
+    color: #00000061;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+}
+
 @keyframes slide {
     from {
         transform: translateX(0);
     }
-
     to {
         transform: translateX(-100%);
     }
 }
 
-@media (min-width: 992px) {
-    .logos-slide img {
-        width: 180px;
-        height: 120px;
-        margin: 0 20px;
-    }
+.partie2 {
+    flex: 1;
+    margin: 10px 0;
+    color: azure;
+    background-color: rgba(234, 212, 184, 0.121);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    width: 100%;
 }
 
 .logos {
-    border-radius: 10px;
     overflow: hidden;
     white-space: nowrap;
     position: relative;
-    margin: 20px 0;
-    color: azure;
-    background-color: rgba(0, 0, 0, 0.307);
-    border-radius: 10px;
-    transition: all 0.3s ease;
+    margin: 20px;
+    background-color: rgba(234, 212, 184, 0.121);
+    /* transition: all 0.3s ease; */
     width: 100%;
     padding: 0 0 10px 0;
 }
-
-.logos:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-} 
 
 .logos:before,
 .logos:after {
@@ -95,12 +112,12 @@
 
 .logos:before {
     left: 0;
-    background: linear-gradient(to left, rgba(255, 255, 255, 0), rgb(45, 43, 43));
+    background: linear-gradient(to left, rgba(255, 255, 255, 0), rgb(241, 238, 238));
 }
 
 .logos:after {
     right: 0;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(45, 43, 43));
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(241, 238, 238));
 }
 
 .logos:hover .logos-slide {
@@ -110,6 +127,20 @@
 .logos-slide {
     display: inline-block;
     justify-content: center;
-    animation: 50s slide infinite linear;
+    animation: 300s slide infinite linear;
+
+}
+
+@media( min-width: 992px) {
+    .logos-slide img{
+        width: 180px;
+        height: 70px;
+        margin: 0 20px;
+    }
+}
+
+.img-fluid{
+    border-radius: 10px;
+    margin: 10px;
 }
 

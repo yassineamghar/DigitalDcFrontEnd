@@ -1,52 +1,54 @@
 <app-navbar></app-navbar>
 
-<div class="container-fluid slide full-height">
-    <div class="partie1">
-        <div class="container px-4 px-lg-4 ">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-lg-3 text-center d-flex align-items-center">
-                    <img src="assets/images/TE_Connectivity_logo.svg" alt="TE Connectivity" class="img-fluid" />
-                </div>
-                <div class="col-lg-9 text-center">
-                    <hr class="divider" />
+<div class="container-fluid full-height d-flex flex-column">
+    <div class="partie1 d-flex flex-column justify-content-center align-items-center">
+        <div class="row justify-content-center align-items-center w-100">
+            <div class="col-lg-4 col-md-5 col-sm-12 text-center mb-3 mb-md-0">
+                <img src="assets/images/TE_Connectivity_logo.svg" alt="TE Connectivity" class="img-fluid" />
+            </div>
+            <div class="col-lg-8 col-md-7 col-sm-12 custom-content">
+                <div class="title-container">
                     <h2>About TE Connectivity</h2>
-                    <h4 class="mt-0">
-                        Creating a Safer, Sustainable, Productive, and Connected Future
-                    </h4>
-                    <p class="text-white-75 mb-4">
-                        As the go-to engineering partner for today's innovation leaders and
-                        technology entrepreneurs, we are helping solve tomorrow's toughest
-                        challenges with advanced connectivity and sensor solutions.
-                    </p>
-                    <hr class="divider" />
                 </div>
+                <div class="divider"></div>
+                <p>
+                    Creating a Safer, Sustainable, Productive, and Connected Future.
+                    As the go-to engineering partner for today's innovation leaders and
+                    technology entrepreneurs, we are helping solve tomorrow's toughest
+                    challenges with advanced connectivity and sensor solutions.
+                </p>
+                <div class="divider"></div>
             </div>
         </div>
     </div>
-    <div class="partie2">
-        <div class="logos" #logosContainer>
-            <hr class="divider m-2" />
-            <div class="d-flex justify-content-center">
-                <h2>No clients</h2>
+
+    <!-- about.component.html -->
+    <!-- about.component.html -->
+    <!-- about.component.html -->
+    <div class="partie2 d-flex flex-column justify-content-center align-items-center">
+        <div class="logos">
+            <div class="title-container">
+                <h2>Customers</h2>
             </div>
-            <hr class="divider m-2" />
-            <div class="logos-slide" *ngFor="let newsItem of images_customers; let i = index">
-                <img src="assets/images/Customers/{{ newsItem.name }}" />
-            </div>
-        </div>
-    </div>
-    <div class="partie2">
-        <div class="logos" #logosContainer>
-            <hr class="divider m-2" />
-            <div class="d-flex justify-content-center">
-                <h2>No partners</h2>
-            </div>
-            <hr class="divider m-2" />
-            <div class="logos-slide" *ngFor="let newsItem of images_partners; let i = index">
-                <img src="assets/images/partners/{{ newsItem.name }}" />
+            <div class="logos-slide">
+                <img *ngFor="let newsItem of images_customers" src="assets/images/Customers/{{ newsItem.name }}" />
             </div>
         </div>
     </div>
+
+    <div class="partie2 d-flex flex-column justify-content-center align-items-center">
+        <div class="logos">
+            <div class="title-container">
+                <h2>Partners</h2>
+            </div>
+            <div class="logos-slide">
+                <img *ngFor="let newsItem of images_partners" src="assets/images/partners/{{ newsItem.name }}" />
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
 
 <app-footercarousel></app-footercarousel>

@@ -7,7 +7,6 @@
   .full-height {
     height: calc(100% - 57.6px);
   }
-
   .col-lg-6 {
     display: block;
   }
@@ -120,7 +119,7 @@
 
 .title {
   text-align: center;
-  padding: 0; /* Adjusted padding to center the title */
+  padding: 0; 
 }
 
 .title h1 {
@@ -140,18 +139,6 @@
 h1{
   padding: 20px 0 0 0;
 }
-
-/* @keyframes back {
-  0% {
-    background-position: 0 0;
-    background-color: #E98300;
-  }
-
-  100% {
-    background-position: 2000px 0;
-    background-color: #E98300;
-  }
-} */
 
 .carousel-control-prev,
 .carousel-control-next {
