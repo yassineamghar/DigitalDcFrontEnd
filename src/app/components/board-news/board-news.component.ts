@@ -35,7 +35,7 @@ export class BoardNewsComponent implements OnInit{
     // Handle lightbox close event when clicking outside the image
     document.addEventListener('click', (event) => {
         if ((event.target as Element).classList.contains('lightbox')) {
-            window.location.href = '/test';
+            window.location.href = '/boardfs';
         }
     });
   }

@@ -6,7 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./videotest.component.css']
 })
 export class VideotestComponent {
-  videos=[
-    { name: '1.mp4' },
-  ]
+  // videos=[
+  //   { name: '1.mp4' },
+  // ]
+  // videos=[
+  //   { name: 'Coming soon Glitch video effects.mp4' },
+  // ]
 }

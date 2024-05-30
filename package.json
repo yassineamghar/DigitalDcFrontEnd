@@ -32,11 +32,15 @@
     "mdb-angular-ui-kit": "^6.0.0",
     "mdb-ui-kit": "^7.2.0",
     "ng-angular-popup": "^0.5.2",
+    "ngx-extended-pdf-viewer": "^16.1.0",
     "ngx-owl-carousel-o": "^17.0.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^4.3.136",
     "primeng": "^16.1.0",
     "rxjs": "~7.8.0",
     "slick-carousel": "^1.8.1",
     "tslib": "^2.3.0",
+    "worker-loader": "^3.0.8",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {

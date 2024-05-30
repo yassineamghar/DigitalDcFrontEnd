@@ -1,3 +1,4 @@
+// import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,7 +37,12 @@ import { VideotestComponent } from './components/videotest/videotest.component';
 import { ShowmoreComponent } from './components/showmore/showmore.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TestComponent } from './components/test/test.component';
-
+import { ArticleComponent } from './components/Media/article/article.component';
+import { ImageComponent } from './components/Media/image/image.component';
+import { VideoComponent } from './components/Media/video/video.component';
+import { ArticleService } from './services/Articles/article.service';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { PdfViewerModalComponent } from './components/pdf-viewer-modal/pdf-viewer-modal.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +62,10 @@ import { TestComponent } from './components/test/test.component';
     VideotestComponent,
     ShowmoreComponent,
     TestComponent,
+    ArticleComponent,
+    ImageComponent,
+    VideoComponent,
+    PdfViewerModalComponent,
     
   ],
   imports: [
@@ -81,8 +91,10 @@ import { TestComponent } from './components/test/test.component';
     CarouselModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    NgxExtendedPdfViewerModule,
+
   ],
-  providers: [AuthService],
+  providers: [AuthService, ArticleService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

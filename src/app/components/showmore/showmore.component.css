@@ -84,3 +84,32 @@
     max-width: 100%;
     height: auto;
   }
+
+
+
+
+
+
+  /*coming soon page*/
+  html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* Prevents scrolling */
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*position: fixed;  Fixes the container in place */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+  }
+  

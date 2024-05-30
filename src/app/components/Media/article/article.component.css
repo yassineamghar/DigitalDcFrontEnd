@@ -1,0 +1,71 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.article-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.article-list li {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #f9f9f9;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.article-list li:hover {
+  background-color: #eaeaea;
+}
+
+.selected-article {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.buttons {
+  margin-bottom: 10px;
+}
+
+.buttons button {
+  margin-right: 10px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.update-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.update-form {
+  margin-top: 20px;
+}
+
+.update-form input[type="file"] {
+  margin-bottom: 10px;
+}
+
+.upload-section {
+  margin-top: 20px;
+}
+
+.upload-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2196f3;
+  color: white;
+  cursor: pointer;
+}

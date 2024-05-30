@@ -43,7 +43,7 @@ body {
     align-items: center;
     justify-content: center;
     flex-grow: 1;
-    background-image: url('src/assets/images/backimage.webp'); /* Remplacez le chemin par l'emplacement de votre image */
+    background-image: url('src/assets/images/backimage.JPG'); /* Remplacez le chemin par l'emplacement de votre image */
     background-size: cover; /* Ajuste la taille de l'image pour couvrir l'élément */
     background-position: center; /* Centre l'image horizontalement et verticalement */
 }

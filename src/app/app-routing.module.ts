@@ -12,6 +12,7 @@ import { EquipementComponent } from './components/equipement/equipement.componen
 import { ShowmoreComponent } from './components/showmore/showmore.component';
 import { VideotestComponent } from './components/videotest/videotest.component';
 import { TestComponent } from './components/test/test.component';
+import { ArticleComponent } from './components/Media/article/article.component';
 
 const routes: Routes = [
   {
@@ -38,33 +39,33 @@ const routes: Routes = [
     path: 'boardfs',
     component: BoardFSComponent
   },
-  {
-    path: 'boardfs',
-    component: BoardFSComponent,
-    children: [
-      {
-        path: 'about',
-        component: AboutComponent
-      },
-      {
-        path: 'equipement',
-        component: EquipementComponent
-      },
-      {
-        path: 'showmore',
-        component: ShowmoreComponent
-      },
-      {
-        path: 'videotest',
-        component: VideotestComponent
-      },
-      {
-        path: 'boardnews',
-        component: BoardNewsComponent,
-      }
+  // {
+  //   path: 'boardfs',
+  //   component: BoardFSComponent,
+  //   children: [
+  //     {
+  //       path: 'about',
+  //       component: AboutComponent
+  //     },
+  //     {
+  //       path: 'equipement',
+  //       component: EquipementComponent
+  //     },
+  //     {
+  //       path: 'showmore',
+  //       component: ShowmoreComponent
+  //     },
+  //     {
+  //       path: 'videotest',
+  //       component: VideotestComponent
+  //     },
+  //     {
+  //       path: 'boardnews',
+  //       component: BoardNewsComponent,
+  //     }
 
-    ]
-  },
+  //   ]
+  // },
   {
     path: 'about',
     component: AboutComponent
@@ -84,6 +85,10 @@ const routes: Routes = [
   {
     path: 'test',
     component: TestComponent
+  },
+  {
+    path: 'articles',
+    component: ArticleComponent
   },
   {
     path: '', redirectTo: '/boardfs', pathMatch: 'full'

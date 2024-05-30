@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <h2>Articles</h2>
+    <ul class="article-list">
+        <li *ngFor="let article of articles" (click)="selectArticle(article)">
+            <span>{{ article.pdf_Name }}</span>
+        </li>
+    </ul>
+
+    <div *ngIf="selectedArticle" class="selected-article">
+        <h3>Selected Article: {{ selectedArticle.pdf_Name }}</h3>
+        <div class="buttons">
+            <button class="delete-btn" (click)="deleteSelectedArticle()">Delete</button>
+            <button class="update-btn" (click)="toggleUpdateForm()">Update</button>
+            <button class="extract-btn" (click)="extractArticlePreviews()">Extract Previews</button>
+        </div>
+        <div *ngIf="showUpdateForm" class="update-form">
+            <input type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx">
+            <button class="save-btn" (click)="updateArticle()">Save Update</button>
+        </div>
+    </div>
+
+    <div class="upload-section">
+        <input type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx">
+        <button class="upload-btn" (click)="uploadFile()">Upload</button>
+    </div>
+
+    <!-- New section for displaying article previews -->
+    <div *ngIf="articlePreviews.length > 0" class="preview-section">
+        <h2>Article Previews</h2>
+        <div class="article-previews">
+            <div *ngFor="let preview of articlePreviews" class="article-preview">
+                <img *ngIf="preview" [src]="preview" alt="Article Preview">
+                <span *ngIf="!preview" class="error-message">Preview not available</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <app-footer></app-footer> -->

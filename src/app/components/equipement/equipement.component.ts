@@ -6,6 +6,10 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
   styleUrls: ['./equipement.component.css']
 })
 export class EquipementComponent implements OnInit{
+
+  videos=[
+    { name: 'Coming soon Glitch video effects.mp4' },
+  ]
   
   images_equ=[
     { name: '1.jpeg', title: 'Equipo 1', description: 'Descripcion del equipo 1' },
