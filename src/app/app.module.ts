@@ -42,7 +42,12 @@ import { ImageComponent } from './components/Media/image/image.component';
 import { VideoComponent } from './components/Media/video/video.component';
 import { ArticleService } from './services/Articles/article.service';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-import { PdfViewerModalComponent } from './components/pdf-viewer-modal/pdf-viewer-modal.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DialogComponent } from './Materials/dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { UserManagementComponent } from './UserManagement/user-management/user-management.component';
+
+
 
 @NgModule({
   declarations: [
@@ -65,8 +70,8 @@ import { PdfViewerModalComponent } from './components/pdf-viewer-modal/pdf-viewe
     ArticleComponent,
     ImageComponent,
     VideoComponent,
-    PdfViewerModalComponent,
-    
+    UserManagementComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -92,6 +97,10 @@ import { PdfViewerModalComponent } from './components/pdf-viewer-modal/pdf-viewe
     FontAwesomeModule,
     ReactiveFormsModule,
     NgxExtendedPdfViewerModule,
+    MatSnackBarModule,
+    MatDialogModule, 
+    
+
 
   ],
   providers: [AuthService, ArticleService],

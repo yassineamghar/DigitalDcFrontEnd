@@ -11,27 +11,26 @@
     <div class="buttons">
       <button class="delete-btn" (click)="deleteSelectedArticle()">Delete</button>
       <button class="update-btn" (click)="toggleUpdateForm()">Update</button>
-      <button class="extract-btn" (click)="extractArticlePreviews()">Extract Previews</button>
     </div>
     <div *ngIf="showUpdateForm" class="update-form">
-      <input type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx">
+      <input type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx, .ppt">
       <button class="save-btn" (click)="updateArticle()">Save Update</button>
     </div>
+    <button (click)="downloadArticleFile(selectedArticle.id_ART)">Download Article File</button>
+    <button (click)="viewArticle(selectedArticle.id_ART)">View Article</button> <!-- Button for viewing selected article -->
   </div>
 
   <div class="upload-section">
-    <input type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx">
+    <input type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx, .ppt">
     <button class="upload-btn" (click)="uploadFile()">Upload</button>
   </div>
+</div>
 
-  <!-- New section for displaying article previews -->
-  <div *ngIf="articlePreviews.length > 0" class="preview-section">
-    <h2>Article Previews</h2>
-    <div class="article-previews">
-      <div *ngFor="let preview of articlePreviews" class="article-preview">
-        <img *ngIf="preview" [src]="preview" alt="Article Preview">
-        <span *ngIf="!preview" class="error-message">Preview not available</span>
-      </div>
+
+  <!-- Modal for displaying the article -->
+  <div *ngIf="showPopup" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closePopup()">&times;</span>
+      <embed [src]="selectedArticleUrl" type="application/pdf" width="100%" height="500px">
     </div>
   </div>
-</div>

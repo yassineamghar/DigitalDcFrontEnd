@@ -1,5 +1,5 @@
 <div class="container-fluid full-height">
-    <div class=" row title align-items-center" style="height: calc(20%);">
+    <div class="row title align-items-center" style="height: calc(20%);">
         <h1 class="m-0">Board News!</h1>
     </div>
     <div class="row align-items-center" style="height: calc(70%);">
@@ -10,7 +10,7 @@
                         <a href="assets/images/carousal-img/{{newsItem.name}}" data-lightbox="image-gallery">
                             <img src="assets/images/carousal-img/{{newsItem.name}}" class="d-block w-100">
                         </a>
-                    </div>                    
+                    </div>
                 </div>
                 <a class="carousel-control-prev" (click)="prevSlide()" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -25,12 +25,11 @@
                 <div class="title-container">
                     <h2>{{ images[currentIndex].caption }}</h2>
                 </div>
-                <div class="separator"></div> 
-                <div class="content-container" style="height: 240px;">
-                    <p>{{ images[currentIndex].description }}</p>
+                <div class="separator"></div>
+                <div class="content-container d-flex " style="height: auto;">
+                    <p [innerHTML]="images[currentIndex].description"></p>
                 </div>
             </div>
         </div>
-        
     </div>
 </div>

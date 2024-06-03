@@ -13,6 +13,7 @@ import { ShowmoreComponent } from './components/showmore/showmore.component';
 import { VideotestComponent } from './components/videotest/videotest.component';
 import { TestComponent } from './components/test/test.component';
 import { ArticleComponent } from './components/Media/article/article.component';
+import { UserManagementComponent } from './UserManagement/user-management/user-management.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'boardfs',
     component: BoardFSComponent
+  },
+  {
+    path: 'user',
+    component: UserManagementComponent
   },
   // {
   //   path: 'boardfs',

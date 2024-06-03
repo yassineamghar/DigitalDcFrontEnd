@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
         alert("Login successful!");
         //store the token in local storage
         localStorage.setItem('token', response.token);
-        this.router.navigate(['home']);
+        this.router.navigate(['boardfs']);
       },
       (error) => {
         // console.log(error);

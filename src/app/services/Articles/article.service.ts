@@ -19,11 +19,15 @@ export class ArticleService {
     return this.http.get<Articles[]>(`${this.apiUrl}/AllArticles`);
   }
     
-
-  getArticleById(id: string): Observable<Articles> {
-    return this.http.get<Articles>(`${this.apiUrl}/${id}`);
+  getArticleFile(articleId: string): Observable<Blob> {
+    const url = `${this.apiUrl}/${articleId}`;
+    return this.http.get(url, { responseType: 'blob' });
   }
   
+  downloadArticleFile(articleId: string): Observable<Blob> {
+    const url = `${this.apiUrl}/${articleId}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
 
   uploadFile(file: File): Observable<any> {
     const formData: FormData = new FormData();
@@ -34,57 +38,67 @@ export class ArticleService {
     });
   }
   
-
   updateArticle(id: string, file: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('newFile', file, file.name);
     return this.http.put(`${this.apiUrl}/updateArticle/${id}`, formData, {
       reportProgress: true,
-      observe: 'events'
+      observe: 'events',
+      responseType: 'text' as 'json' // Trick TypeScript to accept 'text' for event observation
     });
   }
   
   
+  
 
   deleteArticle(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/deleteArticle/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/deleteArticle/${id}`, { responseType: 'text' as 'json' });
   }
-  
+
+
+
+
+  extractPreviews(id: string): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/extractPreviews/${id}`);
+  }
 
   //extract the first page from a PDF file
-  async extractFirstPage(file: File): Promise<string | null> {
-    try {
-      const reader = new FileReader();
-      reader.readAsArrayBuffer(file);
-      const arrayBuffer = await new Promise<ArrayBuffer>((resolve) => {
-        reader.onload = () => {
-          resolve(reader.result as ArrayBuffer);
-        };
-      });
+  // async extractFirstPage(file: File): Promise<string | null> {
+  //   try {
+  //     const reader = new FileReader();
+  //     reader.readAsArrayBuffer(file);
+  //     const arrayBuffer = await new Promise<ArrayBuffer>((resolve) => {
+  //       reader.onload = () => {
+  //         resolve(reader.result as ArrayBuffer);
+  //       };
+  //     });
   
-      const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
-      const page = await pdf.getPage(1); // Pages are 1-indexed
+  //     const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+  //     const page = await pdf.getPage(1); 
   
-      const viewport = page.getViewport({ scale: 1 });
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
+  //     const viewport = page.getViewport({ scale: 1 });
+  //     const canvas = document.createElement('canvas');
+  //     const context = canvas.getContext('2d');
+  //     canvas.width = viewport.width;
+  //     canvas.height = viewport.height;
   
-      const renderContext = {
-        canvasContext: context!,
-        viewport: viewport
-      };
+  //     const renderContext = {
+  //       canvasContext: context!,
+  //       viewport: viewport
+  //     };
   
-      await page.render(renderContext).promise;
+  //     await page.render(renderContext).promise;
   
-      // Convert canvas to PNG image data URL
-      const imageData = canvas.toDataURL('image/png');
+  //     // Convert canvas to PNG image data URL
+  //     const imageData = canvas.toDataURL('image/png');
   
-      return imageData;
-    } catch (error) {
-      console.error('Error extracting first page:', error);
-      return null;
-    }
-  }
+  //     return imageData;
+  //   } catch (error) {
+  //     console.error('Error extracting first page:', error);
+  //     return null;
+  //   }
+  // }
+
+
+
 }
