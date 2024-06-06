@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private http: HttpClient // Inject HttpClient
+    private http: HttpClient 
   ) { }
 
   ngOnInit(): void {

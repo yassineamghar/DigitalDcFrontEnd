@@ -1,10 +1,11 @@
 export class User {
     constructor(
       public id: string,
-      public Username: string,
-      public Email: string,
-      public Fullname: string,
-      public DateCreated: Date
+      public userName: string,
+      public email: string,
+      public fullname: string,
+      public dateCreated: Date,
+      public emailConfirmed: boolean,
     ) {}
   }
 

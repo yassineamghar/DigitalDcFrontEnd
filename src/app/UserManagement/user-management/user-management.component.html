@@ -1,0 +1,61 @@
+<div class="user-management-container">
+  <h2>User Management</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Date created</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.fullname }}</td>
+        <td>{{ user.userName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.emailConfirmed ? 'Approuved' : 'Not Approuved' }}</td>
+        <td>{{ user.dateCreated | date: 'dd/MM/yyyy' }}</td>
+        <td>
+          <button (click)="selectUser(user)">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+  <div class="modal" [class.show]="isModalVisible">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <h3>Edit User</h3>
+      <form (ngSubmit)="updateUser()">
+        <div class="form-group">
+          <label for="fullname">Full Name:</label>
+          <input id="fullname" [(ngModel)]="selectedUser.fullname" name="fullname" required>
+        </div>
+
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input id="username" [(ngModel)]="selectedUser.userName" name="username" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input id="email" [(ngModel)]="selectedUser.email" name="email" required type="email">
+        </div>
+
+        <div class="form-group">
+          <label for="status">Email Confirmed:</label>
+          <select id="status" [(ngModel)]="selectedUser.emailConfirmed" name="status">
+            <option [ngValue]="true">Approved</option>
+            <option [ngValue]="false">Not Approved</option>
+          </select>
+        </div>
+
+        <button type="submit">Update User</button>
+      </form>
+    </div>
+  </div>
+</div>
