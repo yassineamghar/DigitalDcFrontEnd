@@ -41,6 +41,14 @@ export class AuthService {
       );
   }
 
+  deleteUser(userId: string): Observable<any> {
+    const url = `${this.apiUrl}/${userId}`;
+    return this.http.delete(url)
+      .pipe(
+        catchError(this.handleError<any>('deleteUser'))
+      );
+  }
+
   GetAll(): Observable<any> {
     const url = `${this.apiUrl}/AllUsers`;
     return this.http.get(url)

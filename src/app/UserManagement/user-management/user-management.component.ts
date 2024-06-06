@@ -11,46 +11,55 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UserManagementComponent implements OnInit {
   users: User[] = [];
-  selectedUser: User = new User('', '', '', '',new Date, false);
+  selectedUser: User = { id: '', fullname: '', userName: '', email: '', emailConfirmed: false, dateCreated: new Date() };
   isModalVisible: boolean = false;
+  // selectedUser?: User;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private authService: AuthService) { }
 
-  ngOnInit(): void {
-    this.getAllUsers();
+  ngOnInit() {
+    this.loadUsers();
   }
 
-  getAllUsers(): void {
-    this.authService.GetAll().subscribe(
-      data => {
-        this.users = data;
-        console.log('Users retrieved successfully:', data);
-      },
-      error => {
-        console.error('There was an error retrieving the users:', error);
-      }
-    );
+  loadUsers() {
+    this.authService.GetAll().subscribe(data => {
+      this.users = data;
+    });
   }
 
-  selectUser(user: User): void {
-    this.selectedUser = { ...user }; // Clone user to avoid direct binding
+  selectUser(user: User) {
+    this.selectedUser = user;
     this.isModalVisible = true;
   }
 
-  updateUser(): void {
-    this.authService.updateUser(this.selectedUser.id, this.selectedUser).subscribe(
-      response => {
-        console.log('User updated successfully:', response);
-        this.isModalVisible = false;
-        this.getAllUsers(); // Refresh the user list after updating
-      },
-      error => {
-        console.error('There was an error updating the user:', error);
-      }
-    );
+  closeModal() {
+    this.isModalVisible = false;
   }
 
-  closeModal(): void {
-    this.isModalVisible = false;
+  updateUser() {
+    this.authService.updateUser(this.selectedUser.id, this.selectedUser).subscribe({
+      next: () => {
+        alert('User updated successfully.');
+        this.loadUsers();
+        this.closeModal();
+      },
+      error: (error) => {
+        alert(error.error);
+      }
+    });
+  }
+
+  deleteUser(userId: string) {
+    if (confirm("Are you sure you want to delete this user?")) {
+      this.authService.deleteUser(userId).subscribe({
+        next: (response: any) => {
+          alert(response.message);
+          this.loadUsers(); 
+        },
+        error: (error) => {
+          alert(error.error);
+        }
+      });
+    }
   }
 }
