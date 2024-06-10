@@ -37,36 +37,36 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log(this.loginForm);
     if (this.loginForm.invalid) {
       return;
     }
-    // console.log(this.loginForm.value);
+  
     this.authService.login(this.loginForm.value).subscribe(
       (response) => {
-        // console.log(response);
-        alert("Login successful!");
-        //store the token in local storage
-        localStorage.setItem('token', response.token);
-        this.router.navigate(['boardfs']);
+        if (response && response.token) {
+          // Login successful
+          alert("Login successful!");
+          // Store the token in local storage
+          localStorage.setItem('token', response.token);
+          this.router.navigate(['user']);
+        } else {
+          // Email not confirmed or other authentication error
+          if (response && response.error === "Email not confirmed.") {
+            alert("Email not confirmed.");
+          } else {
+            alert("Authentication failed: " + response.error);
+          }
+        }
       },
       (error) => {
-        // console.log(error);
-        if (error.error && error.error.errors) {
-          const errorMessages: string[] = [];
-          for (const key in error.error.errors) {
-            if (error.error.errors.hasOwnProperty(key)) {
-              const messages = error.error.errors[key];
-              errorMessages.push(...messages);
-            }
-          }
-          this.error = errorMessages.join(' and ');
-        } else {
-          this.error = "Other error occurred.";
-        }
+        // Handle other errors
+        console.error(error);
+        alert("Email not confirmed.");
       }
     );
   }
+  
+  
 
   ForgotPasswordSubmit() {
     if (!this.forgotEmail) {

@@ -1,0 +1,18 @@
+<div class="sidebar" [class.active]="isActive">
+    <div class="sidebar-header">
+      <h2>Menu</h2>
+      <button class="toggle-button" (click)="toggleSidebar()">&#9776;</button>
+    </div>
+    <ul class="sidebar-menu">
+      <li><a href="#">🏠Home</a></li>
+      <li><a href="#">📜About</a></li>
+      <li><a href="#">🚀User Management</a></li>
+      <li><a href="#">📞Contact</a></li>
+    </ul>
+  </div>
+  <div class="content" [class.shift]="isActive">
+    <ng-content></ng-content>
+  </div>
+  
+
+

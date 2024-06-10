@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UserManagementComponent implements OnInit {
   users: User[] = [];
-  selectedUser: User = { id: '', fullname: '', userName: '', email: '', emailConfirmed: false, dateCreated: new Date() };
+  selectedUser: User = { id: '', fullname: '', username: '', email: '', dateCreated: new Date(),role:'', emailConfirmed: false, };
   isModalVisible: boolean = false;
   // selectedUser?: User;
 
@@ -24,6 +24,7 @@ export class UserManagementComponent implements OnInit {
   loadUsers() {
     this.authService.GetAll().subscribe(data => {
       this.users = data;
+      console.log(this.users);
     });
   }
 
@@ -35,7 +36,11 @@ export class UserManagementComponent implements OnInit {
   closeModal() {
     this.isModalVisible = false;
   }
-
+  toggleDropdown(users:any) {
+    users.showDropdown = !users.showDropdown;
+    users.showDropdown = false;
+  }
+  
   updateUser() {
     this.authService.updateUser(this.selectedUser.id, this.selectedUser).subscribe({
       next: () => {
@@ -48,12 +53,14 @@ export class UserManagementComponent implements OnInit {
       }
     });
   }
+  
 
   deleteUser(userId: string) {
     if (confirm("Are you sure you want to delete this user?")) {
+      console.log(userId);
       this.authService.deleteUser(userId).subscribe({
-        next: (response: any) => {
-          alert(response.message);
+        next: () => {
+          alert('User deleted successfully.');
           this.loadUsers(); 
         },
         error: (error) => {

@@ -1,70 +1,78 @@
 <app-navbar></app-navbar>
-<div class="container mt-4">
-  <h2 class="text-center mb-4">User Management</h2>
-  <div class="table-responsive">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th>Full Name</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Status</th>
-          <th>Date Created</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users" [ngClass]="{'approved': user.emailConfirmed, 'not-approved': !user.emailConfirmed}">
-          <td data-label="Full Name">{{ user.fullname }}</td>
-          <td data-label="Username">{{ user.userName }}</td>
-          <td data-label="Email">{{ user.email }}</td>
-          <td data-label="Status" [ngStyle]="{'color': user.emailConfirmed ? 'green' : 'red'}">
-            {{ user.emailConfirmed ? 'Approved' : 'Not Approved' }}
-          </td>
-          <td data-label="Date Created">{{ user.dateCreated | date: 'dd/MM/yyyy' }}</td>
-          <td data-label="Actions">
-            <button class="btn btn-primary btn-sm" (click)="selectUser(user)">Edit</button>
-            <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">Delete</button>
-          </td>
-        </tr>
-        
-      </tbody>
-    </table>
-  </div>
+<app-sidebar>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-  <!-- Modal -->
-  <div class="modal fade" [ngClass]="{'show d-block': isModalVisible}" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Edit User</h5>
-          <button type="button" class="close" (click)="closeModal()">&times;</button>
-        </div>
-        <div class="modal-body">
-          <form (ngSubmit)="updateUser()">
-            <div class="form-group">
-              <label for="fullname">Full Name:</label>
-              <input id="fullname" class="form-control" [(ngModel)]="selectedUser.fullname" name="fullname" required>
-            </div>
-            <div class="form-group">
-              <label for="username">Username:</label>
-              <input id="username" class="form-control" [(ngModel)]="selectedUser.userName" name="username" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email:</label>
-              <input id="email" class="form-control" [(ngModel)]="selectedUser.email" name="email" required type="email">
-            </div>
-            <div class="form-group">
-              <label for="status">Email Confirmed:</label>
-              <select id="status" class="form-control" [(ngModel)]="selectedUser.emailConfirmed" name="status">
-                <option [ngValue]="true">Approved</option>
-                <option [ngValue]="false">Not Approved</option>
-              </select>
-            </div>
-            <button type="submit" class="btn btn-success">Update User</button>
-          </form>
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">User Management</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Number</th>
+            <th>Full Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role of the User</th>
+            <th>Status</th>
+            <th>Date Created</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users; let i = index" [ngClass]="{'approved': user.emailConfirmed, 'not-approved': !user.emailConfirmed}">
+            <td data-label="Number">{{ i + 1 }}</td>
+            <td data-label="Full Name">{{ user.fullname }}</td>
+            <td data-label="Username">{{ user.username }}</td>
+            <td data-label="Email">{{ user.email }}</td>
+            <td data-label="Role">{{ user.role }}</td>
+            <td data-label="Status" [ngStyle]="{'color': user.emailConfirmed ? 'green' : 'red'}">
+              {{ user.emailConfirmed ? 'Approved' : 'Not Approved' }}
+            </td>
+            <td data-label="Date Created">{{ user.dateCreated | date: 'dd/MM/yyyy' }}</td>
+            <td data-label="Actions">
+              <button type="button" class="btn btn-outline-orange btn-circle btn-lg btn-circle ml-2" (click)="deleteUser(user.id)">
+                <i class="fa fa-trash"></i>
+              </button>
+              <button type="button" class="btn btn-outline-orange btn-circle btn-lg btn-circle ml-2" (click)="selectUser(user)">
+                <i class="fa fa-edit"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" [ngClass]="{'show d-block': isModalVisible}" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="text-center mb-4">Edit User</h2>
+            <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="updateUser()">
+              <div class="form-group">
+                <label for="status">Status</label>
+                <select id="status" class="form-control" [(ngModel)]="selectedUser.emailConfirmed" name="status">
+                  <option [ngValue]="true" [ngStyle]="{'background-color':'green', 'color':'white'}">Approved</option>
+                  <option [ngValue]="false" [ngStyle]="{'background-color':'red', 'color':'white'}">Not Approved</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="Role">Role of the User</label>
+                <select id="Role" class="form-control" [(ngModel)]="selectedUser.role" name="Role">
+                  <option>Admin</option>
+                  <option>User</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block mt-3">Update User</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</app-sidebar>

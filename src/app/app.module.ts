@@ -18,7 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -46,6 +46,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DialogComponent } from './Materials/dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UserManagementComponent } from './UserManagement/user-management/user-management.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { JwtInterceptorService } from './services/JWT/jwt-interceptor.service';
 
 
 
@@ -71,6 +73,7 @@ import { UserManagementComponent } from './UserManagement/user-management/user-m
     ImageComponent,
     VideoComponent,
     UserManagementComponent,
+    SidebarComponent,
 
   ],
   imports: [
@@ -103,7 +106,7 @@ import { UserManagementComponent } from './UserManagement/user-management/user-m
 
 
   ],
-  providers: [AuthService, ArticleService],
+  providers: [AuthService, ArticleService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

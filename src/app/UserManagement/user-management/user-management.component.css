@@ -1,47 +1,166 @@
-/* Include Bootstrap CSS */
-@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
-
 .user-management-container {
   padding: 20px;
 }
 
 .table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate; /* Change to separate to handle border-radius */
+  border-spacing: 0; /* Ensure no spacing between cells */
+  border: 1px solid #ddd; /* Add border to the table */
+  border-radius: 10px; /* Add border-radius to the table */
+  overflow: hidden; /* Ensure the rounded corners are visible */
+}
+
+.table thead th:first-child {
+  border-top-left-radius: 10px; /* Top-left corner */
+}
+
+.table thead th:last-child {
+  border-top-right-radius: 10px; /* Top-right corner */
+}
+
+.table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px; /* Bottom-left corner */
+}
+
+.table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px; /* Bottom-right corner */
+}
+
+.btn-outline-orange {
+  border: 1px solid orange;
+  color: orange;
+  background-color: transparent;
+}
+
+.btn-outline-orange:hover {
+  background-color: orange;
+  color: white;
+}
+
+.btn-circle.btn-lg,
+.btn-group-lg > .btn-circle.btn {
+  width: 50px;
+  height: 50px;
+  padding: 14px 15px;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.text-muted {
+  color: #aa9388 !important;
+}
+
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled),
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+.btn-circle {
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
 }
 
 .approved {
-  background-color: #d4edda; /* Light green background for approved users */
+  color: #ffffff;
 }
 
 .not-approved {
-  background-color: #f8d7da; /* Light red background for not approved users */
+  color: #ffffff; /* Light red background for not approved users */
 }
 
 .modal.show {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
 }
 
 .modal-content {
-  background-color: #fff;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 500px;
-  border-radius: 5px; /* Rounded corners for the modal */
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  width: 90%;
 }
 
 .close {
-  float: right;
-  font-size: 1.5em;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.2em;
+  color: #555;
+  transition: color 0.3s ease;
   cursor: pointer;
+}
+
+.close:hover {
+  color: #333;
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-control {
+  appearance: none;
+  padding: 10px 20px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: #555;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #6c63ff; /* Change border color on focus */
+}
+
+.select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.select-arrow::before {
+  content: "\25BC"; /* Unicode for down arrow */
+  font-size: 0.8em;
+  color: #888;
+}
+
+/* Style the options */
+select option {
+  padding: 10px;
+  font-size: 16px;
+  color: #555;
+  background-color: #f9f9f9;
+  border: none;
+}
+
+/* Hover effect for options */
+select option:hover {
+  background-color: #e6e6e6;
 }
 
 /* Responsive styling */
 @media (max-width: 768px) {
-  .table, .thead, .tbody, .th, .td, .tr {
+  .table,
+  .thead,
+  .tbody,
+  .th,
+  .td,
+  .tr {
     display: block;
   }
 
@@ -72,10 +191,14 @@
   .td:last-child {
     border-bottom: 0;
   }
+
+  .modal-content {
+    padding: 20px;
+  }
 }
 
 @media (max-width: 576px) {
   .modal-content {
-    width: 90%;
+    width: 95%;
   }
 }
