@@ -59,7 +59,6 @@ export class LoginComponent implements OnInit {
         }
       },
       (error) => {
-        // Handle other errors
         console.error(error);
         alert("Email not confirmed.");
       }

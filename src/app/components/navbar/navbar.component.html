@@ -8,11 +8,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                <!-- <li class="nav-item"><a class="nav-link" href="#about">About</a></li> -->
-                <!-- <li class="nav-item"><a class="nav-link" href="#services">Services</a></li> -->
-                <!-- <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li> -->
-                <li class="nav-item"><a class="nav-link" href="/login">Sign in / up</a></li>
+                <li class="nav-item" *ngIf="(authService.isAuthenticated$ | async)">
+                    <a class="nav-link" (click)="logout()">logout</a>
+              </li>
+              <li class="nav-item" *ngIf="!(authService.isAuthenticated$ | async)">
+                <a class="nav-link" href="/login">Sign in / up</a>
+              </li>
             </ul>
-        </div>
+          </div>
+          
     </div>
 </nav>

@@ -2,6 +2,7 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { map } from 'rxjs';
 
 @Component({
@@ -10,9 +11,12 @@ import { map } from 'rxjs';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
   registerForm: FormGroup = new FormGroup({}); 
-  error: string | null=null;
+  error: string | null = null;
+  showPassword: boolean = false;
+  eyeIcon = faEye;
+  eyeSlashIcon = faEyeSlash;
+
 
   constructor(
     private authService: AuthService,
@@ -50,10 +54,25 @@ export class RegisterComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-        this.error = error.error; 
+        if (error.error && error.error.errors) {
+          const errorMessages: string[] = [];
+          for (const key in error.error.errors) {
+            if (error.error.errors.hasOwnProperty(key)) {
+              const messages = error.error.errors[key];
+              errorMessages.push(...messages);
+            }
+          }
+          this.error = errorMessages.join(' and ');
+        } else {
+          this.error = 'Other error occurred.';
+        }
       }
     );
     
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 
 }

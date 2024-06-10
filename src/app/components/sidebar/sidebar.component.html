@@ -4,11 +4,12 @@
       <button class="toggle-button" (click)="toggleSidebar()">&#9776;</button>
     </div>
     <ul class="sidebar-menu">
-      <li><a href="#">🏠Home</a></li>
-      <li><a href="#">📜About</a></li>
-      <li><a href="#">🚀User Management</a></li>
-      <li><a href="#">📞Contact</a></li>
-    </ul>
+      <li><a [routerLink]="['/home']">🏠 Home</a></li>
+      <li><a [routerLink]="['/boardfs']">📰 Board-news</a></li>
+      <li><a [routerLink]="['/user']">🚀 User Management</a></li>
+      <li><a [routerLink]="['/about']">ℹ️ About</a></li>
+      <li><a [routerLink]="['/articles']">⭐ ECE Star Award</a></li>
+    </ul>    
   </div>
   <div class="content" [class.shift]="isActive">
     <ng-content></ng-content>

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, of } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/User';
 
@@ -12,6 +12,12 @@ export class AuthService {
   private apiUrl = `${environment.apiUrl}/Account`;
   private currentUserToken: string | null = null;
   token = localStorage.getItem('token');
+  
+  private isAuthenticatedSubject = new BehaviorSubject  <boolean>(false);
+  public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+
+
+
   constructor(private httpClient: HttpClient) {}
 
   private getHttpOptions(): { headers: HttpHeaders } {
@@ -33,6 +39,7 @@ export class AuthService {
 
   login(loginForm: any): Observable<any> {
     const url = `${this.apiUrl}/login`
+    this.isAuthenticatedSubject.next(true);
     const httpOptions = this.getHttpOptions();
     return this.httpClient.post(url, loginForm,httpOptions);
   }
@@ -85,8 +92,12 @@ export class AuthService {
   logout(): void {
     this.currentUserToken = null;
     localStorage.removeItem('token');
+    this.isAuthenticatedSubject.next(false);
   }
 
+  isAuthenticated() {
+    return this.isAuthenticatedSubject.value;
+  }
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
