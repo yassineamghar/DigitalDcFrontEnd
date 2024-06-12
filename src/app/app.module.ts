@@ -48,6 +48,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { UserManagementComponent } from './UserManagement/user-management/user-management.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { JwtInterceptorService } from './services/JWT/jwt-interceptor.service';
+import { ECEComponent } from './components/Media/ece/ece.component';
 
 
 
@@ -74,7 +75,7 @@ import { JwtInterceptorService } from './services/JWT/jwt-interceptor.service';
     VideoComponent,
     UserManagementComponent,
     SidebarComponent,
-
+    ECEComponent,
   ],
   imports: [
     BrowserModule,

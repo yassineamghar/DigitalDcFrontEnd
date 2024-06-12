@@ -14,6 +14,7 @@ import { VideotestComponent } from './components/videotest/videotest.component';
 import { TestComponent } from './components/test/test.component';
 import { ArticleComponent } from './components/Media/article/article.component';
 import { UserManagementComponent } from './UserManagement/user-management/user-management.component';
+import { ECEComponent } from './components/Media/ece/ece.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserManagementComponent
+  },
+  {
+    path: 'ECE',
+    component: ECEComponent
   },
   // {
   //   path: 'boardfs',

@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>ECE Management</h2>
+  
+  <!-- File Upload -->
+  <input type="file" (change)="onFileSelected($event)" />
+
+  <button (click)="uploadECE()" [disabled]="!selectedFile">Upload ECE</button>
+  
+  <!-- ECE List -->
+  <div class="ece-list">
+    <mat-card *ngFor="let eceItem of ece" (click)="selectECE(eceItem)">
+      <mat-card-content>
+        <div class="ece-item">
+          <img [src]="eceItem.image_URL" alt="{{ eceItem.title }}" class="ece-image">
+          <div class="ece-details">
+            <h3>{{ eceItem.title }}</h3>
+            <p>{{ eceItem.description }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Selected ECE Details -->
+  <div *ngIf="selectedECE" class="selected-ece">
+    <mat-card>
+      <mat-card-content>
+        <div class="ece-item">
+          <img [src]="selectedECE.image_URL" alt="{{ selectedECE.title }}" class="selected-ece-image">
+          <div class="selected-ece-details">
+            <h3>{{ selectedECE.title }}</h3>
+            <p>{{ selectedECE.description }}</p>
+          </div>
+        </div>
+        <div class="button-container">
+          <button mat-raised-button color="warn" (click)="deleteECE()">Delete</button>
+          <button mat-raised-button color="primary" (click)="updateECE()">Update</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

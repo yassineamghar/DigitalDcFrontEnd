@@ -3,6 +3,7 @@ import { Articles } from './../../models/Media/Articles';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';   // Adjust the import path as needed
 import { PDFDocument, PDFPage } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
@@ -48,57 +49,13 @@ export class ArticleService {
     });
   }
   
-  
-  
-
   deleteArticle(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/deleteArticle/${id}`, { responseType: 'text' as 'json' });
   }
-
-
-
 
   extractPreviews(id: string): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/extractPreviews/${id}`);
   }
 
-  //extract the first page from a PDF file
-  // async extractFirstPage(file: File): Promise<string | null> {
-  //   try {
-  //     const reader = new FileReader();
-  //     reader.readAsArrayBuffer(file);
-  //     const arrayBuffer = await new Promise<ArrayBuffer>((resolve) => {
-  //       reader.onload = () => {
-  //         resolve(reader.result as ArrayBuffer);
-  //       };
-  //     });
   
-  //     const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
-  //     const page = await pdf.getPage(1); 
-  
-  //     const viewport = page.getViewport({ scale: 1 });
-  //     const canvas = document.createElement('canvas');
-  //     const context = canvas.getContext('2d');
-  //     canvas.width = viewport.width;
-  //     canvas.height = viewport.height;
-  
-  //     const renderContext = {
-  //       canvasContext: context!,
-  //       viewport: viewport
-  //     };
-  
-  //     await page.render(renderContext).promise;
-  
-  //     // Convert canvas to PNG image data URL
-  //     const imageData = canvas.toDataURL('image/png');
-  
-  //     return imageData;
-  //   } catch (error) {
-  //     console.error('Error extracting first page:', error);
-  //     return null;
-  //   }
-  // }
-
-
-
 }

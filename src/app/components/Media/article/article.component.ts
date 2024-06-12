@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/services/Notification/notification.service';
 import { DialogComponent } from 'src/app/Materials/dialog/dialog.component';
+import { PdfService } from 'src/app/services/PDF/pdf.service';
 
 @Component({
   selector: 'app-article',
@@ -25,12 +26,13 @@ export class ArticleComponent implements OnInit {
   articlePreviews: string[] = [];
   showPopup: boolean = false;
   selectedArticleUrl: SafeResourceUrl = '';
-  private apiUrl = `${environment.apiUrl}`;
   articleId: string = '';
   file: File | null = null;
-  
+  firstPageImageUrl: string | null = null;
 
-  constructor(private articleService: ArticleService,public dialog: MatDialog, private sanitizer: DomSanitizer, private notificationService: NotificationService) { }
+
+
+  constructor(private articleService: ArticleService, public dialog: MatDialog, private sanitizer: DomSanitizer, private notificationService: NotificationService, private pdfService: PdfService) { }
 
   ngOnInit(): void {
     this.loadArticles();
@@ -77,24 +79,24 @@ export class ArticleComponent implements OnInit {
       console.error('No article selected or no file provided.');
     }
   }
-  
+
 
   deleteSelectedArticle(): void {
     if (this.selectedArticle) {
-        this.articleService.deleteArticle(this.selectedArticle.id_ART).subscribe(
-            (response) => {
-                console.log('Article deleted successfully');
-                this.loadArticles(); // Reload articles after deletion
-                this.showUpdateForm = false; // Hide the update form after deletion
-            },
-            (error) => {
-                console.error('Error deleting article:', error);
-            }
-        );
+      this.articleService.deleteArticle(this.selectedArticle.id_ART).subscribe(
+        (response) => {
+          console.log('Article deleted successfully');
+          this.loadArticles(); // Reload articles after deletion
+          this.showUpdateForm = false; // Hide the update form after deletion
+        },
+        (error) => {
+          console.error('Error deleting article:', error);
+        }
+      );
     } else {
-        console.error('No article selected.');
+      console.error('No article selected.');
     }
-}
+  }
 
 
   onFileSelected(event: any): void {
@@ -167,46 +169,16 @@ export class ArticleComponent implements OnInit {
     });
   }
 
-  // viewArticle(articleId: string): void {
-  //   this.articleService.downloadArticleFile(articleId).subscribe(blob => {
-  //     const url = URL.createObjectURL(blob);
-  //     const newWindow = window.open(url, '_blank');
-  //     if (newWindow) {
-  //       newWindow.focus();
-  //     } else {
-  //       console.error('Popup blocked by browser');
-  //       // Handle popup block error
-  //     }
-  //   }, error => {
-  //     console.error('Error fetching article file:', error);
-  //     // Handle error
-  //   });
-  // }
+  async FileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      try {
+        this.firstPageImageUrl = await this.pdfService.extractFirstPageAsImage(file);
+      } catch (error) {
+        console.error('Error extracting first page as image:', error);
+      }
+    }
+  }
 
-  // async extractArticlePreviews(): Promise<void> {
-  //   for (const article of this.articles) {
-  //     try {
-  //       const response = await fetch(article.pdf_URL);
-  //       const arrayBuffer = await response.arrayBuffer();
-  //       const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
-  //       const firstPage = await pdf.getPage(1); // Pages are 1-indexed
-  //       const viewport = firstPage.getViewport({ scale: 1 });
-  //       const canvas = document.createElement('canvas');
-  //       const context = canvas.getContext('2d');
-  //       canvas.width = viewport.width;
-  //       canvas.height = viewport.height;
-  //       const renderContext = {
-  //         canvasContext: context!,
-  //         viewport: viewport
-  //       };
-  //       await firstPage.render(renderContext).promise;
-  //       this.articlePreviews.push(canvas.toDataURL('image/png'));
-  //     } catch (error) {
-  //       console.error('Error extracting preview for article:', article.pdf_Name, error);
-  //       this.articlePreviews.push('');
-  //     }
-  //   }
-  // }
-  
-  
+
 }
