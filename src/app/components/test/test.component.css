@@ -1,56 +1,62 @@
-.container {
-    padding: 20px;
-  }
-  
-  .title {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .article-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  .article-card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 200px;
-    text-align: center;
-  }
-  
-  .article-title {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .first-page-image {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    z-index: 1000;
-  }
-  
-  .update-form {
-    margin-top: 20px;
-  }
-  
-  .notification {
-    margin-top: 20px;
-    color: red;
-    text-align: center;
-  }
-  
+/* your-component-name.component.css */
+.container-fluid {
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+.column {
+  display: flex;
+  align-items: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  width: 100%;
+}
+
+.title {
+  margin-bottom: 10px;
+}
+
+.description {
+  color: #666;
+}
+
+.btn {
+  border-radius: 5px;
+}
+
+.search-bar {
+  display: flex;
+}
+
+.search-bar input[type="search"] {
+  /* width: calc(100% - 80px); */
+  flex: 1;
+  /* Adjust according to your button width */
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  padding: 0.5em;
+}
+
+.search-bar button {
+  width: 80px; /* Adjust according to your button width */
+  height: 2.5em;
+  background-color: #2762f3;
+  color: #fff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}

@@ -49,9 +49,12 @@ import { UserManagementComponent } from './UserManagement/user-management/user-m
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { JwtInterceptorService } from './services/JWT/jwt-interceptor.service';
 import { ECEComponent } from './components/Media/ece/ece.component';
-
-
-
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToastModule } from 'primeng/toast'; 
+import { NotificationService } from './services/Notification/notification.service';
+import { MessageService } from 'primeng/api';
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,11 +106,12 @@ import { ECEComponent } from './components/Media/ece/ece.component';
     NgxExtendedPdfViewerModule,
     MatSnackBarModule,
     MatDialogModule, 
-    
-
-
+    ButtonModule,
+    DialogModule,
+    InputTextModule,
+    ToastModule
   ],
-  providers: [AuthService, ArticleService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true }],
+  providers: [AuthService, ArticleService, NotificationService, MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

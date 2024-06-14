@@ -31,6 +31,7 @@ export class ECEComponent implements OnInit {
       (data) => {
         this.ece = data;
         this.notificationService.showSuccess('ECE loaded successfully.');
+        console.log('ECE:', this.ece);
       },
       (error) => {
         console.error('Error loading ECE:', error);
@@ -48,7 +49,6 @@ export class ECEComponent implements OnInit {
       console.error('No file selected.');
       return;
     }
-
     this.eceService.uploadECE(this.selectedFile).subscribe(
       () => {
         console.log('File uploaded successfully.');
