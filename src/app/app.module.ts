@@ -55,6 +55,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast'; 
 import { NotificationService } from './services/Notification/notification.service';
 import { MessageService } from 'primeng/api';
+import { SplitterModule } from 'primeng/splitter';
 @NgModule({
   declarations: [
     AppComponent,
@@ -109,7 +110,8 @@ import { MessageService } from 'primeng/api';
     ButtonModule,
     DialogModule,
     InputTextModule,
-    ToastModule
+    ToastModule,
+    SplitterModule
   ],
   providers: [AuthService, ArticleService, NotificationService, MessageService],
   bootstrap: [AppComponent],

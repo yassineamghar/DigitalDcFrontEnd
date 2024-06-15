@@ -20,4 +20,19 @@ export class TestService {
 
     return this.http.request(req);
   }
+
+  updateECE(id: string, file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('newFile', file, file.name);
+    return this.http.put(`${this.apiUrl}/updateECE/${id}`, formData, {
+      reportProgress: true,
+      observe: 'events',
+      responseType: 'text' as 'json' // Trick TypeScript to accept 'text' for event observation
+    });
+  }
+
+
+  deleteECE(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/deleteECE/${id}`, { responseType: 'text' as 'json' });
+  }
 }

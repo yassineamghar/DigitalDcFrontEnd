@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+// import { *aslightbox } from 'lightbox2';
+import { Component,AfterViewInit, ElementRef, OnInit, ViewChild } from '@angular/core';
 import 'slick-carousel';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { NotificationService } from 'src/app/services/Notification/notification.service';
@@ -11,7 +12,7 @@ declare var $: any;
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css'],
-  providers: [MessageService] 
+  providers: [MessageService],
 })
 export class TestComponent implements OnInit {
   
@@ -21,12 +22,15 @@ export class TestComponent implements OnInit {
       this.visible = true;
   }
 
+  showUpdateForm: boolean = false;
   selectedFile: File | null = null;
-  selectedECE: ECE | null = null;
+  selectedECE: ECE | any;
   ece: ECE[] = [];
   newEce: { title: string, description: string } = { title: '', description: '' };
 
-
+ selectECE(item: ECE): void {
+    this.selectedECE = item;
+  }
   @ViewChild('fileInput') fileInput!: ElementRef;
 
   constructor(
@@ -40,10 +44,15 @@ export class TestComponent implements OnInit {
     this.loadECE();
   }
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    if (file) {
-      this.selectedFile = file;
+  onFileSelected(event: any): void {
+    if (event.target.files.length > 0) {
+        this.selectedFile = event.target.files[0];
+        const fileName = event.target.files[0].name;
+        // Type assertion to HTMLLabelElement or null
+        const fileLabel = document.getElementById('file-label') as HTMLLabelElement | null;
+        if (fileLabel) {
+            fileLabel.innerHTML = fileName;
+        }
     }
   }
 
@@ -61,9 +70,9 @@ export class TestComponent implements OnInit {
     );
   }
 
-  uploadFile(): void {
+  uploadECE(): void {
     if (this.selectedFile !== null && this.selectedFile !== undefined) {
-      // console.log('Uploading file:', this.selectedFile);
+      console.log('Uploading file:', this.selectedFile);
       const formData: FormData = new FormData();
       formData.append('file', this.selectedFile);
       formData.append('Title', this.newEce.title);
@@ -73,11 +82,12 @@ export class TestComponent implements OnInit {
           if (event.type === HttpEventType.UploadProgress) {
             const percentDone = event.total ? Math.round(100 * event.loaded / event.total) : 0;
             console.log(`File is ${percentDone}% uploaded.`);
-            this.messageService.add({ severity: 'wait', summary: 'Uploading!!', detail: `File is ${percentDone}% uploaded.`});
-
+            this.messageService.add({ severity: 'info', summary: 'Uploading!!', detail: `File is ${percentDone}% uploaded.`});
+            this.loadECE();
           } else if (event instanceof HttpResponse) {
             console.log('File is completely uploaded!', event.body);
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'File uploaded successfully!' });
+            this.loadECE();
             this.visible = false;
             this.resetForm();
           }
@@ -103,67 +113,42 @@ export class TestComponent implements OnInit {
     }
   }
 
+  updateECE(): void {
+    if (this.selectedECE && this.selectedFile !== null) {
+      // Assuming testService.updateECE() returns Observable, adjust as per your service implementation
+      this.testService.updateECE(this.selectedECE.id_ECE, this.selectedFile).subscribe(
+        (event) => {
+          if (event.type === HttpEventType.Response) {
+            console.log('ECE updated successfully:', event.body);
+            this.loadECE(); // Reload ECE items after update
+            this.selectedFile = null; // Reset selectedFile after update
+            this.selectedECE = null; // Deselect ECE item after update
+          }
+        },
+        (error) => {
+          console.error('Error updating ECE:', error);
+        }
+      );
+    } else {
+      console.error('No ECE selected or no file provided.');
+    }
+  }
 
-
-  // selectECE(ece: ECE): void {
-  //   this.selectedECE = ece;
-  // }
-
-  // updateECE(): void {
-  //   if (!this.selectedECE || !this.selectedFile) {
-  //     console.error('No ECE selected or no file provided.');
-  //     return;
-  //   }
-
-  //   this.eceService.updateECE(this.selectedECE.id_ECE, this.selectedFile).subscribe(
-  //     () => {
-  //       console.log('ECE updated successfully.');
-  //       this.loadECE();
-  //     },
-  //     (error) => {
-  //       console.error('Error updating ECE:', error);
-  //     }
-  //   );
-  // }
-
-  // deleteECE(): void {
-  //   if (!this.selectedECE) {
-  //     console.error('No ECE selected.');
-  //     return;
-  //   }
-
-  //   this.eceService.deleteECE(this.selectedECE.id_ECE).subscribe(
-  //     () => {
-  //       console.log('ECE deleted successfully.');
-  //       this.loadECE();
-  //       this.selectedECE = null;
-  //     },
-  //     (error) => {
-  //       console.error('Error deleting ECE:', error);
-  //     }
-  //   );
-  // }
-
-  // addECE(): void {
-  //   if (!this.selectedFile) {
-  //     console.error('No file selected for upload.');
-  //     return;
-  //   }
-
-  //   this.eceService.uploadECE(this.selectedFile).subscribe(
-  //     (response) => {
-  //       console.log('File uploaded successfully.');
-  //       this.loadECE();
-  //       this.notificationService.showSuccess('ECE added successfully.');
-  //     },
-  //     (error) => {
-  //       console.error('Error uploading file:', error);
-  //       this.notificationService.showError('Failed to upload ECE.');
-  //     }
-  //   );
-  // }
-
-  // triggerFileInput(): void {
-  //   this.fileInput.nativeElement.click();
-  // }
+  deleteECE(): void {
+    if (this.selectedECE) {
+      // Assuming testService.deleteECE() returns Observable, adjust as per your service implementation
+      this.testService.deleteECE(this.selectedECE.id_ECE).subscribe(
+        () => {
+          console.log('ECE deleted successfully');
+          this.loadECE(); // Reload ECE items after deletion
+          this.selectedECE = null; // Deselect ECE item after deletion
+        },
+        (error) => {
+          console.error('Error deleting ECE:', error);
+        }
+      );
+    } else {
+      console.error('No ECE selected.');
+    }
+  }
 }
