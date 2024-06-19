@@ -1,5 +1,148 @@
 <app-navbar></app-navbar>
-<div class="card flex justify-content-center">
+<div class="header">
+    <div class="container">
+        <h1 class="title">ECE STAR AWARD</h1>
+    </div>
+</div>
+
+
+
+<!-- Toolbar -->
+<div class="container">
+    <p-toolbar>
+        <div class="p-toolbar-group-center">
+            <span class="p-input-icon-right">
+                <input pInputText placeholder="Search" [(ngModel)]="searchTerm" (input)="filterECE()"
+                    [style]="{ width: '1200px' }" class="search" />
+                <i class="pi pi-search"></i>
+            </span>
+        </div>
+        <div class="p-toolbar-group-center m-0">
+            <div *ngIf="isAuthorized">
+                <p-button (click)="showAddDialog()" icon="pi pi-plus-circle" severity="info" [outlined]="true"></p-button>
+            </div>
+            <!-- Add Dialog -->
+            <div class="card flex justify-content-center">
+                <p-dialog header="ADD ECE" [modal]="true" [(visible)]="addDialogVisible" [style]="{ width: '25rem' }" (onHide)="resetForm()">
+                    <span class="p-text-secondary block mb-5"></span>
+                    <div class="p-fluid mb-5">
+                        <!-- Title -->
+                        <div class="field grid mb-3">
+                            <label for="title" class="col-fixed font-semibold label-padding">Title</label>
+                            <div class="col">
+                                <input pInputText id="title" class="w-full" autocomplete="off" [(ngModel)]="newEce.title" />
+                            </div>
+                        </div>
+                        <!-- Description -->
+                        <div class="field grid mb-3">
+                            <label for="description" class="col-fixed font-semibold label-padding">Description</label>
+                            <div class="col">
+                                <textarea pInputTextarea id="description" class="w-full description-input" autocomplete="off" [(ngModel)]="newEce.description"></textarea>
+                            </div>
+                        </div>
+                        <!-- File Upload -->
+                        <div class="field grid mb-3">
+                            <label for="file" class="col-fixed font-semibold label-padding">Upload ECE</label>
+                            <div class="col custom-file-input-container">
+                                <input type="file" id="file" (change)="onFileSelected($event)" class="custom-file-input" accept="image/*" />
+                                <label for="file" class="custom-file-label" id="file-label">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-content-center mb-3">
+                        <div class="button-container">
+                            <button type="button" class="btn btn-secondary" severity="secondary" (click)="addDialogVisible = false">Cancel</button>
+                            <button type="button" class="btn btn-primary" (click)="saveECE()">Save</button>
+                        </div>
+                    </div>
+                </p-dialog>
+                <p-toast></p-toast>
+            </div>
+        </div>
+    </p-toolbar>
+</div>
+
+<!-- List of ECEs -->
+<div class="container">
+    <div class="card1" *ngFor="let item of ece" (click)="selectECE(item)">
+        <div *ngIf="selectedECE === item" class="d-flex justify-content-end mb-2">
+            <div class="p-toolbar-group-end">
+                <div class="justify-content-center align-items-center" *ngIf="isAuthorized">
+                    <p-button (click)="showUpdateDialog()" icon="pi pi-pen-to-square" [rounded]="true" severity="info" [outlined]="true" />
+                </div>
+                <div class="justify-content-center align-items-center m-2" *ngIf="isAuthorized">
+                    <p-button (click)="deleteECE()" icon="pi pi-trash" [rounded]="true" severity="danger" [outlined]="true" />
+                </div>
+                <!-- Update Dialog -->
+                <div class="card flex justify-content-center">
+                    <p-dialog header="Update ECE" [modal]="true" [(visible)]="updateDialogVisible" [style]="{ width: '25rem' }" (onHide)="resetForm()">
+                        <span class="p-text-secondary block mb-5"></span>
+                        <div class="p-fluid mb-5">
+                            <!-- Title -->
+                            <div class="field grid mb-3">
+                                <label for="title" class="col-fixed font-semibold label-padding">Title</label>
+                                <div class="col">
+                                    <input pInputText id="title" class="w-full" autocomplete="off" [(ngModel)]="newEce.title" />
+                                </div>
+                            </div>
+                            <!-- Description -->
+                            <div class="field grid mb-3">
+                                <label for="description" class="col-fixed font-semibold label-padding">Description</label>
+                                <div class="col">
+                                    <textarea pInputTextarea id="description" class="w-full description-input" autocomplete="off" [(ngModel)]="newEce.description"></textarea>
+                                </div>
+                            </div>
+                            <!-- File Upload -->
+                            <div class="field grid mb-3">
+                                <label for="file" class="col-fixed font-semibold label-padding">Upload ECE</label>
+                                <div class="col custom-file-input-container">
+                                    <input type="file" id="file" (change)="onFileSelected($event)" class="custom-file-input" accept="image/*" />
+                                    <label for="file" class="custom-file-label" id="file-label">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-content-center mb-3">
+                            <div class="button-container">
+                                <button type="button" class="btn btn-secondary" severity="secondary" (click)="updateDialogVisible = false">Cancel</button>
+                                <button type="button" class="btn btn-primary" (click)="updateECE()">Save</button>
+                            </div>
+                        </div>
+                    </p-dialog>
+                    <p-toast></p-toast>
+                </div>
+            </div>
+        </div>
+        <!-- ECE Item Display -->
+        <p-splitter [style]="{ height: '400px' }">
+            <ng-template pTemplate>
+                <div class="col flex align-items-center justify-content-center">
+                    <div class="panel-container">
+                        <p-image [src]="item.image_URL" alt="Image" width="250" [preview]="true" class="ece-image" />
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate>
+                <div class="col flex align-items-center justify-content-center">
+                    <div class="panel-container">
+                        <div class="card-item">
+                            <h3>{{ item.title }}</h3>
+                            <p>{{ item.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-splitter>
+    </div>
+</div>
+
+<!-- Image Dialog -->
+
+
+
+
+
+
+<!-- <div class="card flex justify-content-center">
     <button (click)="showDialog()" class="btn btn-primary">ADD ECE</button>
     <p-dialog header="ADD ECE" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }" (onHide)="resetForm()">
         <span class="p-text-secondary block mb-5"></span>
@@ -20,58 +163,22 @@
             <div class="field grid mb-3">
                 <label for="file" class="col-fixed font-semibold label-padding">Upload ECE</label>
                 <div class="col custom-file-input-container">
-                    <input type="file" id="file" (change)="onFileSelected($event)" class="custom-file-input" accept="image/*" />
+                    <input type="file" id="file" (change)="onFileSelected($event)" class="custom-file-input"
+                        accept="image/*" />
                     <label for="file" class="custom-file-label" id="file-label">Choose file</label>
                 </div>
             </div>
         </div>
         <div class="flex justify-content-center mb-3">
             <div class="button-container">
-                <button type="button" class="btn btn-secondary" severity="secondary" (click)="visible = false" >Cancel</button>
+                <button type="button" class="btn btn-secondary" severity="secondary"
+                    (click)="visible = false">Cancel</button>
                 <button type="button" class="btn btn-primary" (click)="uploadECE()">Save</button>
             </div>
         </div>
     </p-dialog>
     <p-toast></p-toast>
-</div>
-
-
-
-
-<div class="card" *ngFor="let item of ece" (click)="selectECE(item)">
-    <div *ngIf="selectedECE === item" >
-        <button (click)="updateECE()" class="btn btn-primary mr-2">Update</button>
-        <button (click)="deleteECE()" class="btn btn-danger">Delete</button>
-    </div>
-    <p-splitter [style]="{ height: '300px' }" styleClass="mb-5">
-        <ng-template pTemplate>
-            <div class="col flex align-items-center justify-content-center">
-                <div class="panel-container">
-                    <img [src]="item.image_URL" alt="ECE Image" class="ece-image" />
-                </div>
-            </div>
-        </ng-template>
-        <ng-template pTemplate>
-            <div class="col flex align-items-center justify-content-center">
-                <div class="panel-container">
-                    <div class="card-item">
-                        <h3>{{ item.title }}</h3>
-                        <p>{{ item.description }}</p>
-                    </div>
-                </div>
-            </div>
-        </ng-template>
-    </p-splitter>
-</div>
-
-
-
-
-
-
-
-
-
+</div> -->
 
 
 

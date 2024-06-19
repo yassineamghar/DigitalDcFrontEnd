@@ -56,6 +56,11 @@ import { ToastModule } from 'primeng/toast';
 import { NotificationService } from './services/Notification/notification.service';
 import { MessageService } from 'primeng/api';
 import { SplitterModule } from 'primeng/splitter';
+import { ToolbarModule } from 'primeng/toolbar';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { ImageModule } from 'primeng/image';
+// import "primeicons/primeicons.css";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -111,7 +116,10 @@ import { SplitterModule } from 'primeng/splitter';
     DialogModule,
     InputTextModule,
     ToastModule,
-    SplitterModule
+    SplitterModule,
+    ToolbarModule,
+    SplitButtonModule,
+    ImageModule
   ],
   providers: [AuthService, ArticleService, NotificationService, MessageService],
   bootstrap: [AppComponent],

@@ -31,6 +31,29 @@ export class AuthService {
     };
   }
   
+  getUserRoles(): string[] {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('No token found');
+      return [];
+    }
+
+    // Split the token by '.' to get the payload section
+    const tokenParts = token.split('.');
+    if (tokenParts.length !== 3) {
+      console.error('Invalid token format');
+      return [];
+    }
+
+    // Decode the payload (second part)
+    const payload = JSON.parse(atob(tokenParts[1]));
+
+    // Extract roles from payload
+    const roles = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    console.log('User Roles:', roles);
+
+    return roles ? [roles] : [];
+  }
       
   register(registerForm: any, role: string): Observable<any> {
     const url = `${this.apiUrl}/register?role=${role}`;
@@ -104,4 +127,8 @@ export class AuthService {
       return of(result as T);
     };
   }
+}
+
+function jwt_decode(token: string): any {
+  throw new Error('Function not implemented.');
 }
