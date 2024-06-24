@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, of } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/User';
 
@@ -11,6 +11,7 @@ export class AuthService {
 
   private apiUrl = `${environment.apiUrl}/Account`;
   private currentUserToken: string | null = null;
+  private fullname: string = '';
   token = localStorage.getItem('token');
   
   private isAuthenticatedSubject = new BehaviorSubject  <boolean>(false);
@@ -50,7 +51,9 @@ export class AuthService {
 
     // Extract roles from payload
     const roles = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    // this.fullname = payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] || '';
     console.log('User Roles:', roles);
+    // console.log('Full Name:', this.fullname);
 
     return roles ? [roles] : [];
   }
@@ -65,6 +68,18 @@ export class AuthService {
     this.isAuthenticatedSubject.next(true);
     const httpOptions = this.getHttpOptions();
     return this.httpClient.post(url, loginForm,httpOptions);
+  }
+
+  getUserById(userId: string): Observable<any> {
+    const httpOptions = this.getHttpOptions();
+    return this.httpClient.get<any>(`${this.apiUrl}${userId}`,httpOptions);
+  }
+
+  getUserFullName(userId: string): Observable<string> {
+    return this.httpClient.get<any>(`${this.apiUrl}${userId}`)
+      .pipe(
+        map(data => data.fullname) 
+      );
   }
 
   resetPassword(data: any): Observable<any> {
@@ -121,6 +136,7 @@ export class AuthService {
   isAuthenticated() {
     return this.isAuthenticatedSubject.value;
   }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
@@ -129,6 +145,3 @@ export class AuthService {
   }
 }
 
-function jwt_decode(token: string): any {
-  throw new Error('Function not implemented.');
-}

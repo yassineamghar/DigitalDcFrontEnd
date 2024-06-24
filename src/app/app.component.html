@@ -4,5 +4,10 @@
 </div>
 
 <div *ngIf="!isAuthenticationRoute()">
-    <router-outlet></router-outlet>
+    <app-sidebar *ngIf="showSidebar"></app-sidebar>
+    <div class="main-content">
+        <!-- Main content goes here -->
+        <router-outlet></router-outlet>
+      </div>
+    <!-- <router-outlet></router-outlet> -->
 </div>

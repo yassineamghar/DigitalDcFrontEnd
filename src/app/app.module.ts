@@ -59,8 +59,8 @@ import { SplitterModule } from 'primeng/splitter';
 import { ToolbarModule } from 'primeng/toolbar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { ImageModule } from 'primeng/image';
-// import "primeicons/primeicons.css";
-
+import { UserProfileComponent } from './UserManagement/user-profile/user-profile.component';
+import { MenuModule } from 'primeng/menu';
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,6 +85,7 @@ import { ImageModule } from 'primeng/image';
     UserManagementComponent,
     SidebarComponent,
     ECEComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,7 +120,8 @@ import { ImageModule } from 'primeng/image';
     SplitterModule,
     ToolbarModule,
     SplitButtonModule,
-    ImageModule
+    ImageModule,
+    MenuModule
   ],
   providers: [AuthService, ArticleService, NotificationService, MessageService],
   bootstrap: [AppComponent],

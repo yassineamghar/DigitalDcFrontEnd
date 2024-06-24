@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   showPassword: boolean = false;
   eyeIcon = faEye;
   eyeSlashIcon = faEyeSlash;
+  showPage = false;
   
   constructor(
     private authService: AuthService,
@@ -27,6 +28,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const roles = this.authService.getUserRoles();
+    this.showPage = roles.includes('admin');
     this.loginForm = this.formBuilder.group({
       Username: [null, [Validators.required]],
       Password: [null, [
@@ -48,7 +51,16 @@ export class LoginComponent implements OnInit {
           alert("Login successful!");
           // Store the token in local storage
           localStorage.setItem('token', response.token);
-          this.router.navigate(['user']);
+  
+          // Get user roles from the token
+          const roles = this.authService.getUserRoles();
+  
+          // Check if roles contain 'admin'
+          if (roles.includes('Admin')) {
+            this.router.navigate(['user']);
+          } else {
+            this.router.navigate(['boardfs']);
+          }
         } else {
           // Email not confirmed or other authentication error
           if (response && response.error === "Email not confirmed.") {
@@ -64,6 +76,7 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+  
   
   
 

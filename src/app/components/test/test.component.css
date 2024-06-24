@@ -5,39 +5,87 @@
   padding: 20px;
 }
 
-
 /* Container for the header */
-
 .header {
-  /* background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%);  */
-  padding: 60px 0; /* Increased padding for more height */
-  /* border-bottom: 2px solid #ff7f50; Orange border at the bottom of the header */
-  position: relative; /* Position relative for animations */
-  overflow: hidden; /* Hide overflow for animations */
-  text-align: center; /* Center the text */
+  padding: 60px 0;
+  position: relative; 
+  overflow: hidden; 
+  text-align: center; 
 }
 
 /* Centering and styling the container inside the header */
 .header .container {
-  max-width: 1200px; /* Maximum width for the content */
-  margin: 0 auto; /* Center the content horizontally */
-  padding: 0 15px; /* Padding on the sides */
-  text-align: center; /* Center the text */
+  max-width: 1200px;
+  margin: 0 auto; 
+  padding: 0 15px;
+  text-align: center; 
 }
 
 /* Styling the title inside the header */
 .header .title {
-  color: #ff7f50; /* Coral color (orange) for the title text */
-  font-size: 3rem; /* Large font size for the title */
-  font-weight: bold; /* Bold text */
-  margin: 0; /* No margin around the title */
-  text-transform: uppercase; /* Uppercase letters for the title */
-  letter-spacing: 2px; /* Spacing between the letters */
-  /* border: 2px solid orange; White border around the title */
-  padding: 10px 20px; /* Padding inside the title */
-  border-radius: 10px; /* Slightly rounded corners for the title */
+  color:  #E98300; 
+  font-size: 3rem;
+  font-weight: bold; 
+  margin: 0; 
+  text-transform: uppercase; 
+  letter-spacing: 2px;
+  border: 2px solid orange;  
+  padding: 10px 20px; 
+  border-radius: 10px; 
 }
 
+
+/*img*/
+.row {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+.col-6 {
+  height: 100%;
+}
+
+.col-6.text {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px; 
+  text-align: center;
+  order: 1; 
+}
+
+.col-6.image {
+  order:2; 
+  padding: 10px; 
+  align-self: flex-start;
+}
+
+.col-6 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.welcome-text {
+  font-family: Arial, sans-serif; 
+  font-size: 60px; 
+  font-weight: bold; 
+  line-height: 1; 
+  text-align:left;
+}
+
+p {
+  color: rgb(46, 45, 45);
+  font-size: 150%;
+  line-height:141%;
+  text-align: justify;
+}
+
+.separator {
+  border-top: 5px solid #134bb3;
+  margin: 20px 0; 
+}
 
 /* Add button */
 /* Ensure proper padding and margin */
@@ -73,31 +121,29 @@
   cursor: pointer;
 }
 
-/* Ensure inputs and textarea take full width */
 input[pInputText],
 textarea[pInputTextarea] {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #cccccc;
   border-radius: 4px;
-  box-sizing: border-box; /* Ensures padding and border are included in width */
+  box-sizing: border-box; 
 }
 
-/* Custom height for description textarea */
 .description-input {
-  min-height: 150px; /* Adjust height as needed */
-  resize: vertical; /* Allows vertical resizing */
+  min-height: 150px; 
+  resize: vertical; 
 }
 .button-container {
   display: flex;
   justify-content: center;
-  gap: 10px; /* Adjust as needed */
+  gap: 10px; 
 }
 .button-style{
   border-radius: 4px;
 }
 .p-dialog-content {
-  border-radius: 10px; /* Ensures the dialog content has rounded corners */
+  border-radius: 10px; 
 }
 
 /* Responsive adjustments */
@@ -117,61 +163,54 @@ textarea[pInputTextarea] {
   }
 }
 
-
 /* part loading ece */
-
-.card {
-  /* margin-bottom: 20px; */
+/* .card {
   border: 1px solid #ddd;
   border-radius: 8px;
-  overflow: hidden; /* Ensure card content doesn't overflow */
+  overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .card1 {
   margin-bottom: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  overflow: hidden; /* Ensure card content doesn't overflow */
+  overflow: hidden; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .p-splitter {
-  border: none; /* Remove default border from splitter */
+  border: none; 
 }
 
 .panel-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* text-align: center; */
-  height: 100%; /* Ensure the container takes up full height of the panel */
+  height: 100%; 
 }
 
 .ece-image {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain; /* Maintain aspect ratio and fit within container */
-  border-radius: 8px; /* Rounded corners for image */
+  object-fit: contain; 
+  border-radius: 8px; 
 }
 
-
-
 .card-item {
-  /* max-width: 100%; */
   padding: 1rem;
   text-align: left;
 }
 
 .card-item h3 {
-  font-size: 1.5rem; /* Adjust as needed */
+  font-size: 1.5rem; 
   margin-bottom: 10px;
-  color: #333; /* Text color */
+  color: #333; 
 }
 
 .card-item p {
-  font-size: 1rem; /* Adjust as needed */
-  line-height: 1.4; /* Adjust line height for readability */
-  color: #666; /* Text color */
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #666;
 }
 
 p-splitter {
@@ -185,61 +224,56 @@ p-splitter {
   justify-content: center;
 }
 
-/* .col {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-} */
-
 /* button */
 .btn-update {
-  background-color: #007bff; /* Blue background */
-  color: #fff; /* White text */
-  border: none; /* No border */
-  padding: 8px 16px; /* Padding inside the button */
-  font-size: 14px; /* Font size */
-  border-radius: 4px; /* Rounded corners */
-  cursor: pointer; /* Cursor on hover */
-  transition: background-color 0.3s ease; /* Smooth transition */
+  background-color: #007bff; 
+  color: #fff; 
+  border: none; 
+  padding: 8px 16px; 
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
 }
 
 .btn-update:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
 }
+
 .btn-add {
-  background-color: #007bff; /* Blue background */
-  color: #fff; /* White text */
-  border: none; /* No border */
-  padding: 8px 16px; /* Padding inside the button */
-  font-size: 14px; /* Font size */
-  border-radius: 4px; /* Rounded corners */
-  cursor: pointer; /* Cursor on hover */
-  transition: background-color 0.3s ease; /* Smooth transition */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px; 
+  border-radius: 4px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease;
 }
 
 .btn-add:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3; 
 }
+
 .btn-delete {
-  background-color: #dc3545; /* Red background */
-  color: #fff; /* White text */
-  border: none; /* No border */
-  padding: 8px 16px; /* Padding inside the button */
-  font-size: 14px; /* Font size */
-  border-radius: 4px; /* Rounded corners */
-  cursor: pointer; /* Cursor on hover */
-  transition: background-color 0.3s ease; /* Smooth transition */
+  background-color: #dc3545; 
+  color: #fff; 
+  border: none; 
+  padding: 8px 16px; 
+  font-size: 14px; 
+  border-radius: 4px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease;
 }
 
 .btn-delete:hover {
-  background-color: #c82333; /* Darker red on hover */
+  background-color: #c82333; 
 }
 
 /* search */
 .search {
-  width: 100%; /* Default width */
-  max-width: 1200px; /* Maximum width */
+  width: 100%; 
+  max-width: 1200px;
   padding: 8px;
   font-size: 16px;
 }
@@ -282,8 +316,6 @@ p-splitter {
 }
 
 /* Assuming this is your component's CSS file, adjust accordingly */
-
-
 .pi {
   font-family: primeicons;
   font-style: normal;
@@ -296,10 +328,7 @@ p-splitter {
   -moz-osx-font-smoothing: grayscale;
   background-color: transparent !important;
   border-radius: 50%;
-
 }
-
-
 
 .p-button-rounded {
   border-radius: 50%;
@@ -311,3 +340,81 @@ p-splitter {
   border-radius: 10px;
 }
 
+
+
+/*what i add*/
+/* .card {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.card img.card-image {
+  width: 40%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.card-content .header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card-content .header svg {
+  margin-right: 5px;
+}
+
+.card-content h2 {
+  font-size: 1.5em;
+  margin: 10px 0;
+}
+
+.card-content p {
+  flex-grow: 1;
+}
+
+.card-content .footer {
+  display: flex;
+  align-items: center;
+}
+
+.card-content .footer .author-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.card-content .footer .author {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+  }
+
+  .card img.card-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .card-content {
+    padding: 10px;
+  }
+} */

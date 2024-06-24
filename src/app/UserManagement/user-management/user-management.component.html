@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<app-sidebar>
+<app-sidebar ></app-sidebar>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
   <div class="container mt-4">
@@ -30,10 +30,10 @@
             </td>
             <td data-label="Date Created">{{ user.dateCreated | date: 'dd/MM/yyyy' }}</td>
             <td data-label="Actions">
-              <button type="button" class="btn btn-outline-orange btn-circle btn-lg btn-circle ml-2" (click)="deleteUser(user.id)">
+              <button type="button" class="btn btn-outline-danger btn-circle btn-lg   m-2" (click)="deleteUser(user.id)">
                 <i class="fa fa-trash"></i>
               </button>
-              <button type="button" class="btn btn-outline-orange btn-circle btn-lg btn-circle ml-2" (click)="selectUser(user)">
+              <button type="button" class="btn btn-outline-primary btn-circle btn-lg  m-2" (click)="selectUser(user)">
                 <i class="fa fa-edit"></i>
               </button>
             </td>
@@ -75,4 +75,3 @@
       </div>
     </div>
   </div>
-</app-sidebar>

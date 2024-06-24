@@ -1,4 +1,4 @@
-<div class="sidebar" [class.active]="isActive">
+<div class="sidebar" [class.active]="!isActive">
     <div class="sidebar-header">
       <h2>Menu</h2>
       <button class="toggle-button" (click)="toggleSidebar()">&#9776;</button>
@@ -6,13 +6,12 @@
     <ul class="sidebar-menu">
       <li><a [routerLink]="['/home']">🏠 Home</a></li>
       <li><a [routerLink]="['/boardfs']">📰 Board-news</a></li>
-      <li><a [routerLink]="['/user']">🚀 User Management</a></li>
+      <li><a [routerLink]="['/user']" *ngIf="showPage">🚀 User Management</a></li>
       <li><a [routerLink]="['/about']">ℹ️ About</a></li>
       <li><a [routerLink]="['/test']">⭐ ECE Star Award</a></li>
     </ul>    
   </div>
   <div class="content" [class.shift]="isActive">
-    <ng-content></ng-content>
   </div>
   
 
