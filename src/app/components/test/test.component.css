@@ -5,36 +5,6 @@
   padding: 20px;
 }
 
-/* Container for the header */
-.header {
-  padding: 60px 0;
-  position: relative; 
-  overflow: hidden; 
-  text-align: center; 
-}
-
-/* Centering and styling the container inside the header */
-.header .container {
-  max-width: 1200px;
-  margin: 0 auto; 
-  padding: 0 15px;
-  text-align: center; 
-}
-
-/* Styling the title inside the header */
-.header .title {
-  color:  #E98300; 
-  font-size: 3rem;
-  font-weight: bold; 
-  margin: 0; 
-  text-transform: uppercase; 
-  letter-spacing: 2px;
-  border: 2px solid orange;  
-  padding: 10px 20px; 
-  border-radius: 10px; 
-}
-
-
 /*img*/
 .row {
   display: flex;
@@ -164,12 +134,12 @@ textarea[pInputTextarea] {
 }
 
 /* part loading ece */
-/* .card {
+.card {
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-} */
+}
 
 .card1 {
   margin-bottom: 20px;
@@ -343,7 +313,20 @@ p-splitter {
 
 
 /*what i add*/
-/* .card {
+/* 
+.container{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+}
+.cards {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-right: 20px;
+}
+.card2 {
   display: flex;
   flex-direction: row;
   border: 1px solid #ddd;
@@ -352,9 +335,10 @@ p-splitter {
   width: 100%;
   max-width: 800px;
   margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.card img.card-image {
+.card2 img.card-image {
   width: 40%;
   height: auto;
   object-fit: cover;
@@ -364,52 +348,36 @@ p-splitter {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  flex-grow: 1;
-}
-
-.card-content .header {
-  display: flex;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
-}
+  flex-grow: 1;
+ }
 
-.card-content .header svg {
-  margin-right: 5px;
-}
-
-.card-content h2 {
-  font-size: 1.5em;
-  margin: 10px 0;
+.card-content h1 {
+  font-family: Arial, sans-serif; 
+  font-size: 50px; 
+  font-weight: bold; 
+  line-height: 1; 
+  text-align:left;
 }
 
 .card-content p {
-  flex-grow: 1;
+  color: rgb(46, 45, 45);
+  font-size: 150%;
+  line-height:141%;
+  text-align: justify;
 }
-
-.card-content .footer {
-  display: flex;
-  align-items: center;
-}
-
-.card-content .footer .author-image {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.card-content .footer .author {
-  display: flex;
-  flex-direction: column;
+.illustration img {
+  max-width: 100%;
+  height: auto;
 }
 
 @media (max-width: 768px) {
-  .card {
+  .card2 {
     flex-direction: column;
   }
 
-  .card img.card-image {
+  .card2 img.card-image {
     width: 100%;
     height: auto;
   }
@@ -417,4 +385,121 @@ p-splitter {
   .card-content {
     padding: 10px;
   }
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .cards {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 } */
+
+
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* align-items: flex-start; */
+  padding: 20px;
+  justify-content: space-between;
+
+}
+
+.cards {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+
+/* .cards.reverse {
+  flex-direction: row-reverse;
+} */
+
+.card-content h1 {
+  font-family: Arial, sans-serif; 
+  font-size: 50px; 
+  font-weight: bold; 
+  line-height: 1; 
+  text-align:left;
+}
+.card-content p {
+  color: rgb(46, 45, 45);
+  font-size: 150%;
+  line-height:141%;
+  text-align: justify;
+}
+
+.card2 {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px 0 20px 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card2 img.card-image {
+  width: 40%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin:20px 50px 20px 0px;
+}
+
+.illustration img {
+  max-width: 100%;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+  /* margin-left: 50px; */
+}
+
+@media (max-width: 768px) {
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cards.reverse {
+    flex-direction: column;
+  }
+
+  .card2 {
+    flex-direction: column;
+    margin-right: 0;
+  }
+
+  .card2 img.card-image {
+    width: 100%;
+  }
+
+  .card-content {
+    padding: 10px;
+  }
+
+  .illustration {
+    margin-top: 10px;
+  }
+}

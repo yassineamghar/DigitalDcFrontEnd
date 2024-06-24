@@ -87,58 +87,49 @@
     </p-toolbar>
 </div>
 
-
-
-<!-- <div class="card">
-    <img src="assets/ECE_img/ECEAward_page-0001.jpg" alt="Card Image" class="card-image">
-    <div class="card-content">
-        <div class="header">
-            <svg width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
-                <path
-                    d="M8 1a4 4 0 0 0-4 4v3h8V5a4 4 0 0 0-4-4zm0 1a3 3 0 0 1 3 3v3H5V5a3 3 0 0 1 3-3zm4 8H4a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1z">
-                </path>
-            </svg>
-            Members only
-        </div>
-        <h2>Can coffee make you a better developer?</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Voluptatibus quia, nulla! Maiores et perferendis
-            eaque, exercitationem praesentium nihil.</p>
-        <div class="footer">
-            <img src="https://via.placeholder.com/40" alt="Author Image" class="author-image">
-            <div class="author">
-                Jonathan Reinink<br>
-                Aug 18
+<div class="container">
+    <ng-container *ngFor="let item of ece; let i = index">
+        <div class="cards">
+            <div class="card2">
+                <img [src]="item.image_URL" alt="Card Image" class="card-image">
+                <div class="card-content">
+                    <h1>{{ item.title }}</h1>
+                    <p>{{ item.description }}</p>
+                </div>
+            </div>
+            <div class="illustration">
+                <img src="assets/ECE_img/illustration1.png" alt="Illustration">
             </div>
         </div>
-    </div>
-</div> -->
-
-
+    </ng-container>
+</div>
 
 
 <!-- <div class="container">
-    <div class="max-w-sm w-full lg:max-w-full lg:flex">
-        <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-            style="background-image: url('assets/ECE_img/ECEAward_page-0001.jpg')" title="Woman holding a mug">
-        </div>
-        <div
-            class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-            <div class="mb-8">
-                <div class="text-gray-900 font-bold text-xl mb-2">Can coffee make you a better developer?</div>
-                <p class="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+    <ng-container *ngFor="let item of ece; let i = index">
+        <div class="cards" [ngClass]="{'reverse': i % 2 !== 0}">
+            <div class="card2">
+                <img [src]="item.image_URL" alt="Card Image" class="card-image">
+                <div class="card-content">
+                    <h1>{{ item.title }}</h1>
+                    <p>{{ item.description }}</p>
+                </div>
+            </div>
+            <div class="illustration">
+                <img [src]="i % 2 === 0 ? 'assets/ECE_img/illustration1.png' : 'assets/ECE_img/illustration2.png'" alt="Illustration">
             </div>
         </div>
-    </div>
+    </ng-container>
 </div> -->
 
 
 
 
 
+<!-- 
 
 
-<!-- List of ECEs -->
+
 <div class="container">
     <div class="card1" *ngFor="let item of ece" (click)="selectECE(item)">
         <div *ngIf="selectedECE === item" class="d-flex justify-content-end mb-2">
@@ -151,13 +142,11 @@
                     <p-button (click)="deleteECE()" icon="pi pi-trash" [rounded]="true" severity="danger"
                         [outlined]="true" />
                 </div>
-                <!-- Update Dialog -->
                 <div class="card flex justify-content-center">
                     <p-dialog header="Update ECE" [modal]="true" [(visible)]="updateDialogVisible"
                         [style]="{ width: '25rem' }" (onHide)="resetForm()">
                         <span class="p-text-secondary block mb-5"></span>
                         <div class="p-fluid mb-5">
-                            <!-- Title -->
                             <div class="field grid mb-3">
                                 <label for="title" class="col-fixed font-semibold label-padding">Title</label>
                                 <div class="col">
@@ -165,7 +154,6 @@
                                         [(ngModel)]="newEce.title" />
                                 </div>
                             </div>
-                            <!-- Description -->
                             <div class="field grid mb-3">
                                 <label for="description"
                                     class="col-fixed font-semibold label-padding">Description</label>
@@ -174,7 +162,6 @@
                                         autocomplete="off" [(ngModel)]="newEce.description"></textarea>
                                 </div>
                             </div>
-                            <!-- File Upload -->
                             <div class="field grid mb-3">
                                 <label for="file" class="col-fixed font-semibold label-padding">Upload ECE</label>
                                 <div class="col custom-file-input-container">
@@ -196,7 +183,6 @@
                 </div>
             </div>
         </div>
-        <!-- ECE Item Display -->
         <p-splitter [style]="{ height: '400px' }">
             <ng-template pTemplate>
                 <div class="col flex align-items-center justify-content-center">
@@ -218,3 +204,5 @@
         </p-splitter>
     </div>
 </div>
+
+ -->
