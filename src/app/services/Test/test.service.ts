@@ -27,11 +27,10 @@ export class TestService {
   uploadECE(formData: FormData): Observable<HttpEvent<any>> {
     const httpOptions = this.getHttpOptions();
     const req = new HttpRequest('POST', `${this.apiUrl}/upload`, formData, {
-      headers: httpOptions.headers, // Ensure headers are passed correctly
+      headers: httpOptions.headers, 
       reportProgress: true,
       responseType: 'json'
     });
-  
     return this.http.request(req);
   }
   

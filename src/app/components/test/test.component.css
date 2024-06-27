@@ -57,6 +57,29 @@ p {
   margin: 20px 0; 
 }
 
+
+/* scroll down button */
+.scroll-button {
+  font-family: Arial, sans-serif; 
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  font-size: 20px;
+  color: #fff;
+  background-color: #355389;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+.scroll-button:hover {
+  background-color: #0056b3;
+}
+
+
+
 /* Add button */
 /* Ensure proper padding and margin */
 .label-padding {
@@ -194,96 +217,74 @@ p-splitter {
   justify-content: center;
 }
 
-/* button */
-.btn-update {
-  background-color: #007bff; 
-  color: #fff; 
-  border: none; 
-  padding: 8px 16px; 
-  font-size: 14px;
-  border-radius: 4px;
-  cursor: pointer; 
-  transition: background-color 0.3s ease; 
-}
-
-.btn-update:hover {
-  background-color: #0056b3;
-}
-
-.btn-add {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  font-size: 14px; 
-  border-radius: 4px; 
-  cursor: pointer; 
-  transition: background-color 0.3s ease;
-}
-
-.btn-add:hover {
-  background-color: #0056b3; 
-}
-
-.btn-delete {
-  background-color: #dc3545; 
-  color: #fff; 
-  border: none; 
-  padding: 8px 16px; 
-  font-size: 14px; 
-  border-radius: 4px; 
-  cursor: pointer; 
-  transition: background-color 0.3s ease;
-}
-
-.btn-delete:hover {
-  background-color: #c82333; 
-}
-
 /* search */
 .search {
   width: 100%; 
-  max-width: 1200px;
+  max-width: 100px;
   padding: 8px;
   font-size: 16px;
 }
 
-@media (max-width: 1200px) {
+.search-container {
+  position: relative;
+  width: 300px;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 10px;
+  padding-left: 40px; /* Adjust this based on the icon size */
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #888;
+}
+
+@media (min-width: 1200px) {
   .search {
     max-width: 1000px;
   }
 }
 
-@media (max-width: 992px) {
+@media (min-width: 992px) {
   .search {
     max-width: 800px;
   }
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .search {
     max-width: 600px;
   }
 }
 
-@media (max-width: 576px) {
+@media (min-width: 576px) {
   .search {
     max-width: 100%;
   }
 }
 
-.p-toolbar-group-end {
+.searchbar{
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: 10px; 
 }
 
 .p-toolbar-group-center {
-  flex-grow: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
 }
+
 
 /* Assuming this is your component's CSS file, adjust accordingly */
 .pi {
@@ -310,138 +311,24 @@ p-splitter {
   border-radius: 10px;
 }
 
+/* card  */
 
-
-/*what i add*/
-/* 
-.container{
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 20px;
-}
 .cards {
   display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  margin-right: 20px;
-}
-.card2 {
-  display: flex;
-  flex-direction: row;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  width: 100%;
-  max-width: 800px;
-  margin: 20px auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card2 img.card-image {
-  width: 40%;
-  height: auto;
-  object-fit: cover;
-}
-
-.card-content {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: center; /* Align cards and buttons side by side */
   align-items: center;
   flex-grow: 1;
- }
-
-.card-content h1 {
-  font-family: Arial, sans-serif; 
-  font-size: 50px; 
-  font-weight: bold; 
-  line-height: 1; 
-  text-align:left;
-}
-
-.card-content p {
-  color: rgb(46, 45, 45);
-  font-size: 150%;
-  line-height:141%;
-  text-align: justify;
-}
-.illustration img {
-  max-width: 100%;
-  height: auto;
-}
-
-@media (max-width: 768px) {
-  .card2 {
-    flex-direction: column;
-  }
-
-  .card2 img.card-image {
-    width: 100%;
-    height: auto;
-  }
-
-  .card-content {
-    padding: 10px;
-  }
-  .container {
-    flex-direction: column;
-    align-items: center;
-  }
-  .cards {
-    margin-right: 0;
-    margin-bottom: 20px;
-  }
-} */
-
-
-
-
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  /* align-items: flex-start; */
-  padding: 20px;
-  justify-content: space-between;
-
-}
-
-.cards {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-grow: 1;
-}
-
-/* .cards.reverse {
-  flex-direction: row-reverse;
-} */
-
-.card-content h1 {
-  font-family: Arial, sans-serif; 
-  font-size: 50px; 
-  font-weight: bold; 
-  line-height: 1; 
-  text-align:left;
-}
-.card-content p {
-  color: rgb(46, 45, 45);
-  font-size: 150%;
-  line-height:141%;
-  text-align: justify;
 }
 
 .card2 {
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
   width: 100%;
-  max-width: 800px;
-  margin: 20px 0 20px 40px;
+  max-width: 1000px; /* Increased the max-width to make the card wider */
+  margin: 20px 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -455,35 +342,52 @@ p-splitter {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Align content to the start (left) */
   padding: 20px;
   flex-grow: 1;
-  text-align: center;
+  text-align: left; /* Align text to the left */
+}
+
+.card-content h1 {
+  font-family: Arial, sans-serif; 
+  font-size: 50px; 
+  font-weight: bold; 
+  line-height: 1; 
+  text-align: left; /* Align title to the left */
+}
+
+.card-content p {
+  color: rgb(46, 45, 45);
+  font-size: 150%;
+  line-height: 141%;
+  text-align: justify;
 }
 
 .illustration {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin:20px 50px 20px 0px;
+  padding: 20px;
 }
 
 .illustration img {
-  max-width: 100%;
+  width: auto;
   height: auto;
-  align-items: center;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  /* margin-left: 50px; */
+  align-items: center;
+  margin-left: 10px; 
+  gap: 10px; 
 }
 
 @media (max-width: 768px) {
   .cards {
     flex-direction: column;
     align-items: center;
-  }
-
-  .cards.reverse {
-    flex-direction: column;
   }
 
   .card2 {
@@ -497,9 +401,32 @@ p-splitter {
 
   .card-content {
     padding: 10px;
+    align-items: center; 
+    text-align: center; 
+  }
+
+  .card-content h1 {
+    text-align: center; /* Center align title for smaller screens */
   }
 
   .illustration {
     margin-top: 10px;
+    padding: 10px;
+  }
+
+  .button-group {
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 10px;
   }
 }
+
+
+
+.deleteconf{
+  color: #595d6e; /* Subtle grey color */
+  font-size: 1rem; /* Adjust font size as needed */
+  line-height: 1.5; /* Improve readability with line height */
+  margin-bottom: 2rem; 
+}
+

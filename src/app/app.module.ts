@@ -61,6 +61,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { ImageModule } from 'primeng/image';
 import { UserProfileComponent } from './UserManagement/user-profile/user-profile.component';
 import { MenuModule } from 'primeng/menu';
+import { WorkshopComponent } from './components/Media/workshop/workshop.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,6 +87,7 @@ import { MenuModule } from 'primeng/menu';
     SidebarComponent,
     ECEComponent,
     UserProfileComponent,
+    WorkshopComponent,
   ],
   imports: [
     BrowserModule,

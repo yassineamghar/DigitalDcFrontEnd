@@ -15,6 +15,7 @@ import { TestComponent } from './components/test/test.component';
 import { ArticleComponent } from './components/Media/article/article.component';
 import { UserManagementComponent } from './UserManagement/user-management/user-management.component';
 import { ECEComponent } from './components/Media/ece/ece.component';
+import { WorkshopComponent } from './components/Media/workshop/workshop.component';
 
 const routes: Routes = [
   {
@@ -99,6 +100,10 @@ const routes: Routes = [
   {
     path: 'articles',
     component: ArticleComponent
+  },
+  {
+    path: 'workshop',
+    component: WorkshopComponent
   },
   {
     path: '', redirectTo: '/boardfs', pathMatch: 'full'

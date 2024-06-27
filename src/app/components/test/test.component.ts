@@ -30,8 +30,12 @@ export class TestComponent implements OnInit {
   isAuthorized: boolean = false;
   addDialogVisible: boolean = false;
   updateDialogVisible: boolean = false;
+  deleteDialogVisible: boolean = false;
+  itemToDelete: any;
 
-  
+
+
+
   constructor(
     private testService: TestService,
     private eceService: EceService,
@@ -41,15 +45,15 @@ export class TestComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) { }
 
-  
+
   @ViewChild('fileInput') fileInput!: ElementRef;
 
   ngOnInit(): void {
-      this.loadECE();
-      this.isAuthorized = this.checkUserAuthorization();
+    this.loadECE();
+    this.isAuthorized = this.checkUserAuthorization();
 
-      // Force change detection after updating isAuthorized
-      this.cdr.detectChanges(); 
+    // Force change detection after updating isAuthorized
+    this.cdr.detectChanges();
   }
   checkUserAuthorization(): boolean {
     // const userRoles = this.authService.getUserRoles();
@@ -63,19 +67,29 @@ export class TestComponent implements OnInit {
     const isAdminOrUser = userRoles.includes('Admin') || userRoles.includes('User');
     this.loadECE();
     return isAdminOrUser;
-  
+
   }
 
- 
-
+  scrollToSection(sectionId: string): void {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 
   showAddDialog() {
     this.resetForm();
     this.addDialogVisible = true;
   }
 
-  showUpdateDialog() {
+  showUpdateDialog(item: any): void {
+    this.newEce = { ...item };
     this.updateDialogVisible = true;
+  }
+
+  showDeleteDialog(item: any): void {
+    this.itemToDelete = item;
+    this.deleteDialogVisible = true;
   }
 
   selectECE(item: ECE): void {
@@ -94,6 +108,7 @@ export class TestComponent implements OnInit {
       }
     }
   }
+
 
   loadECE(): void {
     this.eceService.getAllECE().subscribe(
@@ -136,6 +151,8 @@ export class TestComponent implements OnInit {
     }
   }
 
+
+
   resetForm() {
     this.newEce = { title: '', description: '' };
     this.selectedFile = null;
@@ -146,54 +163,52 @@ export class TestComponent implements OnInit {
     }
   }
 
-  updateECE(): void {
-    if (this.selectedECE) {
-      const formData = new FormData();
-      formData.append('title', this.newEce.title);
-      formData.append('description', this.newEce.description);
+  updateECE(item: any): void {
+    const formData = new FormData();
+    formData.append('title', this.newEce.title);
+    formData.append('description', this.newEce.description);
 
-      if (this.selectedFile) {
-        formData.append('file', this.selectedFile);
-      } else if (this.fileName !== 'Choose file') {
-        formData.append('existingFileName', this.fileName);
-      }
-
-      this.testService.updateECE(this.selectedECE.id_ECE, formData).subscribe(
-        (event) => {
-          if (event.type === HttpEventType.Response) {
-            this.loadECE();
-            this.resetForm();
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'ECE updated successfully!' });
-            this.updateDialogVisible = false;
-          }
-        },
-        (error) => {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update ECE.' });
-        }
-      );
-    } else {
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'No File selected.' });
+    if (this.selectedFile) {
+      formData.append('file', this.selectedFile);
+    } else if (this.fileName !== 'Choose file') {
+      formData.append('existingFileName', this.fileName);
     }
+
+    this.testService.updateECE(item.id_ECE, formData).subscribe(
+      (event) => {
+        if (event.type === HttpEventType.Response) {
+          this.loadECE();
+          this.resetForm();
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'ECE updated successfully!' });
+          this.updateDialogVisible = false;
+        }
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update ECE.' });
+      }
+    );
   }
-  deleteECE(): void {
-    if (this.selectedECE) {
-      this.testService.deleteECE(this.selectedECE.id_ECE).subscribe(
+
+  deleteECE() {
+    if (this.itemToDelete) {
+      this.testService.deleteECE(this.itemToDelete.id_ECE).subscribe(
         () => {
           console.log('ECE deleted successfully');
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'File deleted successfully!' });
           this.loadECE(); // Reload ECE items after deletion
-          this.selectedECE = null; // Deselect ECE item after deletion
+          this.deleteDialogVisible = false;
+          this.itemToDelete = null;
         },
         (error) => {
           console.error('Error deleting ECE:', error);
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to delete file.' });
+          this.deleteDialogVisible = false;
+          this.itemToDelete = null;
         }
       );
-    } else {
-      console.error('No ECE selected.');
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'No file selected.' });
     }
   }
+
 
   showImage(imageUrl: string): void {
     this.imageToShow = imageUrl;
@@ -204,7 +219,7 @@ export class TestComponent implements OnInit {
     console.log('Closing image dialog...');
     this.isImageDialogVisible = false;
   }
-  
+
   filterECE(): void {
     if (this.searchTerm) {
       this.ece = this.ece.filter(item => item.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
