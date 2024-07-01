@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+<app-sidebar *ngIf="isAuthorized"></app-sidebar>
 
 <div class="container p-0">
     <div class="row">
@@ -16,5 +17,66 @@
                 <button class="scroll-button" (click)="scrollToSection('list-section')">View More</button>
             </div>
         </div>
+    </div>
+</div>
+
+
+<!-- Toolbar -->
+<div class="container" id="list-section">
+    <p-toolbar>
+        <div class="p-toolbar-group-center">
+            <span class="p-input-icon-right">
+                <input pInputText placeholder="Search" [(ngModel)]="searchTerm" (input)="filterECE()"
+                    [style]="{ width: '1200px' }" class="search" />
+                <i class="pi pi-search"></i>
+            </span>
+        </div>
+        <div class="p-toolbar-group-center m-0">
+            <div *ngIf="isAuthorized">
+                <p-button (click)="showAddDialog()" icon="pi pi-plus-circle" severity="info"
+                    [outlined]="true"></p-button>
+            </div>
+        </div>
+    </p-toolbar>
+    <!-- Add Dialog -->
+    <div class="card flex justify-content-center">
+        <p-dialog header="ADD ECE" [modal]="true" [(visible)]="addDialogVisible" [style]="{ width: '25rem' }"
+            (onHide)="resetForm()">
+            <span class="p-text-secondary block mb-5"></span>
+            <div class="p-fluid mb-5">
+                <!-- Title -->
+                <div class="field grid mb-3">
+                    <label for="title" class="col-fixed font-semibold label-padding">Title</label>
+                    <div class="col">
+                        <input pInputText id="title" class="w-full" autocomplete="off" [(ngModel)]="newEce.title" />
+                    </div>
+                </div>
+                <!-- Description -->
+                <div class="field grid mb-3">
+                    <label for="description" class="col-fixed font-semibold label-padding">Description</label>
+                    <div class="col">
+                        <textarea pInputTextarea id="description" class="w-full description-input" autocomplete="off"
+                            [(ngModel)]="newEce.description"></textarea>
+                    </div>
+                </div>
+                <!-- File Upload -->
+                <div class="field grid mb-3">
+                    <label for="file" class="col-fixed font-semibold label-padding">Upload ECE</label>
+                    <div class="col custom-file-input-container">
+                        <input type="file" id="file" (change)="onFileSelected($event)" class="custom-file-input"
+                            accept="image/*" />
+                        <label for="file" class="custom-file-label" id="file-label">Choose file</label>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-content-center mb-3">
+                <div class="button-container">
+                    <button type="button" class="btn btn-secondary" severity="secondary"
+                        (click)="addDialogVisible = false">Cancel</button>
+                    <button type="button" class="btn btn-primary" (click)="saveECE()">Save</button>
+                </div>
+            </div>
+        </p-dialog>
+        <p-toast></p-toast>
     </div>
 </div>

@@ -327,7 +327,7 @@ p-splitter {
   border-radius: 8px;
   overflow: hidden;
   width: 100%;
-  max-width: 1000px; /* Increased the max-width to make the card wider */
+  max-width: 1000px; 
   margin: 20px 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -412,7 +412,7 @@ p-splitter {
 
 .dialog-image {
   max-width: 100%;
-  max-height: 90vh;
+  max-height: calc(100vh - 57.6px);;
 }
 
 .close-button {
@@ -471,4 +471,3 @@ p-splitter {
   line-height: 1.5; /* Improve readability with line height */
   margin-bottom: 2rem; 
 }
-

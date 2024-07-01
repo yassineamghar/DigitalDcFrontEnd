@@ -18,7 +18,6 @@ export class TestService {
     console.log (token);
     return {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
         'Authorization': token ? `Bearer ${token}` : ''
       })
     };
@@ -72,7 +71,7 @@ export class TestService {
     return this.http.put(`${this.apiUrl}/updateECE/${id}`, formData, {
       reportProgress: true,
       observe: 'events',
-      responseType: 'text' as 'json' // Trick TypeScript to accept 'text' for event observation
+      responseType: 'text' as 'json' 
     });
   }
 

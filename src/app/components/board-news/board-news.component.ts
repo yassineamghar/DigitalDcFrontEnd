@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import * as lightbox from 'lightbox2';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-board-news',
@@ -7,7 +8,7 @@ import * as lightbox from 'lightbox2';
   styleUrls: ['./board-news.component.css']
 })
 export class BoardNewsComponent implements OnInit{
-
+  
   images = [
     { 
       name: 'ECEAward_page-0001.jpg', 
@@ -47,7 +48,7 @@ export class BoardNewsComponent implements OnInit{
         'disableKeyboardControls': true, 
         'alwaysShowNavOnTouchDevices': false,
     });
-
+    
     // Hide the close button using CSS
     const closeButton = document.querySelector('.lightbox-close');
     if (closeButton) {

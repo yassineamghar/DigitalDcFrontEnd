@@ -89,7 +89,7 @@
     <ng-container *ngFor="let item of ece; let i = index">
         <div class="cards">
             <div class="card2">
-                <img [src]="item.image_URL" alt="Card Image" class="card-image" (click)="showImage(item.image_URL)">
+                <img class="card-image" [src]="item.image_URL" alt="Card Image" (click)="showImage(item.image_URL)">               
                 <div class="card-content">
                     <h1>{{ item.title }}</h1>
                     <p>{{ item.description }}</p>
@@ -107,9 +107,9 @@
         </div>
     </ng-container>
     <!-- Image Dialog -->
-    <div *ngIf="isImageDialogVisible" class="image-dialog">
-        <div class="image-dialog-content">
-            <span class="close-button" (click)="hideImage()"><i class="pi pi-times"></i>
+    <div *ngIf="isImageDialogVisible" class="image-dialog" (click)="hideImage()">
+        <div class="image-dialog-content" >
+            <span class="close-button" (click)="hideImage()"><i class="pi pi-times" style="font-size: 2rem"></i>
             </span>
             <img [src]="imageToShow" alt="Dialog Image" class="dialog-image">
         </div>

@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 
 <div class="container">
-    <h2 class="title">ECE STAR</h2>
+    <h2 class="title">Workshop</h2>
     <div class="article-grid">
         <div *ngFor="let article of articles" class="article-card" (click)="selectArticle(article)">
             <h3 class="article-title">{{ article.pdf_Name }}</h3>
@@ -9,7 +9,7 @@
     </div>
 
     <div *ngIf="selectedArticle" class="selected-article">
-        <h3 class="sub-title">Selected ECE: {{ selectedArticle.pdf_Name }}</h3>
+        <h3 class="sub-title">Selected Workshop: {{ selectedArticle.pdf_Name }}</h3>
         <!-- Display first page image here -->
         <div *ngIf="firstPageImageUrl">
           <img [src]="firstPageImageUrl" alt="First Page">
@@ -23,8 +23,8 @@
             <input type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx, .ppt">
             <button class="save-btn">Save Update</button>
         </div>
-        <button class="download-btn" (click)="downloadArticleFile(selectedArticle.id_ART)">Download ECE File</button>
-        <button class="view-btn" (click)="viewArticle(selectedArticle.id_ART)">View ECE</button>
+        <button class="download-btn" (click)="downloadArticleFile(selectedArticle.id_ART)">Download Workshop File</button>
+        <button class="view-btn" (click)="viewArticle(selectedArticle.id_ART)">View Workshop</button>
     </div>
 
     <div class="upload-section">
