@@ -4,27 +4,27 @@
 
 .table {
   width: 100%;
-  border-collapse: separate; /* Change to separate to handle border-radius */
-  border-spacing: 0; /* Ensure no spacing between cells */
-  border: 1px solid #ddd; /* Add border to the table */
-  border-radius: 10px; /* Add border-radius to the table */
-  overflow: hidden; /* Ensure the rounded corners are visible */
+  border-collapse: separate; 
+  border-spacing: 0; 
+  border: 1px solid #ddd; 
+  border-radius: 10px; 
+  overflow: hidden; 
 }
 
 .table thead th:first-child {
-  border-top-left-radius: 10px; /* Top-left corner */
+  border-top-left-radius: 10px; 
 }
 
 .table thead th:last-child {
-  border-top-right-radius: 10px; /* Top-right corner */
+  border-top-right-radius: 10px; 
 }
 
 .table tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 10px; /* Bottom-left corner */
+  border-bottom-left-radius: 10px; 
 }
 
 .table tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 10px; /* Bottom-right corner */
+  border-bottom-right-radius: 10px; 
 }
 
 .btn-outline-orange {
@@ -70,14 +70,14 @@ button:not(:disabled) {
 }
 
 .not-approved {
-  color: #ffffff; /* Light red background for not approved users */
+  color: #ffffff; 
 }
 
 .modal.show {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.5); 
 }
 
 .modal-content {
@@ -122,7 +122,7 @@ button:not(:disabled) {
 
 .form-control:focus {
   outline: none;
-  border-color: #6c63ff; /* Change border color on focus */
+  border-color: #6c63ff; 
 }
 
 .select-arrow {
@@ -134,7 +134,7 @@ button:not(:disabled) {
 }
 
 .select-arrow::before {
-  content: "\25BC"; /* Unicode for down arrow */
+  content: "\25BC"; 
   font-size: 0.8em;
   color: #888;
 }

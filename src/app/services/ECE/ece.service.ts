@@ -12,10 +12,6 @@ export class EceService {
   private currentUserToken: string | null = null;
   token = localStorage.getItem('token');
 
-
-  // private apiUrl = 'http://localhost:5037/api/ECE';
-  // private token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcnRlc3QiLCJqdGkiOiIwYmRjM2EzYS1lOWE2LTRiNjEtOGQwMy0wOWRkNTVjYzEwOTMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNzE5NTI5NjY4LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUxNDQiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.RE4PyQqCh_R6a-CmDe4C8r0HjVmPe-bMrLtxgLrUAcQ';
-
   constructor(private http: HttpClient) { }
 
   private getHttpOptions(): { headers: HttpHeaders } {
@@ -23,7 +19,6 @@ export class EceService {
     console.log(token);
     return {
       headers: new HttpHeaders({
-        // 'Content-Type': 'application/json',
         'Authorization': token ? `Bearer ${token}` : ''
       })
     };

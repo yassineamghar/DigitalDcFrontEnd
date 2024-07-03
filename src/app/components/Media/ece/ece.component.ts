@@ -8,7 +8,8 @@ import { EceService } from 'src/app/services/ECE/ece.service';
 import { NotificationService } from 'src/app/services/Notification/notification.service';
 import { PdfService } from 'src/app/services/PDF/pdf.service';
 import { AuthService } from 'src/app/services/auth.service';
-
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 @Component({
   selector: 'app-ece',
   templateUrl: './ece.component.html',
@@ -30,7 +31,8 @@ export class ECEComponent implements OnInit {
   updateDialogVisible: boolean = false;
   deleteDialogVisible: boolean = false;
   itemToDelete: any;
-
+  searchTermChanged: Subject<string> = new Subject<string>();
+  originalEce: any[] = []; // Backup of the original ECE array
 
 
 
@@ -40,7 +42,15 @@ export class ECEComponent implements OnInit {
     private messageService: MessageService,
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
-  ) { }
+  ) { 
+    this.searchTermChanged.pipe(
+      debounceTime(800), // Adjust the debounce time as needed
+      distinctUntilChanged()
+    ).subscribe(searchTerm => {
+      this.searchTerm = searchTerm;
+      this.filterECE();
+    });
+  }
 
 
   showAlert() {
@@ -52,23 +62,14 @@ export class ECEComponent implements OnInit {
   ngOnInit(): void {
     this.loadECE();
     this.isAuthorized = this.checkUserAuthorization();
-
     // Force change detection after updating isAuthorized
     this.cdr.detectChanges();
   }
   checkUserAuthorization(): boolean {
-    // const userRoles = this.authService.getUserRoles();
-    // console.log('User Roles:', userRoles);
-
-    // // Example logic to check authorization based on roles
-    // const isAdminOrUser = userRoles.includes('Admin') || userRoles.includes('User');
-    // console.log('Is Authorized:', isAdminOrUser);
-
     const userRoles = this.authService.getUserRoles();
     const isAdminOrUser = userRoles.includes('Admin') || userRoles.includes('User');
     this.loadECE();
     return isAdminOrUser;
-
   }
 
   scrollToSection(sectionId: string): void {
@@ -122,6 +123,8 @@ export class ECEComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load ECE. Please try again later.' });
       }
     );
+    this.ece = [...this.originalEce]; // Reset the 'ece' array
+
   }
 
   saveECE(): void {
@@ -235,11 +238,26 @@ export class ECEComponent implements OnInit {
     this.isImageDialogVisible = false;
   }
 
+  onSearchTermChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.searchTermChanged.next(target.value);
+  }
+  
+
   filterECE(): void {
     if (this.searchTerm) {
-      this.ece = this.ece.filter(item => item.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+      const filteredItems = this.originalEce.filter(item =>
+        item.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+      if (filteredItems.length > 0) {
+        this.ece = filteredItems;
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Not found.' });
+        this.ece = []; // Clear the list or show an empty state
+      }
     } else {
-      this.loadECE();
+      this.loadECE(); // Reload the original ECE list
     }
   }
+  
 }

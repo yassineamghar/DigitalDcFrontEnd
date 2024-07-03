@@ -1,4 +1,5 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-about',
@@ -6,6 +7,9 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angula
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
+  
+  isAuthorized: boolean = false;
+
 
   images_customers: any[] = [
     { name: 'Aptiv_logo.png' },
@@ -22,13 +26,22 @@ export class AboutComponent implements OnInit {
 
   @ViewChild('logosContainer', { static: true }) logosContainer!: ElementRef;
 
-  constructor() { }
+  constructor(private authService: AuthService,     private cdr: ChangeDetectorRef,
+  ) { }
 
   ngOnInit(): void {
     this.populateImages(this.images_customers, 100, 100);
     this.populateImages(this.images_partners, 100, 100);
+    this.isAuthorized = this.checkUserAuthorization();
+    // Force change detection after updating isAuthorized
+    this.cdr.detectChanges();
   }
-
+  checkUserAuthorization(): boolean {
+    const userRoles = this.authService.getUserRoles();
+    const isAdminOrUser = userRoles.includes('Admin') || userRoles.includes('User');
+    // this.loadECE();
+    return isAdminOrUser;
+  }
   populateImages(imagesArray: any[], desiredSize: number, delay: number): void {
     const originalImages = [...imagesArray];
     const appendImage = () => {

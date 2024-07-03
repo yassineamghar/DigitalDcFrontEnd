@@ -1,9 +1,9 @@
 import { HttpEventType, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { ECE } from 'src/app/models/Media/ECE';
-import { EceService } from 'src/app/services/ECE/ece.service';
+import { workshop } from 'src/app/models/Workshop/workshop';
 import { NotificationService } from 'src/app/services/Notification/notification.service';
+import { WorkshopService } from 'src/app/services/Workshop/workshop.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -15,10 +15,11 @@ export class WorkshopComponent implements OnInit{
   
   visible: boolean = false;
   showUpdateForm: boolean = false;
-  selectedFile: File | null = null;
-  selectedECE: ECE | any;
-  ece: ECE[] = [];
-  newEce: { title: string, description: string } = { title: '', description: '' };
+  selectedImageFile: File | null = null;
+  selectedPdfFile: File | null = null;
+  selectedWS: workshop | any;
+  ws: workshop[] = [];
+  newWS: { title: string, description: string } = { title: '', description: '' };
   fileName: string = '';
   imageToShow: string | null = null;
   isImageDialogVisible = false;
@@ -31,7 +32,7 @@ export class WorkshopComponent implements OnInit{
 
 
   constructor(
-    private eceService: EceService,
+    private wsService: WorkshopService,
     private notificationService: NotificationService,
     private messageService: MessageService,
     private authService: AuthService,
@@ -41,7 +42,7 @@ export class WorkshopComponent implements OnInit{
   @ViewChild('fileInput') fileInput!: ElementRef;
 
   ngOnInit(): void {
-    this.loadECE();
+    this.loadWS();
     this.isAuthorized = this.checkUserAuthorization();
     // Force change detection after updating isAuthorized
     this.cdr.detectChanges();
@@ -50,7 +51,7 @@ export class WorkshopComponent implements OnInit{
   checkUserAuthorization(): boolean {
     const userRoles = this.authService.getUserRoles();
     const isAdminOrUser = userRoles.includes('Admin') || userRoles.includes('User');
-    this.loadECE();
+    this.loadWS();
     return isAdminOrUser;
 
   }
@@ -68,7 +69,7 @@ export class WorkshopComponent implements OnInit{
   }
 
   showUpdateDialog(item: any): void {
-    this.newEce = { ...item };
+    this.newWS = { ...item };
     this.updateDialogVisible = true;
   }
 
@@ -77,84 +78,79 @@ export class WorkshopComponent implements OnInit{
     this.deleteDialogVisible = true;
   }
 
-  selectECE(item: ECE): void {
-    this.selectedECE = item;
-    this.newEce = { ...item }; 
+  selectECE(item: workshop): void {
+    this.selectedWS = item;
+    this.newWS = { ...item }; 
     this.fileName = item.image_Name || '';
   }
 
-  onFileSelected(event: any): void {
+  onFileSelectedImage(event: any): void {
     if (event.target.files.length > 0) {
-      this.selectedFile = event.target.files[0];
+      this.selectedImageFile = event.target.files[0];
       const fileName = event.target.files[0].name;
-      const fileLabel = document.getElementById('file-label') as HTMLLabelElement | null;
+      const fileLabel = document.getElementById('file-label-Image') as HTMLLabelElement | null;
       if (fileLabel) {
         fileLabel.innerHTML = fileName;
       }
     }
   }
 
+  onFileSelectedPdf(event: any): void {
+    if (event.target.files.length > 0) {
+      this.selectedPdfFile = event.target.files[0];
+      const fileName = event.target.files[0].name;
+      const fileLabel = document.getElementById('file-label-PDF') as HTMLLabelElement | null;
+      if (fileLabel) {
+        fileLabel.innerHTML = fileName;
+      }
+    }
+  }
 
-  loadECE(): void {
-    this.eceService.getAllECE().subscribe(
+  loadWS(): void {
+    this.wsService.getAllWorkshop().subscribe(
       (data) => {
-        this.ece = data;
-        console.log('ECE:', this.ece);
+        this.ws = data;
+        console.log('WS:', this.ws);
       },
       (error) => {
-        console.error('Error loading ECE:', error);
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load ECE. Please try again later.' });
+        console.error('Error loading WS:', error);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load WS. Please try again later.' });
       }
     );
   }
 
-  saveECE(): void {
-    if (this.selectedFile) {
+  saveWS(): void {
+    if (this.selectedImageFile && this.selectedPdfFile) {
       const formData: FormData = new FormData();
-      formData.append('file', this.selectedFile);
-      formData.append('Title', this.newEce.title);
-      formData.append('Description', this.newEce.description);
-      this.eceService.uploadECE(formData).subscribe(
+      formData.append('imageFile', this.selectedImageFile);
+      formData.append('pdfFile', this.selectedPdfFile);
+      formData.append('Title', this.newWS.title);
+      formData.append('Description', this.newWS.description);
+      this.wsService.uploadWS(formData).subscribe(
         (event) => {
           if (event.type === HttpEventType.UploadProgress) {
             const percentDone = event.total ? Math.round(100 * event.loaded / event.total) : 0;
-            this.messageService.add({ severity: 'info', summary: 'Uploading!!', detail: `File is ${percentDone}% uploaded.` });
-            this.loadECE();
+            this.messageService.add({ severity: 'info', summary: 'Uploading!', detail: `File is ${percentDone}% uploaded.` });
           } else if (event instanceof HttpResponse) {
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'File uploaded successfully!' });
-            this.loadECE();
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Files uploaded successfully!' });
+            this.loadWS();
             this.addDialogVisible = false;
             this.resetForm();
           }
         },
         (error) => {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to upload file.' });
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to upload files.' });
         }
       );
     } else {
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'No file selected.' });
+      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Both image and PDF files must be selected.' });
     }
   }
 
-
-
-  private getHttpOptions(): { headers: HttpHeaders } {
-    const token = localStorage.getItem('token');
-    console.log (token);
-    return {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token ? `Bearer ${token}` : ''
-      })
-    };
-  }
-
-
-
-
   resetForm() {
-    this.newEce = { title: '', description: '' };
-    this.selectedFile = null;
+    this.newWS = { title: '', description: '' };
+    this.selectedImageFile  = null;
+    this.selectedPdfFile = null;
     this.fileName = '';
     const fileInput = document.getElementById('file') as HTMLInputElement;
     if (fileInput) {
@@ -162,44 +158,50 @@ export class WorkshopComponent implements OnInit{
     }
   }
 
-  updateECE(item: any): void {
+  updateWS(item: any): void {
     const formData = new FormData();
-    formData.append('title', this.newEce.title);
-    formData.append('description', this.newEce.description);
+    formData.append('title', this.newWS.title);
+    formData.append('description', this.newWS.description);
 
-    if (this.selectedFile) {
-      formData.append('file', this.selectedFile);
-    } else if (this.fileName !== 'Choose file') {
-      formData.append('existingFileName', this.fileName);
+    if (this.selectedImageFile) {
+      formData.append('imageFile', this.selectedImageFile);
+    } else if (item.image_Name) {
+      formData.append('existingImageName', item.image_Name);
     }
 
-    this.eceService.updateECE(item.id_ECE, formData).subscribe(
+    if (this.selectedPdfFile) {
+      formData.append('pdfFile', this.selectedPdfFile);
+    } else if (item.pdf_Name) {
+      formData.append('existingPdfName', item.pdf_Name);
+    }
+
+    this.wsService.updateWS(item.id_Workshop, formData).subscribe(
       (event) => {
         if (event.type === HttpEventType.Response) {
-          this.loadECE();
+          this.loadWS();
           this.resetForm();
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'ECE updated successfully!' });
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Workshop updated successfully!' });
           this.updateDialogVisible = false;
         }
       },
       (error) => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update ECE.' });
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update Workshop.' });
       }
     );
   }
 
-  deleteECE() {
+  deleteWS() {
     if (this.itemToDelete) {
-      this.eceService.deleteECE(this.itemToDelete.id_ECE).subscribe(
+      this.wsService.deleteWS(this.itemToDelete.id_Workshop).subscribe(
         () => {
-          console.log('ECE deleted successfully');
+          console.log('Workshop deleted successfully');
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'File deleted successfully!' });
-          this.loadECE(); // Reload ECE items after deletion
+          this.loadWS(); // Reload Workshop items after deletion
           this.deleteDialogVisible = false;
           this.itemToDelete = null;
         },
         (error) => {
-          console.error('Error deleting ECE:', error);
+          console.error('Error deleting Workshop:', error);
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to delete file.' });
           this.deleteDialogVisible = false;
           this.itemToDelete = null;
@@ -219,11 +221,11 @@ export class WorkshopComponent implements OnInit{
     this.isImageDialogVisible = false;
   }
 
-  filterECE(): void {
+  filterWS(): void {
     if (this.searchTerm) {
-      this.ece = this.ece.filter(item => item.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+      this.ws = this.ws.filter(item => item.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
     } else {
-      this.loadECE();
+      this.loadWS();
     }
   }
 }

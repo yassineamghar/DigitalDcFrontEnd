@@ -1,193 +1,275 @@
-<app-navbar></app-navbar>
-<app-sidebar *ngIf="isAuthorized"></app-sidebar>
-<!-- <div class="header">
-    <div class="container">
-        <h1 class="title">ECE STAR AWARD</h1>
+<div class="sidebar">
+    <div class="logo">
+      <img src="https://via.placeholder.com/40" alt="Logo">
+      <h1>BERRY</h1>
     </div>
-</div> -->
-<div class="container p-0">
-    <div class="row">
-        <div class="col-6 image">
-            <img src="assets/ECE_img/ECE STAR AWARD.png">
-        </div>
-        <div class="col-6 text">
-            <div class="description">
-                <h1 class="welcome-text">Welcome to the ECE Star Award page</h1>
-                <hr class="separator">
-                <p> This page is dedicated to recognizing and celebrating the exceptional employees who have
-                    demonstrated outstanding innovation, timely delivery, exceptional service quality, and unwavering
-                    support. These individuals have gone above and beyond in their roles, making significant
-                    contributions to our team's success and setting a high standard for excellence.</p>
-                <button class="scroll-button" (click)="scrollToSection('list-section')">View List of Awardees</button>
-            </div>
-        </div>
+    <div class="menu-item">
+      <h2>Dashboard</h2>
+      <a routerLink="#" class="menu-link active">
+        <div class="menu-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>        </div>
+        Default
+      </a>
+      <a routerLink="#" class="menu-link">
+        <div class="menu-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 11V7m0 4v4m0-4H7m4 0h4m-4 0a4 4 0 100-8 4 4 0 000 8zm-7 4v2a2 2 0 002 2h14a2 2 0 002-2v-2M7 7h.01" />
+              </svg>        </div>
+        Analytics
+      </a>
     </div>
-</div>
-
-
-
-<!-- Toolbar -->
-<div class="container">
-    <p-toolbar>
-        <div class="p-toolbar-group-center">
-            <span class="p-input-icon-right">
-                <input pInputText placeholder="Search" [(ngModel)]="searchTerm" (input)="filterECE()"
-                    [style]="{ width: '1200px' }" class="search" />
-                <i class="pi pi-search"></i>
-            </span>
-        </div>
-        <div class="p-toolbar-group-center m-0">
-            <div *ngIf="isAuthorized">
-                <p-button (click)="showAddDialog()" icon="pi pi-plus-circle" severity="info"
-                    [outlined]="true"></p-button>
-            </div>
-        </div>
-    </p-toolbar>
-    <!-- Add Dialog -->
-    <div class="card flex justify-content-center">
-        <p-dialog header="ADD ECE" [modal]="true" [(visible)]="addDialogVisible" [style]="{ width: '25rem' }"
-            (onHide)="resetForm()">
-            <span class="p-text-secondary block mb-5"></span>
-            <div class="p-fluid mb-5">
-                <!-- Title -->
-                <div class="field grid mb-3">
-                    <label for="title" class="col-fixed font-semibold label-padding">Title</label>
-                    <div class="col">
-                        <input pInputText id="title" class="w-full" autocomplete="off"
-                            [(ngModel)]="newEce.title" />
-                    </div>
-                </div>
-                <!-- Description -->
-                <div class="field grid mb-3">
-                    <label for="description" class="col-fixed font-semibold label-padding">Description</label>
-                    <div class="col">
-                        <textarea pInputTextarea id="description" class="w-full description-input"
-                            autocomplete="off" [(ngModel)]="newEce.description"></textarea>
-                    </div>
-                </div>
-                <!-- File Upload -->
-                <div class="field grid mb-3">
-                    <label for="file" class="col-fixed font-semibold label-padding">Upload ECE</label>
-                    <div class="col custom-file-input-container">
-                        <input type="file" id="file" (change)="onFileSelected($event)" class="custom-file-input"
-                            accept="image/*" />
-                        <label for="file" class="custom-file-label" id="file-label">Choose file</label>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-content-center mb-3">
-                <div class="button-container">
-                    <button type="button" class="btn btn-secondary" severity="secondary"
-                        (click)="addDialogVisible = false">Cancel</button>
-                    <button type="button" class="btn btn-primary" (click)="saveECE()">Save</button>
-                </div>
-            </div>
-        </p-dialog>
-        <p-toast></p-toast>
+    <div class="menu-item">
+      <h2>Widget</h2>
+      <a routerLink="#" class="menu-link">
+        <div class="menu-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6h6v6m2 0h1a2 2 0 002-2v-7a2 2 0 00-2-2h-1m-6 0H9a2 2 0 00-2 2v7a2 2 0 002 2h1m6 0H9m6 0v-6m-4 6v-6m0 6H9m4 0H9" />
+              </svg>        </div>
+        Statistics
+      </a>
+      <a routerLink="#" class="menu-link">
+        <div class="menu-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 114 4H3a4 4 0 010-8h14a4 4 0 110 8h-4a4 4 0 01-4-4z" />
+              </svg>        </div>
+        Data
+      </a>
+      <a routerLink="#" class="menu-link">
+        <div class="menu-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17a1 1 0 001-1V7a1 1 0 10-2 0v9a1 1 0 001 1zm4 0a1 1 0 001-1V9a1 1 0 10-2 0v7a1 1 0 001 1zm4-3a1 1 0 001-1v-1a1 1 0 10-2 0v1a1 1 0 001 1zM5 17a1 1 0 001-1V5a1 1 0 10-2 0v11a1 1 0 001 1z" />
+              </svg>        </div>
+        Chart
+      </a>
     </div>
-</div>
-
-
-
-<!-- list items  -->
-<div class="container">
-    <ng-container *ngFor="let item of ece; let i = index">
-        <div class="cards">
-            <div class="card2">
-                <img [src]="item.image_URL" alt="Card Image" class="card-image">
-                <div class="card-content">
-                    <h1>{{ item.title }}</h1>
-                    <p>{{ item.description }}</p>
-                </div>
-                <div class="illustration">
-                    <img src="assets/ECE_img/illustration1.png" alt="Illustration">
-                </div>
-            </div>
-            <div class="button-group" *ngIf="isAuthorized">
-                <p-button (click)="showUpdateDialog(item)" icon="pi pi-pen-to-square" [rounded]="true" severity="info"
-                    [outlined]="true"></p-button>
-                <p-button (click)="showDeleteDialog(item)" icon="pi pi-trash" [rounded]="true" severity="danger"
-                    [outlined]="true"></p-button>
-            </div>
+    <div class="menu-item">
+      <h2>Application</h2>
+      <a routerLink="#" class="menu-link">
+        <div class="menu-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2h5m8-10a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>        </div>
+        Users
+      </a>
+      <a routerLink="#" class="menu-link">
+        <div class="menu-icon">
+          <!-- Icon SVG -->
         </div>
-    </ng-container>
-
-    <!-- update form -->
-    <div class="card flex justify-content-center">
-        <p-dialog header="Update ECE" [modal]="true" [(visible)]="updateDialogVisible" [style]="{ width: '25rem' }"
-            (onHide)="resetForm()">
-            <span class="p-text-secondary block mb-5"></span>
-            <div class="p-fluid mb-5">
-                <div class="field grid mb-3">
-                    <label for="title" class="col-fixed font-semibold label-padding">Title</label>
-                    <div class="col">
-                        <input pInputText id="title" class="w-full" autocomplete="off" [(ngModel)]="newEce.title" />
-                    </div>
-                </div>
-                <div class="field grid mb-3">
-                    <label for="description" class="col-fixed font-semibold label-padding">Description</label>
-                    <div class="col">
-                        <textarea pInputTextarea id="description" class="w-full description-input" autocomplete="off"
-                            [(ngModel)]="newEce.description"></textarea>
-                    </div>
-                </div>
-                <div class="field grid mb-3">
-                    <label for="file" class="col-fixed font-semibold label-padding">Upload ECE</label>
-                    <div class="col custom-file-input-container">
-                        <input type="file" id="file" (change)="onFileSelected($event)" class="custom-file-input"
-                            accept="image/*" />
-                        <label for="file" class="custom-file-label" id="file-label">Choose file</label>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-content-center mb-3">
-                <div class="button-container">
-                    <button type="button" class="btn btn-secondary"
-                        (click)="updateDialogVisible = false">Cancel</button>
-                    <button type="button" class="btn btn-primary" (click)="updateECE(newEce)">Save</button>
-                </div>
-            </div>
-        </p-dialog>
-        <p-toast></p-toast>
+        Customer
+      </a>
+      <a routerLink="#" class="menu-link">
+        <div class="menu-icon">
+          <!-- Icon SVG -->
+        </div>
+        Chat
+      </a>
+      <a routerLink="#" class="menu-link">
+        <div class="menu-icon">
+          <!-- Icon SVG -->
+        </div>
+        Kanban
+      </a>
     </div>
-    <!-- Confirmation Dialog -->
-    <div class="card flex justify-content-center">
-        <p-dialog header="Confirm Deletion" [(visible)]="deleteDialogVisible" [modal]="true"
-            [style]="{ width: '25rem'}">
-            <p class="deleteconf">Are you sure you want to delete this item?</p>
-            <div class="flex justify-content-center">
-                <div class="button-container">
-                    <button type="button" class="btn btn-secondary"
-                        (click)="deleteDialogVisible = false">Cancel</button>
-                    <button type="button" class="btn btn-danger" (click)="deleteECE()">Delete</button>
-                </div>
-            </div>
-        </p-dialog>
+  </div>
+
+
+
+
+
+
+<!-- <div class="MuiBox-root css-8dd97e"><span class="MuiBox-root css-qpq9bu"><a
+            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1gpqd7"
+            aria-label="theme-logo" href="/dashboard/default"><svg width="92" height="32" viewBox="0 0 92 32"
+                fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M33.085 26.4841V12.3839H37.9541C39.6408 12.3839 40.9202 12.7131 41.7922 13.3717C42.6642 14.0237 43.1002 14.9825 43.1002 16.2478C43.1002 16.9387 42.9251 17.5488 42.5751 18.0782C42.225 18.6011 41.7381 18.9853 41.1143 19.2306C41.8272 19.4114 42.3873 19.7761 42.7947 20.3249C43.2084 20.8737 43.4152 21.5452 43.4152 22.3392C43.4152 23.695 42.9888 24.7215 42.1359 25.4188C41.283 26.1161 40.0673 26.4712 38.4888 26.4841H33.085ZM35.9492 20.3443V24.1502H38.4028C39.0775 24.1502 39.6026 23.9888 39.9781 23.666C40.36 23.3367 40.551 22.8848 40.551 22.3102C40.551 21.0189 39.8922 20.3637 38.5747 20.3443H35.9492ZM35.9492 18.2912H38.0687C39.5135 18.2654 40.236 17.6811 40.236 16.5384C40.236 15.8992 40.0514 15.4408 39.6822 15.1632C39.3194 14.8792 38.7434 14.7371 37.9541 14.7371H35.9492V18.2912ZM53.9365 20.3733H48.4371V24.1502H54.8913V26.4841H45.573V12.3839H54.8723V14.7371H48.4371V18.0976H53.9365V20.3733ZM61.7175 21.3224H59.436V26.4841H56.5717V12.3839H61.7365C63.379 12.3839 64.6455 12.7551 65.5365 13.4975C66.4276 14.24 66.8734 15.2891 66.8734 16.6449C66.8734 17.6069 66.6661 18.4107 66.2527 19.0563C65.8455 19.6954 65.2248 20.2055 64.3907 20.5864L67.3985 26.3485V26.4841H64.3242L61.7175 21.3224ZM59.436 18.9691H61.746C62.4656 18.9691 63.0226 18.7851 63.417 18.4172C63.8114 18.0427 64.0092 17.5294 64.0092 16.8773C64.0092 16.2124 63.8214 15.6894 63.4455 15.3085C63.0768 14.9276 62.5069 14.7371 61.7365 14.7371H59.436V18.9691ZM74.2058 21.3224H71.9237V26.4841H69.0594V12.3839H74.2248C75.8667 12.3839 77.1337 12.7551 78.0248 13.4975C78.9159 14.24 79.3611 15.2891 79.3611 16.6449C79.3611 17.6069 79.1544 18.4107 78.7404 19.0563C78.3332 19.6954 77.7125 20.2055 76.879 20.5864L79.8863 26.3485V26.4841H76.8119L74.2058 21.3224ZM71.9237 18.9691H74.2343C74.9533 18.9691 75.5103 18.7851 75.9052 18.4172C76.2997 18.0427 76.4969 17.5294 76.4969 16.8773C76.4969 16.2124 76.3092 15.6894 75.9337 15.3085C75.5645 14.9276 74.9946 14.7371 74.2248 14.7371H71.9237V18.9691ZM85.8823 18.7367L88.7751 12.3839H91.9064L87.3427 21.3708V26.4841H84.4309V21.3708L79.8673 12.3839H83.008L85.8823 18.7367Z"
+                    fill="#121926"></path>
+                <path
+                    d="M10.987 31.5841C4.92849 31.5841 0 26.626 0 20.5323C0 14.4385 4.92899 9.48041 10.987 9.48041C17.045 9.48041 21.974 14.4385 21.974 20.5323C21.974 26.626 17.0459 31.5841 10.987 31.5841ZM10.987 10.536C5.50765 10.536 1.04938 15.0196 1.04938 20.5318C1.04938 26.044 5.50765 30.5275 10.987 30.5275C16.4663 30.5275 20.9251 26.0429 20.9251 20.5308C20.9251 15.0186 16.4673 10.536 10.987 10.536Z"
+                    fill="#2196f3"></path>
+                <path
+                    d="M18.96 21.0225C18.6182 19.7483 15.4851 19.6108 13.6203 20.0779C12.6437 20.3235 11.6456 20.6428 10.6162 20.8265C11.3697 21.4989 12.1788 22.135 13.34 22.2932C16.2211 22.6842 18.0112 21.775 18.96 21.0225Z"
+                    fill="#2196f3"></path>
+                <path
+                    d="M13.34 22.2932C12.1764 22.135 11.3697 21.4989 10.6162 20.8265C9.45013 19.7857 8.41298 18.6579 6.37723 19.0823C3.14069 19.7572 2.71488 23.6081 5.21404 26.0828C6.28706 27.2131 7.66455 28.0041 9.17779 28.3586C10.691 28.7132 12.2742 28.616 13.7333 28.079C15.1924 27.5419 16.4641 26.5883 17.3925 25.3352C18.3209 24.0819 18.8656 22.5835 18.96 21.0235C18.0112 21.775 16.221 22.6842 13.34 22.2932Z"
+                    fill="#673ab7"></path>
+                <path
+                    d="M15.034 13.9586C14.6301 14.8295 18.2304 15.7957 18.6611 18.6879C18.8687 15.8409 15.5335 12.882 15.034 13.9586Z"
+                    fill="#2196f3"></path>
+                <path
+                    d="M7.46619 17.5935C8.11524 17.3231 8.42345 16.5746 8.15463 15.9217C7.8858 15.2688 7.14167 14.9587 6.49262 15.2292C5.84357 15.4996 5.53536 16.2481 5.80418 16.9011C6.07306 17.5539 6.81714 17.8639 7.46619 17.5935Z"
+                    fill="#673ab7"></path>
+                <path
+                    d="M10.3549 14.08C10.6585 13.7746 10.6585 13.2795 10.3549 12.9741C10.0513 12.6687 9.55909 12.6687 9.25551 12.9741C8.95194 13.2795 8.95194 13.7746 9.25551 14.08C9.55909 14.3854 10.0513 14.3854 10.3549 14.08Z"
+                    fill="#2196f3"></path>
+                <path
+                    d="M13.1014 9.05206C14.2245 5.7149 13.4696 3.04871 11.1614 1.78241C9.58359 2.10513 8.647 2.87335 8.12549 3.93383C11.2204 3.68185 13.1844 5.63041 13.1014 9.05206Z"
+                    fill="#2196f3"></path>
+                <path
+                    d="M25.6983 6.13641C20.1389 4.1294 16.6304 4.81756 16.0786 9.39055C19.2648 12.6973 22.474 11.1146 25.6983 6.13641Z"
+                    fill="#2196f3"></path>
+                <path
+                    d="M21.2765 4.32541C21.5343 3.21728 21.6681 1.90776 21.6881 0.41748C15.9226 1.70883 13.3224 4.17658 15.2839 8.33846C15.3816 8.36203 15.4754 8.38119 15.5696 8.40085C16.0281 5.14422 18.0463 3.93835 21.2765 4.32541Z"
+                    fill="#2196f3"></path>
+            </svg></a></span>
+    <div class="MuiAvatar-root MuiAvatar-rounded MuiAvatar-colorDefault css-u4flij" color="inherit"><svg
+            xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            class="tabler-icon tabler-icon-menu-2">
+            <path d="M4 6l16 0"></path>
+            <path d="M4 12l16 0"></path>
+            <path d="M4 18l16 0"></path>
+        </svg>
     </div>
 </div>
 
 
 
 
+<div class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation16 MuiDrawer-paper MuiDrawer-paperAnchorLeft css-i8uw39"
+    tabindex="-1" style="transform: none; transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;">
+    <div class="MuiBox-root css-11wszyz"><a
+            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1gpqd7"
+            aria-label="theme-logo" href="/dashboard/default"><svg width="92" height="32" viewBox="0 0 92 32"
+                fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M33.085 26.4841V12.3839H37.9541C39.6408 12.3839 40.9202 12.7131 41.7922 13.3717C42.6642 14.0237 43.1002 14.9825 43.1002 16.2478C43.1002 16.9387 42.9251 17.5488 42.5751 18.0782C42.225 18.6011 41.7381 18.9853 41.1143 19.2306C41.8272 19.4114 42.3873 19.7761 42.7947 20.3249C43.2084 20.8737 43.4152 21.5452 43.4152 22.3392C43.4152 23.695 42.9888 24.7215 42.1359 25.4188C41.283 26.1161 40.0673 26.4712 38.4888 26.4841H33.085ZM35.9492 20.3443V24.1502H38.4028C39.0775 24.1502 39.6026 23.9888 39.9781 23.666C40.36 23.3367 40.551 22.8848 40.551 22.3102C40.551 21.0189 39.8922 20.3637 38.5747 20.3443H35.9492ZM35.9492 18.2912H38.0687C39.5135 18.2654 40.236 17.6811 40.236 16.5384C40.236 15.8992 40.0514 15.4408 39.6822 15.1632C39.3194 14.8792 38.7434 14.7371 37.9541 14.7371H35.9492V18.2912ZM53.9365 20.3733H48.4371V24.1502H54.8913V26.4841H45.573V12.3839H54.8723V14.7371H48.4371V18.0976H53.9365V20.3733ZM61.7175 21.3224H59.436V26.4841H56.5717V12.3839H61.7365C63.379 12.3839 64.6455 12.7551 65.5365 13.4975C66.4276 14.24 66.8734 15.2891 66.8734 16.6449C66.8734 17.6069 66.6661 18.4107 66.2527 19.0563C65.8455 19.6954 65.2248 20.2055 64.3907 20.5864L67.3985 26.3485V26.4841H64.3242L61.7175 21.3224ZM59.436 18.9691H61.746C62.4656 18.9691 63.0226 18.7851 63.417 18.4172C63.8114 18.0427 64.0092 17.5294 64.0092 16.8773C64.0092 16.2124 63.8214 15.6894 63.4455 15.3085C63.0768 14.9276 62.5069 14.7371 61.7365 14.7371H59.436V18.9691ZM74.2058 21.3224H71.9237V26.4841H69.0594V12.3839H74.2248C75.8667 12.3839 77.1337 12.7551 78.0248 13.4975C78.9159 14.24 79.3611 15.2891 79.3611 16.6449C79.3611 17.6069 79.1544 18.4107 78.7404 19.0563C78.3332 19.6954 77.7125 20.2055 76.879 20.5864L79.8863 26.3485V26.4841H76.8119L74.2058 21.3224ZM71.9237 18.9691H74.2343C74.9533 18.9691 75.5103 18.7851 75.9052 18.4172C76.2997 18.0427 76.4969 17.5294 76.4969 16.8773C76.4969 16.2124 76.3092 15.6894 75.9337 15.3085C75.5645 14.9276 74.9946 14.7371 74.2248 14.7371H71.9237V18.9691ZM85.8823 18.7367L88.7751 12.3839H91.9064L87.3427 21.3708V26.4841H84.4309V21.3708L79.8673 12.3839H83.008L85.8823 18.7367Z"
+                    fill="#121926"></path>
+                <path
+                    d="M10.987 31.5841C4.92849 31.5841 0 26.626 0 20.5323C0 14.4385 4.92899 9.48041 10.987 9.48041C17.045 9.48041 21.974 14.4385 21.974 20.5323C21.974 26.626 17.0459 31.5841 10.987 31.5841ZM10.987 10.536C5.50765 10.536 1.04938 15.0196 1.04938 20.5318C1.04938 26.044 5.50765 30.5275 10.987 30.5275C16.4663 30.5275 20.9251 26.0429 20.9251 20.5308C20.9251 15.0186 16.4673 10.536 10.987 10.536Z"
+                    fill="#2196f3"></path>
+                <path
+                    d="M18.96 21.0225C18.6182 19.7483 15.4851 19.6108 13.6203 20.0779C12.6437 20.3235 11.6456 20.6428 10.6162 20.8265C11.3697 21.4989 12.1788 22.135 13.34 22.2932C16.2211 22.6842 18.0112 21.775 18.96 21.0225Z"
+                    fill="#2196f3"></path>
+                <path
+                    d="M13.34 22.2932C12.1764 22.135 11.3697 21.4989 10.6162 20.8265C9.45013 19.7857 8.41298 18.6579 6.37723 19.0823C3.14069 19.7572 2.71488 23.6081 5.21404 26.0828C6.28706 27.2131 7.66455 28.0041 9.17779 28.3586C10.691 28.7132 12.2742 28.616 13.7333 28.079C15.1924 27.5419 16.4641 26.5883 17.3925 25.3352C18.3209 24.0819 18.8656 22.5835 18.96 21.0235C18.0112 21.775 16.221 22.6842 13.34 22.2932Z"
+                    fill="#673ab7"></path>
+                <path
+                    d="M15.034 13.9586C14.6301 14.8295 18.2304 15.7957 18.6611 18.6879C18.8687 15.8409 15.5335 12.882 15.034 13.9586Z"
+                    fill="#2196f3"></path>
+                <path
+                    d="M7.46619 17.5935C8.11524 17.3231 8.42345 16.5746 8.15463 15.9217C7.8858 15.2688 7.14167 14.9587 6.49262 15.2292C5.84357 15.4996 5.53536 16.2481 5.80418 16.9011C6.07306 17.5539 6.81714 17.8639 7.46619 17.5935Z"
+                    fill="#673ab7"></path>
+                <path
+                    d="M10.3549 14.08C10.6585 13.7746 10.6585 13.2795 10.3549 12.9741C10.0513 12.6687 9.55909 12.6687 9.25551 12.9741C8.95194 13.2795 8.95194 13.7746 9.25551 14.08C9.55909 14.3854 10.0513 14.3854 10.3549 14.08Z"
+                    fill="#2196f3"></path>
+                <path
+                    d="M13.1014 9.05206C14.2245 5.7149 13.4696 3.04871 11.1614 1.78241C9.58359 2.10513 8.647 2.87335 8.12549 3.93383C11.2204 3.68185 13.1844 5.63041 13.1014 9.05206Z"
+                    fill="#2196f3"></path>
+                <path
+                    d="M25.6983 6.13641C20.1389 4.1294 16.6304 4.81756 16.0786 9.39055C19.2648 12.6973 22.474 11.1146 25.6983 6.13641Z"
+                    fill="#2196f3"></path>
+                <path
+                    d="M21.2765 4.32541C21.5343 3.21728 21.6681 1.90776 21.6881 0.41748C15.9226 1.70883 13.3224 4.17658 15.2839 8.33846C15.3816 8.36203 15.4754 8.38119 15.5696 8.40085C16.0281 5.14422 18.0463 3.93835 21.2765 4.32541Z"
+                    fill="#2196f3"></path>
+            </svg></a>
+    </div>
+    <div class="MuiBox-root css-hmsojf">
+        <div class="MuiBox-root css-1hw29i9">
+            <ul class="MuiList-root MuiList-padding MuiList-subheader css-19o40po"><span
+                    class="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom css-3ofz6e">Dashboard</span><a
+                    class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters Mui-selected MuiListItemButton-root MuiListItemButton-gutters Mui-selected css-o5kj71"
+                    tabindex="0" href="/dashboard/default" target="_self"><button class="MuiButtonBase-root css-1o67hnq"
+                        tabindex="0" type="button" aria-label="theme-icon">
+                        <div class="MuiListItemIcon-root css-15aonzv"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="20px" height="20px" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                class="tabler-icon tabler-icon-dashboard">
+                                <path d="M12 13m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                                <path d="M13.45 11.55l2.05 -2.05"></path>
+                                <path d="M6.4 20a9 9 0 1 1 11.2 0z"></path>
+                            </svg></div>
+                    </button>
+                    <div class="MuiListItemText-root css-sqh3xd">
+                        <h5 class="MuiTypography-root MuiTypography-h5 MuiTypography-noWrap css-6qzqzf">Default</h5>
+                    </div><span class="MuiTouchRipple-root css-w0pj6f"></span>
+                </a><a
+                    class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-o5kj71"
+                    tabindex="0" href="/dashboard/analytics" target="_self"><button
+                        class="MuiButtonBase-root css-1o67hnq" tabindex="0" type="button" aria-label="theme-icon">
+                        <div class="MuiListItemIcon-root css-14pa9wv"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="20px" height="20px" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                class="tabler-icon tabler-icon-device-analytics">
+                                <path
+                                    d="M3 4m0 1a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1z">
+                                </path>
+                                <path d="M7 20l10 0"></path>
+                                <path d="M9 16l0 4"></path>
+                                <path d="M15 16l0 4"></path>
+                                <path d="M8 12l3 -3l2 2l3 -3"></path>
+                            </svg></div>
+                    </button>
+                    <div class="MuiListItemText-root css-sqh3xd">
+                        <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-1clzfxk">Analytics</p>
+                    </div><span class="MuiTouchRipple-root css-w0pj6f"></span>
+                </a></ul>
+            <hr class="MuiDivider-root MuiDivider-fullWidth css-1g6zw7e">
+            <ul class="MuiList-root MuiList-padding MuiList-subheader css-19o40po"><span
+                    class="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom css-3ofz6e">Widget</span><a
+                    class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-o5kj71"
+                    tabindex="0" href="/widget/statistics" target="_self"><button class="MuiButtonBase-root css-1o67hnq"
+                        tabindex="0" type="button" aria-label="theme-icon">
+                        <div class="MuiListItemIcon-root css-14pa9wv"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="20px" height="20px" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                class="tabler-icon tabler-icon-chart-arcs">
+                                <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                                <path d="M16.924 11.132a5 5 0 1 0 -4.056 5.792"></path>
+                                <path d="M3 12a9 9 0 1 0 9 -9"></path>
+                            </svg></div>
+                    </button>
+                    <div class="MuiListItemText-root css-sqh3xd">
+                        <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-1clzfxk">Statistics
+                        </p>
+                    </div><span class="MuiTouchRipple-root css-w0pj6f"></span>
+                </a><a
+                    class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-o5kj71"
+                    tabindex="0" href="/widget/data" target="_self"><button class="MuiButtonBase-root css-1o67hnq"
+                        tabindex="0" type="button" aria-label="theme-icon">
+                        <div class="MuiListItemIcon-root css-14pa9wv"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="20px" height="20px" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                class="tabler-icon tabler-icon-clipboard-list">
+                                <path
+                                    d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2">
+                                </path>
+                                <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z">
+                                </path>
+                                <path d="M9 12l.01 0"></path>
+                                <path d="M13 12l2 0"></path>
+                                <path d="M9 16l.01 0"></path>
+                                <path d="M13 16l2 0"></path>
+                            </svg></div>
+                    </button>
+                    <div class="MuiListItemText-root css-sqh3xd">
+                        <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-1clzfxk">Data</p>
+                    </div><span class="MuiTouchRipple-root css-w0pj6f"></span>
+                </a><a
+                    class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-o5kj71"
+                    tabindex="0" href="/widget/chart" target="_self"><button class="MuiButtonBase-root css-1o67hnq"
+                        tabindex="0" type="button" aria-label="theme-icon">
+                        <div class="MuiListItemIcon-root css-14pa9wv"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="20px" height="20px" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                class="tabler-icon tabler-icon-chart-infographic">
+                                <path d="M7 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+                                <path d="M7 3v4h4"></path>
+                                <path d="M9 17l0 4"></path>
+                                <path d="M17 14l0 7"></path>
+                                <path d="M13 13l0 8"></path>
+                                <path d="M21 12l0 9"></path>
+                            </svg></div>
+                    </button>
+                    <div class="MuiListItemText-root css-sqh3xd">
+                        <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-1clzfxk">Chart</p>
+                    </div><span class="MuiTouchRipple-root css-w0pj6f"></span>
+                </a></ul>
+            <hr class="MuiDivider-root MuiDivider-fullWidth css-1g6zw7e">
 
 
-
-
-
-
-<!-- <div class="container">
-    <ng-container *ngFor="let item of ece; let i = index">
-        <div class="cards" [ngClass]="{'reverse': i % 2 !== 0}">
-            <div class="card2">
-                <img [src]="item.image_URL" alt="Card Image" class="card-image">
-                <div class="card-content">
-                    <h1>{{ item.title }}</h1>
-                    <p>{{ item.description }}</p>
-                </div>
-            </div>
-            <div class="illustration">
-                <img [src]="i % 2 === 0 ? 'assets/ECE_img/illustration1.png' : 'assets/ECE_img/illustration2.png'" alt="Illustration">
-            </div>
-        </div>
-    </ng-container>
+        </div>       
+    </div>
 </div> -->

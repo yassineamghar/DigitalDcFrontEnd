@@ -1,432 +1,319 @@
-/*container*/
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/*img*/
-.row {
-  display: flex;
-  width: 100%;
+.sidebar {
+  width: 250px;
   height: 100vh;
+  background-color: #fff;
+  border-right: 1px solid #ccc;
+  padding: 20px;
 }
 
-.col-6 {
-  height: 100%;
-}
-
-.col-6.text {
+.logo {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 20px; 
-  text-align: center;
-  order: 1; 
-}
-
-.col-6.image {
-  order:2; 
-  padding: 10px; 
-  align-self: flex-start;
-}
-
-.col-6 img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.welcome-text {
-  font-family: Arial, sans-serif; 
-  font-size: 60px; 
-  font-weight: bold; 
-  line-height: 1; 
-  text-align:left;
-}
-
-p {
-  color: rgb(46, 45, 45);
-  font-size: 150%;
-  line-height:141%;
-  text-align: justify;
-}
-
-.separator {
-  border-top: 5px solid #134bb3;
-  margin: 20px 0; 
-}
-
-
-/* scroll down button */
-.scroll-button {
-  font-family: Arial, sans-serif; 
-  display: inline-block;
-  padding: 10px 20px;
-  margin-top: 20px;
-  font-size: 20px;
-  color: #fff;
-  background-color: #355389;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-}
-
-.scroll-button:hover {
-  background-color: #0056b3;
-}
-
-
-
-/* Add button */
-/* Ensure proper padding and margin */
-.label-padding {
-  padding-right: 1rem;
-}
-
-.mb-3 {
-  margin-bottom: 1rem;
-}
-
-.custom-file-input-container {
-  position: relative;
-  width: 100%;
-}
-
-.custom-file-input {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.custom-file-label {
-  display: block;
-  width: 100%;
-  padding: 0.5rem;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  text-align: center;
-  cursor: pointer;
-}
-
-input[pInputText],
-textarea[pInputTextarea] {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  box-sizing: border-box; 
-}
-
-.description-input {
-  min-height: 150px; 
-  resize: vertical; 
-}
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 10px; 
-}
-.button-style{
-  border-radius: 4px;
-}
-.p-dialog-content {
-  border-radius: 10px; 
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .p-dialog .p-fluid .field {
-      flex-direction: column;
-      align-items: flex-start;
-  }
-
-  .p-dialog .p-fluid .field .col-fixed,
-  .p-dialog .p-fluid .field .col {
-      width: 100%;
-  }
-
-  .p-dialog .p-fluid .field .col {
-      margin-top: 0.5rem;
-  }
-}
-
-/* part loading ece */
-.card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card1 {
   margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.p-splitter {
-  border: none; 
 }
 
-.panel-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%; 
+.logo img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
 }
 
-.ece-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; 
-  border-radius: 8px; 
+.logo h1 {
+  font-size: 24px;
+  margin: 0;
 }
 
-.card-item {
-  padding: 1rem;
-  text-align: left;
-}
-
-.card-item h3 {
-  font-size: 1.5rem; 
+.menu-item {
   margin-bottom: 10px;
-  color: #333; 
 }
 
-.card-item p {
-  font-size: 1rem;
-  line-height: 1.4;
-  color: #666;
+.menu-item h2 {
+  font-size: 16px;
+  margin: 20px 0 10px;
+  color: #333;
 }
 
-p-splitter {
-  width: 100%;
-}
-
-.panel {
-  height: 100%;
+.menu-link {
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-/* search */
-.search {
-  width: 100%; 
-  max-width: 100px;
-  padding: 8px;
-  font-size: 16px;
-}
-
-.search-container {
-  position: relative;
-  width: 300px;
-}
-
-.search-container input {
-  width: 100%;
   padding: 10px;
-  padding-left: 40px; /* Adjust this based on the icon size */
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  font-size: 16px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
-.search-icon {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  font-size: 16px;
-  color: #888;
+.menu-link:hover {
+  background-color: #f0f0f0;
 }
 
-@media (min-width: 1200px) {
-  .search {
-    max-width: 1000px;
-  }
+.menu-link.active {
+  background-color: #e3e3f3;
+  color: #5e35b1;
 }
 
-@media (min-width: 992px) {
-  .search {
-    max-width: 800px;
-  }
+.menu-icon {
+  margin-right: 10px;
 }
 
-@media (min-width: 768px) {
-  .search {
-    max-width: 600px;
-  }
-}
-
-@media (min-width: 576px) {
-  .search {
-    max-width: 100%;
-  }
-}
-
-.searchbar{
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 10px; 
-}
-
-.p-toolbar-group-center {
-  display: flex;
-  justify-content: flex-end;
+.menu-icon svg {
+  width: 20px;
+  height: 20px;
 }
 
 
-/* Assuming this is your component's CSS file, adjust accordingly */
-.pi {
-  font-family: primeicons;
-  font-style: normal;
-  font-weight: 400;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  display: inline-block;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: transparent !important;
-  border-radius: 50%;
-}
 
-.p-button-rounded {
-  border-radius: 50%;
-  height: 3rem;
-  background-color: transparent  !important;
-}
 
-.pi-plus-circle{
-  border-radius: 10px;
-}
 
-/* card  */
 
-.cards {
-  display: flex;
-  justify-content: center; /* Align cards and buttons side by side */
-  align-items: center;
-  flex-grow: 1;
-}
 
-.card2 {
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  width: 100%;
-  max-width: 1000px; /* Increased the max-width to make the card wider */
-  margin: 20px 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card2 img.card-image {
-  width: 40%;
-  height: auto;
-  object-fit: cover;
-}
-
-.card-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start; /* Align content to the start (left) */
-  padding: 20px;
-  flex-grow: 1;
-  text-align: left; /* Align text to the left */
-}
-
-.card-content h1 {
-  font-family: Arial, sans-serif; 
-  font-size: 50px; 
-  font-weight: bold; 
-  line-height: 1; 
-  text-align: left; /* Align title to the left */
-}
-
-.card-content p {
-  color: rgb(46, 45, 45);
-  font-size: 150%;
-  line-height: 141%;
-  text-align: justify;
-}
-
-.illustration {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.illustration img {
+/* .css-8dd97e {
   width: auto;
-  height: auto;
+  display: flex;
+}
+@media (min-width: 0px) {
+  .css-qpq9bu {
+      display: none;
+  }
+}
+.css-qpq9bu {
+  flex-grow: 1;
 }
 
-.button-group {
+.css-1gpqd7 {
+  margin: 0px;
+  font: inherit;
+  color: rgb(33, 150, 243);
+  text-decoration: underline rgba(33, 150, 243, 0.4);
+}
+
+.css-u4flij {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: Roboto, sans-serif;
+  line-height: 1;
+  user-select: none;
+  background: rgb(237, 231, 246);
+  cursor: pointer;
+  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  font-size: 1.2rem;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out 0s;
+  color: rgb(94, 53, 177);
+}
+
+
+
+
+element.style {
+  transform: none;
+  transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+}
+.css-f0t7gy .MuiDrawer-paper {
+  margin-top: 0px;
+  z-index: 1099;
+  width: 260px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(54, 65, 82);
+  border-right: none;
+}
+.css-i8uw39 {
+  background-color: rgb(255, 255, 255);
+  color: rgb(54, 65, 82);
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 10px -5px, rgba(0, 0, 0, 0.14) 0px 16px 24px 2px, rgba(0, 0, 0, 0.12) 0px 6px 30px 5px;
+  background-image: none;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  height: 100%;
+  flex: 1 0 auto;
+  z-index: 1200;
+  position: fixed;
+  top: 0px;
+  outline: 0px;
+  left: 0px;
+}
+
+
+.css-11wszyz {
+  display: flex;
+  padding: 16px;
+}
+
+.css-1gpqd7 {
+  margin: 0px;
+  font: inherit;
+  color: rgb(33, 150, 243);
+  text-decoration: underline rgba(33, 150, 243, 0.4);
+}
+ */
+
+
+/* after title  */
+/* .css-hmsojf {
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-top: 0px;
+}
+.css-1hw29i9 {
+  margin-top: 12px;
+}
+.css-19o40po {
+  list-style: none;
+  margin: 0px;
+  padding: 0px 0px 8px;
+  position: relative;
+}
+.css-3ofz6e {
+  margin: 10px 0px 0.35em;
+  font-family: Roboto, sans-serif;
+  line-height: 1.66;
+  display: block;
+  color: rgb(18, 25, 38);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 6px;
+  text-transform: capitalize;
+}
+.css-o5kj71.Mui-selected {
+  background-color: rgb(237, 231, 246);
+  color: rgb(103, 58, 183);
+}
+.css-o5kj71.Mui-selected {
+  color: rgb(94, 53, 177);
+  background-color: rgb(237, 231, 246);
+}
+.css-o5kj71.Mui-selected {
+  background-color: rgba(33, 150, 243, 0.08);
+}
+.css-o5kj71 {
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0px;
+  border: 0px;
+  margin: 0px 0px 4px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-start;
   align-items: center;
-  margin-left: 10px; 
-  gap: 10px; 
+  position: relative;
+  text-decoration: none;
+  min-width: 0px;
+  box-sizing: border-box;
+  text-align: left;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  padding: 10px 16px 10px 24px;
+  color: rgb(54, 65, 82);
+  z-index: 1201;
+  border-radius: 8px;
+} */
+/* button  */
+/* .css-1o67hnq {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0px;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 8px;
+}
+.css-o5kj71.Mui-selected .MuiListItemIcon-root {
+  color: rgb(94, 53, 177);
+}
+.css-15aonzv {
+  flex-shrink: 0;
+  display: inline-flex;
+  min-width: 36px;
+  color: rgb(103, 58, 183);
 }
 
-@media (max-width: 768px) {
-  .cards {
-    flex-direction: column;
-    align-items: center;
-  }
+.css-o5kj71 {
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0px;
+  border: 0px;
+  margin: 0px 0px 4px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+  min-width: 0px;
+  box-sizing: border-box;
+  text-align: left;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  padding: 10px 16px 10px 24px;
+  color: rgb(54, 65, 82);
+  z-index: 1201;
+  border-radius: 8px;
+}
+.css-1o67hnq {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0px;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 8px;
+}
+.css-14pa9wv {
+  flex-shrink: 0;
+  display: inline-flex;
+  min-width: 36px;
+  color: rgb(54, 65, 82);
+}
+ */
 
-  .card2 {
-    flex-direction: column;
-    margin-right: 0;
-  }
-
-  .card2 img.card-image {
-    width: 100%;
-  }
-
-  .card-content {
-    padding: 10px;
-    align-items: center; 
-    text-align: center; 
-  }
-
-  .card-content h1 {
-    text-align: center; /* Center align title for smaller screens */
-  }
-
-  .illustration {
-    margin-top: 10px;
-    padding: 10px;
-  }
-
-  .button-group {
-    flex-direction: row;
-    gap: 10px;
-    margin-top: 10px;
-  }
+/* hr  */
+/* .css-1g6zw7e {
+  margin: 2px 0px 10px;
+  flex-shrink: 0;
+  border-width: 0px 0px thin;
+  border-style: solid;
+  border-color: rgb(227, 232, 239);
 }
 
 
-
-.deleteconf{
-  color: #595d6e; /* Subtle grey color */
-  font-size: 1rem; /* Adjust font size as needed */
-  line-height: 1.5; /* Improve readability with line height */
-  margin-bottom: 2rem; 
-}
-
+.css-19o40po {
+  list-style: none;
+  margin: 0px;
+  padding: 0px 0px 8px;
+  position: relative;
+} */
