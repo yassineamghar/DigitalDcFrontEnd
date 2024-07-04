@@ -13,19 +13,21 @@ export class DialogComponent implements OnInit{
   isLoading = true;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private sanitizer: DomSanitizer) {
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 1000); 
+    
   }
 
   ngOnInit(): void {
-    // Any initialization logic if required
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
   }
 
+  // getSafeUrl(): SafeResourceUrl {
+  //   return this.sanitizer.bypassSecurityTrustResourceUrl(this.data?.url || '');
+  // }
   getSafeUrl(): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.data?.url || '');
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.data.url);
   }
-
   onLoad(): void {
     this.isLoading = false;
   }

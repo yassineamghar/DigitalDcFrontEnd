@@ -1,319 +1,139 @@
-.sidebar {
-  width: 250px;
-  height: 100vh;
-  background-color: #fff;
-  border-right: 1px solid #ccc;
-  padding: 20px;
-}
-
-.logo {
-  display: flex;
+/* title part */
+.container1 {
   align-items: center;
-  margin-bottom: 20px;
+  justify-content: center;
+  height: 80px; 
+  text-align: center;
 }
 
-.logo img {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
+.title {
+  font-size: 36px;
+  font-family: "Inter var", sans-serif;
 }
 
-.logo h1 {
-  font-size: 24px;
+/* table  */
+.p-datatable .p-datatable-tbody > tr > td {
+  text-align: left;
+  border: 1px solid #dee2e6;
+  border-width: 0 0 1px 0;
+  padding: 1rem 1rem;
+}
+.table-wrapper {
+  margin: 20px;
+  border: 1px solid #dee2e6;
+  border-width: 0 0 1px 0;
+}
+.table th, .table td {
+  vertical-align: middle;
+  border: 1px solid #dee2e6;
+  border-width: 0 0 1px 0;
+}
+
+.btn-action {
+  margin-right: 5px;
+}
+.btn-view-all {
+  margin-bottom: 10px;
+}
+.status-completed {
+  background-color: #28a745;
+  color: white;
+}
+.status-cancelled {
+  background-color: #dc3545;
+  color: white;
+}
+.status-pending {
+  background-color: #ffc107;
+  color: white;
+}
+/* .pagination {
+  justify-content: center;
+} */
+
+
+
+/* modal  */
+.modal-content {
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  background-color: #f7f9fc;
+}
+
+.modal-header {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 1rem;
+}
+
+.modal-header h2 {
   margin: 0;
 }
 
-.menu-item {
-  margin-bottom: 10px;
+.modal-header .close {
+  color: rgb(0, 0, 0);
+  opacity: 0.8;
 }
 
-.menu-item h2 {
-  font-size: 16px;
-  margin: 20px 0 10px;
-  color: #333;
+.modal-header .close:hover {
+  opacity: 1;
 }
 
-.menu-link {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  text-decoration: none;
-  color: #333;
+.modal-body {
+  padding: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+}
+
+.form-control {
   border-radius: 5px;
-  transition: background-color 0.3s;
+  border: 1px solid #ced4da;
+  padding: 0.5rem 0.75rem;
 }
 
-.menu-link:hover {
-  background-color: #f0f0f0;
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-.menu-link.active {
-  background-color: #e3e3f3;
-  color: #5e35b1;
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
 }
 
-.menu-icon {
-  margin-right: 10px;
+.btn-primary:hover {
+  background-color: #0056b3;
 }
 
-.menu-icon svg {
-  width: 20px;
-  height: 20px;
+.btn-block {
+  width: 100%;
 }
 
-
-
-
-
-
-
-/* .css-8dd97e {
-  width: auto;
-  display: flex;
-}
-@media (min-width: 0px) {
-  .css-qpq9bu {
-      display: none;
-  }
-}
-.css-qpq9bu {
-  flex-grow: 1;
+.mt-3 {
+  margin-top: 1rem;
 }
 
-.css-1gpqd7 {
-  margin: 0px;
-  font: inherit;
-  color: rgb(33, 150, 243);
-  text-decoration: underline rgba(33, 150, 243, 0.4);
+select option {
+  padding: 0.5rem;
 }
 
-.css-u4flij {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-family: Roboto, sans-serif;
-  line-height: 1;
-  user-select: none;
-  background: rgb(237, 231, 246);
-  cursor: pointer;
-  border-radius: 8px;
-  width: 34px;
-  height: 34px;
-  font-size: 1.2rem;
-  overflow: hidden;
-  transition: all 0.2s ease-in-out 0s;
-  color: rgb(94, 53, 177);
+select option[ngValue="true"] {
+  background-color: green;
+  color: white;
 }
 
-
-
-
-element.style {
-  transform: none;
-  transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+select option[ngValue="false"] {
+  background-color: red;
+  color: white;
 }
-.css-f0t7gy .MuiDrawer-paper {
-  margin-top: 0px;
-  z-index: 1099;
-  width: 260px;
-  background-color: rgb(255, 255, 255);
-  color: rgb(54, 65, 82);
-  border-right: none;
-}
-.css-i8uw39 {
-  background-color: rgb(255, 255, 255);
-  color: rgb(54, 65, 82);
-  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 10px -5px, rgba(0, 0, 0, 0.14) 0px 16px 24px 2px, rgba(0, 0, 0, 0.12) 0px 6px 30px 5px;
-  background-image: none;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  flex: 1 0 auto;
-  z-index: 1200;
-  position: fixed;
-  top: 0px;
-  outline: 0px;
-  left: 0px;
-}
-
-
-.css-11wszyz {
-  display: flex;
-  padding: 16px;
-}
-
-.css-1gpqd7 {
-  margin: 0px;
-  font: inherit;
-  color: rgb(33, 150, 243);
-  text-decoration: underline rgba(33, 150, 243, 0.4);
-}
- */
-
-
-/* after title  */
-/* .css-hmsojf {
-  padding-left: 16px;
-  padding-right: 16px;
-  margin-top: 0px;
-}
-.css-1hw29i9 {
-  margin-top: 12px;
-}
-.css-19o40po {
-  list-style: none;
-  margin: 0px;
-  padding: 0px 0px 8px;
-  position: relative;
-}
-.css-3ofz6e {
-  margin: 10px 0px 0.35em;
-  font-family: Roboto, sans-serif;
-  line-height: 1.66;
-  display: block;
-  color: rgb(18, 25, 38);
-  font-size: 0.875rem;
-  font-weight: 500;
-  padding: 6px;
-  text-transform: capitalize;
-}
-.css-o5kj71.Mui-selected {
-  background-color: rgb(237, 231, 246);
-  color: rgb(103, 58, 183);
-}
-.css-o5kj71.Mui-selected {
-  color: rgb(94, 53, 177);
-  background-color: rgb(237, 231, 246);
-}
-.css-o5kj71.Mui-selected {
-  background-color: rgba(33, 150, 243, 0.08);
-}
-.css-o5kj71 {
-  -webkit-tap-highlight-color: transparent;
-  background-color: transparent;
-  outline: 0px;
-  border: 0px;
-  margin: 0px 0px 4px;
-  cursor: pointer;
-  user-select: none;
-  vertical-align: middle;
-  appearance: none;
-  display: flex;
-  flex-grow: 1;
-  justify-content: flex-start;
-  align-items: center;
-  position: relative;
-  text-decoration: none;
-  min-width: 0px;
-  box-sizing: border-box;
-  text-align: left;
-  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  padding: 10px 16px 10px 24px;
-  color: rgb(54, 65, 82);
-  z-index: 1201;
-  border-radius: 8px;
-} */
-/* button  */
-/* .css-1o67hnq {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-  background-color: transparent;
-  outline: 0px;
-  border: 0px;
-  margin: 0px;
-  padding: 0px;
-  cursor: pointer;
-  user-select: none;
-  vertical-align: middle;
-  appearance: none;
-  text-decoration: none;
-  color: inherit;
-  border-radius: 8px;
-}
-.css-o5kj71.Mui-selected .MuiListItemIcon-root {
-  color: rgb(94, 53, 177);
-}
-.css-15aonzv {
-  flex-shrink: 0;
-  display: inline-flex;
-  min-width: 36px;
-  color: rgb(103, 58, 183);
-}
-
-.css-o5kj71 {
-  -webkit-tap-highlight-color: transparent;
-  background-color: transparent;
-  outline: 0px;
-  border: 0px;
-  margin: 0px 0px 4px;
-  cursor: pointer;
-  user-select: none;
-  vertical-align: middle;
-  appearance: none;
-  display: flex;
-  flex-grow: 1;
-  justify-content: flex-start;
-  align-items: center;
-  position: relative;
-  text-decoration: none;
-  min-width: 0px;
-  box-sizing: border-box;
-  text-align: left;
-  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  padding: 10px 16px 10px 24px;
-  color: rgb(54, 65, 82);
-  z-index: 1201;
-  border-radius: 8px;
-}
-.css-1o67hnq {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-  background-color: transparent;
-  outline: 0px;
-  border: 0px;
-  margin: 0px;
-  padding: 0px;
-  cursor: pointer;
-  user-select: none;
-  vertical-align: middle;
-  appearance: none;
-  text-decoration: none;
-  color: inherit;
-  border-radius: 8px;
-}
-.css-14pa9wv {
-  flex-shrink: 0;
-  display: inline-flex;
-  min-width: 36px;
-  color: rgb(54, 65, 82);
-}
- */
-
-/* hr  */
-/* .css-1g6zw7e {
-  margin: 2px 0px 10px;
-  flex-shrink: 0;
-  border-width: 0px 0px thin;
-  border-style: solid;
-  border-color: rgb(227, 232, 239);
-}
-
-
-.css-19o40po {
-  list-style: none;
-  margin: 0px;
-  padding: 0px 0px 8px;
-  position: relative;
-} */

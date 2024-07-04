@@ -64,6 +64,11 @@ import { WorkshopComponent } from './components/Media/workshop/workshop.componen
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { DialogComponent } from './Materials/dialog/dialog.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TreeTableModule } from 'primeng/treetable';
+import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -128,7 +133,10 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     ImageModule,
     MenuModule,
     NgxDocViewerModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    TreeTableModule,
+    TableModule,
+    DropdownModule
   ],
   providers: [AuthService, ArticleService, NotificationService, MessageService],
   bootstrap: [AppComponent],
