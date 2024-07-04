@@ -29,6 +29,10 @@ export class WorkshopService {
   getAllWorkshop(): Observable<workshop[]> {
     return this.http.get<workshop[]>(`${this.apiUrl}/AllWorkshop`);
   }
+  
+  getWorkshopById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
 
   uploadWS(formData: FormData): Observable<HttpEvent<any>> {
     // Logging the FormData entries
@@ -91,5 +95,11 @@ export class WorkshopService {
       responseType: 'text' as 'json'
     });
   }
+
+  downloadArticleFile(id: string): Observable<Blob> {
+    const url = `${this.apiUrl}/Article/${id}`;
+    return this.http.get(url, { responseType: 'blob' });
+}
+
 
 }

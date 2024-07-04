@@ -1,6 +1,9 @@
 import { HttpEventType, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { DialogComponent } from 'src/app/Materials/dialog/dialog.component';
 import { workshop } from 'src/app/models/Workshop/workshop';
 import { NotificationService } from 'src/app/services/Notification/notification.service';
 import { WorkshopService } from 'src/app/services/Workshop/workshop.service';
@@ -37,6 +40,9 @@ export class WorkshopComponent implements OnInit{
     private messageService: MessageService,
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+
   ) { }
 
   @ViewChild('fileInput') fileInput!: ElementRef;
@@ -46,6 +52,10 @@ export class WorkshopComponent implements OnInit{
     this.isAuthorized = this.checkUserAuthorization();
     // Force change detection after updating isAuthorized
     this.cdr.detectChanges();
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.getWorkshopById(id);
+    }
   }
 
   checkUserAuthorization(): boolean {
@@ -117,6 +127,12 @@ export class WorkshopComponent implements OnInit{
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load WS. Please try again later.' });
       }
     );
+  }
+
+  getWorkshopById(id: string): void {
+    this.wsService.getWorkshopById(id).subscribe(response => {
+      this.ws = response.WorkshopDto;
+    });
   }
 
   saveWS(): void {
@@ -228,5 +244,25 @@ export class WorkshopComponent implements OnInit{
       this.loadWS();
     }
   }
+
+  viewWS(id: string): void {
+    this.wsService.downloadArticleFile(id).subscribe(blob => {
+      const url = URL.createObjectURL(blob);
+      const fileType = blob.type;
+
+      const dialogRef = this.dialog.open(DialogComponent, {
+        width: '1000px',
+        data: { url: url, fileType: fileType }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.loadWS();
+      });
+    }, error => {
+      console.error('Error fetching article file:', error);
+    });
+  }
+
 }
 

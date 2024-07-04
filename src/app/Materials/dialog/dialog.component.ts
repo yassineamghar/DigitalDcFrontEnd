@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
@@ -7,9 +7,32 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.css']
 })
-export class DialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private sanitizer: DomSanitizer) { }
+export class DialogComponent implements OnInit{
+ 
+  isClosed = false;
+  isLoading = true;
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private sanitizer: DomSanitizer) {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000); 
+  }
+
+  ngOnInit(): void {
+    // Any initialization logic if required
+  }
+
   getSafeUrl(): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.data.url);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.data?.url || '');
+  }
+
+  onLoad(): void {
+    this.isLoading = false;
+  }
+
+  closeIframe(): void {
+    this.isClosed = true;
+    console.log('Closing iframe');
   }
 }
+

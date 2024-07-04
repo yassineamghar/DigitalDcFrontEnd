@@ -43,7 +43,6 @@ import { VideoComponent } from './components/Media/video/video.component';
 import { ArticleService } from './services/Articles/article.service';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { DialogComponent } from './Materials/dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UserManagementComponent } from './UserManagement/user-management/user-management.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -62,6 +61,9 @@ import { ImageModule } from 'primeng/image';
 import { UserProfileComponent } from './UserManagement/user-profile/user-profile.component';
 import { MenuModule } from 'primeng/menu';
 import { WorkshopComponent } from './components/Media/workshop/workshop.component';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
+import { DialogComponent } from './Materials/dialog/dialog.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,6 +90,7 @@ import { WorkshopComponent } from './components/Media/workshop/workshop.componen
     ECEComponent,
     UserProfileComponent,
     WorkshopComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -123,7 +126,9 @@ import { WorkshopComponent } from './components/Media/workshop/workshop.componen
     ToolbarModule,
     SplitButtonModule,
     ImageModule,
-    MenuModule
+    MenuModule,
+    NgxDocViewerModule,
+    ProgressSpinnerModule
   ],
   providers: [AuthService, ArticleService, NotificationService, MessageService],
   bootstrap: [AppComponent],

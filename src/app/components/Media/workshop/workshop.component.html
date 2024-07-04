@@ -22,7 +22,7 @@
 
 
 <!-- Toolbar -->
-<div class="container" id="list-section">
+<div class="container" >
     <p-toolbar>
         <div class="p-toolbar-group-center">
             <span class="p-input-icon-right">
@@ -39,7 +39,7 @@
         </div>
     </p-toolbar>
     <!-- Add Dialog -->
-    <div class="card flex justify-content-center">
+    <div class=" flex justify-content-center">
         <p-dialog header="ADD Workshop" [modal]="true" [(visible)]="addDialogVisible" [style]="{ width: '25rem' }" (onHide)="resetForm()">
             <span class="p-text-secondary block mb-5"></span>
             <div class="p-fluid mb-5">
@@ -89,7 +89,7 @@
 
 
 <!-- list items  -->
-<div class="container">
+<div class="container" id="list-section">
     <ng-container *ngFor="let item of ws; let i = index">
         <div class="cards">
             <div class="card2">
@@ -97,7 +97,9 @@
                 <div class="card-content">
                     <h1>{{ item.title }}</h1>
                     <p>{{ item.description }}</p>
+                    <button class="read-article"(click)="viewWS(item.id_Workshop)">Read Article</button>
                 </div>
+                
             </div>
             <div class="button-group" *ngIf="isAuthorized">
                 <p-button (click)="showUpdateDialog(item)" icon="pi pi-pen-to-square" [rounded]="true" severity="info"

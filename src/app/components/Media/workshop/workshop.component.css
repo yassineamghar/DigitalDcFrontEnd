@@ -78,6 +78,15 @@ p {
   background-color: #0056b3;
 }
 
+/* Read Article button */
+.card-button{
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: flex-end; 
+  padding: 20px;
+  flex-grow: 1;
+}
 
 
 /* Add button */
@@ -375,6 +384,26 @@ p-splitter {
   text-align: justify;
 }
 
+.read-article {
+  font-family: Arial, sans-serif; 
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  font-size: 20px;
+  color: #fff;
+  background-color: #355389;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.read-article:hover {
+  background-color: #0056b3;
+}
 .illustration {
   display: flex;
   align-items: center;
@@ -477,4 +506,14 @@ p-splitter {
   font-size: 1rem; /* Adjust font size as needed */
   line-height: 1.5; /* Improve readability with line height */
   margin-bottom: 2rem; 
+}
+
+
+
+.add{
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Space between search bar and add button */
+  position: absolute;
+  right: 20px; 
 }
