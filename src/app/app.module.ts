@@ -67,6 +67,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TreeTableModule } from 'primeng/treetable';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
+import { TagModule } from 'primeng/tag';
+import { StepsModule } from 'primeng/steps';
 
 
 @NgModule({
@@ -136,7 +138,9 @@ import { DropdownModule } from 'primeng/dropdown';
     ProgressSpinnerModule,
     TreeTableModule,
     TableModule,
-    DropdownModule
+    DropdownModule,
+    TagModule,
+    StepsModule
   ],
   providers: [AuthService, ArticleService, NotificationService, MessageService],
   bootstrap: [AppComponent],

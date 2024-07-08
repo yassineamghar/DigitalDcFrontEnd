@@ -1,139 +1,76 @@
-/* title part */
-.container1 {
-  align-items: center;
-  justify-content: center;
-  height: 80px; 
-  text-align: center;
-}
-
-.title {
-  font-size: 36px;
+.container{
   font-family: "Inter var", sans-serif;
+  font-size: 16px;
+
 }
 
-/* table  */
-.p-datatable .p-datatable-tbody > tr > td {
-  text-align: left;
-  border: 1px solid #dee2e6;
-  border-width: 0 0 1px 0;
-  padding: 1rem 1rem;
-}
-.table-wrapper {
-  margin: 20px;
-  border: 1px solid #dee2e6;
-  border-width: 0 0 1px 0;
-}
-.table th, .table td {
-  vertical-align: middle;
-  border: 1px solid #dee2e6;
-  border-width: 0 0 1px 0;
+.steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-.btn-action {
-  margin-right: 5px;
-}
-.btn-view-all {
-  margin-bottom: 10px;
-}
-.status-completed {
-  background-color: #28a745;
-  color: white;
-}
-.status-cancelled {
-  background-color: #dc3545;
-  color: white;
-}
-.status-pending {
-  background-color: #ffc107;
-  color: white;
-}
-/* .pagination {
-  justify-content: center;
-} */
-
-
-
-/* modal  */
-.modal-content {
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  background-color: #f7f9fc;
+.step {
+  text-align: center;
+  flex: 1;
+  position: relative;
 }
 
-.modal-header {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  padding: 1rem;
+.step span {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: #fff;
+  margin-bottom: 5px;
+  font-size: 16px;
 }
 
-.modal-header h2 {
+.step.active span {
+  background-color: #007bff;
+}
+
+.step p {
   margin: 0;
+  font-weight: bold;
 }
 
-.modal-header .close {
-  color: rgb(0, 0, 0);
-  opacity: 0.8;
+.step::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  right: -50%;
+  width: 99%;
+  height: 2px;
+  background-color: #ccc;
 }
 
-.modal-header .close:hover {
-  opacity: 1;
+.step.active::after {
+  background-color: #007bff;
 }
 
-.modal-body {
-  padding: 2rem;
+.step:last-child::after {
+  display: none;
 }
 
 .form-group {
   margin-bottom: 1.5rem;
 }
 
-.form-group label {
-  font-weight: 600;
-}
-
 .form-control {
-  border-radius: 5px;
-  border: 1px solid #ced4da;
-  padding: 0.5rem 0.75rem;
-}
-
-.form-control:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.btn-primary {
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  padding: 0.75rem 1.25rem;
-  font-weight: 600;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-}
-
-.btn-block {
   width: 100%;
-}
-
-.mt-3 {
-  margin-top: 1rem;
-}
-
-select option {
   padding: 0.5rem;
+  margin: 5px 0;
 }
 
-select option[ngValue="true"] {
-  background-color: green;
-  color: white;
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
-select option[ngValue="false"] {
-  background-color: red;
-  color: white;
+button {
+  padding: 10px 20px;
 }

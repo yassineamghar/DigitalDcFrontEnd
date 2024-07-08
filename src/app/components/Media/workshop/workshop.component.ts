@@ -190,7 +190,7 @@ export class WorkshopComponent implements OnInit{
     } else if (item.pdf_Name) {
       formData.append('existingPdfName', item.pdf_Name);
     }
-
+    
     this.wsService.updateWS(item.id_Workshop, formData).subscribe(
       (event) => {
         if (event.type === HttpEventType.Response) {

@@ -1,95 +1,66 @@
-<app-navbar></app-navbar>
-<app-sidebar *ngIf="isAuthorized"></app-sidebar>
-
-
-<div class="container1">
-    <div class="title">
-      <p>User Management</p>
-    </div>
-  </div>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   
 <div class="container">
-    <p-table [value]="users" [paginator]="true" [rows]="5" [tableStyle]="{  }"
-             [rowsPerPageOptions]="[5, 10, 15]">
-      <ng-template pTemplate="header">
-        <tr [style]="{'border': '1px solid #dee2e6',  'border-width': '0 0 1px 0'}">
-          <th >Username</th>
-          <th >Full Name</th>
-          <th >Email</th>
-          <th >Role of the User</th>
-          <th >Status</th>
-          <th >Date Created</th>
-          <th >Actions</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-user>
-        <tr [ngClass]="{'approved': user.emailConfirmed, 'not-approved': !user.emailConfirmed}"  [style]="{'border': '1px solid #dee2e6',  'border-width': '0 0 1px 0','padding': '0'}">
-          <td>{{ user.username }}</td>
-          <td>{{ user.fullname }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.role }}</td>
-          <td [ngStyle]="{'color': user.emailConfirmed ? 'green' : 'red'}">
-            <i *ngIf="user.emailConfirmed" class="pi pi-verified" style="color: green"></i>
-            <i *ngIf="!user.emailConfirmed" class="pi pi-times-circle" style="color: red"></i>
-            {{ user.emailConfirmed ? 'Approved' : 'Not Approved' }}
-          </td>
-          <td data-label="Date Created">{{ user.dateCreated | date: 'dd/MM/yyyy' }}</td>
-          <td data-label="Actions">
-            <button type="button" class="btn btn-outline-danger btn-circle btn-lg m-2" (click)="showDeleteDialog(user.id)">
-              <i class="pi pi-user-minus"></i>
-            </button>
-            <button type="button" class="btn btn-outline-primary btn-circle btn-lg m-2" (click)="selectUser(user)">
-              <i class="pi pi-user-edit"></i>
-            </button>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>  
-  <!-- Modal -->
-  <div class="modal fade" [ngClass]="{'show d-block': isModalVisible}" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2 class="text-center mb-4">Edit User</h2>
-          <button type="button" class="close" (click)="closeModal()" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form (ngSubmit)="updateUser()">
-            <div class="form-group">
-              <label for="status">Status</label>
-              <select id="status" class="form-control" [(ngModel)]="selectedUser.emailConfirmed" name="status">
-                <option [ngValue]="true">Approved</option>
-                <option [ngValue]="false">Not Approved</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="Role">Role of the User</label>
-              <select id="Role" class="form-control" [(ngModel)]="selectedUser.role" name="Role">
-                <option>Admin</option>
-                <option>User</option>
-              </select>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block mt-3">Update User</button>
-            <button type="cancel" class="btn btn-primary btn-block mt-3">cancel</button>
-          </form>
-        </div>
-      </div>
+  <div class="steps">
+    <div class="step" [class.active]="step === 1">
+      <span>1</span>
+      <p>Personal</p>
+    </div>
+    <div class="step" [class.active]="step === 2">
+      <span>2</span>
+      <p>Security</p>
+    </div>
+    <div class="step" [class.active]="step === 3">
+      <span>3</span>
+      <p>Confirmation</p>
     </div>
   </div>
-  <div class="card flex justify-content-center">
-    <p-dialog header="Confirm Deletion" [(visible)]="deleteDialogVisible" [modal]="true"
-        [style]="{ width: '25rem'}">
-        <p class="deleteconf">Are you sure you want to delete this Workshop?</p>
-        <div class="flex justify-content-center">
-            <div class="button-container">
-                <button type="button" class="btn btn-secondary"
-                    (click)="deleteDialogVisible = false">Cancel</button>
-                <button type="button" class="btn btn-danger" (click)="deleteUser()">Delete</button>
-            </div>
+  <div class="justify-content-center align-items-center">
+    <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="step === 1">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="fullname">Fullname</label>
+            <input id="fullname" formControlName="fullname" class="form-control" type="text" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="username">Username</label>
+            <input id="username" formControlName="username" class="form-control" type="text" />
+          </div>
         </div>
-    </p-dialog>
-</div>
-  <p-toast></p-toast>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="email">Email</label>
+            <input id="email" formControlName="email" class="form-control" type="email" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="confirmEmail">Confirm Email</label>
+            <input id="confirmEmail" formControlName="confirmEmail" class="form-control" type="email" />
+          </div>
+        </div>
+      </div>
+    
+      <div *ngIf="step === 2">
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" formControlName="password" class="form-control" type="password" />
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input id="confirmPassword" formControlName="confirmPassword" class="form-control" type="password" />
+        </div>
+      </div>
+    
+      <div *ngIf="step === 3">
+        <p>Do you want to confirm the update of your profile?</p>
+      </div>
+    
+      <div class="button-group">
+        <button type="button" class="btn btn-secondary" *ngIf="step > 1" (click)="prevStep()">Previous</button>
+        <button type="button" class="btn btn-primary" *ngIf="step < 3" (click)="nextStep()">Next</button>
+        <button type="submit" class="btn btn-success" *ngIf="step === 3">Update</button>
+      </div>
+    </form>
+    
+  </div>
 </div>

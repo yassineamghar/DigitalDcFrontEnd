@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
   
           // Check if roles contain 'admin'
           if (roles.includes('Admin')) {
-            this.router.navigate(['user']);
+            this.router.navigate(['user-management']);
           } else {
             this.router.navigate(['boardfs']);
           }

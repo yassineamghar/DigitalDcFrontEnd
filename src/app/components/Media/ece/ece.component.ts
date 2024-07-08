@@ -38,7 +38,6 @@ export class ECEComponent implements OnInit {
 
   constructor(
     private eceService: EceService,
-    private notificationService: NotificationService,
     private messageService: MessageService,
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
@@ -245,18 +244,27 @@ export class ECEComponent implements OnInit {
   
 
   filterECE(): void {
+    // if (this.searchTerm) {
+    //   const filteredItems = this.originalEce.filter(item =>
+    //     item.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    //   );
+    //   if (filteredItems.length > 0) {
+    //     this.ece = filteredItems;
+    //   } else {
+    //     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Not found.' });
+    //     this.ece = [];
+    //   }
+    // } else {
+    //   this.loadECE(); 
+    // }
     if (this.searchTerm) {
-      const filteredItems = this.originalEce.filter(item =>
-        item.title.toLowerCase().includes(this.searchTerm.toLowerCase())
-      );
-      if (filteredItems.length > 0) {
-        this.ece = filteredItems;
-      } else {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Not found.' });
-        this.ece = []; // Clear the list or show an empty state
+      this.ece = this.ece.filter(item => item.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+      if (this.ece.length === 0) {
+        this.messageService.add({ severity: 'info', summary: 'Info', detail: 'No ECE found matching the search term.' });
       }
     } else {
-      this.loadECE(); // Reload the original ECE list
+      this.loadECE();
+      this.ece = this.ece;
     }
   }
   

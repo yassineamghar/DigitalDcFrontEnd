@@ -44,7 +44,7 @@ const routes: Routes = [
     component: BoardFSComponent
   },
   {
-    path: 'user',
+    path: 'user-management',
     component: UserManagementComponent
   },
   {

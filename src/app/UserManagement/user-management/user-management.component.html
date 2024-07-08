@@ -1,77 +1,115 @@
 <app-navbar></app-navbar>
-<app-sidebar ></app-sidebar>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<app-sidebar *ngIf="isAuthorized"></app-sidebar>
 
-  <div class="container mt-4">
-    <h2 class="text-center mb-4">User Management</h2>
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-          <tr>
-            <th>Number</th>
-            <th>Full Name</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Role of the User</th>
-            <th>Status</th>
-            <th>Date Created</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of users; let i = index" [ngClass]="{'approved': user.emailConfirmed, 'not-approved': !user.emailConfirmed}">
-            <td data-label="Number">{{ i + 1 }}</td>
-            <td data-label="Full Name">{{ user.fullname }}</td>
-            <td data-label="Username">{{ user.username }}</td>
-            <td data-label="Email">{{ user.email }}</td>
-            <td data-label="Role">{{ user.role }}</td>
-            <td data-label="Status" [ngStyle]="{'color': user.emailConfirmed ? 'green' : 'red'}">
-              {{ user.emailConfirmed ? 'Approved' : 'Not Approved' }}
-            </td>
-            <td data-label="Date Created">{{ user.dateCreated | date: 'dd/MM/yyyy' }}</td>
-            <td data-label="Actions">
-              <button type="button" class="btn btn-outline-danger btn-circle btn-lg   m-2" (click)="deleteUser(user.id)">
-                <i class="fa fa-trash"></i>
-              </button>
-              <button type="button" class="btn btn-outline-primary btn-circle btn-lg  m-2" (click)="selectUser(user)">
-                <i class="fa fa-edit"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+<div class="container1">
+  <div class="title">
+    <p>User Management</p>
+  </div>
+</div>
+
+
+
+
+<div class="container">
+  <div class="container2">
+    <div class="search-box">
+      <input type="text" placeholder="Search Keyword" [(ngModel)]="searchTerm" (input)="filterUsers()">
+      <button class="search-button">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
+          <path
+            d="M840 1016L594 770q-36 28-77.5 42t-88.5 14q-125 0-212.5-87.5T128 526q0-125 87.5-212.5T428 226q125 0 212.5 87.5T728 526q0 45-13 87t-43 77l246 247q9 8 9 21t-9 21q-9 9-21.5 9t-21.5-9ZM428 766q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70Z" />
+        </svg>
+      </button>
     </div>
-
-    <!-- Modal -->
-    <div class="modal fade" [ngClass]="{'show d-block': isModalVisible}" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="text-center mb-4">Edit User</h2>
-            <button type="button" class="close" (click)="closeModal()" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form (ngSubmit)="updateUser()">
-              <div class="form-group">
-                <label for="status">Status</label>
-                <select id="status" class="form-control" [(ngModel)]="selectedUser.emailConfirmed" name="status">
-                  <option [ngValue]="true" [ngStyle]="{'background-color':'green', 'color':'white'}">Approved</option>
-                  <option [ngValue]="false" [ngStyle]="{'background-color':'red', 'color':'white'}">Not Approved</option>
-                </select>
+  </div>
+  <p-table [value]="users" [paginator]="true" [rows]="5" [tableStyle]="{ 'align-items':'center','justify-content':'center' }" >
+    <ng-template pTemplate="header">
+      <tr [style]="{'border': '1px solid #dee2e6',  'border-width': '0 0 1px 0'}">
+        <th>Username</th>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Role of the User</th>
+        <th>Status</th>
+        <th>Date Created</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr [ngClass]="{'approved': user.emailConfirmed, 'not-approved': !user.emailConfirmed}"
+        [style]="{'border': '1px solid #dee2e6',  'border-width': '0 0 1px 0','padding': '0'}" >
+        <td>{{ user.username }}</td>
+        <td>{{ user.fullname }}</td>
+        <td>{{ user.email }}</td>
+        <td ><p-tag [value]="user.role"  [severity]="getSeverity(user.role)" [style]="{'width':'100px', 'height':'30px','font-size':'15px'}"></p-tag></td>
+        <td [ngStyle]="{'color': user.emailConfirmed ? 'green' : 'red'}">
+          <i *ngIf="user.emailConfirmed" class="pi pi-verified" style="color: green"></i>
+          <i *ngIf="!user.emailConfirmed" class="pi pi-times-circle" style="color: red"></i>
+          {{ user.emailConfirmed ? 'Approved' : 'Not Approved' }}
+        </td>
+        <td data-label="Date Created">{{ user.dateCreated | date: 'dd/MM/yyyy' }}</td>
+        <td data-label="Actions">
+          <button type="button" class="btn btn-outline-danger btn-circle btn-lg m-2"
+            (click)="showDeleteDialog(user.id)">
+            <i class="pi pi-user-minus"></i>
+          </button>
+          <button type="button" class="btn btn-outline-primary btn-circle btn-lg m-2" (click)="selectUser(user)">
+            <i class="pi pi-user-edit"></i>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <!-- Modal -->
+  <div class="modal fade" [ngClass]="{'show d-block': isModalVisible}" tabindex="-1">
+    <div class="modal-overlay" *ngIf="isModalVisible"></div>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="text-center">Edit User</h2>
+          <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="updateUser()">
+            <div class="form-group">
+              <label for="status">Status</label>
+              <select id="status" class="form-control" [(ngModel)]="selectedUser.emailConfirmed" name="status">
+                <option [ngValue]="true">Approved</option>
+                <option [ngValue]="false">Not Approved</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="Role">Role of the User</label>
+              <select id="Role" class="form-control" [(ngModel)]="selectedUser.role" name="Role">
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+              </select>
+            </div>
+            <div class="row">
+              <div class="col">
+                <button type="button" class="btn btn-secondary btn-block mt-3" (click)="closeModal()">Cancel</button>
               </div>
-              <div class="form-group">
-                <label for="Role">Role of the User</label>
-                <select id="Role" class="form-control" [(ngModel)]="selectedUser.role" name="Role">
-                  <option>Admin</option>
-                  <option>User</option>
-                </select>
+              <div class="col">
+                <button type="submit" class="btn btn-primary btn-block mt-3">Update</button>
               </div>
-              <button type="submit" class="btn btn-primary btn-block mt-3">Update User</button>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
+  
+  <div class="card flex justify-content-center">
+    <p-dialog header="Confirm Deletion" [(visible)]="deleteDialogVisible" [modal]="true" [style]="{ width: '25rem'}">
+      <p class="deleteconf">Are you sure you want to delete this User?</p>
+      <div class="flex justify-content-center">
+        <div class="button-container">
+          <button type="button" class="btn btn-secondary" (click)="deleteDialogVisible = false">Cancel</button>
+          <button type="button" class="btn btn-danger" (click)="deleteUser()">Delete</button>
+        </div>
+      </div>
+    </p-dialog>
+  </div>
+  <p-toast></p-toast>
+</div>
