@@ -1,12 +1,8 @@
 import { HttpEventType, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MessageService } from 'primeng/api';
 import { ECE } from 'src/app/models/Media/ECE';
 import { EceService } from 'src/app/services/ECE/ece.service';
-import { NotificationService } from 'src/app/services/Notification/notification.service';
-import { PdfService } from 'src/app/services/PDF/pdf.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -32,7 +28,7 @@ export class ECEComponent implements OnInit {
   deleteDialogVisible: boolean = false;
   itemToDelete: any;
   searchTermChanged: Subject<string> = new Subject<string>();
-  originalEce: any[] = []; // Backup of the original ECE array
+  originalEce: any[] = []; 
 
 
 
@@ -43,17 +39,12 @@ export class ECEComponent implements OnInit {
     private cdr: ChangeDetectorRef,
   ) { 
     this.searchTermChanged.pipe(
-      debounceTime(800), // Adjust the debounce time as needed
+      debounceTime(800), 
       distinctUntilChanged()
     ).subscribe(searchTerm => {
       this.searchTerm = searchTerm;
       this.filterECE();
     });
-  }
-
-
-  showAlert() {
-    alert('Button clicked!');
   }
 
   @ViewChild('fileInput') fileInput!: ElementRef;
@@ -95,7 +86,7 @@ export class ECEComponent implements OnInit {
 
   selectECE(item: ECE): void {
     this.selectedECE = item;
-    this.newEce = { ...item }; // Pre-fill the form with the selected item details
+    this.newEce = { ...item }; 
     this.fileName = item.image_Name || '';
   }
 
@@ -122,7 +113,7 @@ export class ECEComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load ECE. Please try again later.' });
       }
     );
-    this.ece = [...this.originalEce]; // Reset the 'ece' array
+    this.ece = [...this.originalEce];
 
   }
 
@@ -212,7 +203,7 @@ export class ECEComponent implements OnInit {
         () => {
           console.log('ECE deleted successfully');
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'File deleted successfully!' });
-          this.loadECE(); // Reload ECE items after deletion
+          this.loadECE(); 
           this.deleteDialogVisible = false;
           this.itemToDelete = null;
         },
@@ -229,7 +220,7 @@ export class ECEComponent implements OnInit {
 
   showImage(imageUrl: string): void {
     this.imageToShow = imageUrl;
-    this.isImageDialogVisible = true; // Set dialog visible when showing image
+    this.isImageDialogVisible = true;
   }
 
   hideImage(): void {
@@ -244,19 +235,6 @@ export class ECEComponent implements OnInit {
   
 
   filterECE(): void {
-    // if (this.searchTerm) {
-    //   const filteredItems = this.originalEce.filter(item =>
-    //     item.title.toLowerCase().includes(this.searchTerm.toLowerCase())
-    //   );
-    //   if (filteredItems.length > 0) {
-    //     this.ece = filteredItems;
-    //   } else {
-    //     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Not found.' });
-    //     this.ece = [];
-    //   }
-    // } else {
-    //   this.loadECE(); 
-    // }
     if (this.searchTerm) {
       this.ece = this.ece.filter(item => item.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
       if (this.ece.length === 0) {

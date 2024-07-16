@@ -32,12 +32,7 @@ export class EquipmentComponent implements OnInit {
   itemToDelete: any;
   searchTermChanged: Subject<string> = new Subject<string>();
   originalEq: any[] = []; 
-  imageUrl: string='';
-  // isZoomed = false;
 
-  // toggleZoom() {
-  //   this.isZoomed = !this.isZoomed;
-  // }
 
 
   constructor(
@@ -45,7 +40,6 @@ export class EquipmentComponent implements OnInit {
     private messageService: MessageService,
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
-    private dialog: MatDialog,
   ) { 
     this.searchTermChanged.pipe(
       debounceTime(800), // Adjust the debounce time as needed
@@ -57,9 +51,7 @@ export class EquipmentComponent implements OnInit {
   }
 
 
-  showAlert() {
-    alert('Button clicked!');
-  }
+  
 
   @ViewChild('fileInput') fileInput!: ElementRef;
 
@@ -148,18 +140,18 @@ export class EquipmentComponent implements OnInit {
             this.messageService.add({ severity: 'info', summary: 'Uploading!!', detail: `File is ${percentDone}% uploaded.` });
             this.loadEquipment();
           } else if (event instanceof HttpResponse) {
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'File uploaded successfully!' });
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Equipment created successfully!' });
             this.loadEquipment();
             this.addDialogVisible = false;
             this.resetForm();
           }
         },
         (error) => {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to upload file.' });
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to create Equipment.' });
         }
       );
     } else {
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'No file selected.' });
+      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'No Equipment selected.' });
     }
   }
   
@@ -207,14 +199,14 @@ export class EquipmentComponent implements OnInit {
       this.eqService.deleteEquipment(this.itemToDelete.id_EQ).subscribe(
         () => {
           console.log('Equipment deleted successfully');
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'File deleted successfully!' });
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Equipment deleted successfully!' });
           this.loadEquipment(); 
           this.deleteDialogVisible = false;
           this.itemToDelete = null;
         },
         (error) => {
           console.error('Error deleting Equipment:', error);
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to delete file.' });
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to delete Equipment.' });
           this.deleteDialogVisible = false;
           this.itemToDelete = null;
         }
@@ -243,7 +235,7 @@ export class EquipmentComponent implements OnInit {
     if (this.searchTerm) {
       this.eq = this.eq.filter(item => item.nameEQ.toLowerCase().includes(this.searchTerm.toLowerCase()));
       if (this.eq.length === 0) {
-        this.messageService.add({ severity: 'info', summary: 'Info', detail: 'No ECE found matching the search term.' });
+        this.messageService.add({ severity: 'info', summary: 'Info', detail: 'No Equipment found matching the search term.' });
       }
     } else {
       this.loadEquipment();
@@ -255,10 +247,6 @@ export class EquipmentComponent implements OnInit {
     return value.toString().padStart(2, '0');
   }
 
-  openImagePreview() {
-    const dialogRef = this.dialog.open(ImagePreviewComponent, {
-      data: { imageUrl: this.imageUrl }
-    });
-  }
+  
   
 }

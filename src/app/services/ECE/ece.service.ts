@@ -28,9 +28,7 @@ export class EceService {
     return this.http.get<ECE[]>(`${this.apiUrl}/AllECE`);
   }
 
-  // Function to upload ECE
   uploadECE(formData: FormData): Observable<HttpEvent<any>> {
-    // Logging the FormData entries
     formData.forEach((value, key) => {
       console.log(key, value);
     });
@@ -43,26 +41,11 @@ export class EceService {
     });
   }
 
-
-  // uploadECE(formData: FormData): Observable<any> {
-  //   const headers = new HttpHeaders({
-  //     'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcnRlc3QiLCJqdGkiOiIwYmRjM2EzYS1lOWE2LTRiNjEtOGQwMy0wOWRkNTVjYzEwOTMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNzE5NTI5NjY4LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUxNDQiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.RE4PyQqCh_R6a-CmDe4C8r0HjVmPe-bMrLtxgLrUAcQ'
-  //   });
-
-  //   return this.http.post(`${this.apiUrl}/upload`, formData, { headers }).pipe(
-  //     catchError(error => {
-  //       console.error('Upload error', error);
-  //       return throwError(error);
-  //     })
-  //   );  }
-
-
   getUserRoles(): string[] {
     const token = localStorage.getItem('token');
     if (!token) {
       return [];
     }
-    // Split the token by '.' to get the payload section
     const tokenParts = token.split('.');
     if (tokenParts.length !== 3) {
       console.error('Invalid token format');
@@ -77,7 +60,6 @@ export class EceService {
     return roles;
   }
 
-  // Helper function to decode base64 encoded string
   private decodeBase64(input: string): any {
     const base64Url = input.replace(/-/g, '+').replace(/_/g, '/');
     const base64 = decodeURIComponent(atob(base64Url).split('').map((c) => {
@@ -93,7 +75,7 @@ export class EceService {
       headers: httpOptions.headers,
       reportProgress: true,
       observe: 'events',
-      responseType: 'text' as 'json' // Trick TypeScript to accept 'text' for event observation
+      responseType: 'text' as 'json'
     });
   }
 

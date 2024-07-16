@@ -350,8 +350,8 @@ p-splitter {
   transition: transform 0.3s ease-out;
 }
 
-.zoomed {
-  transform: scale(1.5); /* Adjust the scale factor as needed */
+:host ::ng-deep img.p-image-preview { 
+  height: 90vh;
 }
 
 
