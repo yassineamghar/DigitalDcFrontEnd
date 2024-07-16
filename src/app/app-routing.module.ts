@@ -1,3 +1,4 @@
+import { BoardEquipmentComponent } from './components/board-equipment/board-equipment.component';
 import { UserProfileComponent } from './UserManagement/user-profile/user-profile.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -7,9 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { SlidesComponent } from './components/slides/slides.component';
 import { BoardFSComponent } from './components/board-fs/board-fs.component';
-import { BoardNewsComponent } from './components/board-news/board-news.component';
 import { AboutComponent } from './components/about/about.component';
-import { EquipementComponent } from './components/equipement/equipement.component';
 import { ShowmoreComponent } from './components/showmore/showmore.component';
 import { VideotestComponent } from './components/videotest/videotest.component';
 import { TestComponent } from './components/test/test.component';
@@ -17,6 +16,8 @@ import { ArticleComponent } from './components/Media/article/article.component';
 import { UserManagementComponent } from './UserManagement/user-management/user-management.component';
 import { ECEComponent } from './components/Media/ece/ece.component';
 import { WorkshopComponent } from './components/Media/workshop/workshop.component';
+import { UpdateProfileComponent } from './UserManagement/update-profile/update-profile.component';
+import { EquipmentComponent } from './components/Media/equipment/equipment.component';
 
 const routes: Routes = [
   {
@@ -52,43 +53,20 @@ const routes: Routes = [
     component: UserProfileComponent
   },
   {
+    path: 'update-profile',
+    component: UpdateProfileComponent
+  },
+  {
     path: 'ECE',
     component: ECEComponent
   },
-  // {
-  //   path: 'boardfs',
-  //   component: BoardFSComponent,
-  //   children: [
-  //     {
-  //       path: 'about',
-  //       component: AboutComponent
-  //     },
-  //     {
-  //       path: 'equipement',
-  //       component: EquipementComponent
-  //     },
-  //     {
-  //       path: 'showmore',
-  //       component: ShowmoreComponent
-  //     },
-  //     {
-  //       path: 'videotest',
-  //       component: VideotestComponent
-  //     },
-  //     {
-  //       path: 'boardnews',
-  //       component: BoardNewsComponent,
-  //     }
-
-  //   ]
-  // },
   {
     path: 'about',
     component: AboutComponent
   },
   {
-    path: 'equipement',
-    component: EquipementComponent
+    path: 'board-equipement',
+    component: BoardEquipmentComponent
   },
   {
     path: 'showmore',
@@ -109,6 +87,10 @@ const routes: Routes = [
   {
     path: 'workshop',
     component: WorkshopComponent
+  },
+  {
+    path: 'equipment',
+    component: EquipmentComponent
   },
   {
     path: '', redirectTo: '/boardfs', pathMatch: 'full'

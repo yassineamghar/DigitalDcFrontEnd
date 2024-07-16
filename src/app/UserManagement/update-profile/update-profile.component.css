@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+.profile-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.profile-card, .profile-details {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.profile-card {
+    width: 30%;
+    margin-right: 20px;
+}
+.profile-details {
+    flex-grow: 1;
+}
+.profile-card img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.profile-card h2 {
+    margin: 10px 0 5px;
+    font-size: 1.5em;
+}
+.profile-card p {
+    color: #777;
+    margin: 5px 0;
+}
+.profile-card .badge {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9em;
+}
+.profile-card .info {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.profile-card .info i {
+    margin-right: 10px;
+    color: #007bff;
+}
+.profile-card .stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.profile-card .stats div {
+    text-align: center;
+}
+.profile-details h3 {
+    margin-top: 0;
+}
+.profile-details p {
+    line-height: 1.6;
+}
+.profile-details .personal-details {
+    margin-top: 20px;
+}
+.profile-details .personal-details dt {
+    font-weight: bold;
+}
+.profile-details .personal-details dd {
+    margin: 0 0 10px;
+}
+.profile-details .personal-details dd:before {
+    content: ": ";
+}

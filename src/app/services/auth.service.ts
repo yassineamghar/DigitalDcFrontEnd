@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/User';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,12 @@ export class AuthService {
       })
     };
   }
+
+  // Method to get the current user ID
+  getCurrentUserId(): Observable<string> {
+    return this.httpClient.get(`${this.apiUrl}/currentUserId`, { responseType: 'text', headers: this.getHttpOptions().headers });
+  }
+  
   
   getUserRoles(): string[] {
     const token = localStorage.getItem('token');
@@ -72,7 +79,7 @@ export class AuthService {
 
   getUserById(userId: string): Observable<any> {
     const httpOptions = this.getHttpOptions();
-    return this.httpClient.get<any>(`${this.apiUrl}${userId}`,httpOptions);
+    return this.httpClient.get<any>(`${this.apiUrl}/${userId}`,httpOptions);
   }
 
   getUserFullName(userId: string): Observable<string> {
@@ -93,6 +100,7 @@ export class AuthService {
       catchError(this.handleError<any>('forgotPassword'))
     );
   }
+  
   GetAll(): Observable<any> {
     const url = `${this.apiUrl}/AllUsers`;
     const httpOptions = this.getHttpOptions();
@@ -102,8 +110,18 @@ export class AuthService {
   updateUser(userId: string, user: any): Observable<any> {
     const url = `${this.apiUrl}/UpdateUser/${userId}`;
     const httpOptions = this.getHttpOptions();
+    console.log('Updating user:', user); // Log user data before sending
     return this.httpClient.put(url, user, httpOptions).pipe(
       catchError(this.handleError<any>('updateUser'))
+    );
+  }
+
+  updateUserProfile(userId: string, user: any): Observable<any> {
+    const url = `${this.apiUrl}/UpdateUserProfile/${userId}`;
+    const httpOptions = this.getHttpOptions();
+    console.log('Updating user:', user); // Log user data before sending
+    return this.httpClient.put(url, user, httpOptions).pipe(
+      catchError(this.handleError<any>('UpdateUserProfile'))
     );
   }
 
@@ -144,4 +162,3 @@ export class AuthService {
     };
   }
 }
-

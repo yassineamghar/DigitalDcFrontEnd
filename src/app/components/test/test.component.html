@@ -1,66 +1,85 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  
-<div class="container">
-  <div class="steps">
-    <div class="step" [class.active]="step === 1">
-      <span>1</span>
-      <p>Personal</p>
-    </div>
-    <div class="step" [class.active]="step === 2">
-      <span>2</span>
-      <p>Security</p>
-    </div>
-    <div class="step" [class.active]="step === 3">
-      <span>3</span>
-      <p>Confirmation</p>
+
+<div class="wrapper">
+  <div class="fixed-container">
+    <div class="steps">
+      <div class="step" [class.active]="step === 1">
+        <span>1</span>
+        <p>Personal</p>
+      </div>
+      <div class="step" [class.active]="step === 2">
+        <span>2</span>
+        <p>Security</p>
+      </div>
+      <div class="step" [class.active]="step === 3">
+        <span>3</span>
+        <p>Confirmation</p>
+      </div>
     </div>
   </div>
-  <div class="justify-content-center align-items-center">
-    <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
-      <div *ngIf="step === 1">
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="fullname">Fullname</label>
-            <input id="fullname" formControlName="fullname" class="form-control" type="text" />
+  <div class="scrollable-container">
+      <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="step === 1">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="fullname">Fullname</label>
+              <input id="fullname" formControlName="fullname" class="form-control" type="text" />
+              <div *ngIf="userProfileForm.get('fullname')?.invalid && userProfileForm.get('fullname')?.touched">
+                <small class="text-danger">Fullname is required</small>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="username">Username</label>
+              <input id="username" formControlName="username" class="form-control" type="text"  />
+            </div>
           </div>
-          <div class="form-group col-md-6">
-            <label for="username">Username</label>
-            <input id="username" formControlName="username" class="form-control" type="text" />
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="email">Email</label>
+              <input id="email" formControlName="email" class="form-control" type="email" />
+              <div *ngIf="userProfileForm.get('email')?.invalid && userProfileForm.get('email')?.touched">
+                <small class="text-danger">Email is required and must be a valid email address</small>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="confirmEmail">Confirm Email</label>
+              <input id="confirmEmail" formControlName="confirmEmail" class="form-control" type="email" />
+              <div *ngIf="userProfileForm.hasError('emailMismatch') && userProfileForm.get('confirmEmail')?.touched">
+                <small class="text-danger">Emails must match</small>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="email">Email</label>
-            <input id="email" formControlName="email" class="form-control" type="email" />
+      
+        <div *ngIf="step === 2">
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" formControlName="password" class="form-control" type="password" />
+            <div *ngIf="userProfileForm.get('password')?.invalid && userProfileForm.get('password')?.touched">
+              <small class="text-danger">Password must be at least 8 characters long</small>
+            </div>
           </div>
-          <div class="form-group col-md-6">
-            <label for="confirmEmail">Confirm Email</label>
-            <input id="confirmEmail" formControlName="confirmEmail" class="form-control" type="email" />
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input id="confirmPassword" formControlName="confirmPassword" class="form-control" type="password" />
+            <div *ngIf="userProfileForm.hasError('passwordMismatch') && userProfileForm.get('confirmPassword')?.touched">
+              <small class="text-danger">Passwords must match</small>
+            </div>
           </div>
         </div>
-      </div>
-    
-      <div *ngIf="step === 2">
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input id="password" formControlName="password" class="form-control" type="password" />
+      
+        <div *ngIf="step === 3">
+          <p>Do you want to confirm the update of your profile?</p>
         </div>
-        <div class="form-group">
-          <label for="confirmPassword">Confirm Password</label>
-          <input id="confirmPassword" formControlName="confirmPassword" class="form-control" type="password" />
+      
+        <div class="button-group">
+          <button type="button" class="btn btn-secondary" *ngIf="step > 1" (click)="prevStep()">Previous</button>
+          <button type="button" class="btn btn-primary" *ngIf="step < 3" (click)="nextStep()">Next</button>
+          <button type="submit" class="btn btn-success" *ngIf="step === 3">Update</button>
         </div>
-      </div>
-    
-      <div *ngIf="step === 3">
-        <p>Do you want to confirm the update of your profile?</p>
-      </div>
-    
-      <div class="button-group">
-        <button type="button" class="btn btn-secondary" *ngIf="step > 1" (click)="prevStep()">Previous</button>
-        <button type="button" class="btn btn-primary" *ngIf="step < 3" (click)="nextStep()">Next</button>
-        <button type="submit" class="btn btn-success" *ngIf="step === 3">Update</button>
-      </div>
-    </form>
-    
+      </form>
+      
   </div>
 </div>

@@ -69,6 +69,10 @@ import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { TagModule } from 'primeng/tag';
 import { StepsModule } from 'primeng/steps';
+import { UpdateProfileComponent } from './UserManagement/update-profile/update-profile.component';
+import { BoardEquipmentComponent } from './components/board-equipment/board-equipment.component';
+import { EquipmentComponent } from './components/Media/equipment/equipment.component';
+import { ImagePreviewComponent } from './Materials/image-preview/image-preview.component';
 
 
 @NgModule({
@@ -97,7 +101,11 @@ import { StepsModule } from 'primeng/steps';
     ECEComponent,
     UserProfileComponent,
     WorkshopComponent,
-    DialogComponent
+    DialogComponent,
+    UpdateProfileComponent,
+    BoardEquipmentComponent,
+    EquipmentComponent,
+    ImagePreviewComponent
   ],
   imports: [
     BrowserModule,

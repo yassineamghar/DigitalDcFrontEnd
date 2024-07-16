@@ -49,11 +49,16 @@
         <img width="24" height="24" src="https://img.icons8.com/ios/50/meeting-room.png" alt="meeting-room"/>              </div>
       <span class="menu-text">Workshop</span>
     </a>
+    <a [routerLink]="['/equipment']" [routerLinkActive]="['active']" class="menu-link">
+      <div class="menu-icon">
+        <img width="24" height="24" src="https://img.icons8.com/ios/50/crane-hook.png" alt="crane-hook"/>              </div>
+      <span class="menu-text">Equipment</span>
+    </a>
   </div>
   <hr class="MuiDivider-root MuiDivider-fullWidth css-1g6zw7e">
   <div class="menu-item">
     <h2>User Management</h2>
-    <a [routerLink]="['/user-profile']" [routerLinkActive]="['active']" class="menu-link">
+    <a [routerLink]="['/test']" [routerLinkActive]="['active']" class="menu-link">
       <div class="menu-icon">
         <img width="24" height="24" src="https://img.icons8.com/ios-filled/50/user.png" alt="user"/>        
       </div>
@@ -73,21 +78,3 @@
 
 
 
-
-
-
-<!-- <div class="sidebar" [class.active]="!isActive">
-  <div class="sidebar-header">
-    <h2>Menu</h2>
-    <button class="toggle-button" (click)="toggleSidebar()">&#9776;</button>
-  </div>
-  <ul class="sidebar-menu">
-    <li><a [routerLink]="['/boardfs']">📰 Board-news</a></li>
-    <li><a [routerLink]="['/about']">ℹ️ About</a></li>
-    <li><a [routerLink]="['/ECE']">⭐ ECE Star Award</a></li>
-    <li><a [routerLink]="['/workshop']">🛠️ Workshop</a></li>
-    <li><a [routerLink]="['/user']" *ngIf="showPage">🚀 User Management</a></li>
-
-  </ul>
-</div>
-<div class="content" [class.shift]="isActive"></div> -->
