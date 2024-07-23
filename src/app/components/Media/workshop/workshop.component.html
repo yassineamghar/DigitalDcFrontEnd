@@ -22,7 +22,7 @@
 
 
 <!-- Toolbar -->
-<div class="container" >
+<div class="container">
     <p-toolbar>
         <div class="p-toolbar-group-center">
             <span class="p-input-icon-right">
@@ -39,8 +39,9 @@
         </div>
     </p-toolbar>
     <!-- Add Dialog -->
-    <div class=" flex justify-content-center">
-        <p-dialog header="ADD Workshop" [modal]="true" [(visible)]="addDialogVisible" [style]="{ width: '25rem' }" (onHide)="resetForm()">
+    <div class="flex justify-content-center">
+        <p-dialog header="ADD Workshop" [modal]="true" [(visible)]="addDialogVisible" [style]="{ width: '50rem' }"
+            (onHide)="resetForm()">
             <span class="p-text-secondary block mb-5"></span>
             <div class="p-fluid mb-5">
                 <!-- Title -->
@@ -54,30 +55,78 @@
                 <div class="field grid mb-3">
                     <label for="description" class="col-fixed font-semibold label-padding">Description</label>
                     <div class="col">
-                        <textarea pInputTextarea id="description" class="w-full description-input" autocomplete="off" [(ngModel)]="newWS.description"></textarea>
+                        <textarea pInputTextarea id="description" class="w-full description-input" autocomplete="off"
+                            [(ngModel)]="newWS.description"></textarea>
                     </div>
                 </div>
                 <!-- Image Upload -->
                 <div class="field grid mb-3">
-                    <label for="image-file" class="col-fixed font-semibold label-padding">Upload Workshop Image</label>
-                    <div class="col custom-file-input-container">
-                        <input type="file" id="image-file" (change)="onFileSelectedImage($event)" class="custom-file-input" accept="image/*" />
-                        <label for="image-file" class="custom-file-label" id="file-label-Image">Choose Image</label>
+                    <label for="image-files" class="col-fixed font-semibold label-padding">Upload Images</label>
+                    <div class="col">
+                        <p-fileUpload name="imageFiles[]" url="https://www.primefaces.org/cdn/api/upload.php"
+                            (onUpload)="onUpload($event)" [multiple]="true" accept="image/*" [auto]="false"
+                            chooseLabel="Choose Images" cancelLabel="" [showCancelButton]="false">
+                            <ng-template pTemplate="content">
+                                <ul *ngIf="uploadedFiles.length">
+                                    <li *ngFor="let file of uploadedFiles">
+                                        {{ file.name }}
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </p-fileUpload>
                     </div>
                 </div>
+
                 <!-- PDF Upload -->
                 <div class="field grid mb-3">
-                    <label for="pdf-file" class="col-fixed font-semibold label-padding">Upload Workshop PDF</label>
-                    <div class="col custom-file-input-container">
-                        <input type="file" id="pdf-file" (change)="onFileSelectedPdf($event)" class="custom-file-input" accept="application/pdf" />
-                        <label for="pdf-file" class="custom-file-label" id="file-label-PDF">Choose PDF</label>
+                    <label for="pdf-files" class="col-fixed font-semibold label-padding">Upload Workshop PDFs</label>
+                    <div class="col">
+                        <p-fileUpload name="pdfs[]" url="https://www.primefaces.org/cdn/api/upload.php"
+                            (onUpload)="onPdfUpload($event)" [multiple]="true" accept="application/pdf" [auto]="false"
+                            chooseLabel="Choose PDFs" cancelLabel="" [showCancelButton]="false">
+                            <ng-template pTemplate="content">
+                                <ul *ngIf="uploadedPdfFiles.length">
+                                    <li *ngFor="let file of uploadedPdfFiles">
+                                        {{ file.name }}
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </p-fileUpload>
                     </div>
                 </div>
+
+
+                <!-- Video Upload -->
+                <div class="field grid mb-3">
+                    <label for="video-file" class="col-fixed font-semibold label-padding">Upload Workshop Video</label>
+                    <div class="col">
+                        <p-fileUpload name="videoFile" url="https://www.primefaces.org/cdn/api/upload.php"
+                            (onUpload)="onVideoUpload($event)" accept="video/*" [multiple]="false" [auto]="false"
+                            chooseLabel="Choose just one Video" cancelLabel="" [showCancelButton]="false">
+
+                            <ng-template pTemplate="content">
+                                <ul *ngIf="uploadedVideoFiles.length">
+                                    <li *ngFor="let file of uploadedVideoFiles">
+                                        {{ file.name }}
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </p-fileUpload>
+                    </div>
+                    <!-- Display error message -->
+                    <div *ngIf="errorMessage" class="p-mt-2 p-text-danger">
+                        {{ errorMessage }}
+                    </div>
+                </div>
+
+
+
             </div>
             <!-- Button -->
             <div class="flex justify-content-center mb-3">
                 <div class="button-container">
-                    <button type="button" class="btn btn-secondary" severity="secondary" (click)="addDialogVisible = false">Cancel</button>
+                    <button type="button" class="btn btn-secondary" severity="secondary"
+                        (click)="addDialogVisible = false">Cancel</button>
                     <button type="button" class="btn btn-primary" (click)="saveWS()">Save</button>
                 </div>
             </div>
@@ -93,13 +142,12 @@
     <ng-container *ngFor="let item of ws; let i = index">
         <div class="cards">
             <div class="card2">
-                <img class="card-image" [src]="item.image_URL" alt="Card Image" (click)="showImage(item.image_URL)">               
+                <!-- <img class="card-image" [src]="item.image_URL" alt="Card Image" (click)="showImage(item.image_URL)"> -->
                 <div class="card-content">
                     <h1>{{ item.title }}</h1>
                     <p>{{ item.description }}</p>
-                    <button class="read-article"(click)="viewWS(item.id_Workshop)">Read Article</button>
+                    <button class="read-article" (click)="showWorkshopDetails(item.id_Workshop)">Read More</button>
                 </div>
-                
             </div>
             <div class="button-group" *ngIf="isAuthorized">
                 <p-button (click)="showUpdateDialog(item)" icon="pi pi-pen-to-square" [rounded]="true" severity="info"
@@ -111,53 +159,155 @@
     </ng-container>
     <!-- Image Dialog -->
     <div *ngIf="isImageDialogVisible" class="image-dialog" (click)="hideImage()">
-        <div class="image-dialog-content" >
+        <div class="image-dialog-content">
             <span class="close-button" (click)="hideImage()"><i class="pi pi-times" style="font-size: 2rem"></i>
             </span>
             <img [src]="imageToShow" alt="Dialog Image" class="dialog-image">
         </div>
     </div>
-    <!-- update form -->
-    <div class="card flex justify-content-center">
-        <p-dialog header="Update Workshop" [modal]="true" [(visible)]="updateDialogVisible" [style]="{ width: '25rem' }" (onHide)="resetForm()">
-            <span class="p-text-secondary block mb-5"></span>
+    <!-- Update form -->
+    <div class="flex justify-content-center">
+        <p-dialog header="Update Workshop" [modal]="true" [(visible)]="updateDialogVisible" [style]="{ width: '50rem' }"
+            (onHide)="resetForm()">
             <div class="p-fluid mb-5">
+                <!-- Title -->
                 <div class="field grid mb-3">
                     <label for="title" class="col-fixed font-semibold label-padding">Title</label>
                     <div class="col">
                         <input pInputText id="title" class="w-full" autocomplete="off" [(ngModel)]="newWS.title" />
                     </div>
                 </div>
+
+                <!-- Description -->
                 <div class="field grid mb-3">
                     <label for="description" class="col-fixed font-semibold label-padding">Description</label>
                     <div class="col">
-                        <textarea pInputTextarea id="description" class="w-full description-input" autocomplete="off" [(ngModel)]="newWS.description"></textarea>
+                        <textarea pInputTextarea id="description" class="w-full description-input" autocomplete="off"
+                            [(ngModel)]="newWS.description"></textarea>
                     </div>
                 </div>
+
+                <!-- Existing Images -->
                 <div class="field grid mb-3">
-                    <label for="image-file" class="col-fixed font-semibold label-padding">Upload Workshop Image</label>
-                    <div class="col custom-file-input-container">
-                        <input type="file" id="image-file" (change)="onFileSelectedImage($event)" class="custom-file-input" accept="image/*" />
-                        <label for="image-file" class="custom-file-label" id="file-label-Image">Choose Image</label>
+                    <label for="existing-images" class="col-fixed font-semibold label-padding">Existing Images</label>
+                    <div class="col">
+                        <ul *ngIf="newWS.image_Name.length">
+                            <li *ngFor="let image of newWS.image_Name; let i = index">
+                                {{ image.includes('[Deleted]') ? '[Deleted]' : image }}
+                                <button type="button" class="btn btn-danger btn-sm ml-2" (click)="removeImage(i)"
+                                    [disabled]="image.includes('[Deleted]')">Delete</button>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+
+
+                <!-- Upload New Images -->
                 <div class="field grid mb-3">
-                    <label for="pdf-file" class="col-fixed font-semibold label-padding">Upload Workshop PDF</label>
-                    <div class="col custom-file-input-container">
-                        <input type="file" id="pdf-file" (change)="onFileSelectedPdf($event)" class="custom-file-input" accept="application/pdf" />
-                        <label for="pdf-file" class="custom-file-label" id="file-label-PDF">Choose PDF</label>
+                    <label for="image-files" class="col-fixed font-semibold label-padding">Upload New Images</label>
+                    <div class="col">
+                        <p-fileUpload name="imageFiles[]" url="https://www.primefaces.org/cdn/api/upload.php"
+                            (onUpload)="onUpload($event)" [multiple]="true" accept="image/*" [auto]="false"
+                            chooseLabel="Choose Images" cancelLabel="" [showCancelButton]="false">
+                            <ng-template pTemplate="content">
+                                <ul *ngIf="uploadedFiles.length">
+                                    <li *ngFor="let file of uploadedFiles">
+                                        {{ file.name }}
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </p-fileUpload>
+                    </div>
+                </div>
+
+                <!-- Existing PDFs -->
+                <div class="field grid mb-3">
+                    <label for="existing-pdfs" class="col-fixed font-semibold label-padding">Existing PDFs</label>
+                    <div class="col">
+                        <ul *ngIf="newWS.pdf_Name.length">
+                            <li *ngFor="let pdf of newWS.pdf_Name; let i = index">
+                                {{ pdf.includes('[Deleted]') ? '[Deleted]' : pdf }}
+                                <button type="button" class="btn btn-danger btn-sm ml-2" (click)="removePdf(i)"
+                                    [disabled]="pdf.includes('[Deleted]')">Delete</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Upload New PDFs -->
+                <div class="field grid mb-3">
+                    <label for="pdf-files" class="col-fixed font-semibold label-padding">Upload New PDFs</label>
+                    <div class="col">
+                        <p-fileUpload name="pdfFiles[]" url="https://www.primefaces.org/cdn/api/upload.php"
+                            (onUpload)="onPdfUpload($event)" [multiple]="true" accept="application/pdf" [auto]="false"
+                            chooseLabel="Choose PDFs" cancelLabel="" [showCancelButton]="false">
+                            <ng-template pTemplate="content">
+                                <ul *ngIf="uploadedPdfFiles.length">
+                                    <li *ngFor="let file of uploadedPdfFiles">
+                                        {{ file.name }}
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </p-fileUpload>
+                    </div>
+                </div>
+
+                <!-- Existing Video -->
+                <div class="field grid mb-3">
+                    <label for="existing-video" class="col-fixed font-semibold label-padding">Existing Video</label>
+                    <div class="col">
+                        <div *ngIf="newWS.video_Name">
+                            {{ newWS.video_Name.includes('[Deleted]') ? '[Deleted]' : newWS.video_Name }}
+                            <button type="button" class="btn btn-danger btn-sm ml-2" (click)="removeVideo()"
+                                [disabled]="newWS.video_Name.includes('[Deleted]')">Delete</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload New Video -->
+                <div class="field grid mb-3">
+                    <label for="video-file" class="col-fixed font-semibold label-padding">Upload New Video</label>
+                    <div class="col">
+                        <p-fileUpload name="videoFile" url="https://www.primefaces.org/cdn/api/upload.php"
+                            (onUpload)="onVideoUpload($event)" accept="video/*" [multiple]="false" [auto]="false"
+                            chooseLabel="Choose Video" cancelLabel="" [showCancelButton]="false">
+                            <ng-template pTemplate="content">
+                                <ul *ngIf="uploadedVideoFiles.length">
+                                    <li *ngFor="let file of uploadedVideoFiles">
+                                        {{ file.name }}
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </p-fileUpload>
                     </div>
                 </div>
             </div>
+
+            <!-- Buttons -->
             <div class="flex justify-content-center mb-3">
                 <div class="button-container">
-                    <button type="button" class="btn btn-secondary" (click)="updateDialogVisible = false">Cancel</button>
-                    <button type="button" class="btn btn-primary" (click)="updateWS(newWS)">Save</button>
+                    <button type="button" class="btn btn-secondary" (click)="handleCancel()">Cancel</button>
+                    <button type="button" class="btn btn-primary" (click)="saveChanges()">Save</button>
                 </div>
             </div>
         </p-dialog>
         <p-toast></p-toast>
-    </div>    
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- Confirmation Dialog -->
     <div class="card flex justify-content-center">
         <p-dialog header="Confirm Deletion" [(visible)]="deleteDialogVisible" [modal]="true"

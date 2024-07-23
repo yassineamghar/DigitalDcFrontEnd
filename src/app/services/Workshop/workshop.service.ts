@@ -11,11 +11,19 @@ export class WorkshopService {
   private apiUrl = `${environment.apiUrl}/Workshop`;
   private currentUserToken: string | null = null;
   token = localStorage.getItem('token');
-
+  private selectedWorkshop: any;
 
   constructor(private http: HttpClient) { }
 
-  
+
+  setSelectedWorkshop(workshop: any) {
+    this.selectedWorkshop = workshop;
+  }
+
+  getSelectedWorkshop() {
+    return this.selectedWorkshop;
+  }
+
   private getHttpOptions(): { headers: HttpHeaders } {
     const token = localStorage.getItem('token');
     console.log(token);
@@ -29,7 +37,7 @@ export class WorkshopService {
   getAllWorkshop(): Observable<workshop[]> {
     return this.http.get<workshop[]>(`${this.apiUrl}/AllWorkshop`);
   }
-  
+
   getWorkshopById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
@@ -54,7 +62,7 @@ export class WorkshopService {
     const base64 = decodeURIComponent(atob(base64Url).split('').map((c) => {
       return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
-  
+
     return JSON.parse(base64);
   }
 
@@ -79,14 +87,24 @@ export class WorkshopService {
   }
 
   updateWS(id: string, formData: FormData): Observable<any> {
+    // Log the form data for debugging
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
+
+    // Set the options for the HTTP request
     const httpOptions = this.getHttpOptions();
+    console.log('http', httpOptions.headers);
+
+    // Make the HTTP PUT request
     return this.http.put(`${this.apiUrl}/updateWS/${id}`, formData, {
       headers: httpOptions.headers,
       reportProgress: true,
       observe: 'events',
-      responseType: 'text' as 'json' // Trick TypeScript to accept 'text' for event observation
+      responseType: 'text' as 'json'
     });
   }
+
 
   deleteWS(id: string): Observable<any> {
     const httpOptions = this.getHttpOptions();
@@ -99,7 +117,13 @@ export class WorkshopService {
   downloadArticleFile(id: string): Observable<Blob> {
     const url = `${this.apiUrl}/Article/${id}`;
     return this.http.get(url, { responseType: 'blob' });
-}
+  }
+  deleteImage(workshopId: string, fileName: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/delete-image/${workshopId}/${fileName}`, { responseType: 'text' as 'json' });
+  }
 
+  deletePdf(workshopId: string, fileName: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/delete-pdf/${workshopId}/${fileName}`, { responseType: 'text' as 'json' });
+  }
 
 }

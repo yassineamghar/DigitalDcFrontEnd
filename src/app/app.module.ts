@@ -73,6 +73,8 @@ import { UpdateProfileComponent } from './UserManagement/update-profile/update-p
 import { BoardEquipmentComponent } from './components/board-equipment/board-equipment.component';
 import { EquipmentComponent } from './components/Media/equipment/equipment.component';
 import { ImagePreviewComponent } from './Materials/image-preview/image-preview.component';
+import { ReadMoreComponent } from './components/Media/read-more/read-more.component';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 @NgModule({
@@ -105,7 +107,8 @@ import { ImagePreviewComponent } from './Materials/image-preview/image-preview.c
     UpdateProfileComponent,
     BoardEquipmentComponent,
     EquipmentComponent,
-    ImagePreviewComponent
+    ImagePreviewComponent,
+    ReadMoreComponent
   ],
   imports: [
     BrowserModule,
@@ -148,7 +151,8 @@ import { ImagePreviewComponent } from './Materials/image-preview/image-preview.c
     TableModule,
     DropdownModule,
     TagModule,
-    StepsModule
+    StepsModule,
+    FileUploadModule
   ],
   providers: [AuthService, ArticleService, NotificationService, MessageService],
   bootstrap: [AppComponent],

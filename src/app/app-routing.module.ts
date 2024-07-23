@@ -18,6 +18,7 @@ import { ECEComponent } from './components/Media/ece/ece.component';
 import { WorkshopComponent } from './components/Media/workshop/workshop.component';
 import { UpdateProfileComponent } from './UserManagement/update-profile/update-profile.component';
 import { EquipmentComponent } from './components/Media/equipment/equipment.component';
+import { ReadMoreComponent } from './components/Media/read-more/read-more.component';
 
 const routes: Routes = [
   {
@@ -92,6 +93,7 @@ const routes: Routes = [
     path: 'equipment',
     component: EquipmentComponent
   },
+  { path: 'workshop/:id', component: ReadMoreComponent },
   {
     path: '', redirectTo: '/boardfs', pathMatch: 'full'
   }

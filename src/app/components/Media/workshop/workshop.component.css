@@ -148,6 +148,10 @@ textarea[pInputTextarea] {
   border-radius: 10px; 
 }
 
+.p-dialog{
+  max-width: 100px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .p-dialog .p-fluid .field {
@@ -516,4 +520,12 @@ p-splitter {
   gap: 20px; /* Space between search bar and add button */
   position: absolute;
   right: 20px; 
+}
+
+
+.p-fileupload-buttonbar{
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+
 }
