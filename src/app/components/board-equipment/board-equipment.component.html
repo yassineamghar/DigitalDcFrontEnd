@@ -13,11 +13,7 @@
                 <div class="carousel-inner">
                     <div class="carousel-item" *ngFor="let item of eq; let i = index"
                         [ngClass]="{'active': i === currentIndex}">
-                        <!-- <a [href]="item.image_URL" data-lightbox="image-gallery"> -->
-                            <!-- <img [src]="item.image_URL" class="d-block w-100" (click)="showImage(item.image_URL)" class="card-image"> -->
                             <img [src]="item.image_URL" class="d-block w-100">
-
-                        <!-- </a> -->
                     </div>
                 </div>
                 <!-- Image Dialog -->

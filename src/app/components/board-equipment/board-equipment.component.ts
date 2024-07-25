@@ -77,6 +77,7 @@ export class BoardEquipmentComponent implements OnInit{
     clearInterval(this.intervalId);
     this.startInterval();
   }
+  
   formatTwoDigits(value: number): string {
     return value.toString().padStart(2, '0');
   }

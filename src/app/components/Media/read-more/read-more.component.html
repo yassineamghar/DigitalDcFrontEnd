@@ -1,40 +1,43 @@
+<app-navbar></app-navbar>
+<button type="button" class="btn custom-animated-btn" (click)="goToWorkshop()">
+    <i class="pi pi-arrow-left" style="font-size: 1rem"></i> Go Back
+</button>
+
 <div class="container">
-  <div class="row video-row">
-    <video controls loop muted autoplay style="width: 100%; max-width: 600px;">
-      <source [src]="videoURL" type="video/mp4">
-      Your browser does not support the video tag or the file format of this video.
-    </video>
-  </div>
-  
-
-
-
-
-
-<div class="row">
-    <p>{{ workshopDetails?.description }}</p>
-</div>
-
-<div class="row carousel-row">
-    <div id="carouselExampleIndicators" class="carousel slide w-50">
-        <div class="carousel-inner">
-            <!-- Use the image_URL array to create carousel items -->
-            <div *ngFor="let imageUrl of workshopDetails?.image_URL; let i = index"
-                 class="carousel-item"
-                 [ngClass]="{'active': i === currentIndex}">
-                <img [src]="imageUrl" class="d-block w-100" alt="...">
-            </div>
-        </div>
-        <!-- Carousel controls -->
-        <a class="carousel-control-prev" role="button" (click)="prevSlide()">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </a>
-        <a class="carousel-control-next" role="button" (click)="nextSlide()">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </a>
+    <div class="row video-row">
+        <video *ngIf="videoURL" controls loop muted autoplay>
+            <source [src]="videoURL" type="video/mp4">
+        </video>
     </div>
-</div>
+
+    <div class="row">
+        <p>{{ workshopDetails?.description }}</p>
+    </div>
+
+    <div class="row carousel-row justify-content-center">
+        <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-inner">
+                <!-- Use the image_URL array to create carousel items -->
+                <div *ngFor="let imageUrl of workshopDetails?.image_URL; let i = index" class="carousel-item"
+                    [ngClass]="{'active': i === currentIndex}">
+                    <img [src]="imageUrl" class="d-block mx-auto" alt="...">
+                </div>
+            </div>
+            <!-- Carousel controls -->
+            <a class="carousel-control-prev" role="button" (click)="prevSlide()">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" role="button" (click)="nextSlide()">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
+        </div>
+    </div>
 
 
-    <div class="row">Row 4</div>
+
+    <div class="row">
+        <div *ngFor="let pdfName of workshopDetails?.pdf_Name;">
+            <p> {{pdfName}}</p>
+        </div>
+    </div>
 </div>

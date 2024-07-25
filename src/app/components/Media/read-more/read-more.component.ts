@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { SafeResourceUrl,DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 import { WorkshopService } from 'src/app/services/Workshop/workshop.service';
 
@@ -9,17 +9,14 @@ import { WorkshopService } from 'src/app/services/Workshop/workshop.service';
   templateUrl: './read-more.component.html',
   styleUrls: ['./read-more.component.css']
 })
-export class ReadMoreComponent implements OnInit, OnDestroy{
-  videoURL: string | undefined;  
-  images=[]
-  
+export class ReadMoreComponent implements OnInit, OnDestroy {
   @Input() workshopDetails: any;
   currentIndex = 0;
   intervalId: any;
- 
-  constructor(private route: ActivatedRoute, private wsService: WorkshopService, private sanitizer: DomSanitizer) { }
+  videoURL: SafeResourceUrl | undefined;
 
-  // constructor(private workshopDataService: WorkshopService) {}
+  constructor(private route: ActivatedRoute, private wsService: WorkshopService, private sanitizer: DomSanitizer, private router: Router) { }
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
@@ -27,14 +24,9 @@ export class ReadMoreComponent implements OnInit, OnDestroy{
         this.wsService.getWorkshopById(id).subscribe(
           (workshop) => {
             this.workshopDetails = workshop;
+            this.videoURL = this.sanitizer.bypassSecurityTrustResourceUrl(workshop.video_URL);
             console.log("workshop", this.workshopDetails);
-            console.log('Raw video URL:', this.workshopDetails.video_URL);
-            fetch(this.workshopDetails.video_URL)
-              .then(response => response.blob())
-              .then(blob => {
-                this.videoURL = URL.createObjectURL(blob);
-                console.log('Blob video URL:', this.videoURL); // Check URL
-              });
+            console.log("videoURL", this.videoURL);
           },
           (error) => {
             console.error('Error fetching workshop details', error);
@@ -42,12 +34,11 @@ export class ReadMoreComponent implements OnInit, OnDestroy{
         );
       }
     });
-  
+
     this.intervalId = setInterval(() => {
       this.nextSlide();
     }, 3000);
   }
-  
 
   ngOnDestroy() {
     if (this.intervalId) {
@@ -56,18 +47,22 @@ export class ReadMoreComponent implements OnInit, OnDestroy{
   }
 
   prevSlide() {
+    if (this.currentIndex === this.workshopDetails.image_URL.length - 1) {
+      this.currentIndex = 0;
+    } else {
+      this.currentIndex++;
+    }
+  }
+
+  nextSlide() {
     if (this.currentIndex === 0) {
-      this.currentIndex = this.images.length - 1;
+      this.currentIndex = this.workshopDetails.image_URL.length - 1;
     } else {
       this.currentIndex--;
     }
   }
 
-  nextSlide() {
-    if (this.currentIndex === this.images.length - 1) {
-      this.currentIndex = 0;
-    } else {
-      this.currentIndex++;
-    }
+  goToWorkshop() {
+    this.router.navigate(['/workshop']);
   }
 }

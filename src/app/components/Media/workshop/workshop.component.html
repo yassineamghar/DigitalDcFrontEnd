@@ -142,10 +142,10 @@
     <ng-container *ngFor="let item of ws; let i = index">
         <div class="cards">
             <div class="card2">
-                <!-- <img class="card-image" [src]="item.image_URL" alt="Card Image" (click)="showImage(item.image_URL)"> -->
+                <img class="card-image" [src]="item.image_URL[0]" alt="Card Image" (click)="showImage(item.image_URL[0])">
                 <div class="card-content">
                     <h1>{{ item.title }}</h1>
-                    <p>{{ item.description }}</p>
+                    <p class="description2"> {{ item.description}}</p>
                     <button class="read-article" (click)="showWorkshopDetails(item.id_Workshop)">Read More</button>
                 </div>
             </div>

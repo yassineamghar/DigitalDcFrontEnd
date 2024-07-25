@@ -144,7 +144,6 @@
   text-overflow: ellipsis;
   line-height: 1.2em; /* Line height */
   height: calc(1.2em * 6); /* Adjust based on line height and number of lines */
-
   /* Standard property (for future compatibility) */
   display: box;
   box-orient: vertical;

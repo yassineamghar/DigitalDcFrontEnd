@@ -266,161 +266,157 @@ export class WorkshopComponent implements OnInit {
 
   markForDeletion(type: 'image' | 'pdf' | 'video', item: string) {
     if (type === 'image') {
-        this.filesToDelete.imageNames.push(item);
+      this.filesToDelete.imageNames.push(item);
     } else if (type === 'pdf') {
-        this.filesToDelete.pdfNames.push(item);
+      this.filesToDelete.pdfNames.push(item);
     } else if (type === 'video') {
-        this.filesToDelete.videoName = item;
+      this.filesToDelete.videoName = item;
     }
-}
+  }
 
-saveChanges() {
-  // Debugging: Log the files to delete and the current state of newWS
-  console.log('Files to delete:', this.filesToDelete);
-  console.log('Current Images:', this.newWS.image_Name);
-  console.log('Current PDFs:', this.newWS.pdf_Name);
-  console.log('Current Video:', this.newWS.video_Name);
+  saveChanges() {
+    // Debugging: Log the files to delete and the current state of newWS
+    console.log('Files to delete:', this.filesToDelete);
+    console.log('Current Images:', this.newWS.image_Name);
+    console.log('Current PDFs:', this.newWS.pdf_Name);
+    console.log('Current Video:', this.newWS.video_Name);
 
-  // Remove images marked for deletion
-  this.newWS.image_Name = this.newWS.image_Name.filter(image => {
+    // Remove images marked for deletion
+    this.newWS.image_Name = this.newWS.image_Name.filter(image => {
       const shouldDelete = this.filesToDelete.imageNames.includes(image.replace('[Deleted] ', ''));
       if (shouldDelete) {
-          console.log('Removing image:', image);
+        console.log('Removing image:', image);
       }
       return !shouldDelete;
-  });
-  console.log('Updated Images:', this.newWS.image_Name);
+    });
+    console.log('Updated Images:', this.newWS.image_Name);
 
-  // Remove PDFs marked for deletion
-  this.newWS.pdf_Name = this.newWS.pdf_Name.filter(pdf => {
+    // Remove PDFs marked for deletion
+    this.newWS.pdf_Name = this.newWS.pdf_Name.filter(pdf => {
       const shouldDelete = this.filesToDelete.pdfNames.includes(pdf);
       if (shouldDelete) {
-          console.log('Removing PDF:', pdf);
+        console.log('Removing PDF:', pdf);
       }
       return !shouldDelete;
-  });
-  console.log('Updated PDFs:', this.newWS.pdf_Name);
+    });
+    console.log('Updated PDFs:', this.newWS.pdf_Name);
 
-  // Remove video if marked for deletion
-  if (this.filesToDelete.videoName === this.newWS.video_Name) {
+    // Remove video if marked for deletion
+    if (this.filesToDelete.videoName === this.newWS.video_Name) {
       console.log('Removing video:', this.newWS.video_Name);
       this.newWS.video_Name = '';
+    }
+    console.log('Updated Video:', this.newWS.video_Name);
+
+    // Call your update method to save changes
+    this.updateWS();
+
+    // Clear the deletion markers
+    this.filesToDelete = { imageNames: [], pdfNames: [], videoName: null };
   }
-  console.log('Updated Video:', this.newWS.video_Name);
-
-  // Call your update method to save changes
-  this.updateWS();
-
-  // Clear the deletion markers
-  this.filesToDelete = { imageNames: [], pdfNames: [], videoName: null };
-}
 
 
 
 
-removeImage(index: number) {
-  if (this.newWS.image_Name && this.selectedImageFiles) {
+  removeImage(index: number) {
+    if (this.newWS.image_Name && this.selectedImageFiles) {
       if (index >= 0 && index < this.newWS.image_Name.length) {
-          const fileName = this.newWS.image_Name[index];
-          // Add to filesToDelete
-          this.filesToDelete.imageNames.push(fileName);
-          // Mark the image for deletion
-          this.newWS.image_Name[index] = '[Deleted] ' + fileName;
-          this.newWS.image_URL[index] = ''; // Also clear URL
+        const fileName = this.newWS.image_Name[index];
+        // Add to filesToDelete
+        this.filesToDelete.imageNames.push(fileName);
+        // Mark the image for deletion
+        this.newWS.image_Name[index] = '[Deleted] ' + fileName;
+        this.newWS.image_URL[index] = ''; // Also clear URL
       } else {
-          console.warn('Invalid index:', index);
+        console.warn('Invalid index:', index);
       }
-  } else {
+    } else {
       console.error('Lists are not initialized or empty.');
+    }
   }
-}
 
-removePdf(index: number) {
-  if (this.newWS.pdf_Name && this.selectedPdfFiles) {
+  removePdf(index: number) {
+    if (this.newWS.pdf_Name && this.selectedPdfFiles) {
       if (index >= 0 && index < this.newWS.pdf_Name.length) {
-          const fileName = this.newWS.pdf_Name[index];
-          // Add to filesToDelete
-          this.filesToDelete.pdfNames.push(fileName);
-          // Mark the PDF for deletion
-          this.newWS.pdf_Name[index] = '[Deleted] ' + fileName;
-          this.newWS.pdf_URL[index] = ''; // Also clear URL
+        const fileName = this.newWS.pdf_Name[index];
+        // Add to filesToDelete
+        this.filesToDelete.pdfNames.push(fileName);
+        // Mark the PDF for deletion
+        this.newWS.pdf_Name[index] = '[Deleted] ' + fileName;
+        this.newWS.pdf_URL[index] = ''; // Also clear URL
       } else {
-          console.warn('Invalid index:', index);
+        console.warn('Invalid index:', index);
       }
-  } else {
+    } else {
       console.error('Lists are not initialized or empty.');
+    }
   }
-}
 
-removeVideo() {
-  if (this.newWS.video_Name) {
+  removeVideo() {
+    if (this.newWS.video_Name) {
       // Mark video for deletion
       this.filesToDelete.videoName = this.newWS.video_Name;
       this.newWS.video_Name = '[Deleted] ' + this.newWS.video_Name;
-  } else {
+    } else {
       console.error('No video to remove.');
+    }
   }
-}
 
-handleCancel() {
-  // Reset form and lists to original state
-  this.resetForm();
-  this.updateDialogVisible = false;
-}
+  handleCancel() {
+    // Reset form and lists to original state
+    this.resetForm();
+    this.updateDialogVisible = false;
+  }
 
 
-updateWS(): void {
-  if (!this.selectedWorkshopId) {
+  updateWS(): void {
+    if (!this.selectedWorkshopId) {
       this.errorMessage = 'Workshop ID is required for updating.';
       this.messageService.add({ severity: 'warn', summary: 'Warning', detail: this.errorMessage });
       return;
-  }
+    }
 
-  const formData: FormData = new FormData();
-  formData.append('Title', this.newWS.title || '');
-  formData.append('Description', this.newWS.description || '');
+    const formData: FormData = new FormData();
+    formData.append('Title', this.newWS.title || '');
+    formData.append('Description', this.newWS.description || '');
 
-  // Append image files
-  this.selectedImageFiles.forEach(file => {
+    // Append image files
+    this.selectedImageFiles.forEach(file => {
       formData.append('imageFiles', file, file.name);
-  });
+    });
 
-  // Append PDF files
-  this.selectedPdfFiles.forEach(file => {
+    // Append PDF files
+    this.selectedPdfFiles.forEach(file => {
       formData.append('pdfFiles', file, file.name);
-  });
+    });
 
-  // Append video file only if a new one is provided
-  if (this.selectedVideoFile) {
+    // Append video file only if a new one is provided
+    if (this.selectedVideoFile) {
       formData.append('videoFile', this.selectedVideoFile, this.selectedVideoFile.name);
-  }
+    }
 
-  // Append files to delete
-  formData.append('filesToDelete', JSON.stringify(this.filesToDelete));
+    // Append files to delete
+    formData.append('filesToDelete', JSON.stringify(this.filesToDelete));
 
-  // Call the update service method
-  this.wsService.updateWS(this.selectedWorkshopId, formData).subscribe(
+    // Call the update service method
+    this.wsService.updateWS(this.selectedWorkshopId, formData).subscribe(
       (event) => {
-          if (event.type === HttpEventType.UploadProgress) {
-              const percentDone = event.total ? Math.round(100 * event.loaded / event.total) : 0;
-              this.messageService.add({ severity: 'info', summary: 'Uploading!', detail: `File is ${percentDone}% uploaded.` });
-          } else if (event instanceof HttpResponse) {
-              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Workshop updated successfully!' });
-              this.loadWS();  // Reload the list of workshops or refresh the UI
-              this.updateDialogVisible = false;  // Close any open dialogs
-              this.resetForm();  // Reset the form fields
-          }
+        if (event.type === HttpEventType.UploadProgress) {
+          const percentDone = event.total ? Math.round(100 * event.loaded / event.total) : 0;
+          this.messageService.add({ severity: 'info', summary: 'Uploading!', detail: `File is ${percentDone}% uploaded.` });
+        } else if (event instanceof HttpResponse) {
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Workshop updated successfully!' });
+          this.loadWS();  // Reload the list of workshops or refresh the UI
+          this.updateDialogVisible = false;  // Close any open dialogs
+          this.resetForm();  // Reset the form fields
+        }
       },
       (error) => {
-          console.error('Update error:', error);
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update workshop.' });
+        console.error('Update error:', error);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update workshop.' });
       }
-  );
-}
-
-
-
-
+    );
+  }
 
 
   deleteWS() {
@@ -447,7 +443,7 @@ updateWS(): void {
   showImage(imageUrl: string): void {
     this.imageToShow = imageUrl;
     this.isImageDialogVisible = true;
-  }
+}
 
   hideImage(): void {
     console.log('Closing image dialog...');
