@@ -49,18 +49,7 @@
 }
 
 
-
-/* .workshop-container {
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  margin: 0 auto;
-} */
-
-
-
+/* description  */
 .workshop-description h1 {
   font-family: "Inter var", sans-serif;
   color: #2e2d2d;
@@ -86,7 +75,6 @@ p{
   font-family: "Inter var", sans-serif;
   color: #8c8c8c;
   font-size: 1em;
-  /* margin-top: 5px; */
 }
 
 .workshop-description {
@@ -183,9 +171,6 @@ p{
 
 
 /* Styling for PDF list */
-
-
-
 .pdf-list {
   padding: 20px;
   background-color: #f9f9f9;
@@ -197,7 +182,6 @@ p{
   font-size: 1.25em;
   line-height: 1.6;
   text-align: justify;
-
   margin: 10px 0;
   padding: 10px;
   background-color: #ffffff;
