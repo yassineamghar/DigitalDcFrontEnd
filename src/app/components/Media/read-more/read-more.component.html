@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <app-navbar></app-navbar>
 <button type="button" class="btn custom-animated-btn" (click)="goToWorkshop()">
     <i class="pi pi-arrow-left" style="font-size: 1rem"></i> Go Back
@@ -5,15 +6,22 @@
 
 <div class="container">
     <div class="row video-row">
-        <video *ngIf="videoURL" controls loop muted autoplay>
-            <source [src]="videoURL" type="video/mp4">
-        </video>
+        <div class="video-container">
+            <video *ngIf="videoURL" controls loop muted autoplay>
+                <source [src]="videoURL" type="video/mp4">
+            </video>
+        </div>
     </div>
-
+    
+    
     <div class="row">
-        <p>{{ workshopDetails?.description }}</p>
+        <div class="workshop-description">
+            <h1>{{ workshopDetails?.title }}</h1>
+            <p class="date-created">{{ workshopDetails?.dateCreated | date:'longDate' }}</p>        
+            <p>{{ workshopDetails?.description }}</p>
+        </div>
     </div>
-
+    
     <div class="row carousel-row justify-content-center">
         <div id="carouselExampleIndicators" class="carousel slide">
             <div class="carousel-inner">
@@ -26,18 +34,34 @@
             <!-- Carousel controls -->
             <a class="carousel-control-prev" role="button" (click)="prevSlide()">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
             </a>
             <a class="carousel-control-next" role="button" (click)="nextSlide()">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
             </a>
         </div>
     </div>
+    
+    
 
 
-
-    <div class="row">
-        <div *ngFor="let pdfName of workshopDetails?.pdf_Name;">
-            <p> {{pdfName}}</p>
+    <div class="row pdf-list">
+        <div *ngFor="let pdfUrl of workshopDetails?.pdf_URL; let i = index;">
+            <h2 class="pdf-item">
+                <a (click)="openPDFModal(pdfUrl)">
+                    <i class="fa fa-file-pdf-o pdf-icon"></i> <span>{{ workshopDetails?.pdf_Name[i] }}</span>
+                </a>
+            </h2>
         </div>
     </div>
+    
+    <!-- PDF Viewer Modal -->
+    <div *ngIf="isPDFModalVisible" class="modal" (click)="closePDFModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <span class="close" (click)="closePDFModal()">&times;</span>
+            <iframe *ngIf="selectedPDFURL" [src]="selectedPDFURL | safe" class="pdf-iframe"></iframe>
+        </div>
+    </div>
+    
 </div>

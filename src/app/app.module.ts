@@ -75,6 +75,7 @@ import { EquipmentComponent } from './components/Media/equipment/equipment.compo
 import { ImagePreviewComponent } from './Materials/image-preview/image-preview.component';
 import { ReadMoreComponent } from './components/Media/read-more/read-more.component';
 import { FileUploadModule } from 'primeng/fileupload';
+import { SafePipe } from './Pipe/Safe/safe.pipe';
 
 
 @NgModule({
@@ -108,7 +109,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     BoardEquipmentComponent,
     EquipmentComponent,
     ImagePreviewComponent,
-    ReadMoreComponent
+    ReadMoreComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,8 @@ export class ReadMoreComponent implements OnInit, OnDestroy {
   currentIndex = 0;
   intervalId: any;
   videoURL: SafeResourceUrl | undefined;
+  selectedPDFURL: string | null = null;  // Change this to string
+  isPDFModalVisible: boolean = false;
 
   constructor(private route: ActivatedRoute, private wsService: WorkshopService, private sanitizer: DomSanitizer, private router: Router) { }
 
@@ -65,4 +67,15 @@ export class ReadMoreComponent implements OnInit, OnDestroy {
   goToWorkshop() {
     this.router.navigate(['/workshop']);
   }
+  
+   openPDFModal(pdfUrl: string): void {
+    this.selectedPDFURL = pdfUrl;
+    this.isPDFModalVisible = true;
+  }
+
+  closePDFModal(): void {
+    this.isPDFModalVisible = false;
+    this.selectedPDFURL = null;
+  }
+
 }
