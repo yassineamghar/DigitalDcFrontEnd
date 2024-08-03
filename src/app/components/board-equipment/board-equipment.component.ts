@@ -27,7 +27,6 @@ export class BoardEquipmentComponent implements OnInit{
     this.loadEquipment();
     this.startInterval();
     this.isAuthorized = this.checkUserAuthorization();
-    // Force change detection after updating isAuthorized
     this.cdr.detectChanges();
   }
 

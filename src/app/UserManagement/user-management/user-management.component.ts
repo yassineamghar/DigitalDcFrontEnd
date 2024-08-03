@@ -1,11 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  Input,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import {  ChangeDetectorRef,  Component,  ElementRef,  Input,  OnInit,  ViewChild,} from '@angular/core';
 import { Router } from '@angular/router';
 import { data } from 'jquery';
 import { MessageService } from 'primeng/api';
@@ -24,13 +17,13 @@ export class UserManagementComponent implements OnInit {
   deleteDialogVisible: boolean = false;
   users: User[] = [];
   selectedUser: User = {
-    id: '',
-    fullname: '',
-    username: '',
-    email: '',
-    dateCreated: new Date(),
-    role: '',
-    emailConfirmed: false,
+    Id: '',
+    Fullname: '',
+    UserName: '',
+    Email: '',
+    DateCreated: new Date(),
+    Role: '',
+    EmailConfirmed: false,
   };
   isModalVisible: boolean = false;
   UpdateDialogVisible: boolean = false;
@@ -95,7 +88,8 @@ export class UserManagementComponent implements OnInit {
   }
 
   updateUser() {
-    this.authService.updateUser(this.selectedUser.id, this.selectedUser)
+    this.authService
+      .updateUser(this.selectedUser.Id, this.selectedUser)
       .subscribe({
         next: () => {
           if (this.isModalVisible) {
@@ -150,9 +144,6 @@ export class UserManagementComponent implements OnInit {
     this.deleteDialogVisible = true;
   }
 
-  
-    
-  
   getSeverity(role: string): string {
     switch (role) {
       case 'Admin':
@@ -167,7 +158,7 @@ export class UserManagementComponent implements OnInit {
   filterUsers(): void {
     if (this.searchTerm) {
       this.users = this.users.filter((item) =>
-        item.fullname.toLowerCase().includes(this.searchTerm.toLowerCase())
+        item.Fullname.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
       if (this.users.length === 0) {
         this.messageService.add({

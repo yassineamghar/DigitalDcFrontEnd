@@ -16,9 +16,9 @@
     
     <div class="row">
         <div class="workshop-description">
-            <h1>{{ workshopDetails?.title }}</h1>
-            <p class="date-created">{{ workshopDetails?.dateCreated | date:'longDate' }}</p>        
-            <p>{{ workshopDetails?.description }}</p>
+            <h1>{{ workshopDetails?.Title }}</h1>
+            <p class="date-created">{{ workshopDetails?.DateCreated | date:'longDate' }}</p>        
+            <p>{{ workshopDetails?.Description }}</p>
         </div>
     </div>
     
@@ -26,7 +26,7 @@
         <div id="carouselExampleIndicators" class="carousel slide">
             <div class="carousel-inner">
                 <!-- Use the image_URL array to create carousel items -->
-                <div *ngFor="let imageUrl of workshopDetails?.image_URL; let i = index" class="carousel-item"
+                <div *ngFor="let imageUrl of workshopDetails?.Image_URL; let i = index" class="carousel-item"
                     [ngClass]="{'active': i === currentIndex}">
                     <img [src]="imageUrl" class="d-block mx-auto" alt="...">
                 </div>
@@ -47,10 +47,10 @@
 
 
     <div class="row pdf-list">
-        <div *ngFor="let pdfUrl of workshopDetails?.pdf_URL; let i = index;">
+        <div *ngFor="let pdfUrl of workshopDetails?.Pdf_URL; let i = index;">
             <h2 class="pdf-item">
                 <a (click)="openPDFModal(pdfUrl)">
-                    <i class="fa fa-file-pdf-o pdf-icon"></i> <span>{{ workshopDetails?.pdf_Name[i] }}</span>
+                    <i class="fa fa-file-pdf-o pdf-icon"></i> <span>{{ workshopDetails?.Pdf_Name[i] }}</span>
                 </a>
             </h2>
         </div>

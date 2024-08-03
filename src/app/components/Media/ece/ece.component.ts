@@ -17,7 +17,7 @@ export class ECEComponent implements OnInit {
   selectedFile: File | null = null;
   selectedECE: ECE | any;
   ece: ECE[] = [];
-  newEce: { title: string, description: string } = { title: '', description: '' };
+  newEce: { Title: string, Description: string } = { Title: '', Description: '' };
   fileName: string = '';
   imageToShow: string | null = null;
   isImageDialogVisible = false;
@@ -87,7 +87,7 @@ export class ECEComponent implements OnInit {
   selectECE(item: ECE): void {
     this.selectedECE = item;
     this.newEce = { ...item }; 
-    this.fileName = item.image_Name || '';
+    this.fileName = item.Image_Name || '';
   }
 
   onFileSelected(event: any): void {
@@ -121,8 +121,8 @@ export class ECEComponent implements OnInit {
     if (this.selectedFile) {
       const formData: FormData = new FormData();
       formData.append('file', this.selectedFile);
-      formData.append('Title', this.newEce.title);
-      formData.append('Description', this.newEce.description);
+      formData.append('Title', this.newEce.Title);
+      formData.append('Description', this.newEce.Description);
       this.eceService.uploadECE(formData).subscribe(
         (event) => {
           if (event.type === HttpEventType.UploadProgress) {
@@ -162,7 +162,7 @@ export class ECEComponent implements OnInit {
 
 
   resetForm() {
-    this.newEce = { title: '', description: '' };
+    this.newEce = { Title: '', Description: '' };
     this.selectedFile = null;
     this.fileName = '';
     const fileInput = document.getElementById('file') as HTMLInputElement;
@@ -173,16 +173,15 @@ export class ECEComponent implements OnInit {
 
   updateECE(item: any): void {
     const formData = new FormData();
-    formData.append('title', this.newEce.title);
-    formData.append('description', this.newEce.description);
+    formData.append('Title', this.newEce.Title);
+    formData.append('Description', this.newEce.Description);
 
     if (this.selectedFile) {
-      formData.append('file', this.selectedFile);
+      formData.append('File', this.selectedFile);
     } else if (this.fileName !== 'Choose file') {
       formData.append('existingFileName', this.fileName);
     }
-
-    this.eceService.updateECE(item.id_ECE, formData).subscribe(
+    this.eceService.updateECE(item.Id_ECE, formData).subscribe(
       (event) => {
         if (event.type === HttpEventType.Response) {
           this.loadECE();
@@ -199,16 +198,16 @@ export class ECEComponent implements OnInit {
 
   deleteECE() {
     if (this.itemToDelete) {
-      this.eceService.deleteECE(this.itemToDelete.id_ECE).subscribe(
+      this.eceService.deleteECE(this.itemToDelete.Id_ECE).subscribe(
         () => {
-          console.log('ECE deleted successfully');
+          // console.log('ECE deleted successfully');
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'File deleted successfully!' });
           this.loadECE(); 
           this.deleteDialogVisible = false;
           this.itemToDelete = null;
         },
         (error) => {
-          console.error('Error deleting ECE:', error);
+          // console.error('Error deleting ECE:', error);
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to delete file.' });
           this.deleteDialogVisible = false;
           this.itemToDelete = null;
@@ -236,7 +235,7 @@ export class ECEComponent implements OnInit {
 
   filterECE(): void {
     if (this.searchTerm) {
-      this.ece = this.ece.filter(item => item.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+      this.ece = this.ece.filter(item => item.Title.toLowerCase().includes(this.searchTerm.toLowerCase()));
       if (this.ece.length === 0) {
         this.messageService.add({ severity: 'info', summary: 'Info', detail: 'No ECE found matching the search term.' });
       }

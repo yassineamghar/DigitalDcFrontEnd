@@ -45,23 +45,19 @@ export class AuthService {
       console.error('No token found');
       return [];
     }
-
     // Split the token by '.' to get the payload section
     const tokenParts = token.split('.');
     if (tokenParts.length !== 3) {
       console.error('Invalid token format');
       return [];
     }
-
     // Decode the payload (second part)
     const payload = JSON.parse(atob(tokenParts[1]));
-
     // Extract roles from payload
     const roles = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
     // this.fullname = payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] || '';
     console.log('User Roles:', roles);
     // console.log('Full Name:', this.fullname);
-
     return roles ? [roles] : [];
   }
       

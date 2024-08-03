@@ -20,7 +20,7 @@ export class EquipmentComponent implements OnInit {
   selectedFile: File | null = null;
   selectedEq: Equipment | any;
   eq: Equipment[] = [];
-  newEq: { nameEQ: string, description: string, numbEQ: number } = { nameEQ: '', description: '', numbEQ: 0 };
+  newEq: { NameEQ: string, Description: string, NumbEQ: number } = { NameEQ: '', Description: '', NumbEQ: 0 };
   fileName: string = '';
   imageToShow: string | null = null;
   isImageDialogVisible = false;
@@ -97,7 +97,7 @@ export class EquipmentComponent implements OnInit {
   selectEquipment(item: Equipment): void {
     this.selectedEq = item;
     this.newEq = { ...item }; // Pre-fill the form with the selected item details
-    this.fileName = item.image_Name || '';
+    this.fileName = item.Image_Name || '';
   }
 
   onFileSelected(event: any): void {
@@ -130,9 +130,9 @@ export class EquipmentComponent implements OnInit {
     if (this.selectedFile) {
       const formData: FormData = new FormData();
       formData.append('file', this.selectedFile);
-      formData.append('NameEQ', this.newEq.nameEQ);
-      formData.append('NumbEQ', this.newEq.numbEQ.toString().padStart(2, '0'));// Convert number to string
-      formData.append('Description', this.newEq.description);
+      formData.append('NameEQ', this.newEq.NameEQ);
+      formData.append('NumbEQ', this.newEq.NumbEQ.toString().padStart(2, '0'));// Convert number to string
+      formData.append('Description', this.newEq.Description);
       this.eqService.uploadEquipment(formData).subscribe(
         (event) => {
           if (event.type === HttpEventType.UploadProgress) {
@@ -158,7 +158,7 @@ export class EquipmentComponent implements OnInit {
 
 
     resetForm() {
-    this.newEq = { nameEQ: '', description: '', numbEQ: 0 };
+    this.newEq = { NameEQ: '', Description: '', NumbEQ: 0 };
     this.selectedFile = null;
     this.fileName = '';
     const fileInput = document.getElementById('file') as HTMLInputElement;
@@ -169,9 +169,9 @@ export class EquipmentComponent implements OnInit {
 
   updateEquipment(item: any): void {
     const formData = new FormData();
-    formData.append('NameEQ', this.newEq.nameEQ);
-    formData.append('NumbEQ', this.newEq.numbEQ.toString().padStart(2, '0')); // Convert number to string
-    formData.append('description', this.newEq.description);
+    formData.append('NameEQ', this.newEq.NameEQ);
+    formData.append('NumbEQ', this.newEq.NumbEQ.toString().padStart(2, '0')); // Convert number to string
+    formData.append('description', this.newEq.Description);
 
     if (this.selectedFile) {
       formData.append('file', this.selectedFile);
@@ -179,7 +179,7 @@ export class EquipmentComponent implements OnInit {
       formData.append('existingFileName', this.fileName);
     }
 
-    this.eqService.updateEquipment(item.id_EQ, formData).subscribe(
+    this.eqService.updateEquipment(item.Id_EQ, formData).subscribe(
       (event) => {
         if (event.type === HttpEventType.Response) {
           this.loadEquipment();
@@ -196,7 +196,7 @@ export class EquipmentComponent implements OnInit {
 
   deleteEquipment() {
     if (this.itemToDelete) {
-      this.eqService.deleteEquipment(this.itemToDelete.id_EQ).subscribe(
+      this.eqService.deleteEquipment(this.itemToDelete.Id_EQ).subscribe(
         () => {
           console.log('Equipment deleted successfully');
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Equipment deleted successfully!' });
@@ -233,7 +233,7 @@ export class EquipmentComponent implements OnInit {
 
   filterEquipment(): void {
     if (this.searchTerm) {
-      this.eq = this.eq.filter(item => item.nameEQ.toLowerCase().includes(this.searchTerm.toLowerCase()));
+      this.eq = this.eq.filter(item => item.NameEQ.toLowerCase().includes(this.searchTerm.toLowerCase()));
       if (this.eq.length === 0) {
         this.messageService.add({ severity: 'info', summary: 'Info', detail: 'No Equipment found matching the search term.' });
       }

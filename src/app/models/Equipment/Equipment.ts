@@ -1,11 +1,11 @@
 export class Equipment {
     constructor(
-      public id_EQ: string,
-      public image_URL: string,
-      public image_Name: string,
-      public dateCreated: Date,
-      public nameEQ: string,
-      public description: string,
-      public numbEQ: number,
+      public Id_EQ: string,
+      public Image_URL: string,
+      public Image_Name: string,
+      public DateCreated: Date,
+      public NameEQ: string,
+      public Description: string,
+      public NumbEQ: number,
     ) {}
   }

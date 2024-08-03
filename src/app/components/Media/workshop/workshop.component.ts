@@ -24,8 +24,8 @@ export class WorkshopComponent implements OnInit {
   selectedVideoFile: File | null = null;
   selectedWS: workshop | any;
   ws: workshop[] = [];
-  newWS: { title: string; description: string, image_Name: string[], image_URL: string[]; pdf_URL: string[], pdf_Name: string[], video_Name: string } = { title: '', description: '', image_Name: [], pdf_Name: [], image_URL: [], pdf_URL: [], video_Name: '' };
-  filesToDelete: { imageNames: string[], pdfNames: string[], videoName: string | null } = { imageNames: [], pdfNames: [], videoName: null };
+  newWS: { Title: string; Description: string, Image_Name: string[], Image_URL: string[]; Pdf_URL: string[], Pdf_Name: string[], Video_Name: string } = { Title: '', Description: '', Image_Name: [], Pdf_Name: [], Image_URL: [], Pdf_URL: [], Video_Name: '' };
+  filesToDelete: { ImageNames: string[], PdfNames: string[], VideoName: string | null } = { ImageNames: [], PdfNames: [], VideoName: null };
   workshopData: any = {};
   fileName: string = '';
   imageToShow: string | null = null;
@@ -91,7 +91,7 @@ export class WorkshopComponent implements OnInit {
 
   showUpdateDialog(item: any): void {
     this.newWS = { ...item };
-    this.selectedWorkshopId = item.id_Workshop; // Set the selected workshop ID
+    this.selectedWorkshopId = item.Id_Workshop; // Set the selected workshop ID
     this.updateDialogVisible = true;
   }
 
@@ -184,8 +184,8 @@ export class WorkshopComponent implements OnInit {
       this.selectedVideoFile
     ) {
       const formData: FormData = new FormData();
-      formData.append('Title', this.newWS.title);
-      formData.append('Description', this.newWS.description);
+      formData.append('Title', this.newWS.Title);
+      formData.append('Description', this.newWS.Description);
 
       this.selectedImageFiles.forEach(file => {
         formData.append('imageFiles', file);
@@ -230,15 +230,15 @@ export class WorkshopComponent implements OnInit {
 
   resetForm() {
     this.newWS = {
-      title: '',
-      description: '',
-      image_Name: [],
-      pdf_Name: [],
-      image_URL: [],
-      pdf_URL: [],
-      video_Name: ''
+      Title: '',
+      Description: '',
+      Image_Name: [],
+      Pdf_Name: [],
+      Image_URL: [],
+      Pdf_URL: [],
+      Video_Name: ''
     };
-    this.filesToDelete = { imageNames: [], pdfNames: [], videoName: null };
+    this.filesToDelete = { ImageNames: [], PdfNames: [], VideoName: null };
     this.selectedImageFiles = [];
     this.selectedPdfFiles = [];
     this.selectedVideoFile = null;
@@ -266,67 +266,67 @@ export class WorkshopComponent implements OnInit {
 
   markForDeletion(type: 'image' | 'pdf' | 'video', item: string) {
     if (type === 'image') {
-      this.filesToDelete.imageNames.push(item);
+      this.filesToDelete.ImageNames.push(item);
     } else if (type === 'pdf') {
-      this.filesToDelete.pdfNames.push(item);
+      this.filesToDelete.PdfNames.push(item);
     } else if (type === 'video') {
-      this.filesToDelete.videoName = item;
+      this.filesToDelete.VideoName = item;
     }
   }
 
   saveChanges() {
     // Debugging: Log the files to delete and the current state of newWS
-    console.log('Files to delete:', this.filesToDelete);
-    console.log('Current Images:', this.newWS.image_Name);
-    console.log('Current PDFs:', this.newWS.pdf_Name);
-    console.log('Current Video:', this.newWS.video_Name);
+    // console.log('Files to delete:', this.filesToDelete);
+    // console.log('Current Images:', this.newWS.image_Name);
+    // console.log('Current PDFs:', this.newWS.pdf_Name);
+    // console.log('Current Video:', this.newWS.video_Name);
 
     // Remove images marked for deletion
-    this.newWS.image_Name = this.newWS.image_Name.filter(image => {
-      const shouldDelete = this.filesToDelete.imageNames.includes(image.replace('[Deleted] ', ''));
+    this.newWS.Image_Name = this.newWS.Image_Name.filter(image => {
+      const shouldDelete = this.filesToDelete.ImageNames.includes(image.replace('[Deleted] ', ''));
       if (shouldDelete) {
         console.log('Removing image:', image);
       }
       return !shouldDelete;
     });
-    console.log('Updated Images:', this.newWS.image_Name);
+    console.log('Updated Images:', this.newWS.Image_Name);
 
     // Remove PDFs marked for deletion
-    this.newWS.pdf_Name = this.newWS.pdf_Name.filter(pdf => {
-      const shouldDelete = this.filesToDelete.pdfNames.includes(pdf);
+    this.newWS.Pdf_Name = this.newWS.Pdf_Name.filter(pdf => {
+      const shouldDelete = this.filesToDelete.PdfNames.includes(pdf);
       if (shouldDelete) {
         console.log('Removing PDF:', pdf);
       }
       return !shouldDelete;
     });
-    console.log('Updated PDFs:', this.newWS.pdf_Name);
+    console.log('Updated PDFs:', this.newWS.Pdf_Name);
 
     // Remove video if marked for deletion
-    if (this.filesToDelete.videoName === this.newWS.video_Name) {
-      console.log('Removing video:', this.newWS.video_Name);
-      this.newWS.video_Name = '';
+    if (this.filesToDelete.VideoName === this.newWS.Video_Name) {
+      console.log('Removing video:', this.newWS.Video_Name);
+      this.newWS.Video_Name = '';
     }
-    console.log('Updated Video:', this.newWS.video_Name);
+    console.log('Updated Video:', this.newWS.Video_Name);
 
     // Call your update method to save changes
     this.updateWS();
 
     // Clear the deletion markers
-    this.filesToDelete = { imageNames: [], pdfNames: [], videoName: null };
+    this.filesToDelete = { ImageNames: [], PdfNames: [], VideoName: null };
   }
 
 
 
 
   removeImage(index: number) {
-    if (this.newWS.image_Name && this.selectedImageFiles) {
-      if (index >= 0 && index < this.newWS.image_Name.length) {
-        const fileName = this.newWS.image_Name[index];
+    if (this.newWS.Image_Name && this.selectedImageFiles) {
+      if (index >= 0 && index < this.newWS.Image_Name.length) {
+        const fileName = this.newWS.Image_Name[index];
         // Add to filesToDelete
-        this.filesToDelete.imageNames.push(fileName);
+        this.filesToDelete.ImageNames.push(fileName);
         // Mark the image for deletion
-        this.newWS.image_Name[index] = '[Deleted] ' + fileName;
-        this.newWS.image_URL[index] = ''; // Also clear URL
+        this.newWS.Image_Name[index] = '[Deleted] ' + fileName;
+        this.newWS.Image_URL[index] = ''; // Also clear URL
       } else {
         console.warn('Invalid index:', index);
       }
@@ -336,14 +336,14 @@ export class WorkshopComponent implements OnInit {
   }
 
   removePdf(index: number) {
-    if (this.newWS.pdf_Name && this.selectedPdfFiles) {
-      if (index >= 0 && index < this.newWS.pdf_Name.length) {
-        const fileName = this.newWS.pdf_Name[index];
+    if (this.newWS.Pdf_Name && this.selectedPdfFiles) {
+      if (index >= 0 && index < this.newWS.Pdf_Name.length) {
+        const fileName = this.newWS.Pdf_Name[index];
         // Add to filesToDelete
-        this.filesToDelete.pdfNames.push(fileName);
+        this.filesToDelete.PdfNames.push(fileName);
         // Mark the PDF for deletion
-        this.newWS.pdf_Name[index] = '[Deleted] ' + fileName;
-        this.newWS.pdf_URL[index] = ''; // Also clear URL
+        this.newWS.Pdf_Name[index] = '[Deleted] ' + fileName;
+        this.newWS.Pdf_URL[index] = ''; // Also clear URL
       } else {
         console.warn('Invalid index:', index);
       }
@@ -353,10 +353,10 @@ export class WorkshopComponent implements OnInit {
   }
 
   removeVideo() {
-    if (this.newWS.video_Name) {
+    if (this.newWS.Video_Name) {
       // Mark video for deletion
-      this.filesToDelete.videoName = this.newWS.video_Name;
-      this.newWS.video_Name = '[Deleted] ' + this.newWS.video_Name;
+      this.filesToDelete.VideoName = this.newWS.Video_Name;
+      this.newWS.Video_Name = '[Deleted] ' + this.newWS.Video_Name;
     } else {
       console.error('No video to remove.');
     }
@@ -377,8 +377,8 @@ export class WorkshopComponent implements OnInit {
     }
 
     const formData: FormData = new FormData();
-    formData.append('Title', this.newWS.title || '');
-    formData.append('Description', this.newWS.description || '');
+    formData.append('Title', this.newWS.Title || '');
+    formData.append('Description', this.newWS.Description || '');
 
     // Append image files
     this.selectedImageFiles.forEach(file => {
@@ -421,7 +421,7 @@ export class WorkshopComponent implements OnInit {
 
   deleteWS() {
     if (this.itemToDelete) {
-      this.wsService.deleteWS(this.itemToDelete.id_Workshop).subscribe(
+      this.wsService.deleteWS(this.itemToDelete.Id_Workshop).subscribe(
         () => {
           console.log('Workshop deleted successfully');
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'File deleted successfully!' });
@@ -452,7 +452,7 @@ export class WorkshopComponent implements OnInit {
 
   filterWS(): void {
     if (this.searchTerm) {
-      this.ws = this.ws.filter(item => item.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+      this.ws = this.ws.filter(item => item.Title.toLowerCase().includes(this.searchTerm.toLowerCase()));
     } else {
       this.loadWS();
     }
@@ -478,7 +478,6 @@ export class WorkshopComponent implements OnInit {
   }
 
   showWorkshopDetails(id: string) {
-
     this.router.navigate(['/workshop', id]);
   }
 

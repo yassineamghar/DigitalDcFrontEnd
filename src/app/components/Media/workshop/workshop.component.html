@@ -48,7 +48,7 @@
                 <div class="field grid mb-3">
                     <label for="title" class="col-fixed font-semibold label-padding">Title</label>
                     <div class="col">
-                        <input pInputText id="title" class="w-full" autocomplete="off" [(ngModel)]="newWS.title" />
+                        <input pInputText id="title" class="w-full" autocomplete="off" [(ngModel)]="newWS.Title" />
                     </div>
                 </div>
                 <!-- Description -->
@@ -56,7 +56,7 @@
                     <label for="description" class="col-fixed font-semibold label-padding">Description</label>
                     <div class="col">
                         <textarea pInputTextarea id="description" class="w-full description-input" autocomplete="off"
-                            [(ngModel)]="newWS.description"></textarea>
+                            [(ngModel)]="newWS.Description"></textarea>
                     </div>
                 </div>
                 <!-- Image Upload -->
@@ -142,11 +142,11 @@
     <ng-container *ngFor="let item of ws; let i = index">
         <div class="cards">
             <div class="card2">
-                <img class="card-image" [src]="item.image_URL[0]" alt="Card Image" (click)="showImage(item.image_URL[0])">
+                <img class="card-image" [src]="item.Image_URL[0]" alt="Card Image" (click)="showImage(item.Image_URL[0])">
                 <div class="card-content">
-                    <h1>{{ item.title }}</h1>
-                    <p class="description2"> {{ item.description}}</p>
-                    <button class="read-article" (click)="showWorkshopDetails(item.id_Workshop)">Read More</button>
+                    <h1>{{ item.Title }}</h1>
+                    <p class="description2"> {{ item.Description}}</p>
+                    <button class="read-article" (click)="showWorkshopDetails(item.Id_Workshop)">Read More</button>
                 </div>
             </div>
             <div class="button-group" *ngIf="isAuthorized">
@@ -174,7 +174,7 @@
                 <div class="field grid mb-3">
                     <label for="title" class="col-fixed font-semibold label-padding">Title</label>
                     <div class="col">
-                        <input pInputText id="title" class="w-full" autocomplete="off" [(ngModel)]="newWS.title" />
+                        <input pInputText id="title" class="w-full" autocomplete="off" [(ngModel)]="newWS.Title" />
                     </div>
                 </div>
 
@@ -183,7 +183,7 @@
                     <label for="description" class="col-fixed font-semibold label-padding">Description</label>
                     <div class="col">
                         <textarea pInputTextarea id="description" class="w-full description-input" autocomplete="off"
-                            [(ngModel)]="newWS.description"></textarea>
+                            [(ngModel)]="newWS.Description"></textarea>
                     </div>
                 </div>
 
@@ -191,8 +191,8 @@
                 <div class="field grid mb-3">
                     <label for="existing-images" class="col-fixed font-semibold label-padding">Existing Images</label>
                     <div class="col">
-                        <ul *ngIf="newWS.image_Name.length">
-                            <li *ngFor="let image of newWS.image_Name; let i = index">
+                        <ul *ngIf="newWS.Image_Name.length">
+                            <li *ngFor="let image of newWS.Image_Name; let i = index">
                                 {{ image.includes('[Deleted]') ? '[Deleted]' : image }}
                                 <button type="button" class="btn btn-danger btn-sm ml-2" (click)="removeImage(i)"
                                     [disabled]="image.includes('[Deleted]')">Delete</button>
@@ -224,8 +224,8 @@
                 <div class="field grid mb-3">
                     <label for="existing-pdfs" class="col-fixed font-semibold label-padding">Existing PDFs</label>
                     <div class="col">
-                        <ul *ngIf="newWS.pdf_Name.length">
-                            <li *ngFor="let pdf of newWS.pdf_Name; let i = index">
+                        <ul *ngIf="newWS.Pdf_Name.length">
+                            <li *ngFor="let pdf of newWS.Pdf_Name; let i = index">
                                 {{ pdf.includes('[Deleted]') ? '[Deleted]' : pdf }}
                                 <button type="button" class="btn btn-danger btn-sm ml-2" (click)="removePdf(i)"
                                     [disabled]="pdf.includes('[Deleted]')">Delete</button>
@@ -256,10 +256,10 @@
                 <div class="field grid mb-3">
                     <label for="existing-video" class="col-fixed font-semibold label-padding">Existing Video</label>
                     <div class="col">
-                        <div *ngIf="newWS.video_Name">
-                            {{ newWS.video_Name.includes('[Deleted]') ? '[Deleted]' : newWS.video_Name }}
+                        <div *ngIf="newWS.Video_Name">
+                            {{ newWS.Video_Name.includes('[Deleted]') ? '[Deleted]' : newWS.Video_Name }}
                             <button type="button" class="btn btn-danger btn-sm ml-2" (click)="removeVideo()"
-                                [disabled]="newWS.video_Name.includes('[Deleted]')">Delete</button>
+                                [disabled]="newWS.Video_Name.includes('[Deleted]')">Delete</button>
                         </div>
                     </div>
                 </div>

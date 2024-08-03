@@ -1,10 +1,10 @@
 export class ECE {
     constructor(
-      public id_ECE: string,
-      public image_URL: string,
-      public image_Name: string,
-      public dateCreated: Date,
-      public title: string,
-      public description: string,
+      public Id_ECE: string,
+      public Image_URL: string,
+      public Image_Name: string,
+      public DateCreated: Date,
+      public Title: string,
+      public Description: string,
     ) {}
   }

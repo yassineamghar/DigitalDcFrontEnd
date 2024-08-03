@@ -50,7 +50,7 @@
                 <div class="field grid mb-3">
                     <label for="title" class="col-fixed font-semibold label-padding">Name of the Employee</label>
                     <div class="col">
-                        <input pInputText id="title" class="w-full" autocomplete="off" [(ngModel)]="newEce.title" />
+                        <input pInputText id="title" class="w-full" autocomplete="off" [(ngModel)]="newEce.Title" />
                     </div>
                 </div>
                 <!-- Description -->
@@ -58,7 +58,7 @@
                     <label for="description" class="col-fixed font-semibold label-padding">Description</label>
                     <div class="col">
                         <textarea pInputTextarea id="description" class="w-full description-input" autocomplete="off"
-                            [(ngModel)]="newEce.description"></textarea>
+                            [(ngModel)]="newEce.Description"></textarea>
                     </div>
                 </div>
                 <!-- File Upload -->
@@ -90,10 +90,10 @@
     <ng-container *ngFor="let item of ece; let i = index">
         <div class="cards">
             <div class="card2">
-                <img class="card-image" [src]="item.image_URL" alt="Card Image" (click)="showImage(item.image_URL)">               
+                <img class="card-image" [src]="item.Image_URL" alt="Card Image" (click)="showImage(item.Image_URL)">               
                 <div class="card-content">
-                    <h1>{{ item.title }}</h1>
-                    <p>{{ item.description }}</p>
+                    <h1>{{ item.Title }}</h1>
+                    <p>{{ item.Description }}</p>
                 </div>
                 <div class="illustration">
                     <img src="assets/ECE_img/illustration1.png" alt="Illustration">
@@ -124,14 +124,14 @@
                 <div class="field grid mb-3">
                     <label for="title" class="col-fixed font-semibold label-padding">Name of the Employee</label>
                     <div class="col">
-                        <input pInputText id="title" class="w-full" autocomplete="off" [(ngModel)]="newEce.title" />
+                        <input pInputText id="title" class="w-full" autocomplete="off" [(ngModel)]="newEce.Title" />
                     </div>
                 </div>
                 <div class="field grid mb-3">
                     <label for="description" class="col-fixed font-semibold label-padding">Description</label>
                     <div class="col">
                         <textarea pInputTextarea id="description" class="w-full description-input" autocomplete="off"
-                            [(ngModel)]="newEce.description"></textarea>
+                            [(ngModel)]="newEce.Description"></textarea>
                     </div>
                 </div>
                 <div class="field grid mb-3">

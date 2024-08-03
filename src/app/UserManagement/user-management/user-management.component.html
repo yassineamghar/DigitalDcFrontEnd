@@ -35,21 +35,21 @@
     </ng-template>
     <!-- values -->
     <ng-template pTemplate="body" let-user>
-      <tr [ngClass]="{'approved': user.emailConfirmed, 'not-approved': !user.emailConfirmed}"
+      <tr [ngClass]="{'approved': user.EmailConfirmed, 'not-approved': !user.EmailConfirmed}"
           [style]="{'border': '1px solid #dee2e6',  'border-width': '0 0 1px 0','padding': '0'}" >
-        <td>{{ user.username }}</td>
-        <td>{{ user.fullname }}</td>
-        <td>{{ user.email }}</td>
+        <td>{{ user.Username }}</td>
+        <td>{{ user.Fullname }}</td>
+        <td>{{ user.Email }}</td>
         <td>
-          <p-tag [value]="user.role" [severity]="getSeverity(user.role)"
+          <p-tag [value]="user.Role" [severity]="getSeverity(user.Role)"
                  [style]="{'width':'100px', 'height':'30px', 'font-size':'15px'}"></p-tag>
         </td>
-        <td [ngStyle]="{'color': user.emailConfirmed ? 'green' : 'red'}">
-          <i *ngIf="user.emailConfirmed" class="pi pi-verified" style="color: green"></i>
-          <i *ngIf="!user.emailConfirmed" class="pi pi-times-circle" style="color: red"></i>
-          {{ user.emailConfirmed ? 'Approved' : 'Not Approved' }}
+        <td [ngStyle]="{'color': user.EmailConfirmed ? 'green' : 'red'}">
+          <i *ngIf="user.EmailConfirmed" class="pi pi-verified" style="color: green"></i>
+          <i *ngIf="!user.EmailConfirmed" class="pi pi-times-circle" style="color: red"></i>
+          {{ user.EmailConfirmed ? 'Approved' : 'Not Approved' }}
         </td>
-        <td data-label="Date Created">{{ user.dateCreated | date: 'dd/MM/yyyy' }}</td>
+        <td data-label="Date Created">{{ user.DateCreated | date: 'dd/MM/yyyy' }}</td>
         <td data-label="Actions">
           <button type="button" class="btn btn-outline-danger btn-circle btn-lg m-2"
                   (click)="showDeleteDialog(user)">
@@ -76,14 +76,14 @@
           <form (ngSubmit)="updateUser()">
             <div class="form-group">
               <label for="status">Status</label>
-              <select id="status" class="form-control" [(ngModel)]="selectedUser.emailConfirmed" name="status">
+              <select id="status" class="form-control" [(ngModel)]="selectedUser.EmailConfirmed" name="status">
                 <option [ngValue]="true">Approved</option>
                 <option [ngValue]="false">Not Approved</option>
               </select>
             </div>
             <div class="form-group">
               <label for="Role">Role of the User</label>
-              <select id="Role" class="form-control" [(ngModel)]="selectedUser.role" name="Role">
+              <select id="Role" class="form-control" [(ngModel)]="selectedUser.Role" name="Role">
                 <option value="Admin">Admin</option>
                 <option value="User">User</option>
               </select>
@@ -108,7 +108,7 @@
       <div class="flex justify-content-center">
         <div class="button-container">
           <button type="button" class="btn btn-secondary" (click)="deleteDialogVisible = false">Cancel</button>
-          <button type="button" class="btn btn-danger" (click)="deleteUser(selectedUser.id)">Delete</button>
+          <button type="button" class="btn btn-danger" (click)="deleteUser(selectedUser.Id)">Delete</button>
         </div>
       </div>
     </p-dialog>

@@ -26,7 +26,7 @@ export class ReadMoreComponent implements OnInit, OnDestroy {
         this.wsService.getWorkshopById(id).subscribe(
           (workshop) => {
             this.workshopDetails = workshop;
-            this.videoURL = this.sanitizer.bypassSecurityTrustResourceUrl(workshop.video_URL);
+            this.videoURL = this.sanitizer.bypassSecurityTrustResourceUrl(workshop.Video_URL);
             console.log("workshop", this.workshopDetails);
             console.log("videoURL", this.videoURL);
           },
@@ -49,7 +49,7 @@ export class ReadMoreComponent implements OnInit, OnDestroy {
   }
 
   prevSlide() {
-    if (this.currentIndex === this.workshopDetails.image_URL.length - 1) {
+    if (this.currentIndex === this.workshopDetails.Image_URL.length - 1) {
       this.currentIndex = 0;
     } else {
       this.currentIndex++;
@@ -58,7 +58,7 @@ export class ReadMoreComponent implements OnInit, OnDestroy {
 
   nextSlide() {
     if (this.currentIndex === 0) {
-      this.currentIndex = this.workshopDetails.image_URL.length - 1;
+      this.currentIndex = this.workshopDetails.Image_URL.length - 1;
     } else {
       this.currentIndex--;
     }

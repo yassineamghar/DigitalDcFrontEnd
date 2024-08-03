@@ -24,29 +24,29 @@
         <div *ngIf="step === 1">
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="fullname">Fullname</label>
-              <input id="fullname" formControlName="fullname" class="form-control" type="text" />
-              <div *ngIf="userProfileForm.get('fullname')?.invalid && userProfileForm.get('fullname')?.touched">
+              <label for="Fullname">Fullname</label>
+              <input id="Fullname" formControlName="Fullname" class="form-control" type="text" />
+              <div *ngIf="userProfileForm.get('Fullname')?.invalid && userProfileForm.get('Fullname')?.touched">
                 <small class="text-danger">Fullname is required</small>
               </div>
             </div>
             <div class="form-group col-md-6">
-              <label for="username">Username</label>
-              <input id="username" formControlName="username" class="form-control" type="text"  />
+              <label for="Username">Username</label>
+              <input id="Username" formControlName="Username" class="form-control" type="text"  />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="email">Email</label>
-              <input id="email" formControlName="email" class="form-control" type="email" />
-              <div *ngIf="userProfileForm.get('email')?.invalid && userProfileForm.get('email')?.touched">
+              <label for="Email">Email</label>
+              <input id="Email" formControlName="Email" class="form-control" type="Email" />
+              <div *ngIf="userProfileForm.get('Email')?.invalid && userProfileForm.get('Email')?.touched">
                 <small class="text-danger">Email is required and must be a valid email address</small>
               </div>
             </div>
             <div class="form-group col-md-6">
-              <label for="confirmEmail">Confirm Email</label>
-              <input id="confirmEmail" formControlName="confirmEmail" class="form-control" type="email" />
-              <div *ngIf="userProfileForm.hasError('emailMismatch') && userProfileForm.get('confirmEmail')?.touched">
+              <label for="ConfirmEmail">Confirm Email</label>
+              <input id="ConfirmEmail" formControlName="ConfirmEmail" class="form-control" type="email" />
+              <div *ngIf="userProfileForm.hasError('emailMismatch') && userProfileForm.get('ConfirmEmail')?.touched">
                 <small class="text-danger">Emails must match</small>
               </div>
             </div>
@@ -55,16 +55,16 @@
       
         <div *ngIf="step === 2">
           <div class="form-group">
-            <label for="password">Password</label>
-            <input id="password" formControlName="password" class="form-control" type="password" />
-            <div *ngIf="userProfileForm.get('password')?.invalid && userProfileForm.get('password')?.touched">
+            <label for="Password">Password</label>
+            <input id="Password" formControlName="Password" class="form-control" type="password" />
+            <div *ngIf="userProfileForm.get('Password')?.invalid && userProfileForm.get('Password')?.touched">
               <small class="text-danger">Password must be at least 8 characters long</small>
             </div>
           </div>
           <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
-            <input id="confirmPassword" formControlName="confirmPassword" class="form-control" type="password" />
-            <div *ngIf="userProfileForm.hasError('passwordMismatch') && userProfileForm.get('confirmPassword')?.touched">
+            <label for="ConfirmPassword">Confirm Password</label>
+            <input id="ConfirmPassword" formControlName="ConfirmPassword" class="form-control" type="password" />
+            <div *ngIf="userProfileForm.hasError('PasswordMismatch') && userProfileForm.get('ConfirmPassword')?.touched">
               <small class="text-danger">Passwords must match</small>
             </div>
           </div>
@@ -79,6 +79,7 @@
           <button type="button" class="btn btn-primary" *ngIf="step < 3" (click)="nextStep()">Next</button>
           <button type="submit" class="btn btn-success" *ngIf="step === 3">Update</button>
         </div>
+        <p-toast></p-toast>
       </form>
       
   </div>
