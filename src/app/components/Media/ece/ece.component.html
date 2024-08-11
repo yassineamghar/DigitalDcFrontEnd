@@ -90,14 +90,14 @@
     <ng-container *ngFor="let item of ece; let i = index">
         <div class="cards">
             <div class="card2">
-                <img class="card-image" [src]="item.Image_URL" alt="Card Image" (click)="showImage(item.Image_URL)">               
+                <img class="card-image" [src]="item.Image_URL" alt="Card Image" (click)="showImage(item.Image_URL)">
                 <div class="card-content">
                     <h1>{{ item.Title }}</h1>
                     <p>{{ item.Description }}</p>
                 </div>
-                <div class="illustration">
+                <!-- <div class="illustration">
                     <img src="assets/ECE_img/illustration1.png" alt="Illustration">
-                </div>
+                </div> -->
             </div>
             <div class="button-group" *ngIf="isAuthorized">
                 <p-button (click)="showUpdateDialog(item)" icon="pi pi-pen-to-square" [rounded]="true" severity="info"
@@ -109,7 +109,7 @@
     </ng-container>
     <!-- Image Dialog -->
     <div *ngIf="isImageDialogVisible" class="image-dialog" (click)="hideImage()">
-        <div class="image-dialog-content" >
+        <div class="image-dialog-content">
             <span class="close-button" (click)="hideImage()"><i class="pi pi-times" style="font-size: 2rem"></i>
             </span>
             <img [src]="imageToShow" alt="Dialog Image" class="dialog-image">
@@ -135,6 +135,14 @@
                     </div>
                 </div>
                 <div class="field grid mb-3">
+                    <label for="existing-image" class="col-fixed font-semibold label-padding">Existing image</label>
+                    <div class="col">
+                        <div *ngIf="newEce.Image_Name">
+                            {{ newEce.Image_Name}}
+                        </div>
+                    </div>
+                </div>
+                <div class="field grid mb-3">
                     <label for="file" class="col-fixed font-semibold label-padding">Upload ECE Image</label>
                     <div class="col custom-file-input-container">
                         <input type="file" id="file" (change)="onFileSelected($event)" class="custom-file-input"
@@ -153,6 +161,7 @@
         </p-dialog>
         <p-toast></p-toast>
     </div>
+
     <!-- Confirmation Dialog -->
     <div class="card flex justify-content-center">
         <p-dialog header="Confirm Deletion" [(visible)]="deleteDialogVisible" [modal]="true"

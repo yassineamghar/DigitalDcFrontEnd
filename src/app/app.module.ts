@@ -76,7 +76,8 @@ import { ImagePreviewComponent } from './Materials/image-preview/image-preview.c
 import { ReadMoreComponent } from './components/Media/read-more/read-more.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { SafePipe } from './Pipe/Safe/safe.pipe';
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -154,9 +155,10 @@ import { SafePipe } from './Pipe/Safe/safe.pipe';
     DropdownModule,
     TagModule,
     StepsModule,
-    FileUploadModule
+    FileUploadModule,
+    ConfirmDialogModule,
   ],
-  providers: [AuthService, ArticleService, NotificationService, MessageService],
+  providers: [AuthService, ArticleService, NotificationService, MessageService,     ConfirmationService ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

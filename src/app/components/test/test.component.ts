@@ -7,7 +7,10 @@ import { AuthService } from 'src/app/services/auth.service';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-
+import * as lightbox from 'lightbox2';
+import { HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
+import { BoardnewsService } from 'src/app/services/BoardNews/boardnews.service';
+import { BoardNews } from 'src/app/models/BoardNews/BoardNews';
 declare var $: any;
 
 @Component({
@@ -18,105 +21,243 @@ declare var $: any;
 
 })
 
-export class TestComponent  implements OnInit {
-  userProfileForm: FormGroup;
-  userData: any; // Replace 'any' with your actual user data type
-  userId: string = '';
-  step = 1;
+export class TestComponent implements OnInit {
+  @ViewChild('carouselElement') carouselElement!: ElementRef; 
+
+  newBN: any = {
+    Title: '',
+    Description: '',
+    File: null
+  };
+  selectedFile: File | null = null;
+  fileName: string = '';
+  addDialogVisible: boolean = false;
+  updateDialogVisible: boolean = false;
+  BN: BoardNews[] = [];
+  originalBN: any[] = [];
+  isAuthorized: boolean = false;
+  currentIndex: number = 0;
+  intervalId: any;
+  images: any[] = [];
+  uploadProgress: number = 0;
+  updateItemId: string = '';
+
+  selectedBN: any = {
+    Title: '',
+    Description: '',
+    File: null
+  };
 
   constructor(
-    private formBuilder: FormBuilder,
-    private userService: AuthService,
+    private BNService: BoardnewsService,
     private messageService: MessageService,
-  ) {
-    this.userProfileForm = this.formBuilder.group({
-      Fullname: ['', Validators.required],
-      Username: ['', Validators.required],
-      Email: ['', [Validators.required, Validators.email]], // Validators for email
-      Password: ['', Validators.minLength(8)], // Example validator for password minimum length
-      ConfirmPassword: ['', this.confirmPasswordValidator], // Custom validator for matching confirmPassword with password
-      ConfirmEmail: ['', this.confirmEmailValidator]  // Custom validator for matching confirmPassword with email
-    });
-  }
-
-  // Custom validator function for matching passwords
-  private confirmPasswordValidator(control: FormGroup): { [key: string]: any } | null {
-    const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
-    if (password && confirmPassword && password.value !== confirmPassword.value) {
-      return { 'passwordMismatch': true };
-    }
-    return null;
-  }
-
-  // Custom validator function for matching emails
-  private confirmEmailValidator(control: FormGroup): { [key: string]: any } | null {
-    const email = control.get('Email');
-    const confirmEmail = control.get('ConfirmEmail');
-
-    if (email && confirmEmail && email.value !== confirmEmail.value) {
-      return { 'EmailMismatch': true };
-    }
-
-    return null;
-  }
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
-    this.userService.getCurrentUserId().subscribe((userId: string) => {
-      this.userId = userId;
-      this.userService.getUserById(userId).subscribe((user) => {
-        this.userData = user.Value; 
-        console.log(user.Value);
-        this.userProfileForm.patchValue({
-          Fullname: this.userData.Fullname,
-          Username: this.userData.UserName, 
-          Email: this.userData.Email,
-          ConfirmEmail: this.userData.Email 
-        });
-      });
+    this.startInterval();
+    this.loadBN();
+    this.isAuthorized = this.checkUserAuthorization();
+  }
+
+  checkUserAuthorization(): boolean {
+    const userRoles = this.authService.getUserRoles();
+    return userRoles.includes('Admin') || userRoles.includes('User');
+  }
+  prevSlide() {
+    this.currentIndex = (this.currentIndex === 0) ? (this.images.length - 1) : (this.currentIndex - 1);
+    this.resetInterval();
+  }
+
+  nextSlide() {
+    this.currentIndex = (this.currentIndex === this.images.length - 1) ? 0 : (this.currentIndex + 1);
+    this.resetInterval();
+  }
+
+  startInterval() {
+    this.intervalId = setInterval(() => {
+      this.nextSlide();
+    }, 5000);
+  }
+
+
+  resetInterval() {
+    clearInterval(this.intervalId);
+    this.startInterval();
+  }
+
+  showAddDialog() {
+    this.addDialogVisible = true;
+  }
+
+  showUpdateDialog() {
+    if (this.images.length > 0) {
+      const selectedItem = this.images[this.currentIndex];
+      this.selectedBN = {
+        Title: selectedItem.caption,
+        Description: selectedItem.description,
+        File: null
+      };
+      this.updateItemId = selectedItem.id; 
+      this.updateDialogVisible = true;
+    }
+  }
+
+  resetForm() {
+    this.newBN = {
+      Title: '',
+      Description: '',
+      File: null
+    };
+    this.selectedBN = {
+      Title: '',
+      Description: '',
+      File: null
+    };
+    this.selectedFile = null;
+    this.uploadProgress = 0;
+    this.updateItemId = ''; 
+  }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+      const fileLabel = document.getElementById('file-label') as HTMLLabelElement;
+      fileLabel.innerText = file.name;
+    }
+  }
+
+  onSubmit() {
+    if (!this.selectedFile) {
+      this.messageService.add({ severity: 'warn', summary: 'No File Selected', detail: 'Please select an image file.' });
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('Title', this.newBN.Title);
+    formData.append('Description', this.newBN.Description);
+    formData.append('File', this.selectedFile);
+
+    this.BNService.uploadBN(formData).subscribe({
+      next: (event) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.uploadProgress = Math.round((100 * event.loaded) / (event.total || 1));
+        } else if (event.type === HttpEventType.Response) {
+          this.messageService.add({ severity: 'success', summary: 'Upload Successful', detail: 'Board News has been uploaded.' });
+          this.addDialogVisible = false;
+          this.resetForm();
+          this.loadBN();
+        }
+      },
+      error: (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Upload Failed', detail: 'An error occurred while uploading the image.' });
+        // console.error('Upload error', error);
+      }
     });
   }
 
-  onSubmit(): void {
-    if (this.userProfileForm.valid) {
-      const updatedUserData = {
-        Fullname: this.userProfileForm.value.Fullname,
-        username: this.userProfileForm.value.Username,
-        email: this.userProfileForm.value.Email,
-        password: this.userProfileForm.value.Password // Include password if updating
-      };
+  onUpdate() {
+    if (this.updateItemId === null) {
+      console.error('No item ID found for update.');
+      return;
+    }
+  
+    // Fetch all Board News items to check the ItemType
+    this.BNService.getAllBN().subscribe({
+      next: (data: any[]) => {
+        // Find the item being updated
+        const itemToUpdate = data.find(item => item.Id === this.updateItemId);
+  
+        if (itemToUpdate) {
+          // Check the ItemType and handle accordingly
+          if (itemToUpdate.ItemType === 'ECE' || itemToUpdate.ItemType === 'Workshop') {
+            this.messageService.add({ severity: 'error', summary: 'Update Failed', detail: 'You cannot update this item.' });
+            return;
+          }
+  
+          // Proceed with the update if ItemType is not restricted
+          const formData = new FormData();
+          formData.append('Title', this.selectedBN.Title);
+          formData.append('Description', this.selectedBN.Description);
+          if (this.selectedFile) {
+            formData.append('File', this.selectedFile);
+          }
+  
+          // Use a flag to prevent duplicate messages
+          let successMessageShown = false;
+  
+          this.BNService.updateBN(this.updateItemId, formData).subscribe({
+            next: () => {
+              if (!successMessageShown) {
+                this.messageService.add({ severity: 'success', summary: 'Update Successful', detail: 'Board News has been updated.' });
+                successMessageShown = true; // Prevent further success messages
+              }
+              this.updateDialogVisible = false;
+              this.resetForm();
+              this.loadBN();
+            },
+            error: (error) => {
+              this.messageService.add({ severity: 'error', summary: 'Update Failed', detail: 'An error occurred while updating the Board News.' });
+              // console.error('Update error:', error);
+            }
+          });
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Upload Failed', detail: 'Item not found in combined items.' });
 
-      console.log(updatedUserData);
-
-      this.userService.updateUserProfile(this.userId, updatedUserData).subscribe(
-        (response) => {
-          // console.log('Update User Response:', this.userId, updatedUserData);
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Profile updated successfully!' });
-          // Optionally, reset form or navigate to another page
-        },
-        (error) => {
-          // console.error('Error updating profile:', error);
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error updating profile. Please try again later.' });
-
-          // Handle error messages or display to the user
+          // console.error('Item not found in combined items.');
         }
-      );
-    } else {
-      // console.log('Form is invalid. Please check all fields.');
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Form is invalid. Please check all fields.' });
+      },
+      error: (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Upload Failed', detail: 'Error loading combined items.' });
 
+        // console.error('Error loading combined items:', error);
+      }
+    });
+  }
+  
+  
+  
+  
+
+  showDeleteDialog() {
+    console.log('Current index:', this.currentIndex);
+    console.log('Images:', this.images);
+  
+    const selectedItemId = this.images[this.currentIndex]?.id;
+    console.log('Selected Item ID:', selectedItemId);
+  
+    if (!selectedItemId) {
+      console.error('No ID found for the selected item.');
+      return;
+    }
+  
+    if (confirm('Are you sure you want to delete this item?')) {
+      this.BNService.deleteBN(selectedItemId).subscribe({
+        next: () => {
+          this.messageService.add({ severity: 'success', summary: 'Delete Successful', detail: 'Board News has been deleted.' });
+          this.loadBN();
+        },
+        error: (error) => {
+          this.messageService.add({ severity: 'error', summary: 'Delete Failed', detail: 'An error occurred while deleting the Board News.' });
+          console.error('Delete error', error);
+        }
+      });
     }
   }
 
-  nextStep(): void {
-    if (this.step < 3) {
-      this.step++;
-    }
-  }
-
-  prevStep(): void {
-    if (this.step > 1) {
-      this.step--;
-    }
+  loadBN() {
+    this.BNService.getAllBN().subscribe((data: BoardNews[]) => {
+      this.images = data.map((item: BoardNews) => ({
+        id: item.Id,
+        name: item.Image_URL,
+        caption: item.Title,
+        description: item.Description,
+        dateCreated: item.DateCreated,
+      }));
+      // console.log('Images after loading:', this.images);
+    }, error => {
+      console.error('Error loading images:', error);
+    });
   }
 }

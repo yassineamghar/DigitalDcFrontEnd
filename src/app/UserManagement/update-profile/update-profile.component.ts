@@ -19,29 +19,27 @@ export class UpdateProfileComponent implements OnInit {
   eyeIcon = faEye;
   eyeSlashIcon = faEyeSlash;
 
-
   constructor(
     private formBuilder: FormBuilder,
     private userService: AuthService,
     private messageService: MessageService,
     private router: Router
-
   ) {
     this.userProfileForm = this.formBuilder.group({
       Fullname: ['', Validators.required],
       UserName: ['', Validators.required],
       Email: ['', [Validators.required, Validators.email]], // Validators for email
       Password: ['', Validators.minLength(8)], // Example validator for password minimum length
-      ConfirmPassword: ['', this.confirmPasswordValidator], // Custom validator for matching confirmPassword with password
-      ConfirmEmail: ['', this.confirmEmailValidator]  // Custom validator for matching confirmPassword with email
+      ConfirmPassword: ['', this.confirmPasswordValidator.bind(this)], // Custom validator for matching confirmPassword with password
+      ConfirmEmail: ['', this.confirmEmailValidator.bind(this)] // Custom validator for matching confirmEmail with email
     });
   }
 
   // Custom validator function for matching passwords
   private confirmPasswordValidator(control: FormGroup): { [key: string]: any } | null {
-    const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
-    if (password && confirmPassword && password.value !== confirmPassword.value) {
+    const password = this.userProfileForm?.get('Password')?.value;
+    const confirmPassword = control.value;
+    if (password && confirmPassword && password !== confirmPassword) {
       return { 'passwordMismatch': true };
     }
     return null;
@@ -49,13 +47,11 @@ export class UpdateProfileComponent implements OnInit {
 
   // Custom validator function for matching emails
   private confirmEmailValidator(control: FormGroup): { [key: string]: any } | null {
-    const email = control.get('Email');
-    const confirmEmail = control.get('ConfirmEmail');
-
-    if (email && confirmEmail && email.value !== confirmEmail.value) {
+    const email = this.userProfileForm?.get('Email')?.value;
+    const confirmEmail = control.value;
+    if (email && confirmEmail && email !== confirmEmail) {
       return { 'EmailMismatch': true };
     }
-
     return null;
   }
 
@@ -63,13 +59,12 @@ export class UpdateProfileComponent implements OnInit {
     this.userService.getCurrentUserId().subscribe((userId: string) => {
       this.userId = userId;
       this.userService.getUserById(userId).subscribe((user) => {
-        this.userData = user.Value; 
-        console.log(user.Value);
+        this.userData = user.Value;
         this.userProfileForm.patchValue({
           Fullname: this.userData.Fullname,
-          UserName: this.userData.UserName, 
+          UserName: this.userData.UserName,
           Email: this.userData.Email,
-          ConfirmEmail: this.userData.Email 
+          ConfirmEmail: this.userData.Email
         });
       });
     });
@@ -77,34 +72,58 @@ export class UpdateProfileComponent implements OnInit {
 
   onSubmit(): void {
     if (this.userProfileForm.valid) {
-      const updatedUserData = {
+      const password = this.userProfileForm.value.Password;
+      const confirmPassword = this.userProfileForm.value.ConfirmPassword;
+  
+      // Check if passwords match if both are provided
+      if (password && confirmPassword && password !== confirmPassword) {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Passwords do not match.' });
+        return;
+      }
+  
+      // If ConfirmPassword is provided but Password is not, show error
+      if (confirmPassword && !password) {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Password is required when confirming.' });
+        return;
+      }
+  
+      const updatedUserData: any = {
         Fullname: this.userProfileForm.value.Fullname,
         username: this.userProfileForm.value.UserName,
-        email: this.userProfileForm.value.Email,
-        password: this.userProfileForm.value.Password // Include password if updating
+        email: this.userProfileForm.value.Email
       };
-
-      console.log(updatedUserData);
-
+  
+      if (password) {
+        updatedUserData.password = password;
+      }
+  
       this.userService.updateUserProfile(this.userId, updatedUserData).subscribe(
-        (response) => {
-          // console.log('Update User Response:', this.userId, updatedUserData);
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Profile updated successfully!' });
-          // Optionally, reset form or navigate to another page
+        (response: any) => {
+          console.log('Update response:', response);
+  
+          // Handle undefined response or unexpected response structure
+          if (response && response.success !== undefined) {
+            if (response.success) {
+              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Profile updated successfully!' });
+            } else {
+              this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Profile update failed.' });
+            }
+          } else {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Profile update failed. Please fill all the fields.' });
+          }
         },
         (error) => {
-          // console.error('Error updating profile:', error);
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error updating profile. Please try again later.' });
-
-          // Handle error messages or display to the user
+          console.error('Error updating profile:', error);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Profile update failed. Please try again later.' });
         }
       );
     } else {
-      // console.log('Form is invalid. Please check all fields.');
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Form is invalid. Please check all fields.' });
-
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Profile update failed. Please fill all the fields.' });
     }
   }
+  
+  
+  
 
   nextStep(): void {
     if (this.step < 3) {

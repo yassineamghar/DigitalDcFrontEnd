@@ -17,7 +17,7 @@ export class ECEComponent implements OnInit {
   selectedFile: File | null = null;
   selectedECE: ECE | any;
   ece: ECE[] = [];
-  newEce: { Title: string, Description: string } = { Title: '', Description: '' };
+  newEce: { Title: string, Description: string, Image_Name: string } = { Title: '', Description: '', Image_Name:''};
   fileName: string = '';
   imageToShow: string | null = null;
   isImageDialogVisible = false;
@@ -29,7 +29,6 @@ export class ECEComponent implements OnInit {
   itemToDelete: any;
   searchTermChanged: Subject<string> = new Subject<string>();
   originalEce: any[] = []; 
-
 
 
   constructor(
@@ -91,15 +90,18 @@ export class ECEComponent implements OnInit {
   }
 
   onFileSelected(event: any): void {
-    if (event.target.files.length > 0) {
-      this.selectedFile = event.target.files[0];
-      const fileName = event.target.files[0].name;
-      const fileLabel = document.getElementById('file-label') as HTMLLabelElement | null;
-      if (fileLabel) {
-        fileLabel.innerHTML = fileName;
-      }
+    const file = event.target.files[0];
+    if (file) {
+        this.selectedFile = file;
+        this.fileName = file.name;  // Update the fileName with the selected file's name
+        const fileLabel = document.getElementById('file-label') as HTMLLabelElement;
+        fileLabel.textContent = file.name;  // Update the label with the selected file's name
+    } else {
+        this.selectedFile = null;
+        this.fileName = 'Choose file';  // Reset the fileName if no file is selected
     }
-  }
+}
+
 
 
   loadECE(): void {
@@ -147,22 +149,8 @@ export class ECEComponent implements OnInit {
 
 
 
-  private getHttpOptions(): { headers: HttpHeaders } {
-    const token = localStorage.getItem('token');
-    console.log (token);
-    return {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token ? `Bearer ${token}` : ''
-      })
-    };
-  }
-
-
-
-
-  resetForm() {
-    this.newEce = { Title: '', Description: '' };
+resetForm() {
+    this.newEce = { Title: '', Description: '', Image_Name:'' };
     this.selectedFile = null;
     this.fileName = '';
     const fileInput = document.getElementById('file') as HTMLInputElement;
@@ -177,24 +165,27 @@ export class ECEComponent implements OnInit {
     formData.append('Description', this.newEce.Description);
 
     if (this.selectedFile) {
-      formData.append('File', this.selectedFile);
-    } else if (this.fileName !== 'Choose file') {
-      formData.append('existingFileName', this.fileName);
+        // If a new file is selected, append it to the form data
+        formData.append('File', this.selectedFile);
+    } else {
+        // If no new file is selected, append the existing file name
+        formData.append('existingFileName', this.fileName);
     }
+
     this.eceService.updateECE(item.Id_ECE, formData).subscribe(
-      (event) => {
-        if (event.type === HttpEventType.Response) {
-          this.loadECE();
-          this.resetForm();
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'ECE updated successfully!' });
-          this.updateDialogVisible = false;
+        (event) => {
+            if (event.type === HttpEventType.Response) {
+                this.loadECE();
+                this.resetForm();
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'ECE updated successfully!' });
+                this.updateDialogVisible = false;
+            }
+        },
+        (error) => {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update ECE.' });
         }
-      },
-      (error) => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update ECE.' });
-      }
     );
-  }
+}
 
   deleteECE() {
     if (this.itemToDelete) {

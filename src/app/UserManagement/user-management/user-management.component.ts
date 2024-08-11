@@ -63,7 +63,7 @@ export class UserManagementComponent implements OnInit {
   loadUsers() {
     this.authService.GetAll().subscribe((data) => {
       this.users = data;
-      console.log(this.users);
+      // console.log(this.users);
     });
   }
 
@@ -126,7 +126,7 @@ export class UserManagementComponent implements OnInit {
           this.deleteDialogVisible = false;
         },
         error: (error) => {
-          console.error('Delete user error:', error);
+          // console.error('Delete user error:', error);
           this.messageService.add({
             severity: 'error',
             summary: 'Error',

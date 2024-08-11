@@ -264,23 +264,17 @@ export class WorkshopComponent implements OnInit {
     }
   }
 
-  markForDeletion(type: 'image' | 'pdf' | 'video', item: string) {
-    if (type === 'image') {
-      this.filesToDelete.ImageNames.push(item);
-    } else if (type === 'pdf') {
-      this.filesToDelete.PdfNames.push(item);
-    } else if (type === 'video') {
-      this.filesToDelete.VideoName = item;
-    }
-  }
+  // markForDeletion(type: 'image' | 'pdf' | 'video', item: string) {
+  //   if (type === 'image') {
+  //     this.filesToDelete.ImageNames.push(item);
+  //   } else if (type === 'pdf') {
+  //     this.filesToDelete.PdfNames.push(item);
+  //   } else if (type === 'video') {
+  //     this.filesToDelete.VideoName = item;
+  //   }
+  // }
 
   saveChanges() {
-    // Debugging: Log the files to delete and the current state of newWS
-    // console.log('Files to delete:', this.filesToDelete);
-    // console.log('Current Images:', this.newWS.image_Name);
-    // console.log('Current PDFs:', this.newWS.pdf_Name);
-    // console.log('Current Video:', this.newWS.video_Name);
-
     // Remove images marked for deletion
     this.newWS.Image_Name = this.newWS.Image_Name.filter(image => {
       const shouldDelete = this.filesToDelete.ImageNames.includes(image.replace('[Deleted] ', ''));
@@ -458,24 +452,24 @@ export class WorkshopComponent implements OnInit {
     }
   }
 
-  viewWS(id: string): void {
-    this.wsService.downloadArticleFile(id).subscribe(blob => {
-      const url = URL.createObjectURL(blob);
-      const fileType = blob.type;
+  // viewWS(id: string): void {
+  //   this.wsService.downloadArticleFile(id).subscribe(blob => {
+  //     const url = URL.createObjectURL(blob);
+  //     const fileType = blob.type;
 
-      const dialogRef = this.dialog.open(DialogComponent, {
-        width: '1000px',
-        data: { url: url, fileType: fileType }
-      });
+  //     const dialogRef = this.dialog.open(DialogComponent, {
+  //       width: '1000px',
+  //       data: { url: url, fileType: fileType }
+  //     });
 
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        this.loadWS();
-      });
-    }, error => {
-      console.error('Error fetching article file:', error);
-    });
-  }
+  //     dialogRef.afterClosed().subscribe(result => {
+  //       console.log('The dialog was closed');
+  //       this.loadWS();
+  //     });
+  //   }, error => {
+  //     console.error('Error fetching article file:', error);
+  //   });
+  // }
 
   showWorkshopDetails(id: string) {
     this.router.navigate(['/workshop', id]);

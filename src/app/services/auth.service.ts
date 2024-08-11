@@ -56,7 +56,7 @@ export class AuthService {
     // Extract roles from payload
     const roles = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
     // this.fullname = payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] || '';
-    console.log('User Roles:', roles);
+    // console.log('User Roles:', roles);
     // console.log('Full Name:', this.fullname);
     return roles ? [roles] : [];
   }
@@ -106,7 +106,7 @@ export class AuthService {
   updateUser(userId: string, user: any): Observable<any> {
     const url = `${this.apiUrl}/UpdateUser/${userId}`;
     const httpOptions = this.getHttpOptions();
-    console.log('Updating user:', user); // Log user data before sending
+    // console.log('Updating user:', user); 
     return this.httpClient.put(url, user, httpOptions).pipe(
       catchError(this.handleError<any>('updateUser'))
     );
@@ -115,7 +115,7 @@ export class AuthService {
   updateUserProfile(userId: string, user: any): Observable<any> {
     const url = `${this.apiUrl}/UpdateUserProfile/${userId}`;
     const httpOptions = this.getHttpOptions();
-    console.log('Updating user:', user); // Log user data before sending
+    // console.log('Updating user:', user); 
     return this.httpClient.put(url, user, httpOptions).pipe(
       catchError(this.handleError<any>('UpdateUserProfile'))
     );
@@ -153,7 +153,7 @@ export class AuthService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(`${operation} failed: ${error.message}`);
+      // console.error(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
   }

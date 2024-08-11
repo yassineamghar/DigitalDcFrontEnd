@@ -37,7 +37,7 @@ export class UserProfileComponent implements OnInit {
             (user) => {
               this.user = user.Value;
               this.roles = this.authService.getUserRoles();
-              console.log(this.roles);
+              // console.log(this.roles);
             },
             (error) => {
               console.error('Error fetching user data:', error);
