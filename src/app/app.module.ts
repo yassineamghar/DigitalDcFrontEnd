@@ -78,6 +78,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { SafePipe } from './Pipe/Safe/safe.pipe';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { CommingsoonComponent } from './components/CommingSoon/commingsoon/commingsoon.component';
 
 @NgModule({
   declarations: [
@@ -111,7 +112,8 @@ import { ConfirmationService } from 'primeng/api';
     EquipmentComponent,
     ImagePreviewComponent,
     ReadMoreComponent,
-    SafePipe
+    SafePipe,
+    CommingsoonComponent
   ],
   imports: [
     BrowserModule,

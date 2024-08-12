@@ -1,23 +1,41 @@
 <app-navbar></app-navbar>
    <!-- Portfolio-->
-   <!-- <div  id="portfolio">
+   <div  id="portfolio">
     <div class="title d-flex justify-content-center">
         <h1>View more</h1>
     </div>
-    <div class=" container container-fluid p-0 d-flex justify-content-center">
+    <div class=" p-0 d-flex justify-content-center">
         <div class="row g-0">
             <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="destination_page_url" title="Project Name">
-                    <img class="img-fluid" src="assets/img/portfolio/thumbnails/1.jpg" alt="..." />
+                <a class="portfolio-box" [routerLink]="['/ECE']"  title="Project Name">
+                    <img class="img-fluid" src="assets/Illustrations/ECE.png" alt="..." />
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">ECE Stars Board</div>
                         <div class="project-name">ECE Stars Board</div>
                     </div>
                 </a>
             </div>
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" [routerLink]="['/equipment']" title="Project Name">
+                    <img class="img-fluid" src="assets/Illustrations/equipment.png" alt="..." />
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">Our Equipements</div>
+                        <div class="project-name">Our Equipements</div>
+                    </div>
+                </a>
+            </div>
             
             <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="destination_page_url" title="Project Name">
+                <a [routerLink]="['/workshop']" class="portfolio-box" title="Project Name">
+                    <img class="img-fluid" src="assets/Illustrations/Workshop.png" alt="..." />
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">Workshops & Activities</div>
+                        <div class="project-name">Workshops & Activities</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" [routerLink]="['/commingsoon']" title="Project Name">
                     <img class="img-fluid" src="assets/img/portfolio/thumbnails/1.jpg" alt="..." />
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">Get to know US better</div>
@@ -26,7 +44,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="destination_page_url" title="Project Name">
+                <a class="portfolio-box" [routerLink]="['/commingsoon']" title="Project Name">
                     <img class="img-fluid" src="assets/img/portfolio/thumbnails/1.jpg" alt="..." />
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">Our KPI</div>
@@ -34,17 +52,9 @@
                     </div>
                 </a>
             </div>
+            
             <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="destination_page_url" title="Project Name">
-                    <img class="img-fluid" src="assets/img/portfolio/thumbnails/1.jpg" alt="..." />
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Our Equipements</div>
-                        <div class="project-name">Our Equipements</div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="destination_page_url" title="Project Name">
+                <a class="portfolio-box" [routerLink]="['/commingsoon']" title="Project Name">
                     <img class="img-fluid" src="assets/img/portfolio/thumbnails/1.jpg" alt="..." />
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">How we Work</div>
@@ -52,20 +62,9 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="destination_page_url" title="Project Name">
-                    <img class="img-fluid" src="assets/img/portfolio/thumbnails/1.jpg" alt="..." />
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Workshops & Activities</div>
-                        <div class="project-name">Workshops & Activities</div>
-                    </div>
-                </a>
-            </div>
+            
         </div>
     </div>
-</div> -->
-
-<div class="container d-flex  align-items-center justify-content-center">
-    <img src="assets/GIF/coming_soon.gif" alt="">
 </div>
+
 <app-footercarousel></app-footercarousel>

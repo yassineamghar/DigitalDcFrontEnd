@@ -19,6 +19,7 @@ import { WorkshopComponent } from './components/Media/workshop/workshop.componen
 import { UpdateProfileComponent } from './UserManagement/update-profile/update-profile.component';
 import { EquipmentComponent } from './components/Media/equipment/equipment.component';
 import { ReadMoreComponent } from './components/Media/read-more/read-more.component';
+import { CommingsoonComponent } from './components/CommingSoon/commingsoon/commingsoon.component';
 
 const routes: Routes = [
   {
@@ -92,6 +93,10 @@ const routes: Routes = [
   {
     path: 'equipment',
     component: EquipmentComponent
+  },
+  {
+    path: 'commingsoon',
+    component: CommingsoonComponent
   },
   { path: 'workshop/:id', component: ReadMoreComponent },
   {

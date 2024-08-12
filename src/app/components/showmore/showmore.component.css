@@ -1,11 +1,11 @@
 @media (min-width: 992px) {
     #portfolio {
-      height: calc(100vh - 57.6px);
+      height: calc(100vh - 57.7px);
     }
 }
 
 #portfolio {
-    padding: 20px 0;
+    padding: 0;
     background-size: cover;
     background-position: center;
     opacity: 1;
@@ -15,19 +15,13 @@
 .title h1 {
   font-size: 3.5rem;
   align-items: center;
-  padding: 40px 0;
+  padding: 20px 0;
   color: rgb(18, 25, 38);
   font-weight: 700;
   line-height: 1.167;
   transition: color 0.3s, transform 0.3s;
-}
-
-.title h1:hover {
-  color: rgb(255, 69, 0); /* Change color on hover */
-  transform: scale(1.05); /* Slightly scale up on hover */
-}
-
-  
+  color: rgb(255, 69, 0);
+}  
   .row.g-0 .col-lg-4 {
     padding: 20px; 
   }
@@ -36,7 +30,8 @@
     position: relative;
     display: block;
     margin: 0 auto;
-    max-width: 400px;
+    width: 100%; /* Make sure it fills its column */
+    height: 200px; /* Set a fixed height */
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
@@ -50,6 +45,7 @@
   .portfolio-box img {
     width: 100%;
     height: auto;
+    object-fit: contain;
     transition: all 0.3s ease-in-out;
   }
   

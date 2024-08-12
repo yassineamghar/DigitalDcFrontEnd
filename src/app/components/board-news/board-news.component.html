@@ -1,37 +1,144 @@
-
-
 <div class="container-fluid full-height">
     <div class="row title align-items-center" style="height: calc(20%);">
-        <h1 class="m-0">Board News!</h1>
+      <h1 class="m-0">Board News!</h1>
     </div>
+  
+    <div class="p-toolbar-group-right m-3" *ngIf="isAuthorized">
+      <!-- Add Button -->
+      <p-button (click)="showAddDialog()" icon="pi pi-plus-circle" severity="info" [outlined]="true"
+        label="Add"></p-button>
+  
+      <!-- Update Button -->
+      <p-button (click)="showUpdateDialog()" icon="pi pi-pencil" severity="warning" [outlined]="true"
+        [disabled]="!images.length" label="Update"></p-button>
+  
+      <!-- Delete Button -->
+      <p-button (click)="showDeleteDialog()" icon="pi pi-trash" severity="danger" [outlined]="true"
+        [disabled]="!images.length" label="Delete"></p-button>
+    </div>
+  
+    <div *ngIf="isAuthorized" class="container" id="list-section">
+      <!-- Add Dialog -->
+      <div class=" card flex justify-content-center form">
+        <p-dialog header="ADD Board News" [modal]="true" [(visible)]="addDialogVisible" [style]="{ width: '25rem' }"
+          (onHide)="resetForm()">
+          <span class="p-text-secondary block mb-5"></span>
+          <div class="p-fluid mb-5">
+            <!-- Title -->
+            <div class="field grid mb-3">
+              <label for="title" class="col-fixed font-semibold label-padding">title</label>
+              <div class="col">
+                <input pInputText id="title" class="w-full" autocomplete="off" [(ngModel)]="newBN.Title" />
+              </div>
+            </div>
+            <!-- Description -->
+            <div class="field grid mb-3">
+              <label for="description" class="col-fixed font-semibold label-padding">Description</label>
+              <div class="col">
+                <textarea pInputTextarea id="description" class="w-full description-input" autocomplete="off"
+                  [(ngModel)]="newBN.Description"></textarea>
+              </div>
+            </div>
+            <!-- File Upload -->
+            <div class="field grid mb-3">
+              <label for="file" class="col-fixed font-semibold label-padding">Upload BoardNews Image</label>
+              <div class="col custom-file-input-container">
+                <input type="file" id="file" (change)="onFileSelected($event)" class="custom-file-input"
+                  accept="image/*" />
+                <label for="file" class="custom-file-label" id="file-label">Choose Image</label>
+  
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-content-center mb-3">
+            <div class="button-container">
+              <button type="button" class="btn btn-secondary" severity="secondary"
+                (click)="addDialogVisible = false">Cancel</button>
+              <button type="button" class="btn btn-primary" (click)="onSubmit()">Save</button>
+            </div>
+          </div>
+        </p-dialog>
+        <p-toast></p-toast>
+      </div>
+  
+      <!-- Update Dialog -->
+      <div class="card flex justify-content-center">
+        <p-dialog header="UPDATE Board News" [modal]="true" [(visible)]="updateDialogVisible" [style]="{ width: '25rem' }"
+          (onHide)="resetForm()">
+          <span class="p-text-secondary block mb-5"></span>
+          <div class="p-fluid mb-5">
+            <!-- Title -->
+            <div class="field grid mb-3">
+              <label for="title" class="col-fixed font-semibold label-padding">title</label>
+              <div class="col">
+                <input pInputText id="title" class="w-full" autocomplete="off" [(ngModel)]="selectedBN.Title" />
+              </div>
+            </div>
+            <!-- Description -->
+            <div class="field grid mb-3">
+              <label for="description" class="col-fixed font-semibold label-padding">Description</label>
+              <div class="col">
+                <textarea pInputTextarea id="description" class="w-full description-input" autocomplete="off"
+                  [(ngModel)]="selectedBN.Description"></textarea>
+              </div>
+            </div>
+            <!-- File Upload -->
+            <div class="field grid mb-3">
+              <label for="file" class="col-fixed font-semibold label-padding">Upload BoardNews Image</label>
+              <div class="col custom-file-input-container">
+                <input type="file" id="file" (change)="onFileSelected($event)" class="custom-file-input"
+                  accept="image/*" />
+                <label for="file" class="custom-file-label" id="file-label">Choose Image</label>
+  
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-content-center mb-3">
+            <div class="button-container">
+              <button type="button" class="btn btn-secondary" severity="secondary"
+                (click)="updateDialogVisible = false">Cancel</button>
+              <button type="button" class="btn btn-primary" (click)="onUpdate()">Update</button>
+            </div>
+          </div>
+        </p-dialog>
+        <p-toast></p-toast>
+      </div>
+  
+      <!-- Delete Confirmation Dialog -->
+      <p-confirmDialog header="Delete Confirmation" icon="pi pi-exclamation-triangle" [acceptLabel]="'Yes'"
+        [rejectLabel]="'No'"></p-confirmDialog>
+    </div>
+  
+    <!-- CAROUSEL -->
     <div class="row align-items-center" style="height: calc(70%);">
-        <div class="col-lg-6 p-3">
-            <div id="carouselExampleControls" class="carousel slide w-100" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item" *ngFor="let newsItem of images; let i = index" [ngClass]="{'active': i === currentIndex}">
-                        <a href="assets/images/carousal-img/{{newsItem.name}}" data-lightbox="image-gallery">
-                            <img src="assets/images/carousal-img/{{newsItem.name}}" class="d-block w-100">
-                        </a>
-                    </div>
-                </div>
-                <a class="carousel-control-prev" (click)="prevSlide()" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                </a>
-                <a class="carousel-control-next" (click)="nextSlide()" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </a>
+      <div class="col-lg-6 p-3">
+        <div #carouselElement id="carouselExampleControls" class="carousel slide w-100" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item" *ngFor="let newsItem of images; let i = index"
+              [ngClass]="{'active': i === currentIndex}">
+              <a [href]="newsItem.name" data-lightbox="image-gallery">
+                <img [src]="newsItem.name" class="d-block w-100">
+              </a>
             </div>
+          </div>
+          <a class="carousel-control-prev" (click)="prevSlide()" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </a>
+          <a class="carousel-control-next" (click)="nextSlide()" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </a>
         </div>
-        <div class="col-lg-6 p-3">
-            <div class="text-white custom-content">
-                <div class="title-container">
-                    <h2>{{ images[currentIndex].caption }}</h2>
-                </div>
-                <div class="separator"></div>
-                <div class="content-container d-flex " style="height: auto;">
-                    <p [innerHTML]="images[currentIndex].description"></p>
-                </div>
-            </div>
+      </div>
+      <div class="col-lg-6 p-3">
+        <div class="text-white custom-content">
+          <div class="title-container">
+            <h2>{{ images[currentIndex]?.caption }}</h2>
+          </div>
+          <div class="separator"></div>
+          <div class="content-container d-flex" style="height: auto;">
+            <p [innerHTML]="images[currentIndex]?.description"></p>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
