@@ -37,17 +37,26 @@ export class BoardNewsComponent implements OnInit{
     Description: '',
     File: null
   };
-
+  workloadTimer: any;
+  workloadImageIndex: number | null = null;
   constructor(
     private BNService: BoardnewsService,
     private messageService: MessageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.startInterval();
     this.loadBN();
+    this.loadWorkloadImage();
     this.isAuthorized = this.checkUserAuthorization();
+  }
+
+  ngOnDestroy(): void {
+    if (this.workloadTimer) {
+      clearInterval(this.workloadTimer); // Clear the timer when the component is destroyed
+    }
   }
 
   checkUserAuthorization(): boolean {
@@ -236,7 +245,7 @@ export class BoardNewsComponent implements OnInit{
     }
   }
 
-  loadBN() {
+  loadBN(): void {
     this.BNService.getAllBN().subscribe((data: BoardNews[]) => {
       this.images = data.map((item: BoardNews) => ({
         id: item.Id,
@@ -245,9 +254,61 @@ export class BoardNewsComponent implements OnInit{
         description: item.Description,
         dateCreated: item.DateCreated,
       }));
-      // console.log('Images after loading:', this.images);
+
+      // Load the initial workload image
+      this.loadWorkloadImage();
+
+      // Set up the timer to fetch a new workload image every 15 minutes
+      this.workloadTimer = setInterval(() => {
+        this.loadWorkloadImage();
+      }, 900000); // 900,000 milliseconds = 15 minutes
+
     }, error => {
       console.error('Error loading images:', error);
     });
   }
+
+  loadWorkloadImage(): void {
+    console.log('Fetching new workload image...');
+    this.BNService.getWorkload().subscribe((blob) => {
+      console.log('Blob type:', blob.type);
+      const url = window.URL.createObjectURL(blob);
+      
+      const workloadImage = {
+        id: null,
+        name: url,
+        caption: 'Static Workload Title',
+        description: 'Static workload description goes here.',
+        dateCreated: null
+      };
+  
+      if (this.workloadImageIndex !== null) {
+        // Revoke the old blob URL to free up memory
+        window.URL.revokeObjectURL(this.images[this.workloadImageIndex].name);
+        this.images.splice(this.workloadImageIndex, 1);
+      }
+  
+      // Add the new workload image to the array
+      this.images.push(workloadImage);
+      this.workloadImageIndex = this.images.length - 1; // Update the index for the workload image
+  
+      console.log('New workload image loaded:', workloadImage);
+  
+    }, error => {
+      console.error('Error loading workload image:', error);
+    });
+  }
+  
+  
+
+  // loadWorkloadImage(): void {
+  //   this.BNService.getWorkload().subscribe((blob) => {
+  //     const url = window.URL.createObjectURL(blob);
+  //     this.images.push({
+  //       name: url,
+  //       caption: 'Static Workload Title',
+  //       description: 'Static workload description goes here.'
+  //     });
+  //   });
+  // }
 }
