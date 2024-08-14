@@ -277,8 +277,8 @@ export class BoardNewsComponent implements OnInit{
       const workloadImage = {
         id: null,
         name: url,
-        caption: 'Static Workload Title',
-        description: 'Static workload description goes here.',
+        caption: 'DC Workload',
+        description: 'This report gives a real-time view of warehouse operations, tracking key activities and ensuring efficient, timely processes. It is crucial for monitoring and meeting daily performance goals.',
         dateCreated: null
       };
   

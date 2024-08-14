@@ -103,6 +103,7 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
   line-clamp: 5;
+  text-align: justify;
 }
 .title-container {
   background-color: rgba(234, 212, 184, 0.466);

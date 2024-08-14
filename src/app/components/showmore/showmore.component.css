@@ -20,7 +20,7 @@
   font-weight: 700;
   line-height: 1.167;
   transition: color 0.3s, transform 0.3s;
-  color: rgb(255, 69, 0);
+  color:#E98300;
 }  
   .row.g-0 .col-lg-4 {
     padding: 20px; 
@@ -44,7 +44,7 @@
   
   .portfolio-box img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: contain;
     transition: all 0.3s ease-in-out;
   }
