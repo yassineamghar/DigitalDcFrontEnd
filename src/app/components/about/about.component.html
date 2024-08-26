@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<app-sidebar *ngIf="isAuthorized"></app-sidebar>
+
+<div class="container-fluid full-height d-flex flex-column">
+    <div class="partie1 d-flex flex-column justify-content-center align-items-center">
+        <div class="row justify-content-center align-items-center w-100">
+            <div class="col-lg-4 col-md-5 col-sm-12 text-center mb-3 mb-md-0">
+                <img src="assets/images/TE_Connectivity_logo.svg" alt="TE Connectivity" class="img-fluid" />
+            </div>
+            <div class="col-lg-8 col-md-7 col-sm-12 custom-content">
+                <div class="title-container">
+                    <h2>About TE Connectivity</h2>
+                </div>
+                <div class="divider"></div>
+                <p>
+                    With a 50-plus year history of leadership, TE Connectivity is a global, $16 billion company that
+                    designs and manufactures over 213B products that connect and protect the flow of power and data
+                    inside the products that touch every aspect of peoples lives.
+                </p>
+                <div class="divider"></div>
+            </div>
+        </div>
+    </div>
+    <div class="partie2 d-flex flex-column justify-content-center align-items-center">
+        <div class="logos">
+            <div class="title-container">
+                <h2>Customers</h2>
+            </div>
+            <div class="logos-slide">
+                <img *ngFor="let newsItem of images_customers" src="assets/images/Customers/{{ newsItem.name }}" />
+            </div>
+        </div>
+    </div>
+
+    <div class="partie2 d-flex flex-column justify-content-center align-items-center">
+        <div class="logos">
+            <div class="title-container">
+                <h2>Partners</h2>
+            </div>
+            <div class="logos-slide">
+                <img *ngFor="let newsItem of images_partners" src="assets/images/partners/{{ newsItem.name }}" />
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<app-footercarousel></app-footercarousel>

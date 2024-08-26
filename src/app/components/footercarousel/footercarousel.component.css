@@ -1,0 +1,47 @@
+.footer {
+    background-color: transparent;
+    color: white;
+    padding: 5px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer .container {
+    text-align: center;
+}
+
+.footer .text-muted {
+    font-size: 1rem;
+}
+
+.pagination .page-item {
+    display: inline-block;
+}
+
+.pagination .page-link {
+    border-radius: 50%;
+    border: 1px solid #cccccc;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    padding: 0;
+    margin: 0 5px;
+}
+
+.pagination .page-link.active-dot {
+    background-color: #000000; /* Fond noir */
+    color: #ffffff; /* Texte blanc (ou toute autre couleur désirée pour le texte) */
+}
+
+
+.pagination .page-item.disabled .page-link {
+    background-color: transparent;
+    color: #0000000b;
+    border-color: #070707;
+}
+
+.pagination .page-item.disabled .page-link:hover {
+    cursor: not-allowed;
+}

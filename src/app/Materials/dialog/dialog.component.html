@@ -1,0 +1,21 @@
+<!-- <h2>{{ data.title }}</h2> -->
+<div [ngClass]="{'hidden': isClosed}" class="iframe-container">
+    <iframe
+      *ngIf="!isLoading"
+      [src]="getSafeUrl()"
+      width="100%"
+      height="600px"
+      frameborder="0"
+      title="Custom Iframe"
+    ></iframe>
+    <div *ngIf="isLoading" class="loading-overlay">
+      <div class="card flex justify-content-center">
+        <p-progressSpinner aria-label="Loading..."></p-progressSpinner>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+
+

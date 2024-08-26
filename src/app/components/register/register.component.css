@@ -11,6 +11,11 @@ body {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
 }
+
+.img-brand{
+    width: 300px;
+}
+
 .error-message {
     color: #ff0000; /* Red text color */
     text-align: center; /* Center the error message */
@@ -38,7 +43,7 @@ body {
     align-items: center;
     justify-content: center;
     flex-grow: 1;
-    background-image: url('src/assets/images/backimage.webp'); /* Remplacez le chemin par l'emplacement de votre image */
+    background-image: url('src/assets/images/backlogin.jpg'); /* Remplacez le chemin par l'emplacement de votre image */
     background-size: cover; /* Ajuste la taille de l'image pour couvrir l'élément */
     background-position: center; /* Centre l'image horizontalement et verticalement */
 }

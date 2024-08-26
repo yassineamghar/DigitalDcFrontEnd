@@ -1,0 +1,10 @@
+/* image-preview.component.css */
+.fullscreen-image {
+    width: 100%;
+    height: auto;
+    max-height: 100vh; /* Ensure the image fits within the viewport height */
+    object-fit: contain; /* Maintain aspect ratio while fitting within container */
+    display: block;
+    margin: 0 auto;
+  }
+  

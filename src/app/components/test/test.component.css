@@ -1,0 +1,312 @@
+:host {
+  display: block;
+  height: 100vh;
+}
+
+@media (min-width: 992px) {
+  .full-height {
+    height: calc(100% - 57.6px);
+  }
+  .col-lg-6 {
+    display: block;
+  }
+}
+
+.container-fluid {
+  background-size: cover;
+}
+
+.col-lg-6 {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.col-lg-6:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  z-index: -1;
+}
+
+.col-lg-6.d-flex.align-items-center {
+  height: 100%;
+  overflow: hidden;
+}
+
+.col-lg-6.p-3 {
+  position: relative;
+}
+
+.col-lg-6.p-3::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+}
+
+.custom-content {
+  background-color: rgba(234, 212, 184, 0.121);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  height: 400px;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-content h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  word-wrap: break-word;
+  font-family: 'Arial', sans-serif;
+}
+
+.custom-content .content-container {
+  flex-grow: 1;
+  overflow: auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.custom-content p {
+  font-size: 25px;
+  line-height: 1.3;
+  color: #00000061;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  max-height: 100%;
+}
+
+
+p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 5;
+}
+.title-container {
+  background-color: rgba(234, 212, 184, 0.466);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.title-container h2 {
+  font-size: 36px;
+  color: #35313171;
+  margin-bottom: 10px;
+}
+
+.separator {
+  width: 100%;
+  height: 0.5vw; 
+  background-color: #cf5c149c;
+  margin-bottom: 2%; 
+}
+
+.title {
+  text-align: center;
+  padding: 0; 
+}
+
+.title h1 {
+  font-size: 65px;
+  line-height: 90px;
+  color: #E98300;
+  -webkit-text-stroke: 1px #E98300;
+  background: url(src/assets/images/back.png);
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-position: 0 0;
+  animation: back 20s linear infinite;
+  display: inline-block;
+  font-family: 'Arial', sans-serif;
+  text-transform: uppercase;
+}
+h1 {
+  padding: 20px 0 0 0;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(27, 27, 27, 0.5);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  font-size: 30px;
+  color: #333;
+  line-height: 50px;
+}
+
+.carousel-control-prev {
+  left: 0;
+}
+
+.carousel-control-next {
+  right: 0;
+}
+
+.carousel-item img {
+  height: 400px;
+  width: 100%;
+  object-fit: contain;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+#carouselExampleControls {
+  border-radius: 10px;
+  background-color: rgba(234, 212, 184, 0.121);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  height: 400px;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+
+.p-toolbar-group-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /* width: 100%; */
+}
+
+
+.card{
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .p-dialog .p-fluid .field {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .p-dialog .p-fluid .field .col-fixed,
+  .p-dialog .p-fluid .field .col {
+      width: 100%;
+  }
+
+  .p-dialog .p-fluid .field .col {
+      margin-top: 0.5rem;
+  }
+}
+
+.label-padding {
+  padding-right: 1rem;
+}
+
+
+.custom-file-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.custom-file-input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+.custom-file-input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.custom-file-label {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+}
+
+input[pInputText],
+textarea[pInputTextarea] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  box-sizing: border-box; 
+}
+
+.description-input {
+  min-height: 150px; 
+  resize: vertical; 
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px; 
+}
+
+.button-style{
+  border-radius: 4px;
+}
+.p-dialog-content {
+  border-radius: 10px; 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}
+
+.mb-3 {
+  margin-bottom: 1rem;
+}

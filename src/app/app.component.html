@@ -1,1 +1,11 @@
-<router-outlet></router-outlet>
+<!-- Partie d'authentification -->
+<div *ngIf="isAuthenticationRoute()">
+    <router-outlet></router-outlet>
+</div>
+
+<div *ngIf="!isAuthenticationRoute()">
+    <app-sidebar *ngIf="showSidebar"></app-sidebar>
+    <div class="main-content">
+        <router-outlet></router-outlet>
+      </div>
+</div>

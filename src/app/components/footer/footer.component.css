@@ -1,0 +1,6 @@
+/* Styles pour les titres */
+h6 {
+    color: #2E4957; /* Couleur du texte */
+    font-weight: bold; /* Style en gras */
+    font-size: large;
+}

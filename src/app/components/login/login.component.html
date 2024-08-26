@@ -3,9 +3,8 @@
     <div class="auth-form">
       <div class="card my-5">
         <div class="card-body">
-          <a [routerLink]="['/']" class="d-flex justify-content-center">
-            <!-- <img src="assets/images/logo4.png" /> -->
-            <img src="assets/images/logoDC1.png" />
+          <a [routerLink]="['/boardfs']" class="d-flex justify-content-center">
+            <img class="img-brand" src="assets/images/logo.png" />
           </a>
           <div class="row">
             <div class="d-flex justify-content-center">
@@ -18,23 +17,26 @@
           <h5 class="my-4 d-flex justify-content-center">Sign in with your Username</h5>
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="form-floating mb-3">
-              <input type="Username" class="form-control" id="Username" formControlName="Username" placeholder="Email address / Username" />
+              <input type="Username" class="form-control" id="Username" formControlName="Username"
+                placeholder="Email address / Username" />
               <label for="Username">Username</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="Password" class="form-control" id="Password" formControlName="Password" placeholder="Password" />
+              <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="Password"
+                formControlName="Password" placeholder="Password" />
               <label for="Password">Password</label>
+              <fa-icon [icon]="showPassword ? eyeIcon : eyeSlashIcon"
+                class="position-absolute top-50 end-0 translate-middle-y me-2 cursor-pointer"
+                (click)="togglePasswordVisibility()"></fa-icon>
             </div>
             <div class="d-flex mt-1 justify-content-between">
               <div class="form-check">
-                <!-- <input class="form-check-input input-primary" type="checkbox" id="rememberMe"  />
-                <label class="form-check-label text-muted" for="rememberMe">Remember me</label> -->
               </div>
               <h5 class="text-secondary">
-                <a [routerLink]="['/forgot-password']">Forgot Password?</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Forgot Password?</a>
               </h5>
             </div>
-            <div *ngIf="error" class="error-message">{{ error }}</div> 
+            <div *ngIf="error" class="error-message">{{ error }}</div>
             <div class="d-grid mt-4">
               <button type="submit" class="btn btn-secondary">Sign In</button>
             </div>
@@ -44,6 +46,28 @@
             <a [routerLink]="['/register']">Don't have an account?</a>
           </h5>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Forgot Password modal popup -->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="text-black m-0" id="forgotPasswordModalLabel">Forgot Password</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="ForgotPasswordSubmit()">
+          <div class="mb-3">
+            <label for="forgotEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="forgotEmail" [(ngModel)]="forgotEmail" name="email" required>
+          </div>
+          <button type="submit" class="btn btn-secondary" style="align-items: end;">Submit</button>
+        </form>
       </div>
     </div>
   </div>

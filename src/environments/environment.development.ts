@@ -1,4 +1,6 @@
 export const environment = {
+    // production: true,
+    // apiUrl: 'http://162.109.85.69:301/api',
     production: true,
-    apiUrl: 'http://localhost:5037/api/Account',
+    apiUrl: 'http://localhost:5037/api',
 };

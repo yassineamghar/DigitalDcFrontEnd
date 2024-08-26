@@ -1,0 +1,111 @@
+@media (min-width: 992px) {
+    #portfolio {
+      height: calc(100vh - 57.7px);
+    }
+}
+
+#portfolio {
+    padding: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 1;
+    align-items: center;
+}
+
+.title h1 {
+  font-size: 3.5rem;
+  align-items: center;
+  padding: 20px 0;
+  color: rgb(18, 25, 38);
+  font-weight: 700;
+  line-height: 1.167;
+  transition: color 0.3s, transform 0.3s;
+  color:#E98300;
+}  
+  .row.g-0 .col-lg-4 {
+    padding: 20px; 
+  }
+  
+.portfolio-box {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    width: 100%; /* Make sure it fills its column */
+    height: 200px; /* Set a fixed height */
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .portfolio-box:hover {
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .portfolio-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .portfolio-box:hover img {
+    transform: scale(1.05);
+  }
+  
+  .portfolio-box-caption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .portfolio-box-caption .project-category,
+  .portfolio-box-caption .project-name {
+    font-size: 16px;
+    color: #fff;
+    margin: 0;
+  }
+  
+  .portfolio-box-caption .project-name {
+    font-weight: bold;
+  }
+  
+  .portfolio-box:hover .portfolio-box-caption {
+    transform: translateY(-100%);
+  }
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+
+
+
+
+
+
+  /*coming soon page*/
+  html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* Prevents scrolling */
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*position: fixed;  Fixes the container in place */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+  }
+  
